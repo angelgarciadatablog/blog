@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Git log - revisar historial · Angel García</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg-side: #141414;
+    --border: #242424;
+    --text: #c9c9c9;
+    --text-dim: #555;
+    --text-head: #e8e8e8;
+    --accent: #4a90d9;
+    --code-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+  .topbar a:hover { color: var(--text); }
+  .topbar .sep { color: var(--border); }
+  .note-content { margin-top: 72px; }
+  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
+  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
+  p { margin-bottom: 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Git & GitHub</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Comandos Git</span>
+  </div>
+  <div class="note-content">
+    <h1>Git log - revisar historial</h1>
+    <h1>📘 ¿Qué hace realmente <code>git log</code>?</h1>
+<pre class="codehilite"><code class="language-bash">git log
+</code></pre>
+
+<p><code>git log</code> muestra:</p>
+<p>👉 <strong>la historia de commits del repositorio</strong>.</p>
+<p>Pero no es solo una lista…</p>
+<p>es literalmente el recorrido del historial que Git usa internamente.</p>
+<hr />
+<h2>Cómo piensa Git el proyecto</h2>
+<p>Git no guarda versiones como carpetas numeradas.</p>
+<p>Guarda una cadena de commits conectados:</p>
+<p>```plain text
+A ← B ← C ← D (HEAD)</p>
+<pre class="codehilite"><code>Cada commit sabe:
+
+- quién lo creó
+
+- cuándo
+
+- qué cambió
+
+- cuál fue el commit anterior.
+
+`git log` simplemente recorre esa cadena hacia atrás.
+
+---
+
+## Lo que viste cuando ejecutaste `git log`
+
+Algo así:
+
+```plain text
+commit 54ec3e0...
+Author: Angel Garcia
+Date: ...
+
+    mensaje del commit
+</code></pre>
+
+<p>Cada bloque representa:</p>
+<p>📸 una “foto” completa del proyecto en ese momento.</p>
+<hr />
+<h1>Qué información muestra un commit</h1>
+<p>Por defecto <code>git log</code> enseña:</p>
+<p>Ese hash es importante:</p>
+<p>👉 si cambia el autor o email, cambia el hash</p>
+<p>(eso fue justo lo que hicimos al limpiar).</p>
+<hr />
+<h1>Por qué se abre una pantalla especial</h1>
+<p>Porque el historial puede ser enorme.</p>
+<p>Git usa un visor (<code>less</code>) para poder:</p>
+<ul>
+<li>
+<p>desplazarte</p>
+</li>
+<li>
+<p>buscar</p>
+</li>
+<li>
+<p>navegar sin llenar la terminal.</p>
+</li>
+</ul>
+<hr />
+<h1>Versiones MUY útiles de <code>git log</code></h1>
+<p>Estas las usan casi todos los developers:</p>
+<hr />
+<h2>1️⃣ Log compacto (el favorito)</h2>
+<p>```plain text
+git log --oneline</p>
+<pre class="codehilite"><code>Ejemplo:
+
+```plain text
+54ec3e0 WIP antes de limpieza
+1d37280 introduccion a vectores
+6236774 estructura inicial
+</code></pre>
+
+<p>Mucho más legible.</p>
+<hr />
+<h2>2️⃣ Ver el árbol visual ( importante)</h2>
+<p>```plain text
+git log --graph--oneline--decorate--all</p>
+<pre class="codehilite"><code>Muestra algo como:
+
+```plain text
+* 54ec3e0 (HEAD -&gt; main)
+* 1d37280
+* 6236774
+</code></pre>
+
+<p>Aquí ves ramas y merges visualmente.</p>
+<hr />
+<h2>3️⃣ Ver quién cambió qué</h2>
+<p>```plain text
+git log -p</p>
+<pre class="codehilite"><code>Muestra exactamente las líneas modificadas.
+
+---
+
+# Insight importante (nivel intermedio)
+
+`git log` no mira archivos.
+
+Mira **el grafo de commits**.
+
+Git es básicamente un grafo dirigido de commits.
+
+
+
+`git log` abre un programa llamado **pager** (normalmente `less`) para poder desplazarte.
+
+Para salir simplemente:
+
+```plain text
+q
+</code></pre>
+
+<p>👉 Presiona la tecla <strong>q</strong> (de <em>quit</em>).</p>
+<hr />
+<h2>Atajos útiles mientras estés dentro (por si te sirve para tu documentación)</h2>
+<ul>
+<li>
+<p><code>q</code> → salir</p>
+</li>
+<li>
+<p><code>↑ ↓</code> → mover línea por línea</p>
+</li>
+<li>
+<p><code>space</code> → bajar una página</p>
+</li>
+<li>
+<p><code>b</code> → subir una página</p>
+</li>
+<li>
+<p><code>/texto</code> → buscar dentro del log</p>
+</li>
+<li>
+<p><code>n</code> → siguiente resultado de búsqueda</p>
+</li>
+</ul>
+  </div>
+</body>
+</html>

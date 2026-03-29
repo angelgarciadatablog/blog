@@ -1,0 +1,324 @@
+[
+  {
+    "title": "Instalación de Google Cloud SDK en ordenador",
+    "slug": "notas-gcp/instalacion-de-google-cloud-sdk-en-ordenador",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "CLI de google cloud - SDK"
+  },
+  {
+    "title": "Autenticar CLI de GPC",
+    "slug": "notas-gcp/autenticar-cli-de-gpc",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "CLI de google cloud - SDK"
+  },
+  {
+    "title": "gcloud auth login",
+    "slug": "notas-gcp/gcloud-auth-login",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "CLI de google cloud - SDK"
+  },
+  {
+    "title": "Autenticación de gcloud vs Autenticación de CLI de Google Cloud",
+    "slug": "notas-gcp/autenticacion-de-gcloud-vs-autenticacion-de-cli-de-google-cloud",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "CLI de google cloud - SDK"
+  },
+  {
+    "title": "Cambiar de proyecto",
+    "slug": "notas-gcp/cambiar-de-proyecto",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "CLI de google cloud - SDK"
+  },
+  {
+    "title": "Crear una service account",
+    "slug": "notas-gcp/crear-una-service-account",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "CLI de google cloud - SDK"
+  },
+  {
+    "title": "Instalar libreria Google cloud",
+    "slug": "notas-gcp/instalar-libreria-google-cloud",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Libreria de google cloud"
+  },
+  {
+    "title": "Configurar la infraestructura",
+    "slug": "notas-gcp/configurar-la-infraestructura",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Cloud funtions y cloud scheduler"
+  },
+  {
+    "title": "Crear service account",
+    "slug": "notas-gcp/crear-service-account",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Cloud funtions y cloud scheduler"
+  },
+  {
+    "title": "Crear Cloud Function DAILY/WEEKLY",
+    "slug": "notas-gcp/crear-cloud-function-dailyweekly",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Cloud funtions y cloud scheduler"
+  },
+  {
+    "title": "Crear cloud scheduler",
+    "slug": "notas-gcp/crear-cloud-scheduler",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Cloud funtions y cloud scheduler"
+  },
+  {
+    "title": "Seguridad de cloud funtion",
+    "slug": "notas-gcp/seguridad-de-cloud-funtion",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Cloud funtions y cloud scheduler"
+  },
+  {
+    "title": "Obtener API de Youtube",
+    "slug": "notas-gcp/obtener-api-de-youtube",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Api de youtube"
+  },
+  {
+    "title": "Apis disponibles",
+    "slug": "notas-gcp/apis-disponibles",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Api de youtube"
+  },
+  {
+    "title": "Contenedor",
+    "slug": "notas-gcp/contenedor",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Cloud Run"
+  },
+  {
+    "title": "Evolución de cómo tener tu app en internet.",
+    "slug": "notas-gcp/evolucion-de-como-tener-tu-app-en-internet",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Cloud Run"
+  },
+  {
+    "title": "Confirmar APIs instaladas desde terminal ",
+    "slug": "notas-gcp/confirmar-apis-instaladas-desde-terminal",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Otros"
+  },
+  {
+    "title": "Publicar un dataset de big query",
+    "slug": "notas-gcp/publicar-un-dataset-de-big-query",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Otros"
+  },
+  {
+    "title": "Cloud Shell - CORS",
+    "slug": "notas-gcp/cloud-shell---cors",
+    "category": "notas-gcp",
+    "catLabel": "Google Cloud Platform",
+    "grupo": "Otros"
+  },
+  {
+    "title": "Iniciando en git - iniciar un control de versiones local",
+    "slug": "notas-git/iniciando-en-git---iniciar-un-control-de-versiones-local",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Configurar tu identidad en Git",
+    "slug": "notas-git/configurar-tu-identidad-en-git",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Clonar un repositorio público a local",
+    "slug": "notas-git/clonar-un-repositorio-publico-a-local",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Subir un repositorio local a un nuevo repositorio en github",
+    "slug": "notas-git/subir-un-repositorio-local-a-un-nuevo-repositorio-en-github",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Cuál repo esta más actualizado local o github",
+    "slug": "notas-git/cual-repo-esta-mas-actualizado-local-o-github",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Actualizar local con versión remota",
+    "slug": "notas-git/actualizar-local-con-version-remota",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Problema Git Pull - Cambios en el local y cambios en el remoto",
+    "slug": "notas-git/problema-git-pull---cambios-en-el-local-y-cambios-en-el-remoto",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "git diff - verificar cambios locales",
+    "slug": "notas-git/git-diff---verificar-cambios-locales",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Hacer un push ",
+    "slug": "notas-git/hacer-un-push",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Git push —force",
+    "slug": "notas-git/git-push-force",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "HTPPS o SSH para push",
+    "slug": "notas-git/htpps-o-ssh-para-push",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Revisar versiones",
+    "slug": "notas-git/revisar-versiones",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Git ignore",
+    "slug": "notas-git/git-ignore",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Git log - revisar historial",
+    "slug": "notas-git/git-log---revisar-historial",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Borrar un commit",
+    "slug": "notas-git/borrar-un-commit",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Niveles de usuario",
+    "slug": "notas-git/niveles-de-usuario",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Revisar otros casos",
+    "slug": "notas-git/revisar-otros-casos",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Explicación de rebase",
+    "slug": "notas-git/explicacion-de-rebase",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "Staging Area ",
+    "slug": "notas-git/staging-area",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git"
+  },
+  {
+    "title": "GitHub CLI - SSH",
+    "slug": "notas-git/github-cli---ssh",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Github CLI"
+  },
+  {
+    "title": "Áreas y estados de GIT",
+    "slug": "notas-git/areas-y-estados-de-git",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Otros"
+  },
+  {
+    "title": "Buscar un repo desde una carpeta hijo",
+    "slug": "notas-git/buscar-un-repo-desde-una-carpeta-hijo",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Otros"
+  },
+  {
+    "title": "Carpeta .github - Github Actions - archivos .yml",
+    "slug": "notas-git/carpeta-github---github-actions---archivos-yml",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Otros"
+  },
+  {
+    "title": "Markdown",
+    "slug": "notas-git/markdown",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Otros"
+  },
+  {
+    "title": "Revisar quiénes usuarios que hicieron commits",
+    "slug": "notas-git/revisar-quienes-usuarios-que-hicieron-commits",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Otros"
+  },
+  {
+    "title": "Crear un repo desde la terminal",
+    "slug": "notas-git/crear-un-repo-desde-la-terminal",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Otros"
+  },
+  {
+    "title": "Comandos de Git identicos en windows y mac",
+    "slug": "notas-git/comandos-de-git-identicos-en-windows-y-mac",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Otros"
+  }
+]

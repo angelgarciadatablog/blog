@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contenedor · Angel García</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg-side: #141414;
+    --border: #242424;
+    --text: #c9c9c9;
+    --text-dim: #555;
+    --text-head: #e8e8e8;
+    --accent: #4a90d9;
+    --code-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+  .topbar a:hover { color: var(--text); }
+  .topbar .sep { color: var(--border); }
+  .note-content { margin-top: 72px; }
+  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
+  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
+  p { margin-bottom: 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Google Cloud Platform</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Cloud Run</span>
+  </div>
+  <div class="note-content">
+    <h1>Contenedor</h1>
+    <p>Un contenedor es una <strong>caja que empaqueta tu aplicación con todo lo que necesita para funcionar</strong>.</p>
+<h3>Analogía</h3>
+<p>Imagina que tu aplicación es una receta de cocina. Sin contenedor, le dices a alguien "hazla en tu cocina" y puede que no tenga los ingredientes o el horno correcto. Con contenedor, le envías <strong>la cocina completa con todo adentro</strong> — solo tiene que encenderla.</p>
+<h3>Puedes organizarlo como prefieras</h3>
+<p><strong>Opción A — Todo junto (1 contenedor)</strong></p>
+<p><code>┌─────────────────────────┐
+│  Backend + Frontend      │
+└──────────────────────────┘</code></p>
+<p>Más simple. Es lo que tiene sentido para tu caso.</p>
+<p><strong>Opción B — Separados (2 contenedores)</strong></p>
+<p><code>┌──────────────┐  ┌──────────────┐
+│  Backend     │  │  Frontend    │
+└──────────────┘  └──────────────┘</code></p>
+<p>Cada uno escala independiente. Tiene sentido para apps grandes con mucho tráfico.</p>
+<p><strong>Opción C — Muchos contenedores</strong></p>
+<p><code>┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐
+│  API   │ │  Web   │ │  Redis │ │  DB    │
+└────────┘ └────────┘ └────────┘ └────────┘</code></p>
+<p>Arquitectura de microservicios. Para empresas grandes tipo Netflix, Uber, etc.</p>
+<h3>Otras opciones para subir contenedores a la nube</h3>
+<h3>Y si no quisieras contenedores en absoluto</h3>
+  </div>
+</body>
+</html>

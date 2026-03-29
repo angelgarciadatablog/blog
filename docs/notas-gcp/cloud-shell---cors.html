@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Shell - CORS · Angel García</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg-side: #141414;
+    --border: #242424;
+    --text: #c9c9c9;
+    --text-dim: #555;
+    --text-head: #e8e8e8;
+    --accent: #4a90d9;
+    --code-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+  .topbar a:hover { color: var(--text); }
+  .topbar .sep { color: var(--border); }
+  .note-content { margin-top: 72px; }
+  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
+  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
+  p { margin-bottom: 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Google Cloud Platform</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Otros</span>
+  </div>
+  <div class="note-content">
+    <h1>Cloud Shell - CORS</h1>
+    <h2>Qué es Cloud Shell</h2>
+<p>Es una terminal que Google pone a tu disposición directamente en el navegador desde la consola de GCP (<code>console.cloud.google.com</code>). Viene preinstalada con todas las herramientas de Google Cloud (<code>gsutil</code>, <code>gcloud</code>, etc.) y ya tiene autenticación con tu cuenta, sin necesidad de configurar credenciales.</p>
+<h2>Configurar política de CORS</h2>
+<p>Crea un archivo llamado <code>cors.json</code> en la terminal con el contenido entre <code>EOF</code> y <code>EOF</code>. Es una forma rápida de escribir un archivo sin abrir un editor.</p>
+<p>Define la política CORS:</p>
+<ul>
+<li>
+<p><code>origin</code>: qué dominios pueden hacer peticiones al bucket</p>
+</li>
+<li>
+<p><code>method</code>: solo permite peticiones <code>GET</code> (leer archivos, no escribir)</p>
+</li>
+<li>
+<p><code>responseHeader</code>: qué headers del response puede leer el browser</p>
+</li>
+<li>
+<p><code>maxAgeSeconds</code>: cuánto tiempo el browser cachea esta política (1 hora) antes de volver a preguntar</p>
+</li>
+</ul>
+<pre class="codehilite"><code class="language-bash">cat &gt; cors.json &lt;&lt; 'EOF'
+[
+  {
+    &quot;origin&quot;: [
+      &quot;https://angelgarciadatablog.com&quot;,
+      &quot;https://www.angelgarciadatablog.com&quot;,
+      &quot;http://127.0.0.1:5501&quot;,
+      &quot;http://localhost:5500&quot;
+    ],
+    &quot;method&quot;: [&quot;GET&quot;],
+    &quot;responseHeader&quot;: [&quot;Content-Type&quot;],
+    &quot;maxAgeSeconds&quot;: 3600
+  }
+]
+EOF
+
+gsutil cors set cors.json gs://angelgarciadatablog-analytics
+</code></pre>
+
+<p>*<code>gsutil</code> es la herramienta de línea de comandos para gestionar GCS. Este comando aplica la política del archivo <code>cors.json</code> al bucket <code>angelgarciadatablog-analytics</code>.</p>
+<pre class="codehilite"><code class="language-bash">cat &gt; cors.json &lt;&lt; 'EOF'
+[
+  {
+    &quot;origin&quot;: [&quot;*&quot;],
+    &quot;method&quot;: [&quot;GET&quot;],
+    &quot;responseHeader&quot;: [&quot;Content-Type&quot;],
+    &quot;maxAgeSeconds&quot;: 3600
+  }
+]
+EOF
+
+gsutil cors set cors.json gs://angelgarciadatablog-analytics
+</code></pre>
+
+<p>*Para dar acceso a cualquier link se debe poner * dentro de origin</p>
+<p>verificar</p>
+<pre class="codehilite"><code class="language-bash">gsutil cors get gs://angelgarciadatablog-analytics
+</code></pre>
+
+<hr />
+<h2>Por qué necesitamos CORS</h2>
+<p>CORS es una restricción <strong>del navegador</strong>, no del servidor. Cuando un browser hace un <code>fetch()</code> desde <code>http://127.0.0.1:5500</code> hacia <code>storage.googleapis.com</code>, el browser primero pregunta al servidor "¿permites peticiones desde este origen?". Si el servidor no responde con el header <code>Access-Control-Allow-Origin</code>, el browser bloquea la respuesta — aunque el archivo sea público.</p>
+<h2>Por qué no afecta a otras herramientas</h2>
+<ul>
+<li>
+<p><strong>Pegar la URL en el navegador</strong>: el browser no aplica CORS porque no hay un origen "solicitante", navegas directamente al recurso</p>
+</li>
+<li>
+<p><strong>Power BI, Postman, curl, Python</strong>: son clientes que no implementan la política CORS — hacen la petición directamente sin ese chequeo previo</p>
+</li>
+<li>
+<p><strong>Cualquier backend</strong>: mismo caso, CORS solo aplica en peticiones cross-origin desde código JavaScript en el browser</p>
+</li>
+</ul>
+<h2>En resumen</h2>
+<p>Los datos son públicos para todos. CORS solo controla si <strong>un script JavaScript en el browser</strong> puede consumirlos, como protección que implementan los propios navegadores.</p>
+  </div>
+</body>
+</html>

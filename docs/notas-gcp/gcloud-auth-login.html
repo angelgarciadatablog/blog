@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gcloud auth login · Angel García</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg-side: #141414;
+    --border: #242424;
+    --text: #c9c9c9;
+    --text-dim: #555;
+    --text-head: #e8e8e8;
+    --accent: #4a90d9;
+    --code-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+  .topbar a:hover { color: var(--text); }
+  .topbar .sep { color: var(--border); }
+  .note-content { margin-top: 72px; }
+  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
+  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
+  p { margin-bottom: 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Google Cloud Platform</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">CLI de google cloud - SDK</span>
+  </div>
+  <div class="note-content">
+    <h1>gcloud auth login</h1>
+    <h1>🔐 Qué hacer cuando <code>gcloud</code> pierde credenciales aunque hayas ejecutado <code>gcloud init</code></h1>
+<h2>🧠 Contexto</h2>
+<p>Puede ocurrir que anteriormente hayas ejecutado:</p>
+<pre class="codehilite"><code class="language-bash">gcloud init
+</code></pre>
+
+<p>Y todo haya funcionado correctamente (login, selección de proyecto, configuración activa).</p>
+<p>Sin embargo, en otro momento puedes ver:</p>
+<pre class="codehilite"><code class="language-bash">gcloud auth list
+</code></pre>
+
+<p>Salida:</p>
+<p>```plain text
+Nocredentialedaccounts.</p>
+<pre class="codehilite"><code>Esto puede generar confusión porque el proyecto aún aparece configurado al ejecutar:
+
+```bash
+gcloud config list
+</code></pre>
+
+<hr />
+<h2>🎯 Por qué ocurre esto</h2>
+<p>Es importante entender que:</p>
+<blockquote>
+<p>La configuración del proyecto y la autenticación son cosas distintas.</p>
+</blockquote>
+<p><code>gcloud</code> guarda información en dos niveles:</p>
+<h3>1️⃣ Configuración (Project, región, etc.)</h3>
+<p>Se guarda en:</p>
+<p>```plain text
+~/.config/gcloud/configurations/</p>
+<pre class="codehilite"><code>Esto incluye:
+
+- Proyecto activo
+
+- Configuración por defecto
+
+Esta información puede seguir existiendo aunque no haya sesión activa.
+
+---
+
+### 2️⃣ Credenciales (token de autenticación)
+
+Se guardan en:
+
+```plain text
+~/.config/gcloud/credentials.db
+</code></pre>
+
+<p>Si el token:</p>
+<ul>
+<li>
+<p>Expira</p>
+</li>
+<li>
+<p>Se borra</p>
+</li>
+<li>
+<p>Se invalida</p>
+</li>
+<li>
+<p>Cambias de máquina</p>
+</li>
+<li>
+<p>Reinstalas SDK</p>
+</li>
+</ul>
+<p>Entonces perderás autenticación aunque el proyecto siga configurado.</p>
+<hr />
+<h2>🧠 Punto clave</h2>
+<p>Estar logueado en la consola web de Google Cloud</p>
+<p>≠</p>
+<p>Estar autenticado en el SDK local (<code>gcloud</code>).</p>
+<p>Son sesiones distintas.</p>
+<hr />
+<h2>✅ Cómo verificar si realmente estás autenticado</h2>
+<p>Ejecutar:</p>
+<pre class="codehilite"><code class="language-bash">gcloud auth list
+</code></pre>
+
+<p>Si ves:</p>
+<p>```plain text
+Nocredentialedaccounts.</p>
+<pre class="codehilite"><code>Entonces necesitas volver a autenticarte.
+
+---
+
+## 🔄 Cómo recuperar credenciales
+
+Simplemente ejecutar:
+
+```bash
+gcloud auth login
+</code></pre>
+
+<p>Esto:</p>
+<p>1️⃣ Abre el navegador</p>
+<p>2️⃣ Permite iniciar sesión con tu cuenta Google</p>
+<p>3️⃣ Genera un nuevo token local</p>
+<p>4️⃣ Habilita el SDK nuevamente</p>
+<p>Luego verificar:</p>
+<pre class="codehilite"><code class="language-bash">gcloud auth list
+</code></pre>
+
+<p>Debe aparecer tu cuenta con un <code>*</code> indicando que es la activa.</p>
+<hr />
+<h2>🧠 Consideraciones importantes</h2>
+<ul>
+<li>
+<p>La autenticación es local a cada máquina.</p>
+</li>
+<li>
+<p>Si cambias de computadora, debes autenticar nuevamente.</p>
+</li>
+<li>
+<p>Si reinstalas el SDK, debes autenticar nuevamente.</p>
+</li>
+<li>
+<p>La pérdida de credenciales no afecta tus proyectos en la nube.</p>
+</li>
+</ul>
+<hr />
+<h2>🎓 Modelo mental correcto</h2>
+<p><code>plain text
+CuentaGoogle(identidad)
+        ↓
+gcloudSDK(token local)
+        ↓
+Proyecto activo
+        ↓
+Recursos Cloud</code></p>
+<p>Si falta el token local, el SDK no puede operar.</p>
+  </div>
+</body>
+</html>

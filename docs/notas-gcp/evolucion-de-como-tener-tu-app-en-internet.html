@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evolución de cómo tener tu app en internet. · Angel García</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg-side: #141414;
+    --border: #242424;
+    --text: #c9c9c9;
+    --text-dim: #555;
+    --text-head: #e8e8e8;
+    --accent: #4a90d9;
+    --code-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+  .topbar a:hover { color: var(--text); }
+  .topbar .sep { color: var(--border); }
+  .note-content { margin-top: 72px; }
+  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
+  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
+  p { margin-bottom: 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Google Cloud Platform</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Cloud Run</span>
+  </div>
+  <div class="note-content">
+    <h1>Evolución de cómo tener tu app en internet.</h1>
+    <h3>1) Hosting compartido (el que venden para webs)</h3>
+<ul>
+<li>
+<p>Compras un <strong>espacio en una carpeta</strong> dentro de un servidor</p>
+</li>
+<li>
+<p>No tienes acceso al sistema operativo</p>
+</li>
+<li>
+<p>Solo subes archivos (HTML, PHP) a través de un panel (cPanel)</p>
+</li>
+<li>
+<p>No puedes instalar nada — usas lo que ya viene instalado</p>
+</li>
+<li>
+<p>Ejemplo: pagas $5/mes en GoDaddy, subes tu web y listo</p>
+</li>
+<li>
+<p>están encendidos 24/7.</p>
+</li>
+<li>
+<p>Sirven para : Webs estáticas (HTML, CSS, JS),  WordPress, Webs con PHP</p>
+</li>
+<li>
+<p><strong>No sirven para: </strong>Apps con <strong>Node.js, </strong>Apps con <strong>Python</strong> (Django, Flask), Apps que necesiten <strong>bases de datos modernas, </strong>Cualquier cosa que requiera instalar algo en el servidor</p>
+</li>
+</ul>
+<h3>2) Hosting dedicado (<strong>Servidor dedicado)</strong></h3>
+<ul>
+<li>
+<p>Te dan un <strong>servidor físico completo</strong> exclusivamente para ti</p>
+</li>
+<li>
+<p>Tienes acceso total al sistema operativo, igual que un VPS</p>
+</li>
+<li>
+<p>Nadie más comparte tu máquina — todos los recursos (CPU, RAM, disco) son 100% tuyos</p>
+</li>
+<li>
+<p>Rendimiento garantizado, sin sorpresas por vecinos que consuman mucho</p>
+</li>
+<li>
+<p>Lo usan empresas con alto tráfico o regulaciones que exigen hardware exclusivo</p>
+</li>
+<li>
+<p>Ejemplo: pagas $80-200+/mes en OVH, Hetzner o proveedores cloud</p>
+</li>
+<li>
+<p>Están encendidos 24/7</p>
+</li>
+</ul>
+<h3>3) VPS (Máquina visual) (vm)</h3>
+<ul>
+<li>
+<p>Te dan una <strong>computadora virtual completa</strong> con su propio sistema operativo (Linux)</p>
+</li>
+<li>
+<p>Tú entras por terminal, instalas programas, configuras todo</p>
+</li>
+<li>
+<p>Es como tener tu propia PC remota</p>
+</li>
+<li>
+<p>Ejemplo: pagas $5/mes en DigitalOcean, te conectas por SSH y haces lo que quieras</p>
+</li>
+<li>
+<p>Un VPS es una computadora tuya en internet, encendida 24/7, donde corres lo que quieras:</p>
+</li>
+<li>
+<p>Un VPS pagas un monto fijo mensual, esté encendido o apagado, lo uses o no. Es como el alquiler de un departamento.</p>
+</li>
+</ul>
+<pre class="codehilite"><code class="language-bash">Aplicaciones web — dashboards como el tuyo, e-commerce, APIs 
+Bots — bots de Discord, Telegram, WhatsApp que necesitan estar siempre activos
+Bases de datos — MongoDB, PostgreSQL, MySQL propio
+Servidores de juegos — Minecraft, Counter-Strike
+VPN propia — para navegación privada
+Automatizaciones — scripts que se ejecutan cada cierto tiempo (scraping, reportes)
+Correo propio — tu propio servidor de email
+</code></pre>
+
+<h3>¿VPS  vs Hosting dedicado?</h3>
+<p>La diferencia es <strong>rendimiento garantizado</strong>.</p>
+<p>`VPS:
+🖥️ Servidor físico
+┌──────────────────────────────┐
+│  🖥️ Tu VPS (virtual)         │
+│  🖥️ Otro VPS (virtual)       │  ← comparten la misma máquina física
+│  🖥️ Otro VPS (virtual)       │
+└──────────────────────────────┘
+Si otro VPS consume mucho, puede afectarte</p>
+<p>Dedicado:
+🖥️ Servidor físico
+┌──────────────────────────────┐
+│                              │
+│  Solo tú                     │  ← nadie te quita recursos
+│                              │
+└──────────────────────────────┘`</p>
+<h3>¿Cómo cambiar de proveedor de vps?</h3>
+<p><code>🖥️ Tu VPS ($6/mes)
+┌──────────────────────────────────┐
+│                                  │
+│  📦 Contenedor 1: n8n            │
+│  📦 Contenedor 2: tu app web    │
+│  📦 Contenedor 3: base de datos │
+│  📦 Contenedor 4: otro proyecto │
+│                                  │
+│  Cada uno aislado del otro       │
+└──────────────────────────────────┘</code></p>
+<p><strong>Ventajas de tenerlos separados</strong></p>
+<ul>
+<li>
+<p>Si uno falla, <strong>los demás siguen funcionando</strong></p>
+</li>
+<li>
+<p>Cada uno tiene sus propias dependencias sin conflictos</p>
+</li>
+<li>
+<p>Puedes apagar, reiniciar o actualizar uno sin tocar los demás</p>
+</li>
+<li>
+<p>Para migrar, copias los contenedores que quieras al nuevo VPS</p>
+</li>
+</ul>
+<p><strong>Herramienta clave: Docker Compose</strong></p>
+<p>Con un solo archivo defines todos tus contenedores y los levantas con un comando:</p>
+<p><code>docker compose up</code></p>
+<p>Y todo arranca. Es la forma estándar de manejar varios contenedores en un VPS.</p>
+<h3><strong>4) Contenedores por demanda</strong></h3>
+<p>Subes tu app empaquetada, se enciende/apaga sola. Pagas por uso.</p>
+<h3>5) Serverless / Plataformas</h3>
+<p>Solo subes código, ni siquiera piensas en contenedores. Ideal para frontends y funciones simples.</p>
+<h3>6) PaaS (Platform as a Service)</h3>
+<p>Subes tu código directo, sin Docker ni contenedores. La plataforma se encarga de todo.</p>
+  </div>
+</body>
+</html>

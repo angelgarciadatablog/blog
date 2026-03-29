@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear cloud scheduler · Angel García</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg-side: #141414;
+    --border: #242424;
+    --text: #c9c9c9;
+    --text-dim: #555;
+    --text-head: #e8e8e8;
+    --accent: #4a90d9;
+    --code-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+  .topbar a:hover { color: var(--text); }
+  .topbar .sep { color: var(--border); }
+  .note-content { margin-top: 72px; }
+  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
+  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
+  p { margin-bottom: 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Google Cloud Platform</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Cloud funtions y cloud scheduler</span>
+  </div>
+  <div class="note-content">
+    <h1>Crear cloud scheduler</h1>
+    <p>*De preferencia que la región coincida con la de la cloud funtion</p>
+<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/9242b2f6-5b56-4809-a9cf-0a1b2ab21594/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667U35LYB3%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061111Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJIMEYCIQCOQtmcF5mizim6sWuQ4zclv63nTahTb2RmY8jZAsO1MwIhAPe8oVvii48g6pwiKrv%2BrVYfS4ORUbTqsANiqGbSQnIFKv8DCAUQABoMNjM3NDIzMTgzODA1Igy7DEfGegaA7nWauUIq3APfYN%2Bea0hoDuNejNItKztM2zzEHd4nggOmcE%2BBQMDizBjVsiK2poxC1U2VvYvlzmZ6Tvt%2F1ZfmP9kIh7eTnrT6vA%2BYz6fTc8Q2MHt3%2BbaTi9tNrw3AwdkuSaHQ2Fv%2FVXsy4v2t1p%2FV2a7YueEpOGugOkRLK1MdVXtNKtgEqcp8UKang3vHdkcSgKzXH%2B2J6Yhc8INlkWwTFf%2B%2FsLdb6ot5CRRmD9aOSqQpzN41499%2BsxtrXa%2BtsxO6Soj%2Ftw03RlICZC5oPqZB6GgUobY9TkbGXQCBN21mcSWpAcuNl%2FE3O71eXqHGWshAuOPzeSUOHhORKnsCa1NCNVN5H4%2Fqd7wtjMZO9QdTDuCHMA%2F0gTNNp2lXwkYg%2BZ3ccJcMRpspNfZ7ddRrB4RuTlnbCvyqUx%2Bl1vOeDp95OJjdhC0AQ4HfB3p3rDjSFDyS7sryJZ7D1scMKYlM%2F7wh2MbBnb0MCalIaYrQnB1tRsvo6rKv4BviyBVhOdWmWepnynZmFBFi6QuccgdCacHVMvzJ58L6SRhAJRUtIxReAJUsBSwAkB5bh0b%2BAMfiMXDHBxf%2BbxZL4NnXCUeBjNGmiZN6YwP%2BJu17TPJltFRvb9VsR48CGFk7LAsrzPBpNq2N%2FAT%2FszCByKLOBjqkARcvss0La7YiKlbLw5s21%2FumqQVWr9L4ZDzbl6z1R%2FRvJDY3qAsO9rrAVL46NTgg7b1HnBnEI7RVP9dZ%2Brnl332y0CUziFgk6AUpKu%2FxD7JXkJ689b%2F4enx8Th747YgxX4aeloYzncginiQPiK1Ae9FKzJ3x2cx05VgUMb24y%2BxG8ZzwvO9n7PZpGkeAsSWmIowVwnWw7ZtuKw6znJSoJItXPr5R&amp;X-Amz-Signature=513652fe0259279547b6b48dd396f3779b82d0202cbf1efaf5ebeb2a853be6f2&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p>*Aquí se coloca la URL que generó la cloud funtion, usualmente esa URL no debería compartirse, en caso no tenga seguridad, pero en este caso si la tiene:</p>
+<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/ee2634a2-9448-4885-a8cc-7b530cea676a/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667U35LYB3%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061111Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJIMEYCIQCOQtmcF5mizim6sWuQ4zclv63nTahTb2RmY8jZAsO1MwIhAPe8oVvii48g6pwiKrv%2BrVYfS4ORUbTqsANiqGbSQnIFKv8DCAUQABoMNjM3NDIzMTgzODA1Igy7DEfGegaA7nWauUIq3APfYN%2Bea0hoDuNejNItKztM2zzEHd4nggOmcE%2BBQMDizBjVsiK2poxC1U2VvYvlzmZ6Tvt%2F1ZfmP9kIh7eTnrT6vA%2BYz6fTc8Q2MHt3%2BbaTi9tNrw3AwdkuSaHQ2Fv%2FVXsy4v2t1p%2FV2a7YueEpOGugOkRLK1MdVXtNKtgEqcp8UKang3vHdkcSgKzXH%2B2J6Yhc8INlkWwTFf%2B%2FsLdb6ot5CRRmD9aOSqQpzN41499%2BsxtrXa%2BtsxO6Soj%2Ftw03RlICZC5oPqZB6GgUobY9TkbGXQCBN21mcSWpAcuNl%2FE3O71eXqHGWshAuOPzeSUOHhORKnsCa1NCNVN5H4%2Fqd7wtjMZO9QdTDuCHMA%2F0gTNNp2lXwkYg%2BZ3ccJcMRpspNfZ7ddRrB4RuTlnbCvyqUx%2Bl1vOeDp95OJjdhC0AQ4HfB3p3rDjSFDyS7sryJZ7D1scMKYlM%2F7wh2MbBnb0MCalIaYrQnB1tRsvo6rKv4BviyBVhOdWmWepnynZmFBFi6QuccgdCacHVMvzJ58L6SRhAJRUtIxReAJUsBSwAkB5bh0b%2BAMfiMXDHBxf%2BbxZL4NnXCUeBjNGmiZN6YwP%2BJu17TPJltFRvb9VsR48CGFk7LAsrzPBpNq2N%2FAT%2FszCByKLOBjqkARcvss0La7YiKlbLw5s21%2FumqQVWr9L4ZDzbl6z1R%2FRvJDY3qAsO9rrAVL46NTgg7b1HnBnEI7RVP9dZ%2Brnl332y0CUziFgk6AUpKu%2FxD7JXkJ689b%2F4enx8Th747YgxX4aeloYzncginiQPiK1Ae9FKzJ3x2cx05VgUMb24y%2BxG8ZzwvO9n7PZpGkeAsSWmIowVwnWw7ZtuKw6znJSoJItXPr5R&amp;X-Amz-Signature=6b9b01e792fa08f3e7d14f986cca36c38114aba9ccc9a54b37a2a26d3f56976c&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p>*Cero reintentos en este caso porque la función carga datos a big query y no queremos que tenga la posibilidad de cargar duplicados</p>
+<p>*El plaso de intento es de 600s porque la cloud funtion tienen una duración de 540 segundos</p>
+<p>*Como los reintentos son cero, todo lo que tenga que ver con retirada y duplicaciones no se aplica para este caso (se deja por defecto igual no afectará)</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear Cloud Function DAILY/WEEKLY · Angel García</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg-side: #141414;
+    --border: #242424;
+    --text: #c9c9c9;
+    --text-dim: #555;
+    --text-head: #e8e8e8;
+    --accent: #4a90d9;
+    --code-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+  .topbar a:hover { color: var(--text); }
+  .topbar .sep { color: var(--border); }
+  .note-content { margin-top: 72px; }
+  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
+  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
+  p { margin-bottom: 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Google Cloud Platform</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Cloud funtions y cloud scheduler</span>
+  </div>
+  <div class="note-content">
+    <h1>Crear Cloud Function DAILY/WEEKLY</h1>
+    <p>Cloud Functions crea internamente un servicio en Cloud Run.</p>
+<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/de23cfd5-a657-441d-a610-2ceb9f2391fa/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QWR37MBO%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061059Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJHMEUCIQCZrs1jfFjp%2BrtfBrqdKz2M2ylt5lS5FJGLL7%2FIcYHRFQIgFAbpwZ0IuO3Q%2Bu16rue9VCsqJALfuarF%2FNQoNupFAM4q%2FwMIBRAAGgw2Mzc0MjMxODM4MDUiDPcrvfcaQ%2FUPiOFQ4CrcAxmJukWAyjLJegaHlFP%2BW1TFSDGgaflhquEQw7ydni1amvvoX%2Bu0Z0DKC9B%2Fv5YstAFpdSFZNwb95wZG2peF8lfhc9w06hVMD%2BOAIkqQDJbwLGyIB3rVK0lvUCuQMpYKngtkr%2FGR9T7DGNP9h3PwrmISx8N4nrtSUmiRMzVjOCktCdZPh%2BnGX2F5xhLZrMe8JbZu6Y14Q2IEReQWUQrZtA9tDB1XLugzPY2lnlXEYE7v7%2Bc5d5qhLkAAT5nMuzGsY2yr2sVVCYNKi7SQu%2FfUSrzj3MqwSnWNphJwtrUA7BEXsJxKmDq6EZpH%2FcI1QUwavFQ1rjREV3keIsvjMw9q9Woz4HFU0gvhjYPexY5q9e1biOPbQit3P1egjQfrgEmNrzGLDeqj8DSyWKLlSkDefUPelN9w75sxcjbckcO0IZHV9kA5ShLlA8a2PePmrTKEErZ6qtMCq0almhbpkFpzY82cSHOgAxpxP8IrsaDcGVG9oIVP%2FajOfVYq3TdKms%2B4gtWgXqTNu5%2BrxMwllO%2Bc4Y6AARuY1FdLtcZbgcwAMPCpl7G%2BJMbWAGx5jeJ%2BS4uA8n1KBsigKrWQ6hiqX%2BohPcRad7z4mWAAkpoz6Gqv7uq%2FS3cDXGU8p6buxzN2MI7Hos4GOqUBb12inKEcpI%2BmIwb1h0vaiHhP%2B7ATdF11%2Fu2B0Ux9Cx4nfr8vrXS0r4ZeoC%2F9T7orACbJ9z%2BZTjvCmYXUig4B9%2BpmBZJOSRqMfi1VN5Wf4GBR59NLmEwmLvD5uEt0CaxwysCRCWcQUflFV5nGi%2BKwbdrdZmYH%2B5d124u660rWqhPsBmNtBI0WWu6tu4PGBSb80yNcAbF6MEPrg7c952dc95f3Itxv&amp;X-Amz-Signature=43aee931b3a0aa8c495420fe776d16430b669d931541c1028416fe18ee6d332e&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/cddff7db-ad1b-4e98-91b0-d0474d4cae39/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QWR37MBO%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061059Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJHMEUCIQCZrs1jfFjp%2BrtfBrqdKz2M2ylt5lS5FJGLL7%2FIcYHRFQIgFAbpwZ0IuO3Q%2Bu16rue9VCsqJALfuarF%2FNQoNupFAM4q%2FwMIBRAAGgw2Mzc0MjMxODM4MDUiDPcrvfcaQ%2FUPiOFQ4CrcAxmJukWAyjLJegaHlFP%2BW1TFSDGgaflhquEQw7ydni1amvvoX%2Bu0Z0DKC9B%2Fv5YstAFpdSFZNwb95wZG2peF8lfhc9w06hVMD%2BOAIkqQDJbwLGyIB3rVK0lvUCuQMpYKngtkr%2FGR9T7DGNP9h3PwrmISx8N4nrtSUmiRMzVjOCktCdZPh%2BnGX2F5xhLZrMe8JbZu6Y14Q2IEReQWUQrZtA9tDB1XLugzPY2lnlXEYE7v7%2Bc5d5qhLkAAT5nMuzGsY2yr2sVVCYNKi7SQu%2FfUSrzj3MqwSnWNphJwtrUA7BEXsJxKmDq6EZpH%2FcI1QUwavFQ1rjREV3keIsvjMw9q9Woz4HFU0gvhjYPexY5q9e1biOPbQit3P1egjQfrgEmNrzGLDeqj8DSyWKLlSkDefUPelN9w75sxcjbckcO0IZHV9kA5ShLlA8a2PePmrTKEErZ6qtMCq0almhbpkFpzY82cSHOgAxpxP8IrsaDcGVG9oIVP%2FajOfVYq3TdKms%2B4gtWgXqTNu5%2BrxMwllO%2Bc4Y6AARuY1FdLtcZbgcwAMPCpl7G%2BJMbWAGx5jeJ%2BS4uA8n1KBsigKrWQ6hiqX%2BohPcRad7z4mWAAkpoz6Gqv7uq%2FS3cDXGU8p6buxzN2MI7Hos4GOqUBb12inKEcpI%2BmIwb1h0vaiHhP%2B7ATdF11%2Fu2B0Ux9Cx4nfr8vrXS0r4ZeoC%2F9T7orACbJ9z%2BZTjvCmYXUig4B9%2BpmBZJOSRqMfi1VN5Wf4GBR59NLmEwmLvD5uEt0CaxwysCRCWcQUflFV5nGi%2BKwbdrdZmYH%2B5d124u660rWqhPsBmNtBI0WWu6tu4PGBSb80yNcAbF6MEPrg7c952dc95f3Itxv&amp;X-Amz-Signature=230517cd0a52fba6a1581aaa496c4bf621755107a77a3339f39d858e772178d7&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p>*Es importante que el nombre refleje claramente su propósito.</p>
+<p>*Correcto para BigQuery US.</p>
+<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/e786d6eb-f134-4d71-b687-3a0703535446/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QWR37MBO%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061059Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJHMEUCIQCZrs1jfFjp%2BrtfBrqdKz2M2ylt5lS5FJGLL7%2FIcYHRFQIgFAbpwZ0IuO3Q%2Bu16rue9VCsqJALfuarF%2FNQoNupFAM4q%2FwMIBRAAGgw2Mzc0MjMxODM4MDUiDPcrvfcaQ%2FUPiOFQ4CrcAxmJukWAyjLJegaHlFP%2BW1TFSDGgaflhquEQw7ydni1amvvoX%2Bu0Z0DKC9B%2Fv5YstAFpdSFZNwb95wZG2peF8lfhc9w06hVMD%2BOAIkqQDJbwLGyIB3rVK0lvUCuQMpYKngtkr%2FGR9T7DGNP9h3PwrmISx8N4nrtSUmiRMzVjOCktCdZPh%2BnGX2F5xhLZrMe8JbZu6Y14Q2IEReQWUQrZtA9tDB1XLugzPY2lnlXEYE7v7%2Bc5d5qhLkAAT5nMuzGsY2yr2sVVCYNKi7SQu%2FfUSrzj3MqwSnWNphJwtrUA7BEXsJxKmDq6EZpH%2FcI1QUwavFQ1rjREV3keIsvjMw9q9Woz4HFU0gvhjYPexY5q9e1biOPbQit3P1egjQfrgEmNrzGLDeqj8DSyWKLlSkDefUPelN9w75sxcjbckcO0IZHV9kA5ShLlA8a2PePmrTKEErZ6qtMCq0almhbpkFpzY82cSHOgAxpxP8IrsaDcGVG9oIVP%2FajOfVYq3TdKms%2B4gtWgXqTNu5%2BrxMwllO%2Bc4Y6AARuY1FdLtcZbgcwAMPCpl7G%2BJMbWAGx5jeJ%2BS4uA8n1KBsigKrWQ6hiqX%2BohPcRad7z4mWAAkpoz6Gqv7uq%2FS3cDXGU8p6buxzN2MI7Hos4GOqUBb12inKEcpI%2BmIwb1h0vaiHhP%2B7ATdF11%2Fu2B0Ux9Cx4nfr8vrXS0r4ZeoC%2F9T7orACbJ9z%2BZTjvCmYXUig4B9%2BpmBZJOSRqMfi1VN5Wf4GBR59NLmEwmLvD5uEt0CaxwysCRCWcQUflFV5nGi%2BKwbdrdZmYH%2B5d124u660rWqhPsBmNtBI0WWu6tu4PGBSb80yNcAbF6MEPrg7c952dc95f3Itxv&amp;X-Amz-Signature=1795a161b8b43e5517c89e32a5da976d6111d63ba630fec7e61694671c1c2947&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<h1>1️⃣ Autenticación</h1>
+<p>Ahora mismo no veo cuál opción marcaste, pero debe estar seleccionada:</p>
+<p>```plain text
+Necesita autenticación</p>
+<pre class="codehilite"><code>❌ No selecciones &quot;Permite el acceso público&quot;.
+
+Porque:
+
+- Esta función será invocada por Cloud Scheduler.
+
+- No debe estar expuesta públicamente.
+
+- Es backend interno de pipeline.
+
+👉 Marca **Necesita autenticación**.
+
+---
+
+# 🟢 2️⃣ Facturación
+
+“Basada en solicitudes” está perfecto ✔
+
+Eso significa:
+
+- Solo pagas cuando se ejecuta.
+
+- Ideal para pipelines batch.
+
+Déjalo así.
+
+---
+
+# 🟢 3️⃣ Escalamiento
+
+&quot;Ajuste de escala automático&quot; ✔ correcto.
+
+Número mínimo de instancias = 0 ✔
+
+Eso permite que:
+
+- Se apague cuando no se use.
+
+- Ahorres costo.
+
+No necesitas tocar máximo por ahora.
+
+---
+
+# 🔴 4️⃣ Ingress (Muy importante)
+
+Ahora tienes seleccionado:
+
+```plain text
+Todos
+</code></pre>
+
+<p>Eso permite acceso desde Internet.</p>
+<p>Para tu caso profesional, mejor opción:</p>
+<p>👉 Selecciona <strong>Interno</strong></p>
+<p>¿Por qué?</p>
+<p>Porque:</p>
+<ul>
+<li>
+<p>Solo Cloud Scheduler (dentro del proyecto) la llamará.</p>
+</li>
+<li>
+<p>No necesitas acceso público.</p>
+</li>
+<li>
+<p>Es más seguro.</p>
+</li>
+</ul>
+<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/71f72679-2be2-4f3d-99cc-45c78eff6704/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QWR37MBO%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061059Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJHMEUCIQCZrs1jfFjp%2BrtfBrqdKz2M2ylt5lS5FJGLL7%2FIcYHRFQIgFAbpwZ0IuO3Q%2Bu16rue9VCsqJALfuarF%2FNQoNupFAM4q%2FwMIBRAAGgw2Mzc0MjMxODM4MDUiDPcrvfcaQ%2FUPiOFQ4CrcAxmJukWAyjLJegaHlFP%2BW1TFSDGgaflhquEQw7ydni1amvvoX%2Bu0Z0DKC9B%2Fv5YstAFpdSFZNwb95wZG2peF8lfhc9w06hVMD%2BOAIkqQDJbwLGyIB3rVK0lvUCuQMpYKngtkr%2FGR9T7DGNP9h3PwrmISx8N4nrtSUmiRMzVjOCktCdZPh%2BnGX2F5xhLZrMe8JbZu6Y14Q2IEReQWUQrZtA9tDB1XLugzPY2lnlXEYE7v7%2Bc5d5qhLkAAT5nMuzGsY2yr2sVVCYNKi7SQu%2FfUSrzj3MqwSnWNphJwtrUA7BEXsJxKmDq6EZpH%2FcI1QUwavFQ1rjREV3keIsvjMw9q9Woz4HFU0gvhjYPexY5q9e1biOPbQit3P1egjQfrgEmNrzGLDeqj8DSyWKLlSkDefUPelN9w75sxcjbckcO0IZHV9kA5ShLlA8a2PePmrTKEErZ6qtMCq0almhbpkFpzY82cSHOgAxpxP8IrsaDcGVG9oIVP%2FajOfVYq3TdKms%2B4gtWgXqTNu5%2BrxMwllO%2Bc4Y6AARuY1FdLtcZbgcwAMPCpl7G%2BJMbWAGx5jeJ%2BS4uA8n1KBsigKrWQ6hiqX%2BohPcRad7z4mWAAkpoz6Gqv7uq%2FS3cDXGU8p6buxzN2MI7Hos4GOqUBb12inKEcpI%2BmIwb1h0vaiHhP%2B7ATdF11%2Fu2B0Ux9Cx4nfr8vrXS0r4ZeoC%2F9T7orACbJ9z%2BZTjvCmYXUig4B9%2BpmBZJOSRqMfi1VN5Wf4GBR59NLmEwmLvD5uEt0CaxwysCRCWcQUflFV5nGi%2BKwbdrdZmYH%2B5d124u660rWqhPsBmNtBI0WWu6tu4PGBSb80yNcAbF6MEPrg7c952dc95f3Itxv&amp;X-Amz-Signature=ebd9a6aa2bf995181eb1a26e42d0a55b523bfa6735f4a0418bf6fa75e4ad2b2b&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p>*Agregar la service account</p>
+<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/c5165902-8511-4b37-8a78-a06e7beb11af/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QWR37MBO%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061059Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJHMEUCIQCZrs1jfFjp%2BrtfBrqdKz2M2ylt5lS5FJGLL7%2FIcYHRFQIgFAbpwZ0IuO3Q%2Bu16rue9VCsqJALfuarF%2FNQoNupFAM4q%2FwMIBRAAGgw2Mzc0MjMxODM4MDUiDPcrvfcaQ%2FUPiOFQ4CrcAxmJukWAyjLJegaHlFP%2BW1TFSDGgaflhquEQw7ydni1amvvoX%2Bu0Z0DKC9B%2Fv5YstAFpdSFZNwb95wZG2peF8lfhc9w06hVMD%2BOAIkqQDJbwLGyIB3rVK0lvUCuQMpYKngtkr%2FGR9T7DGNP9h3PwrmISx8N4nrtSUmiRMzVjOCktCdZPh%2BnGX2F5xhLZrMe8JbZu6Y14Q2IEReQWUQrZtA9tDB1XLugzPY2lnlXEYE7v7%2Bc5d5qhLkAAT5nMuzGsY2yr2sVVCYNKi7SQu%2FfUSrzj3MqwSnWNphJwtrUA7BEXsJxKmDq6EZpH%2FcI1QUwavFQ1rjREV3keIsvjMw9q9Woz4HFU0gvhjYPexY5q9e1biOPbQit3P1egjQfrgEmNrzGLDeqj8DSyWKLlSkDefUPelN9w75sxcjbckcO0IZHV9kA5ShLlA8a2PePmrTKEErZ6qtMCq0almhbpkFpzY82cSHOgAxpxP8IrsaDcGVG9oIVP%2FajOfVYq3TdKms%2B4gtWgXqTNu5%2BrxMwllO%2Bc4Y6AARuY1FdLtcZbgcwAMPCpl7G%2BJMbWAGx5jeJ%2BS4uA8n1KBsigKrWQ6hiqX%2BohPcRad7z4mWAAkpoz6Gqv7uq%2FS3cDXGU8p6buxzN2MI7Hos4GOqUBb12inKEcpI%2BmIwb1h0vaiHhP%2B7ATdF11%2Fu2B0Ux9Cx4nfr8vrXS0r4ZeoC%2F9T7orACbJ9z%2BZTjvCmYXUig4B9%2BpmBZJOSRqMfi1VN5Wf4GBR59NLmEwmLvD5uEt0CaxwysCRCWcQUflFV5nGi%2BKwbdrdZmYH%2B5d124u660rWqhPsBmNtBI0WWu6tu4PGBSb80yNcAbF6MEPrg7c952dc95f3Itxv&amp;X-Amz-Signature=819e00b520e2b821640758e6f0dc7d15759954714a840ef494193bbee09ede6d&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p>*Agregar las variables de entorno del repo (.env)</p>
+<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/e3f359f8-777d-4c6a-9cb7-1be5505669f4/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QWR37MBO%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061059Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJHMEUCIQCZrs1jfFjp%2BrtfBrqdKz2M2ylt5lS5FJGLL7%2FIcYHRFQIgFAbpwZ0IuO3Q%2Bu16rue9VCsqJALfuarF%2FNQoNupFAM4q%2FwMIBRAAGgw2Mzc0MjMxODM4MDUiDPcrvfcaQ%2FUPiOFQ4CrcAxmJukWAyjLJegaHlFP%2BW1TFSDGgaflhquEQw7ydni1amvvoX%2Bu0Z0DKC9B%2Fv5YstAFpdSFZNwb95wZG2peF8lfhc9w06hVMD%2BOAIkqQDJbwLGyIB3rVK0lvUCuQMpYKngtkr%2FGR9T7DGNP9h3PwrmISx8N4nrtSUmiRMzVjOCktCdZPh%2BnGX2F5xhLZrMe8JbZu6Y14Q2IEReQWUQrZtA9tDB1XLugzPY2lnlXEYE7v7%2Bc5d5qhLkAAT5nMuzGsY2yr2sVVCYNKi7SQu%2FfUSrzj3MqwSnWNphJwtrUA7BEXsJxKmDq6EZpH%2FcI1QUwavFQ1rjREV3keIsvjMw9q9Woz4HFU0gvhjYPexY5q9e1biOPbQit3P1egjQfrgEmNrzGLDeqj8DSyWKLlSkDefUPelN9w75sxcjbckcO0IZHV9kA5ShLlA8a2PePmrTKEErZ6qtMCq0almhbpkFpzY82cSHOgAxpxP8IrsaDcGVG9oIVP%2FajOfVYq3TdKms%2B4gtWgXqTNu5%2BrxMwllO%2Bc4Y6AARuY1FdLtcZbgcwAMPCpl7G%2BJMbWAGx5jeJ%2BS4uA8n1KBsigKrWQ6hiqX%2BohPcRad7z4mWAAkpoz6Gqv7uq%2FS3cDXGU8p6buxzN2MI7Hos4GOqUBb12inKEcpI%2BmIwb1h0vaiHhP%2B7ATdF11%2Fu2B0Ux9Cx4nfr8vrXS0r4ZeoC%2F9T7orACbJ9z%2BZTjvCmYXUig4B9%2BpmBZJOSRqMfi1VN5Wf4GBR59NLmEwmLvD5uEt0CaxwysCRCWcQUflFV5nGi%2BKwbdrdZmYH%2B5d124u660rWqhPsBmNtBI0WWu6tu4PGBSb80yNcAbF6MEPrg7c952dc95f3Itxv&amp;X-Amz-Signature=747a2c3bf3e7604e44fab5eb58a50fdcee942635e8398bd46ec8318bd930eb5d&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p>*En algunos casos, con una funición más compleja tendría que asignar más memoria</p>
+<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/492efc04-19db-4c00-a861-064042b14e21/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466QWR37MBO%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061059Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJHMEUCIQCZrs1jfFjp%2BrtfBrqdKz2M2ylt5lS5FJGLL7%2FIcYHRFQIgFAbpwZ0IuO3Q%2Bu16rue9VCsqJALfuarF%2FNQoNupFAM4q%2FwMIBRAAGgw2Mzc0MjMxODM4MDUiDPcrvfcaQ%2FUPiOFQ4CrcAxmJukWAyjLJegaHlFP%2BW1TFSDGgaflhquEQw7ydni1amvvoX%2Bu0Z0DKC9B%2Fv5YstAFpdSFZNwb95wZG2peF8lfhc9w06hVMD%2BOAIkqQDJbwLGyIB3rVK0lvUCuQMpYKngtkr%2FGR9T7DGNP9h3PwrmISx8N4nrtSUmiRMzVjOCktCdZPh%2BnGX2F5xhLZrMe8JbZu6Y14Q2IEReQWUQrZtA9tDB1XLugzPY2lnlXEYE7v7%2Bc5d5qhLkAAT5nMuzGsY2yr2sVVCYNKi7SQu%2FfUSrzj3MqwSnWNphJwtrUA7BEXsJxKmDq6EZpH%2FcI1QUwavFQ1rjREV3keIsvjMw9q9Woz4HFU0gvhjYPexY5q9e1biOPbQit3P1egjQfrgEmNrzGLDeqj8DSyWKLlSkDefUPelN9w75sxcjbckcO0IZHV9kA5ShLlA8a2PePmrTKEErZ6qtMCq0almhbpkFpzY82cSHOgAxpxP8IrsaDcGVG9oIVP%2FajOfVYq3TdKms%2B4gtWgXqTNu5%2BrxMwllO%2Bc4Y6AARuY1FdLtcZbgcwAMPCpl7G%2BJMbWAGx5jeJ%2BS4uA8n1KBsigKrWQ6hiqX%2BohPcRad7z4mWAAkpoz6Gqv7uq%2FS3cDXGU8p6buxzN2MI7Hos4GOqUBb12inKEcpI%2BmIwb1h0vaiHhP%2B7ATdF11%2Fu2B0Ux9Cx4nfr8vrXS0r4ZeoC%2F9T7orACbJ9z%2BZTjvCmYXUig4B9%2BpmBZJOSRqMfi1VN5Wf4GBR59NLmEwmLvD5uEt0CaxwysCRCWcQUflFV5nGi%2BKwbdrdZmYH%2B5d124u660rWqhPsBmNtBI0WWu6tu4PGBSb80yNcAbF6MEPrg7c952dc95f3Itxv&amp;X-Amz-Signature=2f980b7f6b20bfeb2136fd8ddb01fb36eca0cf0886e7523b28116a374f8d7a9d&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p>*300 segundo es suficiente para este caso, pero según la complejidad de la función, puede aumentar (540s)</p>
+<h1>🟢 3️⃣ Memoria y CPU</h1>
+<p>512 MB ✔</p>
+<p>1 CPU ✔</p>
+<p>Perfecto para tu carga actual.</p>
+<h1>🟢 4️⃣ Redes</h1>
+<p>No toques nada.</p>
+<p>No necesitas VPC.</p>
+<p>Déjalo como está.</p>
+<h1>🟢 5️⃣ Seguridad</h1>
+<p>Encriptación administrada por Google ✔</p>
+<p>Correcto.</p>
+<h1>🧱 1️⃣ Nombre del contenedor</h1>
+<p>Ves algo como:</p>
+<p><code>plain text
+Nombredel contenedor: placeholder-1</code></p>
+<p>Eso es interno de Cloud Run.</p>
+<p>En Cloud Functions Gen2:</p>
+<ul>
+<li>
+<p>Google construye automáticamente el contenedor</p>
+</li>
+<li>
+<p>Tú no gestionas imagen Docker</p>
+</li>
+<li>
+<p>Tú no defines ENTRYPOINT</p>
+</li>
+<li>
+<p>Tú no defines CMD</p>
+</li>
+</ul>
+<p>❌ No debes cambiarlo.</p>
+<p>Déjalo exactamente como está.</p>
+<h1>💾 2️⃣ Volúmenes</h1>
+<p>No necesitas volúmenes.</p>
+<p>Los volúmenes se usan cuando:</p>
+<ul>
+<li>
+<p>Montas secretos como archivos</p>
+</li>
+<li>
+<p>Conectas discos</p>
+</li>
+<li>
+<p>Haces almacenamiento temporal persistente</p>
+</li>
+</ul>
+<p>Tu pipeline:</p>
+<ul>
+<li>Extrae API</li>
+</ul>
+  </div>
+</body>
+</html>

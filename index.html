@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>angelgarciadatablog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<!-- Mobile overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <div class="site-name">Angel García <span>· docs</span></div>
+    <div class="site-sub">Notas técnicas personales</div>
+  </div>
+  <div class="search-box">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="sideSearch" placeholder="Buscar nota..." oninput="filterNotes(this.value)" />
+  </div>
+  <div class="nav-section" id="navSection">
+    <div class="nav-section-title">Notas</div>
+    <a class="nav-item active" id="nav-all" onclick="showIndex()">
+      <span class="dot"></span> Todas las notas
+    </a>
+  </div>
+  <div class="sidebar-footer">
+    <a href="https://www.angelgarciadatablog.com">angelgarciadatablog.com</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="menu-btn" onclick="openSidebar()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="topbar-name">Angel García</div>
+      <span class="topbar-sep">|</span>
+      <div class="breadcrumb">
+        <a onclick="showIndex()" style="cursor:pointer;color:var(--text-dim)">docs</a>
+        <span>/</span>
+        <span id="breadcrumbCat">inicio</span>
+      </div>
+    </div>
+    <div class="topbar-links">
+      <a href="https://www.angelgarciadatablog.com" target="_blank">Web principal</a>
+      <a href="https://www.youtube.com/@angelgarciadatablog" target="_blank">YouTube</a>
+      <a href="https://www.linkedin.com/in/angelgarciachanga/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+
+  <!-- INDEX VIEW -->
+  <div class="content" id="indexView">
+    <div class="hero-row">
+      <div class="hero-text">
+        <div class="page-title">Documentación angelgarciadatablog</div>
+        <div class="page-desc">Referencia técnica de herramientas y flujos de trabajo en datos, cloud e ingeniería. Exportado desde Notion y versionado en GitHub.</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-num" id="totalNotes">—</div><div class="stat-label">Notas</div></div>
+        <div class="stat"><div class="stat-num" id="totalGroups">—</div><div class="stat-label">Grupos</div></div>
+      </div>
+    </div>
+
+    <div class="section-label" id="catSectionLabel">Categorías disponibles</div>
+    <div class="category-grid" id="catGrid"></div>
+
+    <div class="section-label" id="notesSectionLabel" style="display:none"></div>
+    <div id="groupsContainer" class="groups-container"></div>
+  </div>
+
+  <!-- NOTE VIEWER -->
+  <div id="noteViewer">
+    <button class="note-back" onclick="showIndex()">← Volver</button>
+    <div id="noteContent"></div>
+  </div>
+</main>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

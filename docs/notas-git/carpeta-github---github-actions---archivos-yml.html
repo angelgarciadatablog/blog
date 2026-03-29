@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carpeta .github - Github Actions - archivos .yml · Angel García</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg-side: #141414;
+    --border: #242424;
+    --text: #c9c9c9;
+    --text-dim: #555;
+    --text-head: #e8e8e8;
+    --accent: #4a90d9;
+    --code-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+  .topbar a:hover { color: var(--text); }
+  .topbar .sep { color: var(--border); }
+  .note-content { margin-top: 72px; }
+  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
+  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
+  p { margin-bottom: 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Git & GitHub</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Otros</span>
+  </div>
+  <div class="note-content">
+    <h1>Carpeta .github - Github Actions - archivos .yml</h1>
+    <h2>1️⃣ ¿Qué es <code>.github</code> y por qué empieza con punto?</h2>
+<p>En macOS / Linux:</p>
+<ul>
+<li>
+<p>Las carpetas que empiezan con <code>.</code> son <strong>ocultas</strong></p>
+</li>
+<li>
+<p>No es “misterio”, es solo convención</p>
+</li>
+</ul>
+<p>Ejemplos comunes:</p>
+<ul>
+<li>
+<p><code>.git</code> → info interna de Git</p>
+</li>
+<li>
+<p><code>.env</code> → variables de entorno</p>
+</li>
+<li>
+<p><code>.github</code> → <strong>configuración especial para GitHub</strong></p>
+</li>
+</ul>
+<p>👉 O sea:</p>
+<blockquote>
+<p><code>.github</code> NO es para tu código, es para decirle cosas a GitHub.</p>
+</blockquote>
+<hr />
+<h2>2️⃣ ¿Para qué sirve la carpeta <code>.github</code>?</h2>
+<p>GitHub <strong>escanea automáticamente</strong> esa carpeta cuando subes el repo.</p>
+<p>Dentro de <code>.github</code> pueden vivir:</p>
+<ul>
+<li>
+<p>workflows (automatizaciones)</p>
+</li>
+<li>
+<p>templates de issues</p>
+</li>
+<li>
+<p>templates de PRs</p>
+</li>
+<li>
+<p>config de seguridad</p>
+</li>
+</ul>
+<p>En tu proyecto, <strong>sirve para usar:</strong></p>
+<p>👉 <strong>GitHub Actions</strong></p>
+<h2>3️⃣ ¿Qué es <code>.github/workflows</code> exactamente?</h2>
+<p>Esta ruta:</p>
+<p>```plain text
+.github/workflows/</p>
+<pre class="codehilite"><code>tiene un significado especial:
+
+&gt; 📌 **GitHub busca ahí los archivos ****`.yml`**** para ejecutar Actions**
+
+Si no existe:
+
+- GitHub Actions **no corre**
+
+- Aunque tu YAML esté perfecto
+
+Es una **ruta obligatoria**, no un gusto.
+
+---
+
+## 4️⃣ Qué significa este comando exactamente
+
+```bash
+mkdir .github/workflows
+</code></pre>
+
+<p>Se lee así (en español humano):</p>
+<blockquote>
+<p>“Crea una carpeta llamada <code>workflows</code> dentro de una carpeta llamada <code>.github</code>”</p>
+</blockquote>
+<p>Y como <code>.github</code> es especial, GitHub sabe:</p>
+<ul>
+<li>“ah, aquí hay automatizaciones”</li>
+</ul>
+<hr />
+<h2>5️⃣ Analogía sencilla (para que no se olvide)</h2>
+<p>Piensa en el repo como una empresa:</p>
+<p><code>plain text
+youtube-data-pipeline/
+│
+├── scripts/        → trabajadores (Python)
+├── sql/            → reglasdel negocio
+├── data/           → almacén temporal
+│
+├──.github/
+│   └── workflows/ → jefe que dice CUÁNDOy CÓMO trabajan</code></p>
+<p>Sin <code>.github/workflows</code>:</p>
+<ul>
+<li>
+<p>tienes trabajadores</p>
+</li>
+<li>
+<p>pero nadie los coordina</p>
+</li>
+</ul>
+  </div>
+</body>
+</html>
