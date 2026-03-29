@@ -55,27 +55,39 @@
     </div>
   </div>
 
-  <!-- INDEX VIEW -->
-  <div class="content" id="indexView">
-    <div class="hero-row">
-      <div class="hero-text">
-        <div class="page-title">Documentación angelgarciadatablog</div>
-        <div class="page-desc">Referencia técnica de herramientas y flujos de trabajo en datos, cloud e ingeniería. Exportado desde Notion y versionado en GitHub.</div>
-      </div>
-      <div class="stats-row">
-        <div class="stat"><div class="stat-num" id="totalNotes">—</div><div class="stat-label">Notas</div></div>
-        <div class="stat"><div class="stat-num" id="totalGroups">—</div><div class="stat-label">Grupos</div></div>
-      </div>
+<!-- INDEX VIEW -->
+<div class="content" id="indexView">
+  <div class="hero-row">
+    <div class="hero-text">
+      <div class="page-title">Documentación</div>
+      <div class="page-desc">Referencia técnica de herramientas y flujos de trabajo en datos, cloud e ingeniería. Exportado desde Notion y versionado en GitHub.</div>
     </div>
-
-    <div class="section-label" id="catSectionLabel">Categorías disponibles</div>
-    <div class="category-grid" id="catGrid"></div>
-
-    <div class="section-label" id="notesSectionLabel" style="display:none"></div>
-    <div id="groupsContainer" class="groups-container"></div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num" id="totalNotes">—</div><div class="stat-label">Notas</div></div>
+      <div class="stat"><div class="stat-num" id="totalGroups">—</div><div class="stat-label">Categorías</div></div>
+    </div>
   </div>
 
-  <!-- NOTE VIEWER -->
+  <div class="section-label" id="catSectionLabel">Categorías disponibles</div>
+  <div class="category-grid" id="catGrid"></div>
+
+  <div id="recientesSection">
+    <div class="section-label">Modificadas recientemente</div>
+    <table class="notes-table" id="recientesContainer"></table>
+  </div>
+
+  <div id="catHeader" style="display:none; margin-bottom: 32px;">
+    <div style="font-size:20px; font-weight:600; color:var(--text-head); margin-bottom:6px;" id="catHeaderTitle"></div>
+    <div style="font-size:12px; color:var(--text-dim);" id="catHeaderMeta"></div>
+    <div style="border-bottom:1px solid var(--border); margin-top:16px;"></div>
+  </div>
+
+  <div class="section-label" id="notesSectionLabel" style="display:none"></div>
+  <div id="groupsContainer" class="groups-container"></div>
+</div>
+  
+
+<!-- NOTE VIEWER -->
   <div id="noteViewer">
     <button class="note-back" onclick="showIndex()">← Volver</button>
     <div id="noteContent"></div>

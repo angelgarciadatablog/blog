@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Autenticar CLI de GPC · Angel García</title>
+  <title>Autenticación del CLI vs Autenticación de librerías cliente 👌 · Angel García</title>
   
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
@@ -89,83 +89,43 @@
     <span style="color: var(--text-dim); font-size: 13px;">CLI de google cloud - SDK</span>
   </div>
   <div class="note-content">
-    <h1>Autenticar CLI de GPC</h1>
-    <blockquote>
-<p>gcloud init</p>
-</blockquote>
-<p>Esto va a:</p>
-<p>1️⃣ Abrir el navegador
-2️⃣ Pedirte login con tu cuenta personal
-3️⃣ Mostrar lista de proyectos
-4️⃣ Guardar la configuración local</p>
-<p><strong>Solo se hace una vez al principio para autenticarte con una cuenta y elegir un proyecto</strong></p>
-<p>Al final se abrirá está página:</p>
-<p>https://docs.cloud.google.com/sdk/auth_success?hl=es-419</p>
-<h1>🧠 Qué estamos haciendo realmente</h1>
-<p>Hasta ahora solo instalamos herramientas.</p>
-<p>Con <code>gcloud init</code>:</p>
-<ul>
-<li>
-<p>Se crea un perfil local</p>
-</li>
-<li>
-<p>Se guarda un token de autenticación</p>
-</li>
-<li>
-<p>Se define el proyecto activo</p>
-</li>
-<li>
-<p>Se habilita conexión real a la nube</p>
-</li>
-</ul>
-<p>Es como hacer <code>git config</code> pero para Google Cloud.</p>
-<h2>Elije un proyecto.</h2>
-<p>necesariamente tienes que elegir un proyecto.</p>
-<pre class="codehilite"><code class="language-bash">You are signed in as: [tucorreodegoogle@gmail.com].
-
-Pick cloud project to use:
- [1] hackspace-bootcamps-2021
- [2] prueba-423920
- [3] prueba-blogger-439506
- [4] prueba-n8n-467606
- [5] prueba2-433703
- [6] Enter a project ID
- [7] Create a new project
-Please enter numeric choice or text value (must exactly match list item): 
+    <h1>Autenticación del CLI vs Autenticación de librerías cliente 👌</h1>
+    <p>Cuando trabajas con Google Cloud desde tu máquina local, existen dos mecanismos distintos de autenticación que suelen confundirse.</p>
+<h1><code>1) gcloud auth login</code> — autenticación del CLI</h1>
+<p>Permite que el SDK ejecute comandos contra Google Cloud desde la terminal.</p>
+<pre class="codehilite"><code class="language-bash">gcloud auth login
 </code></pre>
 
-<h1>🧠 Qué se guarda cuando usas <code>gcloud init</code></h1>
-<p>Cuando hiciste login, se guardó en tu usuario de Windows:</p>
-<ul>
-<li>
-<p>Token de autenticación</p>
-</li>
-<li>
-<p>Proyecto activo</p>
-</li>
-<li>
-<p>Configuración de CLI</p>
-</li>
-</ul>
-<p>Eso se guarda en una carpeta tipo: (windows)</p>
-<pre class="codehilite"><code class="language-powershell">C:\Users\TU_USUARIO\AppData\Roaming\gcloud
+<p>Se usa para cualquier comando del CLI:</p>
+<pre class="codehilite"><code class="language-bash">gcloud projects list
+gcloud functions deploy
+bq query ...
 </code></pre>
 
-<p>mac</p>
-<pre class="codehilite"><code class="language-sql">~/.config/gcloud/
+<p><em>Las credenciales se guardan en: ~/.config/gcloud/credentials.db</em></p>
+<h1><code>2) gcloud auth application-default login</code> — autenticación de librerías cliente (ADC)</h1>
+<p>Permite que las librerías oficiales de Google Cloud se autentiquen desde tu código.</p>
+<pre class="codehilite"><code class="language-bash">gcloud auth application-default login
 </code></pre>
 
-<p>Eso NO depende de que terminal esté abierto.</p>
-<hr />
-<h1>🎯 Entonces si cierras Terminal:</h1>
-<p>✔ Sigues autenticado</p>
-<p>✔ El proyecto activo sigue configurado</p>
-<p>✔ <code>gcloud</code> sigue instalado</p>
-<p>✔ <code>bq</code> sigue funcionando</p>
-<p>Cuando vuelvas a abrir PowerShell, todo sigue igual.</p>
-<h1>👌 Vuelves abrir la terminal y quieres verificar el usuario y proyecto:</h1>
-<pre class="codehilite"><code class="language-bash">gcloud config list
+<p>Se usa cuando tu código accede a Google Cloud directamente, por ejemplo:</p>
+<pre class="codehilite"><code class="language-bash">from google.cloud import bigquery
+
+client = bigquery.Client()
 </code></pre>
+
+<p><em>La librería no usa las credenciales de <code>gcloud auth login</code> — usa ADC. Sin este comando, ese código fallará aunque el CLI funcione perfectamente. Las credenciales se guardan en: ~/.config/gcloud/application_default_credentials.json</em></p>
+<h1>Problema común: quota project mismatch</h1>
+<p>Ocurre cuando cambias el proyecto activo con <code>gcloud config set project</code> pero ADC sigue apuntando al proyecto anterior:</p>
+<p>```plain text
+Your active project does not match the quota project in your local Application Default Credentials file.</p>
+<pre class="codehilite"><code>La solución:
+
+```bash
+gcloud auth application-default set-quota-project TU_PROJECT_ID
+</code></pre>
+
+<h1>Resumen:</h1>
   </div>
 </body>
 </html>

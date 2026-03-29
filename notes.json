@@ -1,324 +1,416 @@
 [
   {
-    "title": "Instalación de Google Cloud SDK en ordenador",
-    "slug": "notas-gcp/instalacion-de-google-cloud-sdk-en-ordenador",
+    "title": "Instalación de Google Cloud SDK en ordenador Mac 👌",
+    "slug": "notas-gcp/instalacion-de-google-cloud-sdk-en-ordenador-mac-",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "CLI de google cloud - SDK"
+    "grupo": "CLI de google cloud - SDK",
+    "fecha_modificacion": "2026-03-29T21:29:00+00:00",
+    "fecha_creacion": "2026-02-12T04:28:00.000Z"
   },
   {
-    "title": "Autenticar CLI de GPC",
-    "slug": "notas-gcp/autenticar-cli-de-gpc",
+    "title": "Configuración del Google Cloud SDK 👌",
+    "slug": "notas-gcp/configuracion-del-google-cloud-sdk-",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "CLI de google cloud - SDK"
+    "grupo": "CLI de google cloud - SDK",
+    "fecha_modificacion": "2026-03-29T22:44:00+00:00",
+    "fecha_creacion": "2026-03-29T21:42:00.000Z"
   },
   {
-    "title": "gcloud auth login",
-    "slug": "notas-gcp/gcloud-auth-login",
+    "title": "Autenticación del CLI vs Autenticación de librerías cliente 👌",
+    "slug": "notas-gcp/autenticacion-del-cli-vs-autenticacion-de-librerias-cliente-",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "CLI de google cloud - SDK"
+    "grupo": "CLI de google cloud - SDK",
+    "fecha_modificacion": "2026-03-29T23:00:00+00:00",
+    "fecha_creacion": "2026-03-29T22:50:00.000Z"
   },
   {
-    "title": "Autenticación de gcloud vs Autenticación de CLI de Google Cloud",
-    "slug": "notas-gcp/autenticacion-de-gcloud-vs-autenticacion-de-cli-de-google-cloud",
+    "title": "Instalación de Google Cloud SDK en ordenador Windows",
+    "slug": "notas-gcp/instalacion-de-google-cloud-sdk-en-ordenador-windows",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "CLI de google cloud - SDK"
+    "grupo": "CLI de google cloud - SDK",
+    "fecha_modificacion": "2026-03-29T07:39:00+00:00",
+    "fecha_creacion": "2026-03-29T07:39:00.000Z"
   },
   {
     "title": "Cambiar de proyecto",
     "slug": "notas-gcp/cambiar-de-proyecto",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "CLI de google cloud - SDK"
+    "grupo": "CLI de google cloud - SDK",
+    "fecha_modificacion": "2026-03-29T04:22:00+00:00",
+    "fecha_creacion": "2026-02-17T05:59:00.000Z"
   },
   {
     "title": "Crear una service account",
     "slug": "notas-gcp/crear-una-service-account",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "CLI de google cloud - SDK"
+    "grupo": "CLI de google cloud - SDK",
+    "fecha_modificacion": "2026-03-29T04:22:00+00:00",
+    "fecha_creacion": "2026-03-26T05:09:00.000Z"
   },
   {
     "title": "Instalar libreria Google cloud",
     "slug": "notas-gcp/instalar-libreria-google-cloud",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Libreria de google cloud"
+    "grupo": "Libreria de google cloud",
+    "fecha_modificacion": "2026-03-29T04:22:00+00:00",
+    "fecha_creacion": "2026-02-13T04:07:00.000Z"
   },
   {
     "title": "Configurar la infraestructura",
     "slug": "notas-gcp/configurar-la-infraestructura",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Cloud funtions y cloud scheduler"
+    "grupo": "Cloud funtions y cloud scheduler",
+    "fecha_modificacion": "2026-03-29T04:23:00+00:00",
+    "fecha_creacion": "2026-02-17T06:56:00.000Z"
   },
   {
     "title": "Crear service account",
     "slug": "notas-gcp/crear-service-account",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Cloud funtions y cloud scheduler"
+    "grupo": "Cloud funtions y cloud scheduler",
+    "fecha_modificacion": "2026-03-29T04:23:00+00:00",
+    "fecha_creacion": "2026-02-17T07:08:00.000Z"
   },
   {
     "title": "Crear Cloud Function DAILY/WEEKLY",
     "slug": "notas-gcp/crear-cloud-function-dailyweekly",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Cloud funtions y cloud scheduler"
+    "grupo": "Cloud funtions y cloud scheduler",
+    "fecha_modificacion": "2026-03-29T04:37:00+00:00",
+    "fecha_creacion": "2026-02-17T07:24:00.000Z"
   },
   {
     "title": "Crear cloud scheduler",
     "slug": "notas-gcp/crear-cloud-scheduler",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Cloud funtions y cloud scheduler"
+    "grupo": "Cloud funtions y cloud scheduler",
+    "fecha_modificacion": "2026-03-29T04:39:00+00:00",
+    "fecha_creacion": "2026-02-22T22:54:00.000Z"
   },
   {
     "title": "Seguridad de cloud funtion",
     "slug": "notas-gcp/seguridad-de-cloud-funtion",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Cloud funtions y cloud scheduler"
+    "grupo": "Cloud funtions y cloud scheduler",
+    "fecha_modificacion": "2026-03-29T04:39:00+00:00",
+    "fecha_creacion": "2026-02-22T23:02:00.000Z"
   },
   {
     "title": "Obtener API de Youtube",
     "slug": "notas-gcp/obtener-api-de-youtube",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Api de youtube"
+    "grupo": "Api de youtube",
+    "fecha_modificacion": "2026-03-29T04:39:00+00:00",
+    "fecha_creacion": "2026-02-08T20:39:00.000Z"
   },
   {
     "title": "Apis disponibles",
     "slug": "notas-gcp/apis-disponibles",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Api de youtube"
+    "grupo": "Api de youtube",
+    "fecha_modificacion": "2026-03-29T04:39:00+00:00",
+    "fecha_creacion": "2026-02-08T20:48:00.000Z"
   },
   {
     "title": "Contenedor",
     "slug": "notas-gcp/contenedor",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Cloud Run"
+    "grupo": "Cloud Run",
+    "fecha_modificacion": "2026-03-29T04:23:00+00:00",
+    "fecha_creacion": "2026-03-15T00:04:00.000Z"
   },
   {
     "title": "Evolución de cómo tener tu app en internet.",
     "slug": "notas-gcp/evolucion-de-como-tener-tu-app-en-internet",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Cloud Run"
+    "grupo": "Cloud Run",
+    "fecha_modificacion": "2026-03-29T04:24:00+00:00",
+    "fecha_creacion": "2026-03-15T00:12:00.000Z"
   },
   {
     "title": "Confirmar APIs instaladas desde terminal ",
     "slug": "notas-gcp/confirmar-apis-instaladas-desde-terminal",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T04:25:00+00:00",
+    "fecha_creacion": "2026-02-17T07:04:00.000Z"
   },
   {
     "title": "Publicar un dataset de big query",
     "slug": "notas-gcp/publicar-un-dataset-de-big-query",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T04:25:00+00:00",
+    "fecha_creacion": "2026-02-25T07:11:00.000Z"
   },
   {
     "title": "Cloud Shell - CORS",
     "slug": "notas-gcp/cloud-shell---cors",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T04:25:00+00:00",
+    "fecha_creacion": "2026-03-03T19:25:00.000Z"
   },
   {
     "title": "Iniciando en git - iniciar un control de versiones local",
     "slug": "notas-git/iniciando-en-git---iniciar-un-control-de-versiones-local",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2025-10-22T01:39:00.000Z"
   },
   {
     "title": "Configurar tu identidad en Git",
     "slug": "notas-git/configurar-tu-identidad-en-git",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:59:00+00:00",
+    "fecha_creacion": "2025-11-11T11:17:00.000Z"
   },
   {
     "title": "Clonar un repositorio público a local",
     "slug": "notas-git/clonar-un-repositorio-publico-a-local",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2025-11-11T08:46:00.000Z"
   },
   {
     "title": "Subir un repositorio local a un nuevo repositorio en github",
     "slug": "notas-git/subir-un-repositorio-local-a-un-nuevo-repositorio-en-github",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2025-11-08T08:47:00.000Z"
   },
   {
     "title": "Cuál repo esta más actualizado local o github",
     "slug": "notas-git/cual-repo-esta-mas-actualizado-local-o-github",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:59:00+00:00",
+    "fecha_creacion": "2026-02-21T21:39:00.000Z"
   },
   {
     "title": "Actualizar local con versión remota",
     "slug": "notas-git/actualizar-local-con-version-remota",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:59:00+00:00",
+    "fecha_creacion": "2025-11-01T00:06:00.000Z"
   },
   {
     "title": "Problema Git Pull - Cambios en el local y cambios en el remoto",
     "slug": "notas-git/problema-git-pull---cambios-en-el-local-y-cambios-en-el-remoto",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2025-11-09T00:24:00.000Z"
   },
   {
     "title": "git diff - verificar cambios locales",
     "slug": "notas-git/git-diff---verificar-cambios-locales",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-03-08T14:52:00.000Z"
   },
   {
     "title": "Hacer un push ",
     "slug": "notas-git/hacer-un-push",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T07:00:00+00:00",
+    "fecha_creacion": "2025-10-31T23:40:00.000Z"
   },
   {
     "title": "Git push —force",
     "slug": "notas-git/git-push-force",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-03-05T08:36:00.000Z"
   },
   {
     "title": "HTPPS o SSH para push",
     "slug": "notas-git/htpps-o-ssh-para-push",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-02-21T12:01:00.000Z"
   },
   {
     "title": "Revisar versiones",
     "slug": "notas-git/revisar-versiones",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2025-11-01T08:28:00.000Z"
   },
   {
     "title": "Git ignore",
     "slug": "notas-git/git-ignore",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-02-11T23:44:00.000Z"
   },
   {
     "title": "Git log - revisar historial",
     "slug": "notas-git/git-log---revisar-historial",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-02-21T12:22:00.000Z"
   },
   {
     "title": "Borrar un commit",
     "slug": "notas-git/borrar-un-commit",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-03-28T05:30:00.000Z"
   },
   {
     "title": "Niveles de usuario",
     "slug": "notas-git/niveles-de-usuario",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:59:00+00:00",
+    "fecha_creacion": "2025-11-21T12:11:00.000Z"
   },
   {
     "title": "Revisar otros casos",
     "slug": "notas-git/revisar-otros-casos",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:59:00+00:00",
+    "fecha_creacion": "2026-02-21T22:03:00.000Z"
   },
   {
     "title": "Explicación de rebase",
     "slug": "notas-git/explicacion-de-rebase",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:59:00+00:00",
+    "fecha_creacion": "2026-01-12T07:16:00.000Z"
   },
   {
     "title": "Staging Area ",
     "slug": "notas-git/staging-area",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Comandos Git"
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T07:00:00+00:00",
+    "fecha_creacion": "2025-10-31T23:42:00.000Z"
   },
   {
     "title": "GitHub CLI - SSH",
     "slug": "notas-git/github-cli---ssh",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Github CLI"
+    "grupo": "Github CLI",
+    "fecha_modificacion": "2026-03-29T06:55:00+00:00",
+    "fecha_creacion": "2026-03-22T00:57:00.000Z"
   },
   {
     "title": "Áreas y estados de GIT",
     "slug": "notas-git/areas-y-estados-de-git",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-01-11T07:25:00.000Z"
   },
   {
     "title": "Buscar un repo desde una carpeta hijo",
     "slug": "notas-git/buscar-un-repo-desde-una-carpeta-hijo",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-01-11T08:16:00.000Z"
   },
   {
     "title": "Carpeta .github - Github Actions - archivos .yml",
     "slug": "notas-git/carpeta-github---github-actions---archivos-yml",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-02-08T17:59:00.000Z"
   },
   {
     "title": "Markdown",
     "slug": "notas-git/markdown",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-02-11T22:44:00.000Z"
   },
   {
     "title": "Revisar quiénes usuarios que hicieron commits",
     "slug": "notas-git/revisar-quienes-usuarios-que-hicieron-commits",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-02-21T22:56:00.000Z"
   },
   {
     "title": "Crear un repo desde la terminal",
     "slug": "notas-git/crear-un-repo-desde-la-terminal",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-03-02T10:20:00.000Z"
   },
   {
     "title": "Comandos de Git identicos en windows y mac",
     "slug": "notas-git/comandos-de-git-identicos-en-windows-y-mac",
     "category": "notas-git",
     "catLabel": "Git & GitHub",
-    "grupo": "Otros"
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2025-11-21T11:48:00.000Z"
   }
 ]

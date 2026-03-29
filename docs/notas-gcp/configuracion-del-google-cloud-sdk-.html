@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuración del Google Cloud SDK 👌 · Angel García</title>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --bg-side: #141414;
+    --border: #242424;
+    --text: #c9c9c9;
+    --text-dim: #555;
+    --text-head: #e8e8e8;
+    --accent: #4a90d9;
+    --code-bg: #1a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    z-index: 100;
+  }
+  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+  .topbar a:hover { color: var(--text); }
+  .topbar .sep { color: var(--border); }
+  .note-content { margin-top: 72px; }
+  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
+  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
+  p { margin-bottom: 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+</style>
+
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Google Cloud Platform</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">CLI de google cloud - SDK</span>
+  </div>
+  <div class="note-content">
+    <h1>Configuración del Google Cloud SDK 👌</h1>
+    <h1>1. Verificar si ya hay sesión activa:</h1>
+<p>Antes de autenticarse, siempre verificar si ya existe una sesión:</p>
+<pre class="codehilite"><code class="language-bash">gcloud auth list
+</code></pre>
+
+<p>Tres escenarios posibles:</p>
+<ol>
+<li><strong>Ves tu cuenta con</strong><strong><code>*</code></strong> — ya estás autenticado y activo, no necesitas hacer nada más.</li>
+</ol>
+<p>```plain text
+ACTIVE  ACCOUNT
+*       tu@gmail.com</p>
+<pre class="codehilite"><code>1. **Ves tu cuenta pero sin****`*`** — las credenciales existen pero la cuenta no está activa. Solo actívala:
+
+```bash
+gcloud config set account tu@gmail.com
+</code></pre>
+
+<ol>
+<li><strong>Lista vacía</strong> — no hay ninguna sesión guardada. Procede al siguiente paso.</li>
+</ol>
+<h1>2. Autenticarse</h1>
+<p>Hay dos comandos (más uno aparte) para autenticarse y es importante entender cuándo usar cada uno.</p>
+<ol>
+<li><strong><code>gcloud init</code></strong> — autentica <em>y</em> configura. Hace tres cosas en secuencia: abre el navegador para iniciar sesión, luego te pregunta qué proyecto quieres usar, y finalmente configura región y zona por defecto. Úsalo cuando es la primera vez o cuando quieres reconfigurar todo desde cero.<em> (logear y configurar)</em></li>
+</ol>
+<pre class="codehilite"><code class="language-bash">gcloud init
+</code></pre>
+
+<p>Cuando corres <code>gcloud init</code> por primera vez, el flujo en la terminal es este:</p>
+<ol>
+<li><strong><code>gcloud auth login</code></strong> — solo autentica. No toca ninguna configuración existente. Úsalo cuando ya tienes todo configurado y solo necesitas agregar o refrescar una cuenta. <em>(Logear)</em></li>
+</ol>
+<pre class="codehilite"><code class="language-bash">gcloud auth login
+</code></pre>
+
+<p><em>También guarda el token, pero en otra subcarpeta </em><em><code>~/.config/gcloud/credentials.db</code></em><em> y persiste entre sesiones de terminal.</em></p>
+<ol>
+<li><strong><code>gcloud auth application-default login</code></strong> — este es un tercer tipo de autenticación distinto a los anteriores. Las credenciales que genera no son para el CLI, sino para las <strong>librerías cliente</strong> — por ejemplo cuando tu aplicación en Python usa <code>google-cloud-bigquery</code> o <code>google-cloud-storage</code>. Si solo usas la terminal con <code>gcloud</code> o <code>bq</code>, no lo necesitas.</li>
+</ol>
+<pre class="codehilite"><code class="language-bash">gcloud auth application-default login
+</code></pre>
+
+<h1>3. Múltiples cuentas</h1>
+<p>El SDK permite tener varias cuentas autenticadas simultáneamente en la misma máquina. Cada vez que corres <code>gcloud auth login</code> con una cuenta diferente, se agrega a la lista sin reemplazar las anteriores.</p>
+<pre class="codehilite"><code class="language-bash">gcloud auth list
+</code></pre>
+
+<pre class="codehilite"><code>ACTIVE  ACCOUNT
+*       trabajo@empresa.com
+        personal@gmail.com
+        cliente@otrodominio.com
+</code></pre>
+
+<p>Para cambiar la cuenta activa:</p>
+<pre class="codehilite"><code class="language-bash">gcloud config set account personal@gmail.com
+</code></pre>
+
+<p>Para revocar (cerrar sesión) de una cuenta específica:</p>
+<pre class="codehilite"><code class="language-bash">gcloud auth revoke personal@gmail.com
+</code></pre>
+
+<h1>4. Configuraciones y perfiles</h1>
+<p>Las configuraciones son independientes de las sesiones. Una configuración es simplemente un archivo con propiedades guardadas — cuenta, proyecto, región — que puedes activar con un solo comando. No son sesiones, no autentican ni desautentican nada.
+Son útiles cuando trabajas con múltiples proyectos o clientes regularmente y no quieres cambiar propiedades una por una cada vez.</p>
+<p>Crear y configurar un perfil:</p>
+<pre class="codehilite"><code class="language-bash">#Crear la configuración con un alias &quot;trabajo&quot;
+gcloud config configurations create trabajo
+
+#Asignar una cuenta de gmail para esa configuración 
+gcloud config set account trabajo@empresa.com
+
+#Asignar un proyecto de google cloud a la que esa cuenta tiene acceso
+gcloud config set project proyecto-empresa
+
+#Asignar una región (opcional)
+gcloud config set compute/region us-central1
+</code></pre>
+
+<p>Ver todas las configuraciones existentes:</p>
+<pre class="codehilite"><code class="language-bash">gcloud config configurations list
+</code></pre>
+
+<p>Cambiar entre configuraciones:</p>
+<pre class="codehilite"><code class="language-bash">#Activa la configuración con alias trabajo
+gcloud config configurations activate trabajo
+
+#Activa la configuración con alias cliente-a
+gcloud config configurations activate cliente-a
+</code></pre>
+
+<h1>5. Configuraciones huérfanas y limpieza</h1>
+<p>Dado que las configuraciones y las sesiones son independientes, revocar una cuenta no borra las configuraciones que la usaban — quedan apuntando a credenciales que ya no existen.</p>
+<p>Si tienes esto:</p>
+<p>```plain text
+config-1  →  cuenta-a@gmail.com  ← revocada
+config-2  →  cuenta-a@gmail.com  ← revocada
+config-3  →  cuenta-b@gmail.com  ← activa</p>
+<pre class="codehilite"><code>Las configuraciones huérfanas seguirán listándose y parecerán normales, pero cualquier comando que requiera autenticación fallará al usarlas.
+
+**Importante:** si la configuración activa en ese momento es la huérfana, el SDK se vuelve inestable porque cada comando intenta leer credenciales que no existen. Lo primero en ese caso es activar una configuración sana (con login en la cuenta de gmail):
+
+```bash
+gcloud config configurations activate config-3
+</code></pre>
+
+<p>Luego puedes limpiar las huérfanas de dos formas:</p>
+<p>Borrarlas:</p>
+<pre class="codehilite"><code class="language-bash">gcloud config configurations delete config-1
+gcloud config configurations delete config-2
+</code></pre>
+
+<p>O reasignarlas a una cuenta que sí tiene sesión activa:</p>
+<pre class="codehilite"><code class="language-bash">#Activas una configuración 
+gcloud config configurations activate config-1
+
+#Le agregas una cuenta de gmail en la cual tienes el login
+gcloud config set account cuenta-b@gmail.com
+</code></pre>
+
+<blockquote>
+<p>Pregunta: ¿Qué pasaría si estoy dentro de una configuración (cuenta-proyecto) la cual tiene acceso a una vista de bigquery que hace un llamado a una tabla dentro de otro proyecto?</p>
+</blockquote>
+  </div>
+</body>
+</html>

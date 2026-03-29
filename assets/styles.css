@@ -243,7 +243,7 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1px;
-  background: var(--border);
+  background: var(--bg);  /* ← cambiar border por bg */
   border: 1px solid var(--border);
   border-radius: 4px;
   overflow: hidden;
@@ -350,6 +350,10 @@ main {
 .note-loading { color: var(--text-dim); font-size: 13px; padding: 40px 0; }
 
 /* ── RESPONSIVE ── */
+.reciente-meta-mobile { display: none; }
+.reciente-cat { width: 160px; }
+.reciente-fecha { width: 120px; color: var(--text-dim); font-size: 11px; }
+
 @media (max-width: 768px) {
   aside { transform: translateX(-100%); }
   aside.open { transform: translateX(0); }
@@ -363,6 +367,9 @@ main {
   .stats-row { width: 100%; }
   .stat { flex: 1; }
   .breadcrumb { display: none; }
+  .reciente-cat { display: none; }
+  .reciente-fecha { display: none; }
+  .reciente-meta-mobile { display: block; font-size: 10px; color: var(--text-dim); margin-top: 3px; }
 }
 
 @media (max-width: 480px) {

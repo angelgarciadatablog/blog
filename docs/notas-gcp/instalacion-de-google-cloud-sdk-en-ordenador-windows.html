@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Autenticación de gcloud vs Autenticación de CLI de Google Cloud · Angel García</title>
+  <title>Instalación de Google Cloud SDK en ordenador Windows · Angel García</title>
   
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
@@ -89,115 +89,44 @@
     <span style="color: var(--text-dim); font-size: 13px;">CLI de google cloud - SDK</span>
   </div>
   <div class="note-content">
-    <h1>Autenticación de gcloud vs Autenticación de CLI de Google Cloud</h1>
-    <p>Cuando trabajas con Google Cloud desde tu máquina local, existen <strong>dos mecanismos distintos de autenticación</strong> que suelen confundirse:</p>
-<ul>
-<li>
-<p>Autenticación del CLI (<code>gcloud</code>)</p>
-</li>
-<li>
-<p>Application Default Credentials (ADC) usadas por librerías de Google Cloud</p>
-</li>
-</ul>
-<p>Entender esta diferencia evita errores de permisos, cuotas y warnings.</p>
-<hr />
-<h2>🟢 1️⃣ Autenticación de <code>gcloud</code> (CLI Identity)</h2>
-<p>Se configura con:</p>
-<pre class="codehilite"><code class="language-bash">gcloud auth login
+    <h1>Instalación de Google Cloud SDK en ordenador Windows</h1>
+    <h2>Verificar si está instalado</h2>
+<pre class="codehilite"><code class="language-bash">gcloud --version
 </code></pre>
 
-<h3>¿Qué hace?</h3>
-<ul>
-<li>
-<p>Abre el navegador</p>
-</li>
-<li>
-<p>Permite iniciar sesión con tu cuenta Google</p>
-</li>
-<li>
-<p>Guarda un token OAuth localmente</p>
-</li>
-<li>
-<p>Permite que el SDK (<code>gcloud</code>) ejecute comandos contra GCP</p>
-</li>
-</ul>
-<h3>Se guarda en:</h3>
-<p>Mac/Linux:</p>
-<p>```plain text
-~/.config/gcloud/</p>
-<pre class="codehilite"><code>Windows:
-
-```plain text
-C:\Users\TU_USUARIO\AppData\Roaming\gcloud
+<h2>Instalar CLI de google cloud</h2>
+<h4>1) Windows</h4>
+<p>En PowerShell escribe:</p>
+<pre class="codehilite"><code class="language-bash">winget --version
 </code></pre>
 
-<h3>Se usa para:</h3>
-<ul>
-<li>
-<p><code>gcloud functions deploy</code></p>
-</li>
-<li>
-<p><code>gcloud projects list</code></p>
-</li>
-<li>
-<p><code>gcloud scheduler create</code></p>
-</li>
-<li>
-<p>Cualquier comando del SDK</p>
-</li>
-</ul>
-<hr />
-<h2>🔵 2️⃣ Autenticación de librerías Python (Application Default Credentials — ADC)</h2>
-<p>Se configura con:</p>
-<pre class="codehilite"><code class="language-bash">gcloud auth application-default login
+<p>Si responde con versión → perfecto.</p>
+<p>Luego instala:</p>
+<pre class="codehilite"><code class="language-bash">winget install Google.CloudSDK
 </code></pre>
 
-<p>Y se puede alinear el proyecto de cuotas con:</p>
-<pre class="codehilite"><code class="language-bash">gcloud auth application-default set-quota-project TU_PROJECT_ID
+<p>Eso descarga e instala el SDK automáticamente.</p>
+<h4>2) Mac</h4>
+<p>En macOS (que tú usas normalmente), lo ideal es Homebrew:</p>
+<pre class="codehilite"><code class="language-bash">brew install --cask google-cloud-sdk
 </code></pre>
 
-<h3>¿Qué es ADC?</h3>
-<p>Es el mecanismo estándar que usan las librerías oficiales de Google Cloud para autenticarse automáticamente.</p>
-<p>Por ejemplo, cuando en un notebook haces:</p>
-<pre class="codehilite"><code class="language-python">from google.cloudimport bigquery
+<h4>3) Ubuntu</h4>
+<p>En Ubuntu el proceso se divide en varios pasos porque APT necesita que le digas manualmente de dónde descargar el SDK.</p>
+<pre class="codehilite"><code class="language-bash">#Agregar llave de seguridad de Google:
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
 
-client = bigquery.Client()
-</code></pre>
+#Agregar el repositorio de Google Cloud:
+echo &quot;deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main&quot; | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
 
-<p>La librería no usa directamente <code>gcloud auth login</code>.</p>
-<p>Usa ADC.</p>
-<hr />
-<h2>📁 Dónde se guarda ADC</h2>
-<p>Mac/Linux:</p>
-<p>```plain text
-~/.config/gcloud/application_default_credentials.json</p>
-<pre class="codehilite"><code>Windows:
+#Actualizar catálogo de APT:
+sudo apt update
 
-```plain text
-C:\Users\TU_USUARIO\AppData\Roaming\gcloud\application_default_credentials.json
+#Instalar el SDK:
+sudo apt install -y google-cloud-cli
 </code></pre>
 
 <hr />
-<h2>🎯 Diferencia clave</h2>
-<p>Son sistemas relacionados pero distintos.</p>
-<hr />
-<h2>⚠️ Problema común: “quota project mismatch”</h2>
-<p>Puede ocurrir que:</p>
-<ul>
-<li>Cambies el proyecto activo con:</li>
-</ul>
-<pre class="codehilite"><code class="language-bash">gcloud configset project nuevo-proyecto
-</code></pre>
-
-<p>Pero ADC siga apuntando al proyecto anterior.</p>
-<p>Eso genera el warning:</p>
-<p>```plain text
-Your active project doesnotmatch the quota projectin yourlocal ApplicationDefault Credentials file.</p>
-<pre class="codehilite"><code>La solución es:
-
-```bash
-gcloud auth application-default set-quota-project nuevo-proyecto
-</code></pre>
   </div>
 </body>
 </html>

@@ -21,7 +21,6 @@ async function cargarNotas() {
 function init() {
   const categorias = [...new Set(notes.map(n => n.category))];
 
-  // Tarjetas de categorías dinámicas
   const catGrid = document.getElementById('catGrid');
   catGrid.innerHTML = categorias.map(cat => `
     <a class="category-card" onclick="setFilter('${cat}', null)">
@@ -32,11 +31,10 @@ function init() {
   `).join('');
 
   document.getElementById('totalNotes').textContent = notes.length;
-  const grupos = [...new Set(notes.map(n => n.grupo))];
-  document.getElementById('totalGroups').textContent = grupos.length;
+  document.getElementById('totalGroups').textContent = categorias.length;
 
   buildSidebar();
-  renderGroups(notes);
+  renderRecientes();
 }
 
 // ── Sidebar dinámico ──
@@ -94,6 +92,8 @@ function toggleFolder(key, el) {
 function setFilter(cat, el) {
   document.getElementById('noteViewer').classList.remove('active');
   document.getElementById('indexView').style.display = '';
+  document.querySelector('.hero-row').style.display = cat === 'all' ? '' : 'none';
+  document.getElementById('recientesSection').style.display = cat === 'all' ? '' : 'none';
   currentFilter = cat;
 
   document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
@@ -121,6 +121,14 @@ function setFilter(cat, el) {
   document.getElementById('totalNotes').textContent = filtered.length;
   const grupos = [...new Set(filtered.map(n => n.grupo))];
   document.getElementById('totalGroups').textContent = grupos.length;
+
+  if (cat === 'all') {
+    document.getElementById('catHeader').style.display = 'none';
+  } else {
+    document.getElementById('catHeader').style.display = '';
+    document.getElementById('catHeaderTitle').textContent = CAT_LABELS[cat] || cat;
+    document.getElementById('catHeaderMeta').textContent = `${filtered.length} notas · ${grupos.length} grupos`;
+  }
 }
 
 // ── Buscar notas ──
@@ -159,6 +167,29 @@ function renderGroups(list) {
       </table>
     </div>
   `).join('');
+}
+
+// ── Notas recientes ──
+
+function renderRecientes() {
+  const recientes = [...notes]
+    .sort((a, b) => new Date(b.fecha_modificacion) - new Date(a.fecha_modificacion))
+    .slice(0, 8);
+
+  const container = document.getElementById('recientesContainer');
+  container.innerHTML = recientes.map(n => {
+    const cat = CAT_LABELS[n.category] || n.category;
+    const fecha = new Date(n.fecha_modificacion).toLocaleDateString('es-PE');
+    return `
+      <tr onclick="abrirNota('${n.slug}', '${n.title.replace(/'/g, "\\'")}', '${n.grupo.replace(/'/g, "\\'")}', '${cat}')">
+        <td>
+          <a class="note-link">${n.title}</a>
+          <div class="reciente-meta-mobile">${cat} · ${fecha}</div>
+        </td>
+        <td class="reciente-cat"><span class="note-tag">${cat}</span></td>
+        <td class="reciente-fecha">${fecha}</td>
+      </tr>`;
+  }).join('');
 }
 
 // ── Abrir nota inline ──
@@ -202,6 +233,8 @@ async function abrirNota(slug, titulo, grupo, catLabel, el) {
 function showIndex() {
   document.getElementById('noteViewer').classList.remove('active');
   document.getElementById('indexView').style.display = '';
+  document.querySelector('.hero-row').style.display = ''; 
+  document.getElementById('catHeader').style.display = 'none';  
   document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
   document.querySelectorAll('.nav-child-item').forEach(i => i.classList.remove('active'));
   document.getElementById('nav-all').classList.add('active');
@@ -211,9 +244,10 @@ function showIndex() {
   document.getElementById('catSectionLabel').style.display = '';
   document.getElementById('notesSectionLabel').style.display = 'none';
   document.getElementById('totalNotes').textContent = notes.length;
-  const grupos = [...new Set(notes.map(n => n.grupo))];
-  document.getElementById('totalGroups').textContent = grupos.length;
-  renderGroups(notes);
+  const categorias = [...new Set(notes.map(n => n.category))];
+  document.getElementById('totalGroups').textContent = categorias.length;
+  document.getElementById('groupsContainer').innerHTML = '';
+  document.getElementById('recientesSection').style.display = '';
 }
 
 // ── Sidebar mobile ──

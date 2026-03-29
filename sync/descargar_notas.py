@@ -24,7 +24,6 @@ CAT_LABELS = {
 
 BASE_MD    = "../content"
 BASE_HTML  = "../docs"
-INDEX_HTML = "../index.html"
 
 stats = {"actualizadas": 0, "saltadas": 0, "fallidas": 0, "huerfanas": 0}
 notas_procesadas = []
@@ -118,13 +117,14 @@ def slugify(texto):
     texto = re.sub(r'[\s_]+', '-', texto)
     return texto
 
-def notion_fecha(page_id):
+def notion_fechas(page_id):
+    """Obtiene fecha de modificación y creación en una sola llamada."""
     page = notion.pages.retrieve(page_id=page_id)
-    fecha_str = page["last_edited_time"]
-    return datetime.fromisoformat(fecha_str.replace("Z", "+00:00"))
+    modificacion = datetime.fromisoformat(page["last_edited_time"].replace("Z", "+00:00"))
+    creacion = page["created_time"]
+    return modificacion, creacion
 
 def local_fecha(ruta_html):
-    """Compara contra el .html (archivo final), no el .md"""
     if not os.path.exists(ruta_html):
         return None
     ts = os.path.getmtime(ruta_html)
@@ -167,7 +167,6 @@ def recolectar_html_existentes(base):
     for raiz, _, archivos in os.walk(base):
         for archivo in archivos:
             if archivo.endswith(".html"):
-                # FIX: usar abspath para que coincida con archivos_generados
                 existentes.add(os.path.abspath(os.path.join(raiz, archivo)))
     return existentes
 
@@ -178,13 +177,11 @@ def limpiar_huerfanos(existentes, generados):
         print(f"🗑️  Eliminado huérfano: {ruta}")
         stats["huerfanas"] += 1
 
-
 # ────────────────────────────────────────────
-# Nuevo bloque
+# Convertidor de bloques
 # ────────────────────────────────────────────
 
 def rich_text_a_md(rich_texts):
-    """Convierte lista de rich_text de Notion a texto Markdown."""
     resultado = ""
     for rt in rich_texts:
         texto = rt.get("plain_text", "")
@@ -192,14 +189,13 @@ def rich_text_a_md(rich_texts):
         if annotations.get("code"):
             texto = f"`{texto}`"
         if annotations.get("bold"):
-            texto = f"**{texto}**"
+            texto = f"**{texto.strip()}**"
         if annotations.get("italic"):
             texto = f"*{texto}*"
         resultado += texto
     return resultado
 
 def exportar_pagina(page_id):
-    """Convierte todos los bloques de una página Notion a Markdown."""
     try:
         bloques = notion.blocks.children.list(block_id=page_id)
     except Exception as e:
@@ -215,46 +211,33 @@ def exportar_pagina(page_id):
 
         if tipo == "paragraph":
             lineas.append(texto if texto else "")
-
         elif tipo == "heading_1":
             lineas.append(f"# {texto}")
-
         elif tipo == "heading_2":
             lineas.append(f"## {texto}")
-
         elif tipo == "heading_3":
             lineas.append(f"### {texto}")
-
         elif tipo == "heading_4":
             lineas.append(f"#### {texto}")
-
         elif tipo == "callout":
             lineas.append(f"> {texto}")
-
         elif tipo == "quote":
             lineas.append(f"> {texto}")
-
         elif tipo == "bulleted_list_item":
             lineas.append(f"- {texto}")
-
         elif tipo == "numbered_list_item":
             lineas.append(f"1. {texto}")
-
         elif tipo == "code":
             lenguaje = data.get("language", "")
             codigo = "".join(rt.get("plain_text", "") for rt in rich)
             lineas.append(f"```{lenguaje}\n{codigo}\n```")
-
         elif tipo == "divider":
             lineas.append("---")
-
         elif tipo == "image":
             url = data.get("file", {}).get("url", "") or data.get("external", {}).get("url", "")
             caption = rich_text_a_md(data.get("caption", []))
             lineas.append(f"![{caption}]({url})")
-
         else:
-            # Tipos no soportados los ignoramos silenciosamente
             pass
 
         time.sleep(0.1)
@@ -266,7 +249,6 @@ def exportar_pagina(page_id):
 # ────────────────────────────────────────────
 
 def guardar_nota(page_id, titulo, grupo, categoria):
-    """Descarga y guarda una nota (nivel 3) en docs/categoria/ de forma plana."""
     carpeta_md   = os.path.join(BASE_MD, categoria)
     carpeta_html = os.path.join(BASE_HTML, categoria)
     os.makedirs(carpeta_md, exist_ok=True)
@@ -276,24 +258,22 @@ def guardar_nota(page_id, titulo, grupo, categoria):
     ruta_md   = os.path.join(carpeta_md, slug + ".md")
     ruta_html = os.path.join(carpeta_html, slug + ".html")
 
-    # Registrar para detección de huérfanos
     archivos_generados.add(os.path.abspath(ruta_html))
 
     try:
-        fecha_notion = notion_fecha(page_id)
-        fecha_local  = local_fecha(ruta_html)  # FIX: comparar contra .html
+        fecha_notion, fecha_creacion = notion_fechas(page_id)
+        fecha_local  = local_fecha(ruta_html)
 
         if fecha_local and fecha_local >= fecha_notion:
             print(f"  ⏭️  Sin cambios: {titulo}")
             stats["saltadas"] += 1
         else:
             contenido_md = exportar_pagina(page_id)
-            contenido_completo = contenido_md
 
             with open(ruta_md, "w", encoding="utf-8") as f:
-                f.write(contenido_completo)
+                f.write(contenido_md)
 
-            html = md_to_html(titulo, contenido_completo, categoria, grupo)
+            html = md_to_html(titulo, contenido_md, categoria, grupo)
             with open(ruta_html, "w", encoding="utf-8") as f:
                 f.write(html)
 
@@ -312,10 +292,11 @@ def guardar_nota(page_id, titulo, grupo, categoria):
         "category": categoria,
         "catLabel": CAT_LABELS.get(categoria, categoria),
         "grupo": grupo,
+        "fecha_modificacion": fecha_notion.isoformat(),
+        "fecha_creacion": fecha_creacion,
     })
 
 def procesar_categoria(raiz_id, categoria):
-    """Nivel 1: recorre los agrupadores (nivel 2) de una categoría."""
     try:
         bloques = notion.blocks.children.list(block_id=raiz_id)
     except Exception as e:
@@ -326,7 +307,6 @@ def procesar_categoria(raiz_id, categoria):
         if bloque["type"] != "child_page":
             continue
 
-        # Nivel 2 — agrupador
         grupo_titulo = bloque["child_page"]["title"]
         grupo_id     = bloque["id"]
         print(f"\n  📁 {grupo_titulo}")
@@ -341,13 +321,12 @@ def procesar_categoria(raiz_id, categoria):
             if sub["type"] != "child_page":
                 continue
 
-            # Nivel 3 — nota
             nota_titulo = sub["child_page"]["title"]
             nota_id     = sub["id"]
             guardar_nota(nota_id, nota_titulo, grupo_titulo, categoria)
 
 # ────────────────────────────────────────────
-# Actualizar index.html
+# Generar notes.json
 # ────────────────────────────────────────────
 
 def generar_notes_json():
@@ -368,7 +347,6 @@ for page_id, categoria in RAICES.items():
 
 limpiar_huerfanos(html_existentes, archivos_generados)
 generar_notes_json()
-
 
 print(f"""
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
