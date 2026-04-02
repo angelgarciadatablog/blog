@@ -381,6 +381,7 @@ main {
 #noteViewer pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; color: inherit; }
 #noteViewer pre code.language-bash,
 #noteViewer pre code.language-bash * { color: #f28b82; }
+#noteViewer pre code.language-bash .hljs-comment { color: #6a737d; }
 #noteViewer blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); background: var(--bg-side); border-radius: 0 4px 4px 0; }
 #noteViewer ul, #noteViewer ol { padding-left: 20px; margin-bottom: 16px; }
 #noteViewer li { margin-bottom: 6px; line-height: 1.7; }

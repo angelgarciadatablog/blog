@@ -219,6 +219,14 @@ Al finalizar el sync, `limpiar_imagenes_huerfanas()` escanea todos los archivos 
 | Pillow no instalado | `_IMG_ENABLED = False`, el script usa las URLs de Notion directamente (se rompen en ~1 hora) |
 | Error al descargar | Se registra ⚠️ y se mantiene la URL original de Notion para esa imagen |
 
+### Imágenes en el historial de git
+
+Cada imagen se versiona en git como un archivo binario. Aunque se elimine una imagen y se haga commit, el archivo sigue existiendo en el historial, lo que hace crecer el tamaño del repositorio con el tiempo.
+
+Con imágenes WebP a calidad 85 y un promedio de ~150KB por imagen, esta acumulación **no representa un problema real durante muchos años** para el volumen de notas técnicas de este blog. El repositorio puede crecer varios cientos de MB antes de que sea necesario intervenir.
+
+Cuando el repositorio supere un tamaño manejable, la solución recomendada es **migrar las imágenes a un cloud storage externo** (Google Cloud Storage, Cloudinary, etc.) y que el script guarde la URL externa en lugar de la ruta local. Esta migración es posible sin romper el pipeline actual y puede hacerse en el futuro sin urgencia.
+
 ---
 
 ## Diseño y comportamiento del blog
