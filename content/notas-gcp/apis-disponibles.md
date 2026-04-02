@@ -7,15 +7,10 @@
 ### Sirve para:
 
 - Info de canales
-
 - Lista de videos
-
 - Metadata de videos
-
 - Views, likes, comments (conteos públicos)
-
 - Playlists
-
 - Comentarios públicos
 
 ### Autenticación:
@@ -29,11 +24,8 @@
 ### Ejemplo de preguntas que responde:
 
 - ¿Cuántos videos tiene el canal?
-
 - ¿Cuántas vistas tiene cada video?
-
 - ¿Qué videos existen?
-
 - ¿Cuándo se publicó cada video?
 
 ---
@@ -43,13 +35,9 @@
 No trae:
 
 - Retención de audiencia
-
 - Watch time real
-
 - CTR
-
 - Ingresos
-
 - Performance interna del canal
 
 👉 Esto es normal. No es un bug.
@@ -65,17 +53,11 @@ No trae:
 ### Sirve para:
 
 - Watch time
-
 - Retención
-
 - CTR
-
 - Fuentes de tráfico
-
 - Demografía
-
 - Revenue
-
 - Engagement profundo
 
 ### Autenticación:
@@ -93,7 +75,6 @@ No trae:
 Solo puedes acceder a:
 
 - Tu canal
-
 - Canales donde tengas permisos
 
 👉 No sirve para analizar canales externos.
@@ -111,17 +92,12 @@ Solo puedes acceder a:
 ### Sirve para:
 
 - Reportes históricos grandes
-
 - Descargas en CSV
-
 - Jobs programados
-
 - Data warehouse scenarios
 
 ### Ejemplo real:
 
 - Descargar todos los datos históricos del canal
-
 - Cargar a BigQuery
-
 - Procesar offline

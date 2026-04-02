@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hacer un push  · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -90,213 +17,178 @@
   </div>
   <div class="note-content">
     <h1>Hacer un push </h1>
-    <pre class="codehilite"><code class="language-bash">#revisar el repositorio donde se hará el push
+    <pre class="highlight"><code class="language-bash">#revisar el repositorio donde se hará el push
 git remote -v
 
 # origin  https://github.com/usuario/mi-repositorio.git (fetch - traer)
-# origin  https://github.com/usuario/mi-repositorio.git (push - subir)
-</code></pre>
-
-<pre class="codehilite"><code class="language-bash">#revisar los cambios realizados en el repositorio local
-git status
-</code></pre>
-
-<pre class="codehilite"><code class="language-bash">#Agrega todos los archivos que han sido modificados al staging área
+# origin  https://github.com/usuario/mi-repositorio.git (push - subir)</code></pre>
+<pre class="highlight"><code class="language-bash">#revisar los cambios realizados en el repositorio local
+git status</code></pre>
+<pre class="highlight"><code class="language-bash">#Agrega todos los archivos que han sido modificados al staging área
 git add .
 
 #Agrega solo uno de los archivos modificados al staging área
-git add data/sections.json
-</code></pre>
-
-<pre class="codehilite"><code class="language-bash">#Confirmar los cambios realizados
+git add data/sections.json</code></pre>
+<pre class="highlight"><code class="language-bash">#Confirmar los cambios realizados
 git status
 
 #Esto lista solo los archivos que están en staging, 
 #sin mostrar los que están modificados pero no agregados
-git diff --cached --name-only
-</code></pre>
-
-<pre class="codehilite"><code class="language-bash">#Configurar el usuario que hará el commit en este repositorio
-git config user.name &quot;Angel García&quot;
-git config user.email &quot;angelgarciachanga@gmail.com&quot;
+git diff --cached --name-only</code></pre>
+<pre class="highlight"><code class="language-bash">#Configurar el usuario que hará el commit en este repositorio
+git config user.name "Angel García"
+git config user.email "angelgarciachanga@gmail.com"
 
 #Configurar el usuario que hará el commit en este repositorio 
 #(recomendado si siempre usarás el mismo correo en tu PC)
-git config --global user.name &quot;Angel García&quot;
-git config --global user.email &quot;TU_CORREO_DE_GITHUB&quot;
+git config --global user.name "Angel García"
+git config --global user.email "TU_CORREO_DE_GITHUB"
 
 
-git config --list
-</code></pre>
-
-<pre class="codehilite"><code class="language-bash">#Esto mueve los cambios del staging al repository (commit histórico).
-git commit -m &quot;Actualizar secciones en sections.json&quot;
-</code></pre>
-
-<pre class="codehilite"><code class="language-bash">#Muestra los últimos 5 commits incluyendo el que acabamos de realizar
+git config --list</code></pre>
+<pre class="highlight"><code class="language-bash">#Esto mueve los cambios del staging al repository (commit histórico).
+git commit -m "Actualizar secciones en sections.json"</code></pre>
+<pre class="highlight"><code class="language-bash">#Muestra los últimos 5 commits incluyendo el que acabamos de realizar
 git log --oneline -5
 
 #Muestra todos los commit, para salir hay que presionar q
-git log
-</code></pre>
-
-<pre class="codehilite"><code class="language-bash">#Finalmente, para subir los cambios al repositorio remoto:
+git log</code></pre>
+<pre class="highlight"><code class="language-bash">#Finalmente, para subir los cambios al repositorio remoto:
 #origin → es el nombre del repositorio remoto (GitHub).
 #main → es la rama en la que estás trabajando.
-git push origin main
-</code></pre>
-
+git push origin main</code></pre>
 <hr />
 <h1>Qué pasa si haces <code>git push</code> sin estar logeado en GitHub</h1>
 <p>Cuando ejecutas:</p>
-<p>```plain text
-git push</p>
-<pre class="codehilite"><code>Git intenta conectarse al repositorio remoto definido en `origin`.
-
-Si no existe una sesión válida, GitHub inicia un proceso de autenticación.
-
-Lo que ocurra depende del **método de conexión** del repositorio.
-
----
-
-# CAMINO 1 — Repositorio configurado con HTTPS
-
-Repositorio remoto:
-
-```plain text
-https://github.com/usuario/repositorio.git
-</code></pre>
-
+<pre class="highlight"><code>git push</code></pre>
+<p>Git intenta conectarse al repositorio remoto definido en <code>origin</code>.</p>
+<p>Si no existe una sesión válida, GitHub inicia un proceso de autenticación.</p>
+<p>Lo que ocurra depende del <strong>método de conexión</strong> del repositorio.</p>
+<hr />
+<h1>CAMINO 1 — Repositorio configurado con HTTPS</h1>
+<p>Repositorio remoto:</p>
+<pre class="highlight"><code>https://github.com/usuario/repositorio.git</code></pre>
 <hr />
 <h2>🔄 Flujo completo</h2>
 <p>1️⃣ Ejecutas:</p>
-<p>```plain text
-git push</p>
-<pre class="codehilite"><code>2️⃣ Git intenta conectarse a GitHub.
-
-3️⃣ GitHub detecta que NO hay credenciales guardadas.
-
-4️⃣ Ocurre una de estas acciones:
-
-### 👉 Caso moderno (lo normal hoy)
-
-Se abre automáticamente el navegador:
-
-```plain text
-Authorize Git Credential Manager
-</code></pre>
-
+<pre class="highlight"><code>git push</code></pre>
+<p>2️⃣ Git intenta conectarse a GitHub.</p>
+<p>3️⃣ GitHub detecta que NO hay credenciales guardadas.</p>
+<p>4️⃣ Ocurre una de estas acciones:</p>
+<h3>👉 Caso moderno (lo normal hoy)</h3>
+<p>Se abre automáticamente el navegador:</p>
+<pre class="highlight"><code>Authorize Git Credential Manager</code></pre>
 <p>Te pide:</p>
 <ul>
-<li>
-<p>iniciar sesión en GitHub</p>
-</li>
-<li>
-<p>aprobar acceso desde esa computadora.</p>
-</li>
+<li>iniciar sesión en GitHub</li>
+<li>aprobar acceso desde esa computadora.</li>
 </ul>
 <hr />
 <h3>👉 Caso alternativo</h3>
 <p>Git pide en terminal:</p>
-<p>```plain text
-Username:
-Password or token:</p>
-<pre class="codehilite"><code>(la contraseña real ya no funciona, solo token).
-
----
-
-5️⃣ Después de aprobar:
-
-- GitHub genera un **Personal Access Token**
-
-- macOS lo guarda en el llavero (Keychain)
-
-- el push continúa automáticamente.
-
----
-
-## Resultado
-
-- quedas autenticado
-
-- futuros `git push` no pedirán login.
-
----
-
-## Si cancelas el login
-
-Obtendrás algo como:
-
-```plain text
-remote: Permission denied
-fatal: Authentication failed
-</code></pre>
-
+<pre class="highlight"><code>Username:
+Password or token:</code></pre>
+<p>(la contraseña real ya no funciona, solo token).</p>
+<hr />
+<p>5️⃣ Después de aprobar:</p>
+<ul>
+<li>GitHub genera un <strong>Personal Access Token</strong></li>
+<li>macOS lo guarda en el llavero (Keychain)</li>
+<li>el push continúa automáticamente.</li>
+</ul>
+<hr />
+<h2>Resultado</h2>
+<ul>
+<li>quedas autenticado</li>
+<li>futuros <code>git push</code> no pedirán login.</li>
+</ul>
+<hr />
+<h2>Si cancelas el login</h2>
+<p>Obtendrás algo como:</p>
+<pre class="highlight"><code>remote: Permission denied
+fatal: Authentication failed</code></pre>
 <hr />
 <h1>✅ CAMINO 2 — Repositorio configurado con SSH</h1>
 <p>Repositorio remoto:</p>
-<p>```plain text
-git@github.com:usuario/repositorio.git</p>
-<pre class="codehilite"><code>---
-
-## 🔄 Flujo completo
-
-1️⃣ Ejecutas:
-
-```plain text
-git push
-</code></pre>
-
+<pre class="highlight"><code>git@github.com:usuario/repositorio.git</code></pre>
+<hr />
+<h2>🔄 Flujo completo</h2>
+<p>1️⃣ Ejecutas:</p>
+<pre class="highlight"><code>git push</code></pre>
 <p>2️⃣ Git intenta autenticarse usando tu llave SSH local.</p>
 <hr />
 <h3>Caso A — No existe llave SSH</h3>
 <p>Error típico:</p>
-<p>```plain text
-Permission denied (publickey).
-fatal: Could not read from remote repository.</p>
-<pre class="codehilite"><code>GitHub está diciendo:
-
-&gt; No reconozco esta computadora.
-
----
-
-### Caso B — Existe llave pero no está registrada en GitHub
-
-Mismo error:
-
-```plain text
-Permission denied (publickey)
-</code></pre>
-
+<pre class="highlight"><code>Permission denied (publickey).
+fatal: Could not read from remote repository.</code></pre>
+<p>GitHub está diciendo:</p>
+<blockquote>
+<p>No reconozco esta computadora.</p>
+</blockquote>
+<hr />
+<h3>Caso B — Existe llave pero no está registrada en GitHub</h3>
+<p>Mismo error:</p>
+<pre class="highlight"><code>Permission denied (publickey)</code></pre>
 <p>Porque GitHub no tiene tu clave pública.</p>
 <hr />
 <h3>Caso C — Primera conexión correcta</h3>
 <p>GitHub puede preguntar:</p>
-<p>```plain text
-Are you sure you want to continue connecting?</p>
-<pre class="codehilite"><code>Respondes:
-
-```plain text
-yes
-</code></pre>
-
+<pre class="highlight"><code>Are you sure you want to continue connecting?</code></pre>
+<p>Respondes:</p>
+<pre class="highlight"><code>yes</code></pre>
 <p>Y queda registrada la conexión.</p>
 <hr />
 <h2>Resultado</h2>
 <p>Una vez configurado SSH:</p>
 <ul>
-<li>
-<p>nunca vuelves a logearte</p>
-</li>
-<li>
-<p>no hay navegador</p>
-</li>
-<li>
-<p>autenticación automática.</p>
-</li>
+<li>nunca vuelves a logearte</li>
+<li>no hay navegador</li>
+<li>autenticación automática.</li>
 </ul>
 <hr />
 <h1>Diferencia conceptual clave</h1>
+<table>
+<thead>
+<tr>
+<th>Situación</th>
+<th>HTTPS</th>
+<th>SSH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No autenticado</td>
+<td>abre login web</td>
+<td>error inmediato</td>
+</tr>
+<tr>
+<td>Primera configuración</td>
+<td>automática</td>
+<td>manual</td>
+</tr>
+<tr>
+<td>Credencial guardada</td>
+<td>Keychain</td>
+<td>archivo SSH</td>
+</tr>
+<tr>
+<td>Uso diario</td>
+<td>fácil</td>
+<td>profesional</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>🔎 Algo importante</h1>
+<p>El login ocurre <strong>solo cuando Git necesita permiso</strong>, no cuando clonas ni cuando ves remotes.</p>
+<p>Git puede existir perfectamente sin autenticación hasta el momento del push.</p>
+<hr />
+<p>GitHub valida:</p>
+<pre class="highlight"><code>QUIÉN hace el push → autenticación (HTTPS/SSH)
+QUIÉN escribió el commit → email del commit</code></pre>
+<p>Son dos identidades distintas.</p>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

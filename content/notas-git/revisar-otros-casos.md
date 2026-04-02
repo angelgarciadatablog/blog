@@ -10,7 +10,7 @@ Git te dirá exactamente quién está más actualizado.
 
 # 1) Local y github tiene los mismos commits
 
-```plain text
+```
 Your branch is up to date with 'origin/main'.
 ```
 
@@ -19,9 +19,7 @@ significa:
 👉 Tu repositorio local y el de GitHub tienen **el mismo historial de commits**.
 
 - No te falta hacer `pull`
-
 - No te falta hacer `push`
-
 - Nadie cambió el repo remoto desde tu último sync
 
 ✅ En términos de commits: todo sincronizado.
@@ -34,7 +32,7 @@ significa:
 
 Git dice:
 
-```plain text
+```
 deleted: notebooks-individuales/for-tarea-general.ipynb
 ```
 
@@ -63,7 +61,7 @@ git commit-m"Eliminar notebook antiguo"
 
 ### Deshacer la eliminación (recuperar archivo)
 
-```plain text
+```
 git restore notebooks-individuales/for-tarea-general.ipynb
 ```
 
@@ -77,7 +75,7 @@ El archivo vuelve a aparecer.
 
 Git dice:
 
-```plain text
+```
 numpy-repaso.ipynb
 ```
 
@@ -97,7 +95,7 @@ Git está preguntando:
 
 ### Agregarlo al repo
 
-```plain text
+```
 git add notebooks-carpetas/python_basico/notebook/numpy-repaso.ipynb
 ```
 

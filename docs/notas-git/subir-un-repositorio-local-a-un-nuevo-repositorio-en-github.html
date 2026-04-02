@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Subir un repositorio local a un nuevo repositorio en github · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -90,7 +17,7 @@
   </div>
   <div class="note-content">
     <h1>Subir un repositorio local a un nuevo repositorio en github</h1>
-    <pre class="codehilite"><code class="language-bash">##revisar los cambios que se han hecho en el repositorio local
+    <pre class="highlight"><code class="language-bash">##revisar los cambios que se han hecho en el repositorio local
 git status
 
 #Guardar los cambios
@@ -100,46 +27,40 @@ git add .
 git status
 
 #Realizar el primer commit para guardar en el historial
-git commit -m &quot;este es un primero commit que se guardará según los cambios hechos&quot;
+git commit -m "este es un primero commit que se guardará según los cambios hechos"
 
-#&quot;cuando se crea un primer commit, se creará automáticamente una rama llamada main&quot;. 
+#"cuando se crea un primer commit, se creará automáticamente una rama llamada main". 
 #Pero hasta que no haya ese primer commit, la rama no existe de verdad
 #Para verificar que se creo la rama ejecutar el siguiente comando
-git branch
-</code></pre>
-
+git branch</code></pre>
 <p>Conectar el repositorio local con un repositorio remoto ya credo en github</p>
-<pre class="codehilite"><code class="language-bash">#conectar al repositorio remoto
+<pre class="highlight"><code class="language-bash">#conectar al repositorio remoto
 git remote add origin https://github.com/angelgarciadatablog/angel-notebooks.git
 
 #verificar la conexión
 git remote -v
 
 #hacer el push de lo que está en local hacia lo remoto
-git push origin main
-</code></pre>
-
+git push origin main</code></pre>
 <p>*Esa ruta se utiliza siempre y cuando estes autenticado vía https</p>
 <p>Si es primera vez que te harás un push te pedirá identificarte:</p>
 <p>Esta identificación solo se añade al usuario actual del ordenador</p>
-<pre class="codehilite"><code class="language-bash"># Configurar nombre (usa tu nombre real o de GitHub)
-git config --global user.name &quot;Angel García&quot;
+<pre class="highlight"><code class="language-bash"># Configurar nombre (usa tu nombre real o de GitHub)
+git config --global user.name "Angel García"
 
 # Configurar email (usa el mismo email de tu cuenta GitHub)
-git config --global user.email &quot;tu-email@gmail.com&quot;
+git config --global user.email "tu-email@gmail.com"
 
 # Verificar que se guardó
 git config --global user.name
-git config --global user.email
-</code></pre>
-
+git config --global user.email</code></pre>
 <p>El primer push pedirá autenticación con la cuenta de GitHub</p>
-<pre class="codehilite"><code class="language-bash">#hacer el push de lo que está en local hacia lo remoto
-git push origin main
-</code></pre>
-
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/6b281738-50d0-43c2-a8cc-55b5fbef85ed/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZR7B6GMM%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070146Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJIMEYCIQDC6l59Fn1Y8Sv9cKw%2BWPj7ljlUDWqWXc0It35qs6XsSAIhAMW7KMtXjtHzKM2pdHPqgy5T5RIDzE5K9CtXCjTdtK80Kv8DCAgQABoMNjM3NDIzMTgzODA1IgzThPaALHCrTZfPWloq3AOMt%2BvXpnFSvGULiRhmjRHvcbhl2bo0exwr6Zsg4khf3KfgWBDfTv%2BgU46TTWtiu40Zd%2FiE8RUW0peRwRVOAGdjZFZb2m3F9NBzD3DWs0TF5%2BZRegf4RaS8Hnyngmi1cKyN9tkcWS6BlCRLA%2FXHHFVRnEim2Jjx%2B8AiaTO2XtimyRpjTMLzstwHZ4wBeusMLSgK88lYKiaBQ0Dukzcex%2FG1voQY4zSYefwNx6KqQHMP7A4UpOh%2FpZKBndWnShk%2BEf2cQoo3huT3xKaZvaeVzlCaac0ImBTJfRowTGJo6wu7yEN%2BONw4RlEheIRuJdI9%2FresqVDxP4MZzSe%2FkcPMMPicCa6EiQfJCMkOpAhIdndMYm7eFKZtJsdEUrhRIym30B%2BQX5%2Bmf%2BUAcnFNB04m4auND%2BGRUXIodYwGCuZcAHe0uGNwbvvRaeEfxKzcwJ4y48UqEhl9R8yChKj%2Fm3gIY6ykhq%2B1hGiV6jO2sfpdJ3TlGVeZrU5jKWBnnI7TIpv%2Bxj7V7skn6R898xcBTiO25Xc9hbU7ktE3n3M9pb6ASb2oNaeSb8oBuYqm5iT0UQ4TdaGXjkBD21usBBCbBhD6rJHz5zivLbEz8%2BU9YTLpVV1jzWnW9szZNIIFV%2FV6NjDxlqPOBjqkAbvZgXXGmkG9OJA3kbmKjqzMFoj3657rqLL2YXlHizGKLRKPd6wcOCfhZbi%2BbE9Hp8S1h6h8MVTJUWH%2BPl7zQ9uk8TjLoLb3x7PfJpmL1%2BnpzE%2FiVHioFJMmYZR5LRuukpjWSYu9gQ%2Fpi6tCxOHX1BcLg7t1aAZKYLuU2aIuX%2FYYXW0hyZAj%2BGSq8fzoarUzHBiN7yZ95QojpuULcqsOAFjC5uAD&amp;X-Amz-Signature=0590db7f2fa89651085cb3aafc39082f2565bde22b4b83b2a53eae76a51a1551&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/a6cbe2c4-cb47-438c-a02c-2ad695ee991a/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB466ZR7B6GMM%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070146Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJIMEYCIQDC6l59Fn1Y8Sv9cKw%2BWPj7ljlUDWqWXc0It35qs6XsSAIhAMW7KMtXjtHzKM2pdHPqgy5T5RIDzE5K9CtXCjTdtK80Kv8DCAgQABoMNjM3NDIzMTgzODA1IgzThPaALHCrTZfPWloq3AOMt%2BvXpnFSvGULiRhmjRHvcbhl2bo0exwr6Zsg4khf3KfgWBDfTv%2BgU46TTWtiu40Zd%2FiE8RUW0peRwRVOAGdjZFZb2m3F9NBzD3DWs0TF5%2BZRegf4RaS8Hnyngmi1cKyN9tkcWS6BlCRLA%2FXHHFVRnEim2Jjx%2B8AiaTO2XtimyRpjTMLzstwHZ4wBeusMLSgK88lYKiaBQ0Dukzcex%2FG1voQY4zSYefwNx6KqQHMP7A4UpOh%2FpZKBndWnShk%2BEf2cQoo3huT3xKaZvaeVzlCaac0ImBTJfRowTGJo6wu7yEN%2BONw4RlEheIRuJdI9%2FresqVDxP4MZzSe%2FkcPMMPicCa6EiQfJCMkOpAhIdndMYm7eFKZtJsdEUrhRIym30B%2BQX5%2Bmf%2BUAcnFNB04m4auND%2BGRUXIodYwGCuZcAHe0uGNwbvvRaeEfxKzcwJ4y48UqEhl9R8yChKj%2Fm3gIY6ykhq%2B1hGiV6jO2sfpdJ3TlGVeZrU5jKWBnnI7TIpv%2Bxj7V7skn6R898xcBTiO25Xc9hbU7ktE3n3M9pb6ASb2oNaeSb8oBuYqm5iT0UQ4TdaGXjkBD21usBBCbBhD6rJHz5zivLbEz8%2BU9YTLpVV1jzWnW9szZNIIFV%2FV6NjDxlqPOBjqkAbvZgXXGmkG9OJA3kbmKjqzMFoj3657rqLL2YXlHizGKLRKPd6wcOCfhZbi%2BbE9Hp8S1h6h8MVTJUWH%2BPl7zQ9uk8TjLoLb3x7PfJpmL1%2BnpzE%2FiVHioFJMmYZR5LRuukpjWSYu9gQ%2Fpi6tCxOHX1BcLg7t1aAZKYLuU2aIuX%2FYYXW0hyZAj%2BGSq8fzoarUzHBiN7yZ95QojpuULcqsOAFjC5uAD&amp;X-Amz-Signature=133dd9e876e75e81ca19d86a49aeb4b13150f707f308cb2dce8cf8327f9bfc99&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<pre class="highlight"><code class="language-bash">#hacer el push de lo que está en local hacia lo remoto
+git push origin main</code></pre>
+<p><img alt="" src="img/2a8477bcd0eb8091b12cf2d96a0dc992.webp" /></p>
+<p><img alt="" src="img/2a8477bcd0eb80dbaf92d0956fa45b61.webp" /></p>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

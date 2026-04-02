@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instalación de Google Cloud SDK en ordenador Mac 👌 · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -90,31 +17,65 @@
   </div>
   <div class="note-content">
     <h1>Instalación de Google Cloud SDK en ordenador Mac 👌</h1>
-    <h2>Paso 1: Verificar si ya está instalado</h2>
+    <h1>Paso 1: Verificar si ya está instalado</h1>
 <p>Antes de instalar nada, comprueba si el SDK ya está en tu Mac.</p>
-<pre class="codehilite"><code class="language-bash">gcloud --version
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gcloud --version</code></pre>
 <p>Si ya está instalado, verás algo como:</p>
-<pre class="codehilite"><code class="language-bash">Google Cloud SDK 513.0.0
+<pre class="highlight"><code class="language-bash">Google Cloud SDK 513.0.0
 bq 2.1.11
 core 2024.11.08
-gsutil 5.31
-</code></pre>
-
-<h2>Paso 2: <strong>Elegir método de instalación</strong></h2>
+gsutil 5.31</code></pre>
+<h1>Paso 2: <strong>Elegir método de instalación</strong></h1>
 <p>Hay tres formas de instalar el SDK en Mac. Elige la que mejor se adapte a ti:</p>
-<h3><strong>2) Homebrew</strong>:</h3>
+<h2>1) Instalador .pkg:</h2>
+<p>Descarga un instalador gráfico, como cualquier otra aplicación de Mac. Ideal si prefieres no usar la terminal para instalar.</p>
+<ol>
+<li>Ir a la página oficial y descargar el .pkg:
+   <pre class="highlight"><code class="language-bash">https://cloud.google.com/sdk/docs/install#mac</code></pre></li>
+<li>Abrir el .pkg descargado y seguir el asistente.</li>
+<li>Abrir una terminal nueva y verificar:
+   <pre class="highlight"><code class="language-bash">gcloud version</code></pre></li>
+</ol>
+<h2><strong>2) Homebrew</strong>:</h2>
 <p>El método más limpio si ya usas terminal. Homebrew gestiona la instalación y actualizaciones automáticamente.</p>
-<h3><strong>3) Script Interactivo:</strong></h3>
+<ol>
+<li>Verificar que Homebrew esté instalado:
+   <pre class="highlight"><code class="language-bash">brew --version</code></pre></li>
+<li>
+<p>Instalar el SDK:
+   <pre class="highlight"><code class="language-bash">brew install --cask google-cloud-sdk</code></pre></p>
+<ul>
+<li><strong><code>brew install</code></strong> instala herramientas de línea de comandos — programas que viven en la terminal y no tienen interfaz gráfica. Homebrew los descarga, compila si es necesario, y los deja disponibles como comandos.</li>
+<li><strong><code>brew install --cask</code></strong> instala aplicaciones que tienen una forma de distribución empaquetada, normalmente con un instalador propio (.pkg, .dmg o .app). El flag <code>--cask</code> le dice a Homebrew "esto no es una librería ni una CLI pura, es un paquete con su propio instalador, manéjalo diferente".</li>
+</ul>
+</li>
+<li>
+<p>Agregar al PATH (solo la primera vez):
+   <pre class="highlight"><code class="language-bash">echo 'source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"' &gt;&gt; ~/.zshrc
+echo 'source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"' &gt;&gt; ~/.zshrc
+source ~/.zshrc</code></pre></p>
+</li>
+<li>Abrir una terminal nueva y verificar:
+   <pre class="highlight"><code class="language-bash">gcloud version</code></pre>
+   <em>Con Homebrew, actualizar el SDK en el futuro es tan simple como brew upgrade --cask google-cloud-sdk.</em></li>
+</ol>
+<h2><strong>3) Script Interactivo:</strong></h2>
 <p>Descarga un script que te guía paso a paso con preguntas interactivas. Útil cuando quieres controlar exactamente dónde se instala.</p>
-<h2>Paso 3: Revisar que componentes se instalaron</h2>
-<pre class="codehilite"><code class="language-bash">gcloud components list
-</code></pre>
-
-<p><code>gcloud components list</code> muestra todos los componentes disponibles e instalados — útil para ver si necesitas agregar algo como <code>bq</code> (BigQuery) o <code>gsutil</code>.</p>
-<h3><strong>Componentes del Google Cloud SDK ¿Qué es un componente?</strong></h3>
-<p>Un componente es una parte instalable del SDK. Puede ser una herramienta de línea de comandos (<code>gcloud</code>, <code>bq</code>, <code>gsutil</code>), un conjunto de comandos en niveles alpha o beta, o un paquete con dependencias internas. Google<strong>Componentes que se instalan por defecto</strong>
+<ol>
+<li>Descargar y ejecutar el instalador interactivo:
+   <pre class="highlight"><code class="language-bash">curl https://sdk.cloud.google.com | bash</code></pre>
+   <em>El script te preguntará dónde instalar y si quiere modificar tu shell. Responde según tus preferencias — puedes aceptar los valores por defecto.</em></li>
+<li>Reiniciar la terminal:
+   <pre class="highlight"><code class="language-bash">exec -l $SHELL</code></pre></li>
+<li>Verificar:
+   <pre class="highlight"><code class="language-bash">gcloud version</code></pre>
+   <em>Este método instala el SDK en </em><em><code>~/google-cloud-sdk</code></em><em> por defecto. Las actualizaciones hay que hacerlas manualmente con </em><em><code>gcloud components update</code></em><em>.</em></li>
+</ol>
+<h1>Paso 3: Revisar que componentes se instalaron</h1>
+<pre class="highlight"><code class="language-bash">gcloud components list</code></pre>
+<p><em><code>gcloud components list</code></em><em> muestra todos los componentes disponibles e instalados — útil para ver si necesitas agregar algo como </em><em><code>bq</code></em><em> (BigQuery) o </em><em><code>gsutil</code></em><em>.</em></p>
+<h2><strong>Componentes del Google Cloud SDK ¿Qué es un componente?</strong></h2>
+<p>Un componente es una parte instalable del SDK. Puede ser una herramienta de línea de comandos (<code>gcloud</code>, <code>bq</code>, <code>gsutil</code>), un conjunto de comandos en niveles alpha o beta, o un paquete con dependencias internas. Google <strong>Componentes que se instalan por defecto</strong>
 Al instalar el SDK con cualquiera de los tres métodos vistos, obtienes automáticamente estos cuatro componentes:</p>
 <ol>
 <li>
@@ -130,28 +91,21 @@ Al instalar el SDK con cualquiera de los tres métodos vistos, obtienes automát
 <p><strong><code>core</code></strong> — Librerías internas que usan el resto de herramientas. No lo usas directamente, pero sin él nada funciona.</p>
 </li>
 </ol>
-<h3>Instalar, actualizar y eliminar componentes</h3>
+<h2>Instalar, actualizar y eliminar componentes</h2>
 <p>Instalar uno o varios componentes a la vez:</p>
-<pre class="codehilite"><code class="language-bash">gcloud components install COMPONENTE_ID
-gcloud components install kubectl cloud-sql-proxy beta
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gcloud components install COMPONENTE_ID
+gcloud components install kubectl cloud-sql-proxy beta</code></pre>
 <p>Actualizar todos los componentes instalados a la última versión:</p>
-<pre class="codehilite"><code class="language-bash">gcloud components update
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gcloud components update</code></pre>
 <p>Eliminar un componente que ya no necesitas:</p>
-<pre class="codehilite"><code class="language-bash">gcloud components remove COMPONENTE_ID
-</code></pre>
-
-<h3>Importante: Homebrew y el gestor de componentes</h3>
+<pre class="highlight"><code class="language-bash">gcloud components remove COMPONENTE_ID</code></pre>
+<h2>Importante: Homebrew y el gestor de componentes</h2>
 <p>Si instalaste el SDK con <strong>Homebrew</strong>, el gestor de componentes de <code>gcloud</code> está deshabilitado. Esto significa que <code>gcloud components install</code> no funcionará. En ese caso, los componentes adicionales se instalan con Homebrew directamente:</p>
-<pre class="codehilite"><code class="language-bash">brew install kubectl
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">brew install kubectl</code></pre>
 <p>Y las actualizaciones del SDK completo se hacen con:</p>
-<pre class="codehilite"><code class="language-bash">brew upgrade --cask google-cloud-sdk
-</code></pre>
+<pre class="highlight"><code class="language-bash">brew upgrade --cask google-cloud-sdk</code></pre>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

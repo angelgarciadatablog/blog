@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Explicación de rebase · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -95,47 +22,35 @@
 </blockquote>
 <p>Tenemos un repo tanto en local como en github</p>
 <ol>
-<li>
-<p>En local hacemos un cambio en el archivo .html (agregamos un video)</p>
-</li>
-<li>
-<p>En remoto (github) también hacemos un cambio en el archivo .html (agregamos una playlist)</p>
-</li>
-<li>
-<p>Al momento de querer hacer <code>git push</code> no vamos a poder porque hay cambios en github remoto (playlist) que no lo tiene identificado el local.</p>
-</li>
-<li>
-<p>Entonces debemos traer los cambios de remoto al local, o en otras palabras actualizar el repo local con los cambios que se tiene en remoto (github)</p>
-</li>
-<li>
-<p>El comando que realiza eso es <code>git pull</code>, sin embargo, si solo colocamos <code>git pull</code>, se creará un commit más que hace referencia a que dos cambios se unieron: uno local (video) y remoto github (playlist). Ese commit de más puede causar confusión cuando se revise el historial de commits. En este contexto, dicho commit puede considerarse innecesario (no siempre), ya que el merge no aporta información clara sobre los cambios realizados, sino solo sobre la sincronización entre local y remoto.</p>
-</li>
-<li>
-<p>Sin embargo, si utilizamos <code>git pull --rebase</code>, no se creará ese commit con el merge, solo se justarán ambos commits (el del video y el de la playlist) uno encima de otro, de manera que ambos al final Git toma los commits remotos y luego reaplica los commits locales encima, manteniendo sus mensajes originales y dejando un historial lineal.</p>
-</li>
-<li>
-<p>En caso de que los cambios entren en conflicto (por ejemplo, en local agregamos un video y en remoto se eliminó ese mismo video), tanto <code>git pull</code> como <code>git pull --rebase</code> <strong>detectarán el conflicto</strong>, se detendrán y Git pedirá que el usuario lo resuelva manualmente eligiendo qué cambio prevalece o combinándolos.</p>
-</li>
+<li>En local hacemos un cambio en el archivo .html (agregamos un video)</li>
+<li>En remoto (github) también hacemos un cambio en el archivo .html (agregamos una playlist)</li>
+<li>Al momento de querer hacer <code>git push</code> no vamos a poder porque hay cambios en github remoto (playlist) que no lo tiene identificado el local.</li>
+<li>Entonces debemos traer los cambios de remoto al local, o en otras palabras actualizar el repo local con los cambios que se tiene en remoto (github)</li>
+<li>El comando que realiza eso es <code>git pull</code>, sin embargo, si solo colocamos <code>git pull</code>, se creará un commit más que hace referencia a que dos cambios se unieron: uno local (video) y remoto github (playlist). Ese commit de más puede causar confusión cuando se revise el historial de commits. En este contexto, dicho commit puede considerarse innecesario (no siempre), ya que el merge no aporta información clara sobre los cambios realizados, sino solo sobre la sincronización entre local y remoto.</li>
+<li>Sin embargo, si utilizamos <code>git pull --rebase</code>, no se creará ese commit con el merge, solo se justarán ambos commits (el del video y el de la playlist) uno encima de otro, de manera que ambos al final Git toma los commits remotos y luego reaplica los commits locales encima, manteniendo sus mensajes originales y dejando un historial lineal.</li>
+<li>En caso de que los cambios entren en conflicto (por ejemplo, en local agregamos un video y en remoto se eliminó ese mismo video), tanto <code>git pull</code> como <code>git pull --rebase</code> <strong>detectarán el conflicto</strong>, se detendrán y Git pedirá que el usuario lo resuelva manualmente eligiendo qué cambio prevalece o combinándolos.</li>
 </ol>
 <blockquote>
 <p>Explicación detallada</p>
 </blockquote>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/ba678f71-0c4c-4bda-aaa6-de426b9c06aa/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=8d3ca478d73d14b8d0e6496e1aef6d41eeb2526142cc4a74551a010e34d1405a&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/43c5bc21-438b-4314-9115-5457a03c045e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=39ae9dfc5840a83626ccf35ae0520a4df0034756ed74fc86961b34a3cd9a441d&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/b81596b7-1f7c-4699-843f-a737f7f332d2/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=eae82ec6ffc8d5b434055ee1b6ada81428322af5aa0cc58554119e4b07726a42&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p><img alt="" src="img/2e6477bcd0eb803b8b18d527aafd1316.webp" /></p>
+<p><img alt="" src="img/2e6477bcd0eb805bb3f3c08a14f854e8.webp" /></p>
+<p><img alt="" src="img/2e6477bcd0eb80619e75c855a4d883d1.webp" /></p>
 <blockquote>
 <p>Si ha conflicto entre cambios sale lo siguiente:</p>
 </blockquote>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/59e4583a-cdc7-45ff-9fdb-134574864363/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=69c9c31a22bcadcc93674a7604ff345f16c9a970fc5f6fdaf9d8aa61d68d3196&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/4ce588c2-41c4-4a14-bce2-10f74a27a76f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=6ad4aee90e41a023fa10ec3c31c7915a6722e404b11e6c1228a73f753303e908&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/4a4c84a7-230e-425e-9eed-ae34c4547ba2/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=7729218f1c850671d4baa1438cfceb431305039c5911cd091ef7bd01e7249e37&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p><img alt="" src="img/2e6477bcd0eb8029bab9edd04c5e64b5.webp" /></p>
+<p><img alt="" src="img/2e6477bcd0eb8004ac5bff5d8af41b14.webp" /></p>
+<p><img alt="" src="img/2e6477bcd0eb80ff88c1d2185c670294.webp" /></p>
 <p>Elegir qué cambio prevalecerá:</p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/1f18b1b6-5bb7-4489-bba2-eff5956d3c54/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=8136f0bdc81c5514a11975839b658681d7c118d129b583b7c848256217e1de97&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/108259e3-e2a9-467e-a570-5ce70bd9689a/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=0b7de41a745e68ce6cd2069ad36e2e6ef0b86db445a037f22f03aa74dcb06475&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/1ffcef9e-4c36-4ae7-a494-2ca3c70618ea/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=da7647a7236cd7a458e68612676e6590a325c38faaf40a1922d4dcf55e17c8fe&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/0196615d-82d5-494f-8b2c-e73a03cf6038/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=fce4e5efb23dd4b61404f4a80abf1128cd44f9cf07f3ba646cdadda7772b7fff&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p><img alt="" src="img/2e6477bcd0eb80e48485f82a3214ba21.webp" /></p>
+<p><img alt="" src="img/2e6477bcd0eb80c89f1cd4bffa42b58e.webp" /></p>
+<p><img alt="" src="img/2e6477bcd0eb80fd8482fde3c2816bcb.webp" /></p>
+<p><img alt="" src="img/2e6477bcd0eb809396d0cb72ab8233f5.webp" /></p>
 <hr />
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/20af5cec-8c14-4f06-ad10-b9d4ad82afdc/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4663XWPAWAS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T070303Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjED8aCXVzLXdlc3QtMiJHMEUCIF12XsuDiz3HHv0rRjz%2FxDsxxZMnk%2BqjAga%2FVMF%2FByBgAiEA%2F%2FoICg20a1i5oHhHTXdiuLeZv27v3LUK6X35yw%2BQrLgq%2FwMICBAAGgw2Mzc0MjMxODM4MDUiDPdZ4QHspTrA4MIc3CrcAzaOzCQzee3EYpxbUS1fLJLuPK%2F0I6H1%2BaKDbayYwi%2BRKeD9BN4rj34aUjObo7UhgERYqx0Q%2F3mFgXTpDSTKtxHWxh88pUwRwlEAIKmL1EM1yjrn8qrnthYWz4w5j6mw35H%2FkkxM%2Bp%2FK%2FOIrt3xdMmKwKP2xSTS5fJ8Khbg40LU5gQj%2FQJLJmiA4P7EV3iX%2Fu63VVrH%2B1xf%2F80Mv%2FyorkW0tc4ITqNgAutgB2gSHGHGH1vF2nTy6X6Bw8TJ5J4FD6QGGDPVkikQzaicZBiL8%2Bf4y3uoe3Jk9kR85LEyeI%2F05PJzTSptTRLVMot9JAVjP5jRHPtkT8klrkKZ8KVKIrAunhHTHivt0OcKz%2BoJBTzK4Uff%2FMhkcV%2BuReyAR%2B8RpMueSk1iv%2Bg49xkKWMOVhjy9K5xu9sCY4jxyNtQUVZoempgqnDbywFhzyK6cryxpxLUmwtZkhO6V1dQqiqepXtmXyPZrwGMLrQBHFJxjQjWmu9cWLwpIo8gG4n5ASbJXnHLLWYWV6FinK6QYqeiACumXbmvALiyA9j2xJN3EyLQxdC9j4lDynbvy4j9u3flYI0GW5i3peI1ghkGi2gNyelW2skRL2SfkVJJchuXroMw84zkH3bD7WFkxzFfPWMMGWo84GOqUBHuH9Px7tdoa63TZJojLd1WAamT0I0RWkkadXLd3vtN56T00zjlj0eKC1va%2FmufG8O7t4xC%2FgLTZU3RJykNSHf9vTYVUcwzI7Pi7ow1q61F4BFg1q8t249R%2Fj0t9LGs9OKvdzhAwjRfB7%2FTqGrtxtV2AbPy6%2Fo36JYcgxNWiEGF%2FZcgOUpaqf870CwMa5VX6JAuyDCX8RBk7JpE7wed%2BHPqFS2BlO&amp;X-Amz-Signature=14d1dc4c74ac84de1a443f2087cec5a45eff00995c6f65a5c3ec49a9b92dc0ee&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p><img alt="" src="img/2e6477bcd0eb80d3b367cc7cac7d3346.webp" /></p>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

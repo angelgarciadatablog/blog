@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Revisar quiénes usuarios que hicieron commits · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -91,9 +18,7 @@
   <div class="note-content">
     <h1>Revisar quiénes usuarios que hicieron commits</h1>
     <p>Lista los usuarios que hicieron commits dentro del repo</p>
-<pre class="codehilite"><code class="language-bash">git log --format=&quot;%an | %ae&quot; | sort -u
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">git log --format="%an | %ae" | sort -u</code></pre>
 <h1>Qué hace este comando</h1>
 <p>Se compone de tres partes:</p>
 <hr />
@@ -106,72 +31,65 @@
 <p>“Muéstrame solo el autor y el email”.</p>
 </blockquote>
 <p>Significa:</p>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%an</code></td>
+<td>author name</td>
+</tr>
+<tr>
+<td><code>%ae</code></td>
+<td>author email</td>
+</tr>
+</tbody>
+</table>
 <p>Ejemplo de salida cruda:</p>
-<p>```plain text
-Angel Garcia | angelgarciadatablog@gmail.com
+<pre class="highlight"><code>Angel Garcia | angelgarciadatablog@gmail.com
 Angel Garcia | angelgarciadatablog@gmail.com
 Angel García | noreply@github.com
-Angel Garcia | angelgarciadatablog@gmail.com</p>
-<pre class="codehilite"><code>---
-
-## 3️⃣ `sort -u`
-
-Esto ya es Linux/macOS, no Git.
-
-Hace dos cosas:
-
-- ordena
-
-- elimina duplicados (`u` = unique)
-
-Resultado final:
-
-👉 lista única de identidades que han firmado commits.
-
----
-
-# 🧠 Por qué es tan usado
-
-Porque responde rápido preguntas como:
-
-- ¿Quién ha contribuido al repo?
-
-- ¿Hay emails personales filtrados?
-
-- ¿Hay identidades duplicadas?
-
-- ¿Tengo firmas inconsistentes?
-
-Exactamente lo que estás haciendo ahora.
-
----
-
-# Variantes muy usadas (nivel práctico)
-
-## Ver autores + cantidad de commits
-
-```plain text
-git shortlog-sne
-</code></pre>
-
+Angel Garcia | angelgarciadatablog@gmail.com</code></pre>
+<hr />
+<h2>3️⃣ <code>sort -u</code></h2>
+<p>Esto ya es Linux/macOS, no Git.</p>
+<p>Hace dos cosas:</p>
+<ul>
+<li>ordena</li>
+<li>elimina duplicados (<code>u</code> = unique)</li>
+</ul>
+<p>Resultado final:</p>
+<p>👉 lista única de identidades que han firmado commits.</p>
+<hr />
+<h1>🧠 Por qué es tan usado</h1>
+<p>Porque responde rápido preguntas como:</p>
+<ul>
+<li>¿Quién ha contribuido al repo?</li>
+<li>¿Hay emails personales filtrados?</li>
+<li>¿Hay identidades duplicadas?</li>
+<li>¿Tengo firmas inconsistentes?</li>
+</ul>
+<p>Exactamente lo que estás haciendo ahora.</p>
+<hr />
+<h1>Variantes muy usadas (nivel práctico)</h1>
+<h2>Ver autores + cantidad de commits</h2>
+<pre class="highlight"><code>git shortlog-sne</code></pre>
 <p>Ejemplo:</p>
-<p>```plain text
-15  Angel Garcia <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#110;&#103;&#101;&#108;&#103;&#97;&#114;&#99;&#105;&#97;&#100;&#97;&#116;&#97;&#98;&#108;&#111;&#103;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#97;&#110;&#103;&#101;&#108;&#103;&#97;&#114;&#99;&#105;&#97;&#100;&#97;&#116;&#97;&#98;&#108;&#111;&#103;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>
-3   Angel García <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#110;&#111;&#114;&#101;&#112;&#108;&#121;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;">&#110;&#111;&#114;&#101;&#112;&#108;&#121;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;</a></p>
-<pre class="codehilite"><code>👉 Este sí es casi el **estándar clásico**.
-
----
-
-## Solo nombres únicos
-
-```plain text
-git log--format=&quot;%an&quot; |sort-u
-</code></pre>
-
+<pre class="highlight"><code>15  Angel Garcia &lt;angelgarciadatablog@gmail.com&gt;
+3   Angel García &lt;noreply@github.com&gt;</code></pre>
+<p>👉 Este sí es casi el <strong>estándar clásico</strong>.</p>
+<hr />
+<h2>Solo nombres únicos</h2>
+<pre class="highlight"><code>git log--format="%an" |sort-u</code></pre>
 <hr />
 <h2>Solo correos únicos</h2>
-<p><code>plain text
-git log--format="%ae" |sort-u</code></p>
+<pre class="highlight"><code>git log--format="%ae" |sort-u</code></pre>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

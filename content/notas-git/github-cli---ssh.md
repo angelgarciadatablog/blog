@@ -15,18 +15,14 @@ Cuando haces un `git push`, GitHub verifica que tu llave privada corresponde con
 **Lo que vamos a hacer ahora (pasos):**
 
 1. **Generar el par de llaves** en tu equipo con `ssh-keygen`
-
 1. **Agregar la llave privada al agente SSH** de Windows — para no tener que escribir nada cada vez
-
 1. **Subir la llave pública a GitHub** — una sola vez
-
 1. **Configurar gh para usar SSH** en vez de HTTPS
-
 1. **Verificar** que todo funciona
 
 
 
-## **Paso 0 — Verificar **
+## **Paso 0 — Verificar**
 
 mac
 
@@ -67,7 +63,6 @@ ssh-keygen -t ed25519 -C "angelgarciadatablog@gmail.com"
 Cuando te pregunte:
 
 - **Dónde guardarla** → presiona Enter (usa la ruta por defecto `~/.ssh/id_ed25519`)
-
 - **Passphrase** → te recomiendo ponerle una contraseña, agrega una capa extra de seguridad. Si alguien roba tu llave privada, sin la passphrase no puede usarla.
 
 ⚠️ Si creas una passphrase, el agente SSH se resetea al reiniciar el Mac y te la pedirá cada vez que hagas push.
@@ -87,7 +82,7 @@ La primera vez que uses la llave te pedirá la passphrase, la ingresas y Mac la 
 
 
 
-**¿Por qué ****`ed25519`****?**
+**¿Por qué****`ed25519`****?**
 
 Es el algoritmo moderno recomendado para generar llaves SSH — más seguro y eficiente que el antiguo `RSA`
 
@@ -117,7 +112,6 @@ Perfecto, las llaves se generaron correctamente:
 windows
 
 - **Llave privada:** `C:\Users\Lenovo\.ssh\id_ed25519` → se queda aquí, nunca la compartas
-
 - **Llave pública:** `C:\Users\Lenovo\.ssh\id_ed25519.pub` → esta la subiremos a GitHub
 
 
@@ -125,7 +119,6 @@ windows
 mac
 
 - Privada: `/Users/angelgarciachanga/.ssh/id_ed25519 `→ se queda aquí, nunca la compartas
-
 - Pública: `/Users/angelgarciachanga/.ssh/id_ed25519.pub `→ esta la subiremos a GitHub
 
 
@@ -194,14 +187,13 @@ Get-Content C:\Users\Lenovo\.ssh\id_ed25519.pub
 ## **Ahora súbela a GitHub:**
 
 1. Ve a **github.com** → inicia sesión con `angel-reechai`
-
 1. Clic en tu foto → **Settings**
-
 1. En el menú izquierdo → **SSH and GPG keys**
-
 1. Clic en **New SSH key**
-
 1. Rellena:
+     - **Title:** `Lenovo Work` (o cualquier nombre descriptivo)
+     - **Key type:** `Authentication Key`
+     - **Key:** tu llave pública
 
 ```bash
 tu llave pública

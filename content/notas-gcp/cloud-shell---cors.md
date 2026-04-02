@@ -15,11 +15,8 @@ Crea un archivo llamado `cors.json` en la terminal con el contenido entre `EOF` 
 Define la política CORS:
 
 - `origin`: qué dominios pueden hacer peticiones al bucket
-
 - `method`: solo permite peticiones `GET` (leer archivos, no escribir)
-
 - `responseHeader`: qué headers del response puede leer el browser
-
 - `maxAgeSeconds`: cuánto tiempo el browser cachea esta política (1 hora) antes de volver a preguntar
 
 ```bash
@@ -90,12 +87,17 @@ CORS es una restricción **del navegador**, no del servidor. Cuando un browser h
 ## Por qué no afecta a otras herramientas
 
 - **Pegar la URL en el navegador**: el browser no aplica CORS porque no hay un origen "solicitante", navegas directamente al recurso
-
 - **Power BI, Postman, curl, Python**: son clientes que no implementan la política CORS — hacen la petición directamente sin ese chequeo previo
-
 - **Cualquier backend**: mismo caso, CORS solo aplica en peticiones cross-origin desde código JavaScript en el browser
 
 ## En resumen
+
+| Acceso | Requiere CORS |
+| --- | --- |
+| `fetch()` en JavaScript (browser) | Sí |
+| Pegar URL en el navegador | No |
+| Power BI / Postman / curl | No |
+| Python / cualquier backend | No |
 
 Los datos son públicos para todos. CORS solo controla si **un script JavaScript en el browser** puede consumirlos, como protección que implementan los propios navegadores.
 

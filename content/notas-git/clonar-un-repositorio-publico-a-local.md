@@ -12,4 +12,4 @@ git clone https://github.com/angelgarciadatablog/angel-notebooks
 
 Si el repo es **público**, puedes clonar sin token ni autenticación.
 
-Pero **si intentas hacer un ****`git push`**, GitHub **sí te pedirá autenticación** (usuario + token).
+Pero **si intentas hacer un****`git push`**, GitHub **sí te pedirá autenticación** (usuario + token).

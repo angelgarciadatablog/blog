@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GitHub CLI - SSH · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -98,25 +25,15 @@ SSH (Secure Shell) es un protocolo de comunicación segura. En el contexto de Gi
 <p>Cuando haces un <code>git push</code>, GitHub verifica que tu llave privada corresponde con la pública que tienes registrada — si coinciden, acceso concedido.</p>
 <p><strong>Lo que vamos a hacer ahora (pasos):</strong></p>
 <ol>
-<li>
-<p><strong>Generar el par de llaves</strong> en tu equipo con <code>ssh-keygen</code></p>
-</li>
-<li>
-<p><strong>Agregar la llave privada al agente SSH</strong> de Windows — para no tener que escribir nada cada vez</p>
-</li>
-<li>
-<p><strong>Subir la llave pública a GitHub</strong> — una sola vez</p>
-</li>
-<li>
-<p><strong>Configurar gh para usar SSH</strong> en vez de HTTPS</p>
-</li>
-<li>
-<p><strong>Verificar</strong> que todo funciona</p>
-</li>
+<li><strong>Generar el par de llaves</strong> en tu equipo con <code>ssh-keygen</code></li>
+<li><strong>Agregar la llave privada al agente SSH</strong> de Windows — para no tener que escribir nada cada vez</li>
+<li><strong>Subir la llave pública a GitHub</strong> — una sola vez</li>
+<li><strong>Configurar gh para usar SSH</strong> en vez de HTTPS</li>
+<li><strong>Verificar</strong> que todo funciona</li>
 </ol>
-<h2>**Paso 0 — Verificar **</h2>
+<h2><strong>Paso 0 — Verificar</strong></h2>
 <p>mac</p>
-<pre class="codehilite"><code class="language-bash">#Verificar cuántos pares de SSH tienes:
+<pre class="highlight"><code class="language-bash">#Verificar cuántos pares de SSH tienes:
 ls ~/.ssh
 
 #cada par de keys tiene dos archivos:
@@ -124,11 +41,9 @@ ls ~/.ssh
 #- id_ed25519.pub — clave pública (esta es la que subes a GitHub)
 
 #Verificar si GitHub reconoce tu llave:
-ssh -T git@github.com
-</code></pre>
-
+ssh -T git@github.com</code></pre>
 <p>windows</p>
-<pre class="codehilite"><code class="language-bash">#Verificar cuántos pares de SSH tienes:
+<pre class="highlight"><code class="language-bash">#Verificar cuántos pares de SSH tienes:
 dir C:\Users\TU_USUARIO\.ssh
 
 #Cada par de keys tiene dos archivos:
@@ -136,37 +51,27 @@ dir C:\Users\TU_USUARIO\.ssh
 #- id_ed25519.pub — clave pública (esta es la que subes a GitHub)
 
 Verificar si GitHub reconoce tu llave:
-ssh -T git@github.com
-</code></pre>
-
+ssh -T git@github.com</code></pre>
 <h2><strong>Paso 1 — Generar el par de llaves:</strong></h2>
-<pre class="codehilite"><code class="language-bash">ssh-keygen -t ed25519 -C &quot;angelgarciadatablog@gmail.com&quot;
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">ssh-keygen -t ed25519 -C "angelgarciadatablog@gmail.com"</code></pre>
 <p>Cuando te pregunte:</p>
 <ul>
-<li>
-<p><strong>Dónde guardarla</strong> → presiona Enter (usa la ruta por defecto <code>~/.ssh/id_ed25519</code>)</p>
-</li>
-<li>
-<p><strong>Passphrase</strong> → te recomiendo ponerle una contraseña, agrega una capa extra de seguridad. Si alguien roba tu llave privada, sin la passphrase no puede usarla.</p>
-</li>
+<li><strong>Dónde guardarla</strong> → presiona Enter (usa la ruta por defecto <code>~/.ssh/id_ed25519</code>)</li>
+<li><strong>Passphrase</strong> → te recomiendo ponerle una contraseña, agrega una capa extra de seguridad. Si alguien roba tu llave privada, sin la passphrase no puede usarla.</li>
 </ul>
 <p>⚠️ Si creas una passphrase, el agente SSH se resetea al reiniciar el Mac y te la pedirá cada vez que hagas push.</p>
 <p><strong>Solución</strong> → Configurar <code>~/.ssh/config</code>:</p>
-<pre class="codehilite"><code class="language-bash">cat &gt;&gt; ~/.ssh/config &lt;&lt; 'EOF'
+<pre class="highlight"><code class="language-bash">cat &gt;&gt; ~/.ssh/config &lt;&lt; 'EOF'
 Host github.com
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519
-EOF
-</code></pre>
-
+EOF</code></pre>
 <p>La primera vez que uses la llave te pedirá la passphrase, la ingresas y Mac la recuerda permanentemente.</p>
-<p><strong>¿Por qué </strong><strong><code>ed25519</code></strong><strong>?</strong></p>
+<p><strong>¿Por qué</strong><strong><code>ed25519</code></strong><strong>?</strong></p>
 <p>Es el algoritmo moderno recomendado para generar llaves SSH — más seguro y eficiente que el antiguo <code>RSA</code></p>
 <p>Resultado:</p>
-<pre class="codehilite"><code class="language-bash">Your identification has been saved in C:\Users\Lenovo/.ssh/id_ed25519
+<pre class="highlight"><code class="language-bash">Your identification has been saved in C:\Users\Lenovo/.ssh/id_ed25519
 Your public key has been saved in C:\Users\Lenovo/.ssh/id_ed25519.pub
 The key fingerprint is:
 SHA256:b3qu1K88zcM12735vX4DPLI+gnesbJS6G8EtdDkMcPo angelg@reechai.com
@@ -181,97 +86,66 @@ The key's randomart image is:
 |       .= =+o.o+.|
 |       +oBo*= ..*|
 |       oB*O+o..=O|
-+----[SHA256]-----+
-</code></pre>
-
++----[SHA256]-----+</code></pre>
 <p>Perfecto, las llaves se generaron correctamente:</p>
 <p>windows</p>
 <ul>
-<li>
-<p><strong>Llave privada:</strong> <code>C:\Users\Lenovo\.ssh\id_ed25519</code> → se queda aquí, nunca la compartas</p>
-</li>
-<li>
-<p><strong>Llave pública:</strong> <code>C:\Users\Lenovo\.ssh\id_ed25519.pub</code> → esta la subiremos a GitHub</p>
-</li>
+<li><strong>Llave privada:</strong> <code>C:\Users\Lenovo\.ssh\id_ed25519</code> → se queda aquí, nunca la compartas</li>
+<li><strong>Llave pública:</strong> <code>C:\Users\Lenovo\.ssh\id_ed25519.pub</code> → esta la subiremos a GitHub</li>
 </ul>
 <p>mac</p>
 <ul>
-<li>
-<p>Privada: <code>/Users/angelgarciachanga/.ssh/id_ed25519</code>→ se queda aquí, nunca la compartas</p>
-</li>
-<li>
-<p>Pública: <code>/Users/angelgarciachanga/.ssh/id_ed25519.pub</code>→ esta la subiremos a GitHub</p>
-</li>
+<li>Privada: <code>/Users/angelgarciachanga/.ssh/id_ed25519</code>→ se queda aquí, nunca la compartas</li>
+<li>Pública: <code>/Users/angelgarciachanga/.ssh/id_ed25519.pub</code>→ esta la subiremos a GitHub</li>
 </ul>
 <h2><strong>Paso 2 — Activar el agente SSH:</strong></h2>
 <p>mac</p>
-<pre class="codehilite"><code class="language-bash"># Iniciar el agente SSH (opcional, usualmente ya corre solo en mac)
-eval &quot;$(ssh-agent -s)&quot;
+<pre class="highlight"><code class="language-bash"># Iniciar el agente SSH (opcional, usualmente ya corre solo en mac)
+eval "$(ssh-agent -s)"
 
 # Agregar tu llave al agente
-ssh-add ~/.ssh/id_ed25519
-</code></pre>
-
+ssh-add ~/.ssh/id_ed25519</code></pre>
 <p>windows</p>
-<pre class="codehilite"><code class="language-bash"># Iniciar el agente SSH
+<pre class="highlight"><code class="language-bash"># Iniciar el agente SSH
 Get-Service -Name ssh-agent | Set-Service -StartupType Automatic
 Start-Service ssh-agent
 
 # Agregar tu llave al agente
-ssh-add C:\Users\Lenovo\.ssh\id_ed25519
-</code></pre>
-
+ssh-add C:\Users\Lenovo\.ssh\id_ed25519</code></pre>
 <p>Te pedirá tu passphrase </p>
 <p>Repuesta:</p>
-<pre class="codehilite"><code class="language-bash">Identity added: C:\Users\Lenovo\.ssh\id_ed25519 (angel@gmail.com)
-</code></pre>
-
-<pre class="codehilite"><code class="language-bash">Identity added: /Users/nombredeusuario/.ssh/id_ed25519 (angelgarciadatablog@gmail.com)
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">Identity added: C:\Users\Lenovo\.ssh\id_ed25519 (angel@gmail.com)</code></pre>
+<pre class="highlight"><code class="language-bash">Identity added: /Users/nombredeusuario/.ssh/id_ed25519 (angelgarciadatablog@gmail.com)</code></pre>
 <h2><strong>Paso 3 — Subir la llave pública a GitHub:</strong></h2>
 <p>Primero copia el contenido de tu llave pública:</p>
 <p>Mac</p>
-<pre class="codehilite"><code class="language-bash">cat /Users/nombredeusuario/.ssh/id_ed25519.pub
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">cat /Users/nombredeusuario/.ssh/id_ed25519.pub</code></pre>
 <p>windows:</p>
-<pre class="codehilite"><code class="language-bash">Get-Content C:\Users\Lenovo\.ssh\id_ed25519.pub
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">Get-Content C:\Users\Lenovo\.ssh\id_ed25519.pub</code></pre>
 <h2><strong>Ahora súbela a GitHub:</strong></h2>
 <ol>
-<li>
-<p>Ve a <strong>github.com</strong> → inicia sesión con <code>angel-reechai</code></p>
-</li>
-<li>
-<p>Clic en tu foto → <strong>Settings</strong></p>
-</li>
-<li>
-<p>En el menú izquierdo → <strong>SSH and GPG keys</strong></p>
-</li>
-<li>
-<p>Clic en <strong>New SSH key</strong></p>
-</li>
-<li>
-<p>Rellena:</p>
+<li>Ve a <strong>github.com</strong> → inicia sesión con <code>angel-reechai</code></li>
+<li>Clic en tu foto → <strong>Settings</strong></li>
+<li>En el menú izquierdo → <strong>SSH and GPG keys</strong></li>
+<li>Clic en <strong>New SSH key</strong></li>
+<li>Rellena:<ul>
+<li><strong>Title:</strong> <code>Lenovo Work</code> (o cualquier nombre descriptivo)</li>
+<li><strong>Key type:</strong> <code>Authentication Key</code></li>
+<li><strong>Key:</strong> tu llave pública</li>
+</ul>
 </li>
 </ol>
-<pre class="codehilite"><code class="language-bash">tu llave pública
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">tu llave pública</code></pre>
 <ol>
 <li>Clic en <strong>Add SSH key</strong></li>
 </ol>
 <h2><strong>Paso 5 — Configurar gh para usar SSH:</strong></h2>
-<pre class="codehilite"><code class="language-bash">gh config set git_protocol ssh
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gh config set git_protocol ssh</code></pre>
 <p>Luego verifica:</p>
-<pre class="codehilite"><code class="language-bash">gh config get git_protocol
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gh config get git_protocol</code></pre>
 <p>Debería responder <code>ssh</code>.</p>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

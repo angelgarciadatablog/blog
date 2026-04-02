@@ -30,6 +30,12 @@ angelgarciachanga@MacBook-Air-de-Angel angel-notebooks % git log --graph --oneli
 
 ### Cómo leerlo
 
+| Marca | Significado |
+| --- | --- |
+| `HEAD -> main` | tu repositorio LOCAL |
+| `origin/main` | el repo en GitHub |
+| líneas ` | `y`` |
+
 👉 Si están alineados → iguales
 
 👉 Si se separan → hay diferencias.
@@ -44,7 +50,7 @@ angelgarciachanga@MacBook-Air-de-Angel angel-notebooks % git log --graph --oneli
 
 Esto ya lo estás:
 
-```plain text
+```
 Your branch is up to date with 'origin/main'
 ```
 
@@ -59,7 +65,6 @@ No necesitas `pull` ni `push`.
 Aquí todavía NO estás alineado, porque tu carpeta tiene cambios locales:
 
 - un archivo eliminado
-
 - un archivo nuevo sin seguimiento.
 
 Para estar 100% alineado, tu carpeta debe coincidir exactamente con el último commit.

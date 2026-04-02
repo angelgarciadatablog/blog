@@ -6,6 +6,7 @@
   <title>angelgarciadatablog</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
 
@@ -15,7 +16,7 @@
 <!-- SIDEBAR -->
 <aside id="sidebar">
   <div class="sidebar-header">
-    <div class="site-name">Angel García <span>· docs</span></div>
+    <div class="site-name" onclick="showIndex()" style="cursor:pointer">Angel García <span>· docs</span></div>
     <div class="site-sub">Notas técnicas personales</div>
   </div>
   <div class="search-box">
@@ -40,7 +41,7 @@
       <button class="menu-btn" onclick="openSidebar()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
-      <div class="topbar-name">Angel García</div>
+      <div class="topbar-name" onclick="showIndex()" style="cursor:pointer">Angel García</div>
       <span class="topbar-sep">|</span>
       <div class="breadcrumb">
         <a onclick="showIndex()" style="cursor:pointer;color:var(--text-dim)">docs</a>
@@ -88,12 +89,19 @@
   
 
 <!-- NOTE VIEWER -->
-  <div id="noteViewer">
-    <button class="note-back" onclick="showIndex()">← Volver</button>
-    <div id="noteContent"></div>
+  <div id="noteWrapper">
+    <div id="noteViewer">
+      <button class="note-back">← Volver</button>
+      <div id="noteContent"></div>
+    </div>
+    <nav id="tocPanel">
+      <div class="toc-title">En esta página</div>
+      <div id="tocNav"></div>
+    </nav>
   </div>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>

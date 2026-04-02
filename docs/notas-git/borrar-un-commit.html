@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Borrar un commit · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -94,48 +21,67 @@
 <h2>Eliminar un commit</h2>
 <p><strong>Escenario:</strong> Tienes un historial de commits y quieres eliminar el último realizado.</p>
 <p>Primero verifica cuáles son tus dos últimos commits:</p>
-<pre class="codehilite"><code class="language-bash">git log --oneline -2
-</code></pre>
-
-<pre class="codehilite"><code class="language-bash">//Resultado de ejemplo:
+<pre class="highlight"><code class="language-bash">git log --oneline -2</code></pre>
+<pre class="highlight"><code class="language-bash">//Resultado de ejemplo:
 
 e19e6c8 (HEAD -&gt; main) actualización de carpetas   ← quieres eliminar este
-3f10683 (origin/main) optimize: compress images    ← quieres quedarte aquí
-</code></pre>
-
+3f10683 (origin/main) optimize: compress images    ← quieres quedarte aquí</code></pre>
 <p>El resultado se muestra en el visor <code>less</code> de la terminal, y <code>q</code> es la tecla para salir.</p>
 <h2><strong>¿Qué quieres hacer con los cambios de ese commit?</strong></h2>
 <p><strong>Opción A — Quieres conservar los cambios para retrabajarlos</strong></p>
-<pre class="codehilite"><code class="language-bash">git reset --soft 3f10683   # apuntas al commit donde quieres quedarte, los cambios quedan en staging, listos para hacer commit directamente.
-git reset --mixed 3f10683  # apuntas al commit donde quieres quedarte, los cambios quedan en tus archivos pero fuera del staging, tienes que hacer git add antes de commitear.
-</code></pre>
-
-<p><strong><code>--mixed</code></strong><strong> es el por defecto</strong></p>
+<pre class="highlight"><code class="language-bash">git reset --soft 3f10683   # apuntas al commit donde quieres quedarte, los cambios quedan en staging, listos para hacer commit directamente.
+git reset --mixed 3f10683  # apuntas al commit donde quieres quedarte, los cambios quedan en tus archivos pero fuera del staging, tienes que hacer git add antes de commitear.</code></pre>
+<p><strong><code>--mixed</code></strong><strong>es el por defecto</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Historial</th>
+<th>Cambios en archivos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reset --soft / --mixed</code></td>
+<td>❌ Borra el commit</td>
+<td>✅ Conserva los cambios</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Opción B — No quieres saber nada de esos cambios</strong></p>
-<pre class="codehilite"><code class="language-bash"># apuntas al commit donde quieres quedarte
-git reset --hard 3f10683
-</code></pre>
-
+<pre class="highlight"><code class="language-bash"># apuntas al commit donde quieres quedarte
+git reset --hard 3f10683</code></pre>
 <p>⚠️ Siempre apuntas al commit donde <strong>quieres quedarte</strong>, no al que quieres eliminar. Todo lo que vino después de ese punto desaparece del historial y de tus archivos (desaparece tanto los códigos del los commits, es decir el historial, como también los cambios que se hizo en cada coomit)</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Historial</th>
+<th>Cambios en archivos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reset --hard</code></td>
+<td>❌ Borra el commit</td>
+<td>❌ Borra los cambios</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Opción C — El commit ya está en GitHub y no quieres reescribir el historial</strong></p>
-<pre class="codehilite"><code class="language-bash"># apuntas al commit que quieres deshacer
-git revert e19e6c8
-</code></pre>
-
+<pre class="highlight"><code class="language-bash"># apuntas al commit que quieres deshacer
+git revert e19e6c8</code></pre>
 <ul>
-<li>
-<p>Deshace los cambios de ese commit en tus archivos.</p>
-</li>
-<li>
-<p>El commit original permanece en el historial.</p>
-</li>
-<li>
-<p>Se crea un commit nuevo con los cambios revertidos.</p>
-</li>
-<li>
-<p>Usar cuando el commit <strong>ya está en GitHub</strong> y no quieres reescribir el historial.</p>
-</li>
+<li>Deshace los cambios de ese commit en tus archivos.</li>
+<li>El commit original permanece en el historial.</li>
+<li>Se crea un commit nuevo con los cambios revertidos.</li>
+<li>Usar cuando el commit <strong>ya está en GitHub</strong> y no quieres reescribir el historial.
+|   | Historial | Cambios en archivos |
+| --- | --- | --- |
+| <code>revert</code> | ✅ Conserva el commit | ❌ Borra los cambios |</li>
 </ul>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

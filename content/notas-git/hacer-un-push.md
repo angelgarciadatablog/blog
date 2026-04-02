@@ -96,7 +96,7 @@ git push origin main
 
 Cuando ejecutas:
 
-```plain text
+```
 git push
 ```
 
@@ -112,7 +112,7 @@ Lo que ocurra depende del **método de conexión** del repositorio.
 
 Repositorio remoto:
 
-```plain text
+```
 https://github.com/usuario/repositorio.git
 ```
 
@@ -122,7 +122,7 @@ https://github.com/usuario/repositorio.git
 
 1️⃣ Ejecutas:
 
-```plain text
+```
 git push
 ```
 
@@ -136,14 +136,13 @@ git push
 
 Se abre automáticamente el navegador:
 
-```plain text
+```
 Authorize Git Credential Manager
 ```
 
 Te pide:
 
 - iniciar sesión en GitHub
-
 - aprobar acceso desde esa computadora.
 
 ---
@@ -152,7 +151,7 @@ Te pide:
 
 Git pide en terminal:
 
-```plain text
+```
 Username:
 Password or token:
 ```
@@ -164,9 +163,7 @@ Password or token:
 5️⃣ Después de aprobar:
 
 - GitHub genera un **Personal Access Token**
-
 - macOS lo guarda en el llavero (Keychain)
-
 - el push continúa automáticamente.
 
 ---
@@ -174,7 +171,6 @@ Password or token:
 ## Resultado
 
 - quedas autenticado
-
 - futuros `git push` no pedirán login.
 
 ---
@@ -183,7 +179,7 @@ Password or token:
 
 Obtendrás algo como:
 
-```plain text
+```
 remote: Permission denied
 fatal: Authentication failed
 ```
@@ -194,7 +190,7 @@ fatal: Authentication failed
 
 Repositorio remoto:
 
-```plain text
+```
 git@github.com:usuario/repositorio.git
 ```
 
@@ -204,7 +200,7 @@ git@github.com:usuario/repositorio.git
 
 1️⃣ Ejecutas:
 
-```plain text
+```
 git push
 ```
 
@@ -216,7 +212,7 @@ git push
 
 Error típico:
 
-```plain text
+```
 Permission denied (publickey).
 fatal: Could not read from remote repository.
 ```
@@ -231,7 +227,7 @@ GitHub está diciendo:
 
 Mismo error:
 
-```plain text
+```
 Permission denied (publickey)
 ```
 
@@ -243,13 +239,13 @@ Porque GitHub no tiene tu clave pública.
 
 GitHub puede preguntar:
 
-```plain text
+```
 Are you sure you want to continue connecting?
 ```
 
 Respondes:
 
-```plain text
+```
 yes
 ```
 
@@ -262,11 +258,35 @@ Y queda registrada la conexión.
 Una vez configurado SSH:
 
 - nunca vuelves a logearte
-
 - no hay navegador
-
 - autenticación automática.
 
 ---
 
 # Diferencia conceptual clave
+
+| Situación | HTTPS | SSH |
+| --- | --- | --- |
+| No autenticado | abre login web | error inmediato |
+| Primera configuración | automática | manual |
+| Credencial guardada | Keychain | archivo SSH |
+| Uso diario | fácil | profesional |
+
+---
+
+# 🔎 Algo importante 
+
+El login ocurre **solo cuando Git necesita permiso**, no cuando clonas ni cuando ves remotes.
+
+Git puede existir perfectamente sin autenticación hasta el momento del push.
+
+---
+
+GitHub valida:
+
+```
+QUIÉN hace el push → autenticación (HTTPS/SSH)
+QUIÉN escribió el commit → email del commit
+```
+
+Son dos identidades distintas.

@@ -39,7 +39,7 @@ eb1c3f1 nuevas imagenes
 
 ---
 
-**La flecha ****`HEAD -> main`**** significa:**
+**La flecha****`HEAD -> main`****significa:**
 
 > *"Estás parado en la rama main, en tu máquina local"*
 

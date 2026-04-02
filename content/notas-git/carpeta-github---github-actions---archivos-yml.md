@@ -3,15 +3,12 @@
 En macOS / Linux:
 
 - Las carpetas que empiezan con `.` son **ocultas**
-
 - No es “misterio”, es solo convención
 
 Ejemplos comunes:
 
 - `.git` → info interna de Git
-
 - `.env` → variables de entorno
-
 - `.github` → **configuración especial para GitHub**
 
 👉 O sea:
@@ -29,11 +26,8 @@ GitHub **escanea automáticamente** esa carpeta cuando subes el repo.
 Dentro de `.github` pueden vivir:
 
 - workflows (automatizaciones)
-
 - templates de issues
-
 - templates de PRs
-
 - config de seguridad
 
 En tu proyecto, **sirve para usar:**
@@ -48,18 +42,17 @@ En tu proyecto, **sirve para usar:**
 
 Esta ruta:
 
-```plain text
+```
 .github/workflows/
 ```
 
 tiene un significado especial:
 
-> 📌 **GitHub busca ahí los archivos ****`.yml`**** para ejecutar Actions**
+> 📌 **GitHub busca ahí los archivos****`.yml`****para ejecutar Actions**
 
 Si no existe:
 
 - GitHub Actions **no corre**
-
 - Aunque tu YAML esté perfecto
 
 Es una **ruta obligatoria**, no un gusto.
@@ -86,7 +79,7 @@ Y como `.github` es especial, GitHub sabe:
 
 Piensa en el repo como una empresa:
 
-```plain text
+```
 youtube-data-pipeline/
 │
 ├── scripts/        → trabajadores (Python)
@@ -100,5 +93,4 @@ youtube-data-pipeline/
 Sin `.github/workflows`:
 
 - tienes trabajadores
-
 - pero nadie los coordina

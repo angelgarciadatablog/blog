@@ -1,6 +1,6 @@
 ## **Los 3 niveles de configuración en Git**
 
-### **1. ****`-global`**** (Recomendado para empezar)**
+### **1.****`-global`****(Recomendado para empezar)**
 
 ```bash
 git config --global user.name "Angel García"
@@ -13,7 +13,7 @@ git config --global user.email "angel@ejemplo.com"
 
 ✅ **Se guarda en:** `~/.gitconfig` (tu carpeta de usuario)
 
-### **2. ****`-local`**** (Por proyecto)**
+### **2.****`-local`****(Por proyecto)**
 
 ```bash
 git config --local user.name "Angel García - Empresa X"
@@ -28,7 +28,7 @@ git config --local user.email "angel@empresa.com"
 
 ⚠️ **Nota:** Debes estar dentro de un repositorio Git
 
-### **3. ****`-system`**** (Raro)**
+### **3.****`-system`****(Raro)**
 
 ```bash
 git config --system user.name "Nombre"
@@ -69,7 +69,6 @@ git config --local user.email "angel.garcia@empresa.com"
 **Resultado:**
 
 - Proyectos personales → usan `angel.personal@gmail.com`
-
 - Proyecto trabajo → usa `angel.garcia@empresa.com`
 
 

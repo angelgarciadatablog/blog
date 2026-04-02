@@ -8,7 +8,7 @@ Al trabajar con archivos Markdown dentro de una estructura de carpetas, las imá
 
 En este proyecto la estructura es:
 
-```plain text
+```
 2-ecommerce-analytics-comercial/
 │
 ├── analysis/
@@ -38,9 +38,7 @@ La ruta se interpreta **desde la ubicación del archivo Markdown**.
 ### Símbolos importantes:
 
 - `.` → carpeta actual
-
 - `..` → subir un nivel en la estructura
-
 - `../images/` → subir un nivel y entrar en la carpeta `images`
 
 ---
@@ -49,20 +47,19 @@ La ruta se interpreta **desde la ubicación del archivo Markdown**.
 
 Como el archivo `.md` está dentro de:
 
-```plain text
+```
 analysis/
 ```
 
 Y las imágenes están en:
 
-```plain text
+```
 images/
 ```
 
 Es necesario:
 
 1. Subir un nivel → `..`
-
 1. Entrar a la carpeta `images`
 
 La ruta correcta es:
@@ -84,7 +81,5 @@ Siempre piensa:
 Luego:
 
 - `.` → carpeta actual
-
 - `..` → subir un nivel
-
 - `../images/` → subir y entrar a images

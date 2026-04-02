@@ -5,7 +5,6 @@ Hay dos identidades distintas:
 Define:
 
 - nombre visible
-
 - correo grabado para siempre
 
 # Nivel global
@@ -24,6 +23,12 @@ git config --global user.name
 git config --global user.email
 
 ```
+
+| Sistema | Ubicación del .gitconfig |
+| --- | --- |
+| **Windows** | `C:\Users\TuUsuario\.gitconfig` |
+| **Mac** | `/Users/tuusuario/.gitconfig` |
+| **Linux** | `/home/tuusuario/.gitconfig` |
 
 # Nivel local
 
@@ -50,7 +55,7 @@ Si no existe nada:
 
 
 
-```plain text
+```
 git var GIT_AUTHOR_IDENT
 ```
 
@@ -67,15 +72,12 @@ Eso mostrará exactamente **cómo Git se identifica AHORA MISMO** si hicieras un
 Define:
 
 - permisos
-
 - acceso al repo
-
 - quién puede push
 
 Esto usa:
 
 - HTTPS + token
-
 - o SSH key
 
 (NO tiene relación directa con el author del commit).
@@ -86,7 +88,7 @@ Esto usa:
 
 Cuando haces:
 
-```plain text
+```
 git push
 ```
 
@@ -120,7 +122,7 @@ Ese token es como:
 
 Cuando haces push:
 
-```plain text
+```
 Tu Mac → GitHub
 GitHub: ¿quién eres?
 Mac: aquí está mi token guardado
@@ -133,7 +135,7 @@ GitHub: OK, eres esta cuenta
 
 Gracias a esto que vimos antes:
 
-```plain text
+```
 credential.helper=osxkeychain
 ```
 
@@ -151,16 +153,13 @@ La mayoría ya lo hizo sin darse cuenta:
 
 1. Clonas un repo usando URL HTTPS:
 
-```plain text
+```
 https://github.com/usuario/repo.git
 ```
 
 1. Haces `git push`
-
 1. GitHub abre login en navegador
-
 1. Apruebas acceso
-
 1. macOS guarda el token automáticamente
 
 Y listo.
@@ -172,17 +171,13 @@ No vuelves a verlo.
 ## Ventajas
 
 - Fácil
-
 - Automático
-
 - Ideal para empezar
 
 ## Desventajas
 
 - Depende del llavero
-
 - A veces pide login otra vez
-
 - Menos usado en setups avanzados
 
 ---
@@ -199,7 +194,7 @@ GitHub tiene la **llave pública**.
 
 Cuando te conectas:
 
-```plain text
+```
 GitHub: demuestra que eres tú
 Mac: firma con su llave privada
 GitHub: coincide → acceso permitido
@@ -213,7 +208,7 @@ Nunca envías contraseña.
 
 En tu Mac aparecen dos archivos:
 
-```plain text
+```
 ~/.ssh/id_ed25519        ← privada (NUNCA compartir)
 ~/.ssh/id_ed25519.pub    ← pública (se sube a GitHub)
 ```
@@ -224,10 +219,85 @@ En tu Mac aparecen dos archivos:
 
 ### 1️⃣ Crear la llave
 
-```plain text
+```
 ssh-keygen-t ed25519-C"angelgarciadatablog@gmail.com"
 ```
 
 (presionas Enter varias veces)
 
 ---
+
+### 2️⃣ Copiar la llave pública
+
+```
+cat ~/.ssh/id_ed25519.pub
+```
+
+Copias todo el texto.
+
+---
+
+### 3️⃣ Agregarla en GitHub
+
+GitHub → Settings → SSH and GPG Keys → New SSH Key
+
+Pegas el contenido.
+
+---
+
+### 4️⃣ Usar URL SSH en repos
+
+En lugar de:
+
+```
+https://github.com/usuario/repo.git
+```
+
+usas:
+
+```
+git@github.com:usuario/repo.git
+```
+
+---
+
+## Ventajas
+
+- No vuelves a loguearte
+- Más seguro
+- Ideal para múltiples repos
+- Estándar profesional
+
+## Desventaja
+
+- Primera configuración confunde un poco.
+
+---
+
+# Diferencia CLAVE
+
+| Concepto | HTTPS Token | SSH |
+| --- | --- | --- |
+| Usa contraseña | ❌ | ❌ |
+| Guarda credencial | Keychain | archivo local |
+| Recomendado profesionalmente | 👍 | ⭐⭐⭐ |
+| Fácil inicio | ⭐⭐⭐ | 👍 |
+
+---
+
+# Algo MUY importante que conecta con todo lo anterior
+
+Ni el token ni la SSH key tienen relación con:
+
+```
+git config user.email
+```
+
+Eso solo firma commits.
+
+La autenticación vive aparte.
+
+
+
+
+

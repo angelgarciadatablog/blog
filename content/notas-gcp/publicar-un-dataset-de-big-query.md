@@ -4,7 +4,7 @@
 
 1)
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/7fdfbd6d-f375-436b-ab33-8658a9e574e2/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XQ6N3VTS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260329T061145Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJGMEQCIBtkMjh6Uda8fwj%2FkbJzygES6K3m%2FKTv25aySjebGcgAAiAU46fsr0TSYujw9C3FFpteG0qg8gCOGDpoDpBSK0JEBCr%2FAwgFEAAaDDYzNzQyMzE4MzgwNSIMSY8sXpVvtWKVBR%2B%2FKtwDvNHLjkkwQJJ5BpMaLAjtMG5E6pU%2FAy0Zmq7eOug0Gjgh%2Fe859wkZ8PBCa1eTR6LkFhX4Y8Gu6cvHFW5gY5IUTnpjUATHluyr8jEBfGobdzCso2n0gNXsswkaOk3T0y7Tdu%2BYzJBidPW7oob1UOYPFzQwHRi%2BqRrF%2Fl8EltIjPFDXGfLVjE2%2FgO6Hhu3MsGeOwngpT%2F9107XOz6OpRKPtb47bZgXgtA4pNMLLolLWEmPqPNIA8qk4o8HlKQZ3QbyEZVE%2Fxj92Z9uOMAFkMpGsFrObNjDha%2BSeegDhxmOBz8rjCF1vb8wrot4Yy1NeTs4Nmj31d4vGd9Wxqd4%2Bp9jW37SntqkcwA2ZCLk8haLhHYdTooOZmcv6pK9YxTyEDysBgHCAVFUEZTTZaHb%2Bq8MXiSd3RuY3tZ6vheOdy65G7DpoUJb63i%2FIOnNHlNk9BKqopubbgx5RSYLNKdvfr3hcbx%2BIRnSAJINLZzo9QWdDY6vzYPLgxWIC09JhOuy4y2PyJy1otlxEO73ULqEeOqaFrPNHH0AxMhISv5Q3MkD75Xva8Dh5WtVPF6dyxubAon9HZ3JKANdeJKHUFraUFpYDiNLrqA5GP6eTqGg8RdRvVO2v%2BnX2DjoYaXpo1qIw4caizgY6pgEEq%2FFc5Y6gLZWhGnSBJf8lfXRhspA58BWURv0QkLKmR6T4fjATTkmLbli7jdEJmqaPjh7wj5gx8J211p%2FZ7Uh8Q3rIeO%2FLO8ftJQL3z992d%2Fi0D%2BEqPszB3XNxQVFE9%2Bqy6CWMJrLFsh98N%2Bk6ZmgUDuSZIZ5purN4OMomY2YfNuGN4UnBykCXPwSlifWyBzACw0LVmsp2LBZwFi2pBjg3XBVoEPWi&X-Amz-Signature=11356a77a7312a06810302fe5ce8f9891f77b280353bb0a45a65c6b2f5cf45a3&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+![](img/312477bcd0eb8000a6c9c1e4bd4b8127.webp)
 
 
 
@@ -12,11 +12,15 @@
 
 2)
 
+![](img/312477bcd0eb8036be7dfa9791902405.webp)
+
 
 
 
 
 3)
+
+![](img/312477bcd0eb80288b45feba4228cf2b.webp)
 
 
 
@@ -28,7 +32,7 @@
 
 1. Si ejecutas una consulta con la ruta proyecto.dataset.tabla te saldrán datos (ojo que solo el dataset es público)
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/7e2828f7-708e-4eb7-96e3-1432e319786e/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XQ6N3VTS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260329T061145Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJGMEQCIBtkMjh6Uda8fwj%2FkbJzygES6K3m%2FKTv25aySjebGcgAAiAU46fsr0TSYujw9C3FFpteG0qg8gCOGDpoDpBSK0JEBCr%2FAwgFEAAaDDYzNzQyMzE4MzgwNSIMSY8sXpVvtWKVBR%2B%2FKtwDvNHLjkkwQJJ5BpMaLAjtMG5E6pU%2FAy0Zmq7eOug0Gjgh%2Fe859wkZ8PBCa1eTR6LkFhX4Y8Gu6cvHFW5gY5IUTnpjUATHluyr8jEBfGobdzCso2n0gNXsswkaOk3T0y7Tdu%2BYzJBidPW7oob1UOYPFzQwHRi%2BqRrF%2Fl8EltIjPFDXGfLVjE2%2FgO6Hhu3MsGeOwngpT%2F9107XOz6OpRKPtb47bZgXgtA4pNMLLolLWEmPqPNIA8qk4o8HlKQZ3QbyEZVE%2Fxj92Z9uOMAFkMpGsFrObNjDha%2BSeegDhxmOBz8rjCF1vb8wrot4Yy1NeTs4Nmj31d4vGd9Wxqd4%2Bp9jW37SntqkcwA2ZCLk8haLhHYdTooOZmcv6pK9YxTyEDysBgHCAVFUEZTTZaHb%2Bq8MXiSd3RuY3tZ6vheOdy65G7DpoUJb63i%2FIOnNHlNk9BKqopubbgx5RSYLNKdvfr3hcbx%2BIRnSAJINLZzo9QWdDY6vzYPLgxWIC09JhOuy4y2PyJy1otlxEO73ULqEeOqaFrPNHH0AxMhISv5Q3MkD75Xva8Dh5WtVPF6dyxubAon9HZ3JKANdeJKHUFraUFpYDiNLrqA5GP6eTqGg8RdRvVO2v%2BnX2DjoYaXpo1qIw4caizgY6pgEEq%2FFc5Y6gLZWhGnSBJf8lfXRhspA58BWURv0QkLKmR6T4fjATTkmLbli7jdEJmqaPjh7wj5gx8J211p%2FZ7Uh8Q3rIeO%2FLO8ftJQL3z992d%2Fi0D%2BEqPszB3XNxQVFE9%2Bqy6CWMJrLFsh98N%2Bk6ZmgUDuSZIZ5purN4OMomY2YfNuGN4UnBykCXPwSlifWyBzACw0LVmsp2LBZwFi2pBjg3XBVoEPWi&X-Amz-Signature=edf0199dddea198371654812c88612d8ca76c3c1bca89a2c026c19c811c838ce&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+![](img/312477bcd0eb80678157f83edc1d9667.webp)
 
 
 
@@ -36,16 +40,20 @@
 
 1. En agregar datos, click en la opción “Destaca un proyecto por nombre”
 
-![](https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/609929a9-5cc6-4c6e-b7b6-00fed9a1ad50/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XQ6N3VTS%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260329T061145Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJGMEQCIBtkMjh6Uda8fwj%2FkbJzygES6K3m%2FKTv25aySjebGcgAAiAU46fsr0TSYujw9C3FFpteG0qg8gCOGDpoDpBSK0JEBCr%2FAwgFEAAaDDYzNzQyMzE4MzgwNSIMSY8sXpVvtWKVBR%2B%2FKtwDvNHLjkkwQJJ5BpMaLAjtMG5E6pU%2FAy0Zmq7eOug0Gjgh%2Fe859wkZ8PBCa1eTR6LkFhX4Y8Gu6cvHFW5gY5IUTnpjUATHluyr8jEBfGobdzCso2n0gNXsswkaOk3T0y7Tdu%2BYzJBidPW7oob1UOYPFzQwHRi%2BqRrF%2Fl8EltIjPFDXGfLVjE2%2FgO6Hhu3MsGeOwngpT%2F9107XOz6OpRKPtb47bZgXgtA4pNMLLolLWEmPqPNIA8qk4o8HlKQZ3QbyEZVE%2Fxj92Z9uOMAFkMpGsFrObNjDha%2BSeegDhxmOBz8rjCF1vb8wrot4Yy1NeTs4Nmj31d4vGd9Wxqd4%2Bp9jW37SntqkcwA2ZCLk8haLhHYdTooOZmcv6pK9YxTyEDysBgHCAVFUEZTTZaHb%2Bq8MXiSd3RuY3tZ6vheOdy65G7DpoUJb63i%2FIOnNHlNk9BKqopubbgx5RSYLNKdvfr3hcbx%2BIRnSAJINLZzo9QWdDY6vzYPLgxWIC09JhOuy4y2PyJy1otlxEO73ULqEeOqaFrPNHH0AxMhISv5Q3MkD75Xva8Dh5WtVPF6dyxubAon9HZ3JKANdeJKHUFraUFpYDiNLrqA5GP6eTqGg8RdRvVO2v%2BnX2DjoYaXpo1qIw4caizgY6pgEEq%2FFc5Y6gLZWhGnSBJf8lfXRhspA58BWURv0QkLKmR6T4fjATTkmLbli7jdEJmqaPjh7wj5gx8J211p%2FZ7Uh8Q3rIeO%2FLO8ftJQL3z992d%2Fi0D%2BEqPszB3XNxQVFE9%2Bqy6CWMJrLFsh98N%2Bk6ZmgUDuSZIZ5purN4OMomY2YfNuGN4UnBykCXPwSlifWyBzACw0LVmsp2LBZwFi2pBjg3XBVoEPWi&X-Amz-Signature=734c33460739c041076d483bde24275997edc3377b892afbaeb52af8fd036297&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+![](img/312477bcd0eb8059adcedccea2123a2e.webp)
 
 
 
 1. Escribir el nombre del proyecto
+
+![](img/312477bcd0eb80e984f5cfed82e2d6c5.webp)
 
 
 
 
 
 4.Aparecerá en la lista de datasets de big query
+
+![](img/312477bcd0eb80139b15e2814117a89e.webp)
 
 *En ese proyecto solo será visible el dataset público.

@@ -20,18 +20,15 @@ Git no guarda versiones como carpetas numeradas.
 
 Guarda una cadena de commits conectados:
 
-```plain text
+```
 A ← B ← C ← D (HEAD)
 ```
 
 Cada commit sabe:
 
 - quién lo creó
-
 - cuándo
-
 - qué cambió
-
 - cuál fue el commit anterior.
 
 `git log` simplemente recorre esa cadena hacia atrás.
@@ -42,7 +39,7 @@ Cada commit sabe:
 
 Algo así:
 
-```plain text
+```
 commit 54ec3e0...
 Author: Angel Garcia
 Date: ...
@@ -60,6 +57,13 @@ Cada bloque representa:
 
 Por defecto `git log` enseña:
 
+| Campo | Qué significa |
+| --- | --- |
+| commit | identificador único (hash) |
+| Author | quién escribió el cambio |
+| Date | cuándo se creó |
+| mensaje | explicación del cambio |
+
 Ese hash es importante:
 
 👉 si cambia el autor o email, cambia el hash
@@ -75,9 +79,7 @@ Porque el historial puede ser enorme.
 Git usa un visor (`less`) para poder:
 
 - desplazarte
-
 - buscar
-
 - navegar sin llenar la terminal.
 
 ---
@@ -90,13 +92,13 @@ Estas las usan casi todos los developers:
 
 ## 1️⃣ Log compacto (el favorito)
 
-```plain text
+```
 git log --oneline
 ```
 
 Ejemplo:
 
-```plain text
+```
 54ec3e0 WIP antes de limpieza
 1d37280 introduccion a vectores
 6236774 estructura inicial
@@ -108,13 +110,13 @@ Mucho más legible.
 
 ## 2️⃣ Ver el árbol visual ( importante)
 
-```plain text
+```
 git log --graph--oneline--decorate--all
 ```
 
 Muestra algo como:
 
-```plain text
+```
 * 54ec3e0 (HEAD -> main)
 * 1d37280
 * 6236774
@@ -126,7 +128,7 @@ Aquí ves ramas y merges visualmente.
 
 ## 3️⃣ Ver quién cambió qué
 
-```plain text
+```
 git log -p
 ```
 
@@ -148,7 +150,7 @@ Git es básicamente un grafo dirigido de commits.
 
 Para salir simplemente:
 
-```plain text
+```
 q
 ```
 
@@ -159,13 +161,8 @@ q
 ## Atajos útiles mientras estés dentro (por si te sirve para tu documentación)
 
 - `q` → salir
-
 - `↑ ↓` → mover línea por línea
-
 - `space` → bajar una página
-
 - `b` → subir una página
-
 - `/texto` → buscar dentro del log
-
 - `n` → siguiente resultado de búsqueda

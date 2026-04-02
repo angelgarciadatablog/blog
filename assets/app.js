@@ -5,6 +5,7 @@ const CAT_LABELS = {
 
 let notes = [];
 let currentFilter = 'all';
+let tocObserver = null;
 
 // ── Cargar notas desde notes.json ──
 async function cargarNotas() {
@@ -90,7 +91,7 @@ function toggleFolder(key, el) {
 
 // ── Filtrar por categoría ──
 function setFilter(cat, el) {
-  document.getElementById('noteViewer').classList.remove('active');
+  document.getElementById('noteWrapper').classList.remove('active');
   document.getElementById('indexView').style.display = '';
   document.querySelector('.hero-row').style.display = cat === 'all' ? '' : 'none';
   document.getElementById('recientesSection').style.display = cat === 'all' ? '' : 'none';
@@ -194,17 +195,19 @@ function renderRecientes() {
 
 // ── Abrir nota inline ──
 async function abrirNota(slug, titulo, grupo, catLabel, el) {
-  const viewer = document.getElementById('noteViewer');
   const content = document.getElementById('noteContent');
   const indexView = document.getElementById('indexView');
 
   indexView.style.display = 'none';
-  viewer.classList.add('active');
+  document.getElementById('noteWrapper').classList.add('active');
   content.innerHTML = '<div class="note-loading">Cargando...</div>';
 
-  // Breadcrumb navegable
+  // Botón volver → categoría padre
   const cat = slug.split('/')[0];
   const key = cat.replace('notas-', '');
+  document.querySelector('.note-back').onclick = () => setFilter(cat, document.getElementById(`nav-${key}`));
+
+  // Breadcrumb navegable
   document.getElementById('breadcrumbCat').innerHTML = `
     <a onclick="setFilter('${cat}', document.getElementById('nav-${key}'))" style="cursor:pointer">${catLabel}</a>
     <span>/</span> ${titulo}
@@ -222,6 +225,8 @@ async function abrirNota(slug, titulo, grupo, catLabel, el) {
     const doc = parser.parseFromString(html, 'text/html');
     const noteContent = doc.querySelector('.note-content');
     content.innerHTML = noteContent ? noteContent.innerHTML : doc.body.innerHTML;
+    if (typeof hljs !== 'undefined') hljs.highlightAll();
+    buildTOC();
   } catch (e) {
     content.innerHTML = `<div class="empty-state">Error cargando la nota: ${e.message}</div>`;
   }
@@ -229,9 +234,48 @@ async function abrirNota(slug, titulo, grupo, catLabel, el) {
   window.scrollTo(0, 0);
 }
 
+// ── TOC ──
+function buildTOC() {
+  const headings = document.querySelectorAll('#noteContent h1, #noteContent h2, #noteContent h3');
+  const tocNav = document.getElementById('tocNav');
+  const tocPanel = document.getElementById('tocPanel');
+
+  if (tocObserver) { tocObserver.disconnect(); tocObserver = null; }
+
+  if (headings.length < 2) {
+    tocPanel.style.visibility = 'hidden';
+    return;
+  }
+  tocPanel.style.visibility = '';
+
+  headings.forEach((h, i) => { h.id = `h-${i}`; });
+
+  tocNav.innerHTML = Array.from(headings).map(h => {
+    const level = h.tagName.toLowerCase();
+    return `<a class="toc-item toc-${level}" data-id="${h.id}">${h.textContent}</a>`;
+  }).join('');
+
+  tocNav.querySelectorAll('.toc-item').forEach(a => {
+    a.addEventListener('click', () => {
+      const target = document.getElementById(a.dataset.id);
+      if (target) window.scrollTo({ top: target.offsetTop - 64, behavior: 'smooth' });
+    });
+  });
+
+  tocObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const link = tocNav.querySelector(`[data-id="${entry.target.id}"]`);
+      if (link) link.classList.toggle('toc-active', entry.isIntersecting);
+    });
+  }, { rootMargin: '-10% 0px -75% 0px' });
+
+  headings.forEach(h => tocObserver.observe(h));
+}
+
 // ── Volver al índice ──
 function showIndex() {
-  document.getElementById('noteViewer').classList.remove('active');
+  document.getElementById('noteWrapper').classList.remove('active');
+  if (tocObserver) { tocObserver.disconnect(); tocObserver = null; }
   document.getElementById('indexView').style.display = '';
   document.querySelector('.hero-row').style.display = ''; 
   document.getElementById('catHeader').style.display = 'none';  

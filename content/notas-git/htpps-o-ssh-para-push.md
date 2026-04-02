@@ -6,6 +6,13 @@
 
 Dos protocolos para autenticarte con GitHub al hacer push/pull/clone.
 
+|   | HTTPS | SSH |
+| --- | --- | --- |
+| URL | `https://github.com/user/repo.git` | `git@github.com:user/repo.git` |
+| Autenticación | Usuario + token | Par de claves (pública/privada) |
+| Configuración | Mínima | Requiere generar y registrar key |
+| Portabilidad | Funciona en cualquier red | Puede bloquearse en redes corporativas |
+
 ---
 
 ## Comprobar cuál estás usando
@@ -17,7 +24,6 @@ git remote -v
 ```
 
 - Si empieza por `https://` → HTTPS
-
 - Si empieza por `git@` → SSH
 
 **Verificar si SSH está configurado con GitHub:**
@@ -102,16 +108,12 @@ git remote set-url origin git@github.com:usuario/repo.git
 **HTTPS** si:
 
 - Trabajas en múltiples máquinas o entornos temporales
-
 - No quieres configuración extra
-
 - Es tu situación actual — todos tus repos lo usan
 
 **SSH** si:
 
 - Trabajas siempre desde las mismas máquinas
-
 - Quieres evitar tokens y credenciales
-
 - Tienes varios repos y prefieres no gestionar tokens
 

@@ -1,6 +1,6 @@
 Cuando trabajas con Google Cloud desde tu máquina local, existen dos mecanismos distintos de autenticación que suelen confundirse.
 
-# `1) gcloud auth login` — autenticación del CLI
+# 1) gcloud auth login — autenticación del CLI
 
 Permite que el SDK ejecute comandos contra Google Cloud desde la terminal.
 
@@ -20,7 +20,7 @@ bq query ...
 
 
 
-# `2) gcloud auth application-default login` — autenticación de librerías cliente (ADC)
+# 2) gcloud auth application-default login — autenticación de librerías cliente (ADC)
 
 Permite que las librerías oficiales de Google Cloud se autentiquen desde tu código.
 
@@ -44,7 +44,7 @@ client = bigquery.Client()
 
 Ocurre cuando cambias el proyecto activo con `gcloud config set project` pero ADC sigue apuntando al proyecto anterior:
 
-```plain text
+```
 Your active project does not match the quota project in your local Application Default Credentials file.
 ```
 
@@ -55,6 +55,12 @@ gcloud auth application-default set-quota-project TU_PROJECT_ID
 ```
 
 # Resumen:
+
+|   | `gcloud auth login` | `gcloud auth application-default login` |
+| --- | --- | --- |
+| Para qué | Comandos del CLI | Librerías cliente (`google-cloud-*`) |
+| Archivo | `credentials.db` | `application_default_credentials.json` |
+| Lo necesitas si... | Usas la terminal | Tu código accede a GCP directamente (Librerías Python) |
 
 
 

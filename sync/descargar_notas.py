@@ -39,6 +39,12 @@ LANGUAGE_MAP = {
     "sh":         "bash",
 }
 
+try:
+    import imagenes as _img
+    _IMG_ENABLED = True
+except ImportError:
+    _IMG_ENABLED = False
+
 stats = {"actualizadas": 0, "saltadas": 0, "fallidas": 0, "huerfanas": 0}
 notas_procesadas = []
 archivos_generados = set()
@@ -206,6 +212,11 @@ def exportar_bloques(block_id, indent=0, dentro_de_lista=False):
             elif tipo == "image":
                 url = data.get("file", {}).get("url", "") or data.get("external", {}).get("url", "")
                 caption = rich_text_a_md(data.get("caption", []))
+                if _IMG_ENABLED:
+                    try:
+                        url = _img.descargar_imagen(bloque["id"], url)
+                    except Exception as e:
+                        print(f"    ⚠️  Imagen no descargada: {e}")
                 lineas.append(f"![{caption}]({url})")
                 tipos.append(tipo)
 
@@ -372,6 +383,8 @@ for page_id, categoria in RAICES.items():
 
 if not TEST_MODE:
     limpiar_huerfanos(html_existentes, archivos_generados)
+    if _IMG_ENABLED:
+        _img.limpiar_imagenes_huerfanas(BASE_MD)
 generar_notes_json()
 
 print(f"""

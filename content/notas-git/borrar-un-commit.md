@@ -32,7 +32,11 @@ git reset --soft 3f10683   # apuntas al commit donde quieres quedarte, los cambi
 git reset --mixed 3f10683  # apuntas al commit donde quieres quedarte, los cambios quedan en tus archivos pero fuera del staging, tienes que hacer git add antes de commitear.
 ```
 
-**`--mixed`**** es el por defecto**
+**`--mixed`****es el por defecto**
+
+|   | Historial | Cambios en archivos |
+| --- | --- | --- |
+| `reset --soft / --mixed` | ❌ Borra el commit | ✅ Conserva los cambios |
 
 **Opción B — No quieres saber nada de esos cambios**
 
@@ -42,6 +46,10 @@ git reset --hard 3f10683
 ```
 
 ⚠️ Siempre apuntas al commit donde **quieres quedarte**, no al que quieres eliminar. Todo lo que vino después de ese punto desaparece del historial y de tus archivos (desaparece tanto los códigos del los commits, es decir el historial, como también los cambios que se hizo en cada coomit)
+
+|   | Historial | Cambios en archivos |
+| --- | --- | --- |
+| `reset --hard` | ❌ Borra el commit | ❌ Borra los cambios |
 
 
 
@@ -53,12 +61,12 @@ git revert e19e6c8
 ```
 
 - Deshace los cambios de ese commit en tus archivos.
-
 - El commit original permanece en el historial.
-
 - Se crea un commit nuevo con los cambios revertidos.
-
 - Usar cuando el commit **ya está en GitHub** y no quieres reescribir el historial.
+|   | Historial | Cambios en archivos |
+| --- | --- | --- |
+| `revert` | ✅ Conserva el commit | ❌ Borra los cambios |
 
 
 

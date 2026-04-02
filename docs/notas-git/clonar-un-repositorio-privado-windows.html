@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clonar un repositorio privado (windows) · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Git & GitHub</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Clonar un repositorio</span>
+  </div>
+  <div class="note-content">
+    <h1>Clonar un repositorio privado (windows)</h1>
+    <h1>PASO 1 — Verificación del entorno</h1>
+<p>Abre <strong>PowerShell</strong> (no necesita ser administrador por ahora) y ejecuta estos comandos uno por uno, dime el output de cada uno:</p>
+<p><strong>1.1 — ¿Tienes Git?</strong></p>
+<p><strong>Git</strong> es el sistema de control de versiones. Registra los cambios de tu código, permite trabajar en equipo y es la base de todo. Sin Git, nada más funciona.</p>
+<pre class="highlight"><code class="language-bash">git --version</code></pre>
+<p><strong>1.2 — ¿Tienes SSH?</strong></p>
+<p><strong>OpenSSH</strong> es el protocolo de autenticación segura. Le dice a GitHub <em>"esta persona es quien dice ser"</em> sin usar usuario y contraseña cada vez. Es la llave con la que entras.</p>
+<pre class="highlight"><code class="language-bash">ssh -V</code></pre>
+<p><strong>1.3 — ¿Tienes GH?</strong></p>
+<p><strong>GitHub CLI (</strong><strong><code>gh</code></strong><strong>)</strong> es una herramienta opcional que te permite interactuar con GitHub (crear repos, abrir PRs, etc.) directamente desde la terminal. No reemplaza a Git, lo complementa — Git maneja tu código local, <code>gh</code> maneja la plataforma GitHub.</p>
+<pre class="highlight"><code class="language-bash">gh --version</code></pre>
+<p>🔗 <strong>Relación entre los tres:</strong> Git necesita SSH para autenticarse con GitHub de forma segura. <code>gh</code> usa esa misma autenticación SSH por debajo. Los tres trabajan juntos, ninguno se pisa con otro.</p>
+<h1>PASO 2 — Instalar Git: opciones disponibles</h1>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Comando / Fuente</th>
+<th>Pros</th>
+<th>Contras</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>winget</strong></td>
+<td><code>winget install --id Git.Git -e</code></td>
+<td>Nativo de Windows 10/11, sin descargar nada extra, actualizable con <code>winget upgrade</code></td>
+<td>Requiere winget activo (viene por defecto en W11, en W10 puede faltar)</td>
+</tr>
+<tr>
+<td><strong>Instalador oficial</strong></td>
+<td>git-scm.com</td>
+<td>Control total de opciones durante instalación, más visual para principiantes</td>
+<td>Manual, hay que ir al navegador y elegir bien las opciones</td>
+</tr>
+<tr>
+<td><strong>Chocolatey</strong></td>
+<td><code>choco install git</code></td>
+<td>Popular en entornos DevOps, gestiona muchas herramientas juntas</td>
+<td>Requiere instalar Chocolatey primero si no lo tienes</td>
+</tr>
+<tr>
+<td><strong>Scoop</strong></td>
+<td><code>scoop install git</code></td>
+<td>Instalaciones limpias sin tocar el registro de Windows</td>
+<td>Requiere instalar Scoop primero</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Recomendación:</strong></p>
+<ul>
+<li>Si ya tienes <code>winget</code> → <strong>Opción 1</strong>, es lo más directo</li>
+<li>Si es un equipo de desarrollo que ya usa Chocolatey → <strong>Opción 3</strong></li>
+<li>Si quieres la experiencia más visual y controlada → <strong>Opción 2</strong></li>
+</ul>
+<h1>PASO 3 — Instalar Git con winget</h1>
+<p>Primero verifica que winget esté disponible:</p>
+<pre class="highlight"><code class="language-bash">winget --version</code></pre>
+<p>Si responde <code>no reconocido</code>, significa que tu Windows no lo tiene. </p>
+<p>Si sí responde, instala Git:</p>
+<pre class="highlight"><code class="language-bash">winget install --id Git.Git -e --source winget</code></pre>
+<p>Durante la instalación verás progreso en la terminal. Cuando termine:</p>
+<p>⚠️ <strong>Cierra y vuelve a abrir PowerShell</strong> antes de verificar</p>
+<pre class="highlight"><code class="language-bash">git --version</code></pre>
+<hr />
+<h1>PASO 4 — Elegir método de autenticación con GitHub</h1>
+<p>Tienes 3 opciones para conectarte con GitHub:</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Pros</th>
+<th>Contras</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSH</strong></td>
+<td>Se configura una vez, nunca más pide credenciales, estándar profesional</td>
+<td>Requiere generar y registrar una llave</td>
+</tr>
+<tr>
+<td><strong>HTTPS + Token</strong></td>
+<td>Rápido de configurar, sin instalar nada extra</td>
+<td>El token expira, hay que renovarlo y gestionarlo</td>
+</tr>
+<tr>
+<td><strong>GitHub CLI (</strong><strong><code>gh</code></strong><strong>)</strong></td>
+<td>Guiado paso a paso, maneja SSH o HTTPS por debajo automáticamente</td>
+<td>Requiere instalar <code>gh</code> primero</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🔗 <strong>Nuestra ruta:</strong> configuraremos <strong>SSH</strong> ahora (Paso 5) e instalaremos <code>gh</code> al final como herramienta complementaria.</p>
+</blockquote>
+<h1>PASO 5 — Configurar SSH</h1>
+<h2>5.1 — Instalar OpenSSH Client</h2>
+<p>Solo ejecuta este paso si el comando anterior (<code>ssh -V</code>) no fue reconocido.</p>
+<p>Tienes dos opciones:</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Pros</th>
+<th>Contras</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows Capability</strong></td>
+<td>Nativo de Windows, sin dependencias</td>
+<td>Solo funciona desde PowerShell Admin</td>
+</tr>
+<tr>
+<td><strong>winget</strong></td>
+<td>Consistente con cómo instalamos Git, actualizable</td>
+<td>Requiere tener winget activo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Opción 1 — Windows Capability</strong> (PowerShell como Administrador):</p>
+<pre class="highlight"><code class="language-bash">Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0</code></pre>
+<p><strong>Opción 2 — winget:</strong></p>
+<pre class="highlight"><code class="language-bash">winget install --id Microsoft.OpenSSH.Beta -e --source winget</code></pre>
+<p>Verifica que se instaló correctamente:</p>
+<pre class="highlight"><code class="language-bash">ssh -V</code></pre>
+<h2>5.2— Verificar/Activar OpenSSH en Windows</h2>
+<p>OpenSSH viene incluido en Windows 10/11 pero puede no estar activo. Abre <strong>PowerShell como Administrador</strong> y verifica. Este comando también se ejecuta solo una vez para verificar si OpenSSH está instalado en ese usuario/equipo:</p>
+<pre class="highlight"><code class="language-bash">Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'</code></pre>
+<pre class="highlight"><code class="language-bash">#Verás algo como:
+
+Name  : OpenSSH.Client~~~~0.0.1.0
+State : Installed        
+
+Name  : OpenSSH.Server~~~~0.0.1.0
+State : NotPresent</code></pre>
+<p>Solo necesitas <code>OpenSSH.Client</code>. El <code>OpenSSH.Server</code> no es necesario aquí.</p>
+<p>Si <code>OpenSSH.Client</code> dice <code>NotPresent</code>, instálalo:</p>
+<pre class="highlight"><code class="language-bash">Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0</code></pre>
+<p>Verifica:</p>
+<pre class="highlight"><code class="language-bash">ssh -V</code></pre>
+<hr />
+<h2>5.3 — Configurar ssh-agent como servicio permanente</h2>
+<p>Esto es lo más importante. Sin este paso, tu llave SSH se olvida cada vez que reinicias.
+Este bloque solo necesitas ejecutarlo una vez por usuario de Windows para dejar <code>ssh-agent</code> configurado como servicio automático.</p>
+<pre class="highlight"><code class="language-bash"># Configurar para que arranque automáticamente con Windows
+Set-Service -Name ssh-agent -StartupType Automatic
+
+# Iniciarlo ahora mismo
+Start-Service -Name ssh-agent
+
+# Verificar
+Get-Service -Name ssh-agent | Select-Object Name, Status, StartTyp</code></pre>
+<p>Toda esa sección se ejecuta una sola vez por usuario de Windows. Una vez que <code>ssh-agent</code> queda en <code>Automatic</code>, seguirá arrancando solo cada vez que inicies sesión.</p>
+<pre class="highlight"><code class="language-bash">Esperado:
+
+Name      Status  StartType
+----      ------  ---------
+ssh-agent Running Automatic</code></pre>
+<blockquote>
+<p>⚠️ Si dice <code>Manual</code> en lugar de <code>Automatic</code>, el primer comando no se ejecutó correctamente. Verifica que PowerShell esté abierto como Administrador.</p>
+</blockquote>
+<hr />
+<h2>5.4 — Generar tu llave SSH (sin sobrescribir la existente)</h2>
+<p>En <strong>PowerShell normal</strong> (ya no necesitas admin):</p>
+<pre class="highlight"><code class="language-bash">ssh-keygen -t ed25519 -C "angelg@reechai.com" -f $HOME\.ssh\id_ed25519_lenovo_reechai</code></pre>
+<ul>
+<li><code>t ed25519</code> → usa el algoritmo moderno recomendado</li>
+<li><code>C "angelg@reechai.com"</code> → agrega una etiqueta para identificar la llave</li>
+<li><code>f $HOME\.ssh\id_ed25519_reechai</code> → guarda la llave con otro nombre para no sobrescribir la llave personal existente</li>
+</ul>
+<p><strong><code>Importante</code></strong>: si ya tienes una llave personal en <code>id_ed25519</code>, no presiones Enter para usar la ruta por defecto, porque la reemplazarías.</p>
+<p><strong><code>Importante</code></strong>:  Una misma cuenta de GitHub puede tener varias llaves SSH al mismo tiempo. De hecho es lo normal cuando usas la misma cuenta en varios equipos o varios usuarios de Windows.</p>
+<p>Al ejecutar el comando te pedirá:</p>
+<pre class="highlight"><code class="language-bash">Enter passphrase (empty for no passphrase):</code></pre>
+<p>Puedes:</p>
+<ul>
+<li>presionar Enter para dejarla vacía (de preferencia para poder automatizar los push)</li>
+<li>o ingresar una contraseña si quieres mayor seguridad</li>
+</ul>
+<p>Si la dejas vacía, no tendrás que escribir una contraseña cada vez que hagas <code>git push</code>.</p>
+<p>Deberías ver un mensaje similar a:</p>
+<pre class="highlight"><code class="language-bash">Your identification has been saved in C:\Users\TU_USUARIO\.ssh\id_ed25519_reechai
+Your public key has been saved in C:\Users\TU_USUARIO\.ssh\id_ed25519_reechai.pub</code></pre>
+<p>Verifica que se crearon los archivos:</p>
+<pre class="highlight"><code class="language-bash">Get-ChildItem $HOME\.ssh</code></pre>
+<pre class="highlight"><code class="language-bash">#Esperado:
+id_ed25519        ← llave privada (nunca la compartas ni la subas a ningún lado)
+id_ed25519.pub    ← llave pública (esta es la que se sube a GitHub)
+
+#`known_hosts` almacena las huellas digitales de los servidores SSH a los que ya te has conectado (por ejemplo, GitHub) para verificar su identidad en futuras conexiones. `known_hosts.old` es una copia de respaldo generada automáticamente. Estos archivos no contienen tus llaves SSH ni credenciales, por lo que normalmente no necesitas modificarlos ni eliminarlos.
+# agent es una carpeta creada por el servicio ssh-agent de OpenSSH en Windows. Guarda información temporal de las claves cargadas mientras el agente está funcionando.</code></pre>
+<p>Agrega la llave al agente:</p>
+<pre class="highlight"><code class="language-bash">ssh-add $HOME\.ssh\id_ed25519_lenovo_reechai</code></pre>
+<p><strong><code>Importante</code></strong>: Utilizar el nombre de la llave</p>
+<p>Verificar:</p>
+<pre class="highlight"><code class="language-bash">ssh-add -l</code></pre>
+<p>Mostrar la llave pública para copiarla a GitHub:</p>
+<pre class="highlight"><code class="language-bash">Get-Content $HOME\.ssh\id_ed25519_lenovo_reechai.pub</code></pre>
+<p><strong><code>Importante</code></strong>: Utilizar el nombre de la llave</p>
+<h2>5.5 — Agregar la llave pública a GitHub</h2>
+<p>Copia tu llave pública al portapapeles:</p>
+<pre class="highlight"><code class="language-bash">Get-Content $env:USERPROFILE\.ssh\id_ed25519.pub | clip</code></pre>
+<p>Luego en GitHub:</p>
+<ol>
+<li>Ve a 👉 https://github.com/settings/keys</li>
+<li>Clic en <strong>New SSH key</strong></li>
+<li><strong>Title:</strong> algo descriptivo como <code>Windows - Mi PC</code></li>
+<li><strong>Key type:</strong> <code>Authentication Key</code></li>
+<li><strong>Key:</strong> pega el contenido (ya está en tu portapapeles)</li>
+<li>Clic en <strong>Add SSH key</strong></li>
+</ol>
+<p>Verifica que la conexión funciona:</p>
+<pre class="highlight"><code class="language-bash">ssh -T git@github.com</code></pre>
+<pre class="highlight"><code class="language-bash">#Esperado:
+Hi tuusuario! You've successfully authenticated, but GitHub does not provide shell access.</code></pre>
+<h1>PASO 6 — Clonar el repositorio</h1>
+<h2>6.1 — Navegar a la carpeta donde quieres clonar</h2>
+<p>Primero decide dónde quieres guardar el proyecto. Algunos ejemplos comunes:</p>
+<pre class="highlight"><code class="language-bash">#Raíz del sistema
+cd /
+
+# Si tienes una carpeta de proyectos
+cd C:\Users\TuUsuario\Projects
+
+# O en el escritorio
+cd C:\Users\TuUsuario\Desktop
+
+# O crear una carpeta nueva y entrar
+mkdir C:\Projects
+cd C:\Projects</code></pre>
+<p>El <code>git clone</code> creará automáticamente una carpeta con el nombre del repositorio dentro de donde estés parado. No necesitas crear la carpeta del proyecto manualmente.</p>
+<h2>6.2 — Clonar</h2>
+<pre class="highlight"><code class="language-bash">git clone git@github.com:Reech-Team/obsidian-atrapalo-argentina.git</code></pre>
+<h2>6.3 — Verificar</h2>
+<pre class="highlight"><code class="language-bash"># Entrar al repositorio
+cd obsidian-atrapalo-argentina
+
+# Ver el estado
+git status
+# Esperado: On branch main, nothing to commit, working tree clean
+
+# Ver la conexión con GitHub
+git remote -v
+# Esperado:
+# origin  git@github.com:Reech-Team/obsidian-atrapalo-argentina.git (fetch)
+# origin  git@github.com:Reech-Team/obsidian-atrapalo-argentina.git (push)</code></pre>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HTPPS o SSH para push · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -93,32 +20,53 @@
     <h1>HTTPS vs SSH en Git</h1>
 <h2>¿Qué son?</h2>
 <p>Dos protocolos para autenticarte con GitHub al hacer push/pull/clone.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>HTTPS</th>
+<th>SSH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td><code>https://github.com/user/repo.git</code></td>
+<td><code>git@github.com:user/repo.git</code></td>
+</tr>
+<tr>
+<td>Autenticación</td>
+<td>Usuario + token</td>
+<td>Par de claves (pública/privada)</td>
+</tr>
+<tr>
+<td>Configuración</td>
+<td>Mínima</td>
+<td>Requiere generar y registrar key</td>
+</tr>
+<tr>
+<td>Portabilidad</td>
+<td>Funciona en cualquier red</td>
+<td>Puede bloquearse en redes corporativas</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2>Comprobar cuál estás usando</h2>
 <p><strong>En un repo concreto:</strong></p>
-<pre class="codehilite"><code class="language-python">git remote -v
-</code></pre>
-
+<pre class="highlight"><code class="language-python">git remote -v</code></pre>
 <ul>
-<li>
-<p>Si empieza por <code>https://</code> → HTTPS</p>
-</li>
-<li>
-<p>Si empieza por <code>git@</code> → SSH</p>
-</li>
+<li>Si empieza por <code>https://</code> → HTTPS</li>
+<li>Si empieza por <code>git@</code> → SSH</li>
 </ul>
 <p><strong>Verificar si SSH está configurado con GitHub:</strong></p>
-<pre class="codehilite"><code class="language-python">ssh -T git@github.com
+<pre class="highlight"><code class="language-python">ssh -T git@github.com
 # OK:    Hi usuario! You've successfully authenticated...
-# Error: Permission denied (publickey)
-</code></pre>
-
+# Error: Permission denied (publickey)</code></pre>
 <p><strong>Ver tus claves SSH locales:</strong></p>
-<pre class="codehilite"><code class="language-python">ls ~/.ssh
+<pre class="highlight"><code class="language-python">ls ~/.ssh
 # Si existe id_ed25519 o id_rsa → tienes una key generada
-# Si está vacío o no existe → no tienes SSH configurado
-</code></pre>
-
+# Si está vacío o no existe → no tienes SSH configurado</code></pre>
 <hr />
 <h2>Configurar HTTPS</h2>
 <p>Es el más simple. Solo necesitas un <strong>Personal Access Token</strong> (PAT) en lugar de contraseña.</p>
@@ -127,63 +75,43 @@ GitHub → Settings → Developer settings → Personal access tokens → Tokens
 <p><strong>2. Usarlo:</strong>
 La primera vez que haces push te pide usuario y contraseña. En contraseña pegas el token.</p>
 <p><strong>3. Guardarlo para no repetirlo:</strong></p>
-<pre class="codehilite"><code class="language-python">git config --global credential.helper osxkeychain
-</code></pre>
-
+<pre class="highlight"><code class="language-python">git config --global credential.helper osxkeychain</code></pre>
 <p>macOS lo guarda en el llavero automáticamente.</p>
 <hr />
 <h2>Configurar SSH</h2>
 <p><strong>1. Generar la key:</strong></p>
-<pre class="codehilite"><code class="language-python">ssh-keygen -t ed25519 -C &quot;tu@email.com&quot;
-# Presiona Enter x3 (ruta por defecto, sin passphrase)
-</code></pre>
-
+<pre class="highlight"><code class="language-python">ssh-keygen -t ed25519 -C "tu@email.com"
+# Presiona Enter x3 (ruta por defecto, sin passphrase)</code></pre>
 <p><strong>2. Copiar la clave pública:</strong></p>
-<pre class="codehilite"><code class="language-python">cat ~/.ssh/id_ed25519.pub
-</code></pre>
-
+<pre class="highlight"><code class="language-python">cat ~/.ssh/id_ed25519.pub</code></pre>
 <p><strong>3. Añadirla a GitHub:</strong>
 GitHub → Settings → SSH and GPG keys → New SSH key → pegar</p>
 <p><strong>4. Verificar:</strong></p>
-<pre class="codehilite"><code class="language-python">ssh -T git@github.com
-# Hi usuario! You've successfully authenticated...
-</code></pre>
-
+<pre class="highlight"><code class="language-python">ssh -T git@github.com
+# Hi usuario! You've successfully authenticated...</code></pre>
 <hr />
 <h2>Cambiar el protocolo de un repo existente</h2>
-<pre class="codehilite"><code class="language-python"># De SSH a HTTPS
+<pre class="highlight"><code class="language-python"># De SSH a HTTPS
 git remote set-url origin https://github.com/usuario/repo.git
 
 # De HTTPS a SSH
-git remote set-url origin git@github.com:usuario/repo.git
-</code></pre>
-
+git remote set-url origin git@github.com:usuario/repo.git</code></pre>
 <hr />
 <h2>¿Cuál usar?</h2>
 <p><strong>HTTPS</strong> si:</p>
 <ul>
-<li>
-<p>Trabajas en múltiples máquinas o entornos temporales</p>
-</li>
-<li>
-<p>No quieres configuración extra</p>
-</li>
-<li>
-<p>Es tu situación actual — todos tus repos lo usan</p>
-</li>
+<li>Trabajas en múltiples máquinas o entornos temporales</li>
+<li>No quieres configuración extra</li>
+<li>Es tu situación actual — todos tus repos lo usan</li>
 </ul>
 <p><strong>SSH</strong> si:</p>
 <ul>
-<li>
-<p>Trabajas siempre desde las mismas máquinas</p>
-</li>
-<li>
-<p>Quieres evitar tokens y credenciales</p>
-</li>
-<li>
-<p>Tienes varios repos y prefieres no gestionar tokens</p>
-</li>
+<li>Trabajas siempre desde las mismas máquinas</li>
+<li>Quieres evitar tokens y credenciales</li>
+<li>Tienes varios repos y prefieres no gestionar tokens</li>
 </ul>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

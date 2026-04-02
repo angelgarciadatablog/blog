@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instalar libreria Google cloud · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -98,183 +25,107 @@
 <hr />
 <h2>🥇 Paso 1 — Instalar Google Cloud CLI (si no está instalado)</h2>
 <p>Verificar si ya está instalado:</p>
-<pre class="codehilite"><code class="language-bash">gcloud --version
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gcloud --version</code></pre>
 <p>Si no está instalado</p>
-<pre class="codehilite"><code class="language-sql">pip install google-cloud-bigquery
-</code></pre>
-
+<pre class="highlight"><code class="language-sql">pip install google-cloud-bigquery</code></pre>
 <hr />
 <h2>🥈 Paso 2 — Autenticación con Application Default Credentials</h2>
 <p>En la terminal (fuera de Jupyter), ejecutar exactamente:</p>
-<pre class="codehilite"><code class="language-bash">gcloud auth application-default login
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gcloud auth application-default login</code></pre>
 <p>*Para poder ejecutar esto se debe tener Google Cloud SDK instalado previamente</p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/ce6dfcc3-d51f-47cf-a7c5-442ae1d3d8b3/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4662P3CRDRI%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061038Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJIMEYCIQComlWjw7gc1D45oIKcyGGBWSeSGyxOZZjBrpU50mLU0gIhAL%2B6mwci87AjN%2B6pwPCZ5AWg%2B14FJoT5itxknKELGuHtKv8DCAUQABoMNjM3NDIzMTgzODA1IgxsG6kAOO3jKFTo7ZMq3AO0nZc5bo2laqzyKf3xW2Kmff%2BBeBD%2FFBMyDpNjARRORbY%2BPxWEc2XWbN4AnLyd9w4TvuOCpUx2sZJehhbVG4FV7SjkqPa%2FZ%2BUuJgN6mWoFxvzSg9ytl5vPN1gBKpmlRAkZeveUBqe0VP%2F7PySb%2FgxRflzb%2FxsR3RcgAh%2FAlDIOMSXziiLREQNJoBNP4Lm8%2FM6u8dD0t044zTTsOIIFhpQVlDi2fd8lCqx7uqMO%2BbL6tn%2FacHfX%2FGOpC%2FqKOvT6jrX4WDPrEntKmYDlbKNLpvTOhwyd9Qt41EJ4mOFNyWmQQS4Vl0mYTad3lW5NLG5VKCDbFaYPnhGvxqOvvTg1WQJa6BCKN8Ohe46yegpI4LbnnPyo3dgqLzPKLh5NfC5XQXVuyFjpbSw9ff1NBYPU%2FInSt1Z%2FkKEeCo0tLj8JkdZgSz%2FoJspqCvOYED53b5i2z%2BQN16dsySdaOIHsfVilRpFkLg7pUWwzoYlfJ9DiuqmjgUSRs%2FscLDnedmAIDyel3wU3zL7lhhOxU3BkEVgpVTRMwV0cY7rC%2FUjq5xpptywlhWuQu5ChFhJa9ktgHGawNbqPKR60yeLJsohTkHnEc1rj8I6mwJJHpUhplB%2BoBlOhag7dmlTYRkfgNRDl0TC%2Bx6LOBjqkAflcxDAPN0YwnzgAG%2FoTW%2BR2CMSKIWDmoGlfcWeingscYkVNpua9%2FPN%2ByrYmwQtnHhhWajbpuqaO1O5krKadPC1vanEofs4bmsj%2F2fp%2FZ7Q1dKQLk%2BlOo7TER0XjgMf7VNkz6SPGy%2BElDWPviZ%2B%2FALCWHy0QA6c8Xdkdan5FaTCnsnBWdvN9HkoV7iWu%2F1srVh%2B%2FLWuXtXnHtLFupxFwC%2FNtRn6W&amp;X-Amz-Signature=ca5fa042d56da1b61b2a4dbbe1e79d382019e9426d4bbd3040f1c2b65c2480bb&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p><img alt="" src="img/306477bcd0eb801cb981d366f43ccae3.webp" /></p>
 <p>Esto abrirá una ventana en el navegador para autheticarte con tu cuenta de google. Al final conectará con tu cuenta y te redijirá a esta página: https://docs.cloud.google.com/sdk/auth_success?hl=es-419</p>
 <p>⚠️ Importante:</p>
 <p>No es:</p>
-<pre class="codehilite"><code class="language-bash">gcloud auth login
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gcloud auth login</code></pre>
 <p>No es:</p>
-<pre class="codehilite"><code class="language-bash">gcloud init
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gcloud init</code></pre>
 <p>Es específicamente:</p>
-<pre class="codehilite"><code class="language-bash">gcloud auth application-default login
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">gcloud auth application-default login</code></pre>
 <hr />
 <h2>🧠 ¿Qué ocurre al ejecutar el comando?</h2>
 <ol>
-<li>
-<p>Se abre el navegador.</p>
-</li>
-<li>
-<p>Se inicia sesión con la cuenta Google.</p>
-</li>
-<li>
-<p>Se genera un archivo local en:</p>
-</li>
+<li>Se abre el navegador.</li>
+<li>Se inicia sesión con la cuenta Google.</li>
+<li>Se genera un archivo local en:</li>
 </ol>
-<p>```plain text
-~/.config/gcloud/application_default_credentials.json</p>
-<pre class="codehilite"><code>Este archivo contiene las credenciales necesarias para que las librerías oficiales de Google Cloud (como `google-cloud-bigquery`) puedan autenticarse automáticamente.
+<pre class="highlight"><code>~/.config/gcloud/application_default_credentials.json</code></pre>
+<p>Este archivo contiene las credenciales necesarias para que las librerías oficiales de Google Cloud (como <code>google-cloud-bigquery</code>) puedan autenticarse automáticamente.</p>
+<p>Este archivo es usado automáticamente por la librería Python.</p>
+<h1>🧪 Paso  de validación en notebook</h1>
+<p>Ve a tu notebook y ejecuta:</p>
+<pre class="highlight"><code class="language-python">from google.cloudimport bigquery
 
-Este archivo es usado automáticamente por la librería Python.
+client = bigquery.Client()print("Proyecto detectado:", client.project)
 
-
-
-# 🧪 Paso  de validación en notebook
-
-Ve a tu notebook y ejecuta:
-
-```python
-from google.cloudimport bigquery
-
-client = bigquery.Client()print(&quot;Proyecto detectado:&quot;, client.project)
-
-datasets =list(client.list_datasets())for datasetin datasets:print(dataset.dataset_id)
-</code></pre>
-
+datasets =list(client.list_datasets())for datasetin datasets:print(dataset.dataset_id)</code></pre>
 <p>Debería imprimir:</p>
-<p>```plain text
-Proyecto detectado:
+<pre class="highlight"><code>Proyecto detectado:
 prueba2-433703
-dataset_youtube_v3</p>
-<pre class="codehilite"><code>*Esto lista los proyectos actuales dentro de la cuenta de google
-
-
-
-# 📦 Uso de la librería `google-cloud-bigquery`
-
-## 🎯 Objetivo
-
-Permitir que el pipeline interactúe con BigQuery desde Python:
-
-- Crear tablas
-
-- Ejecutar queries
-
-- Insertar datos
-
-- Cargar DataFrames
-
-# 🥇 Instalación previa
-
-Antes de importar la librería, debe estar instalada en el entorno virtual:
-
-```bash
-pip install google-cloud-bigquery
-</code></pre>
-
+dataset_youtube_v3</code></pre>
+<p>*Esto lista los proyectos actuales dentro de la cuenta de google</p>
+<h1>📦 Uso de la librería <code>google-cloud-bigquery</code></h1>
+<h2>🎯 Objetivo</h2>
+<p>Permitir que el pipeline interactúe con BigQuery desde Python:</p>
+<ul>
+<li>Crear tablas</li>
+<li>Ejecutar queries</li>
+<li>Insertar datos</li>
+<li>Cargar DataFrames</li>
+</ul>
+<h1>🥇 Instalación previa</h1>
+<p>Antes de importar la librería, debe estar instalada en el entorno virtual:</p>
+<pre class="highlight"><code class="language-bash">pip install google-cloud-bigquery</code></pre>
 <p>Dependencias recomendadas adicionales:</p>
-<pre class="codehilite"><code class="language-bash">pip install pyarrow
-pip install python-dotenv
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">pip install pyarrow
+pip install python-dotenv</code></pre>
 <hr />
 <h1>🥈 Importación en Python</h1>
-<pre class="codehilite"><code class="language-python">from google.cloud import bigquery
-</code></pre>
-
+<pre class="highlight"><code class="language-python">from google.cloud import bigquery</code></pre>
 <hr />
 <h1>🧠 ¿Qué hace esta importación?</h1>
 <p>Este módulo:</p>
 <ul>
-<li>
-<p>Proporciona el cliente oficial de BigQuery para Python.</p>
-</li>
-<li>
-<p>Permite autenticación mediante Application Default Credentials.</p>
-</li>
-<li>
-<p>Permite interactuar con el Data Warehouse sin usar el CLI.</p>
-</li>
+<li>Proporciona el cliente oficial de BigQuery para Python.</li>
+<li>Permite autenticación mediante Application Default Credentials.</li>
+<li>Permite interactuar con el Data Warehouse sin usar el CLI.</li>
 </ul>
 <p>Es parte del SDK oficial de Google Cloud para Python.</p>
 <p>Contenido del <code>.env</code>:</p>
-<p>```plain text
-GCP_PROJECT=prueba2-433703</p>
-<pre class="codehilite"><code># 🏗 Creación del cliente
-
-Después de importar:
-
-```python
-import os
+<pre class="highlight"><code>GCP_PROJECT=prueba2-433703</code></pre>
+<h1>🏗 Creación del cliente</h1>
+<p>Después de importar:</p>
+<pre class="highlight"><code class="language-python">import os
 from google.cloud import bigquery
 
-PROJECT_ID = os.getenv(&quot;GCP_PROJECT&quot;)
+PROJECT_ID = os.getenv("GCP_PROJECT")
 
 client = bigquery.Client(project=PROJECT_ID)
 
-print(&quot;Proyecto activo:&quot;, client.project)
-</code></pre>
-
+print("Proyecto activo:", client.project)</code></pre>
 <p>El objeto <code>client</code> permite:</p>
 <ul>
-<li>
-<p>Ejecutar queries SQL</p>
-</li>
-<li>
-<p>Crear tablas</p>
-</li>
-<li>
-<p>Cargar DataFrames</p>
-</li>
-<li>
-<p>Ejecutar DELETE</p>
-</li>
-<li>
-<p>Ejecutar MERGE</p>
-</li>
-<li>
-<p>Gestionar datasets</p>
-</li>
+<li>Ejecutar queries SQL</li>
+<li>Crear tablas</li>
+<li>Cargar DataFrames</li>
+<li>Ejecutar DELETE</li>
+<li>Ejecutar MERGE</li>
+<li>Gestionar datasets</li>
 </ul>
 <hr />
 <h1>🐍 Crear cliente BigQuery usando esa variable</h1>
-<pre class="codehilite"><code class="language-python">from google.cloud import bigquery
+<pre class="highlight"><code class="language-python">from google.cloud import bigquery
 
 client = bigquery.Client(project=PROJECT_ID)
-print(&quot;Proyecto activo:&quot;, client.project)
-</code></pre>
-
+print("Proyecto activo:", client.project)</code></pre>
 <p>Esto garantiza que:</p>
 <ul>
-<li>
-<p>El proyecto está definido explícitamente</p>
-</li>
-<li>
-<p>No depende del SDK</p>
-</li>
-<li>
-<p>Es portable a otros entornos</p>
-</li>
+<li>El proyecto está definido explícitamente</li>
+<li>No depende del SDK</li>
+<li>Es portable a otros entornos</li>
 </ul>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

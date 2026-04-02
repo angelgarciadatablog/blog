@@ -1,0 +1,7 @@
+notion-client==3.0.0
+markdown==3.10.2
+python-dotenv==1.2.2
+pymdown-extensions==10.21.2
+notion2md==2.9.0
+Pillow
+requests

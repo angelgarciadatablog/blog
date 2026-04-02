@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Evolución de cómo tener tu app en internet. · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -92,85 +19,105 @@
     <h1>Evolución de cómo tener tu app en internet.</h1>
     <h3>1) Hosting compartido (el que venden para webs)</h3>
 <ul>
-<li>
-<p>Compras un <strong>espacio en una carpeta</strong> dentro de un servidor</p>
-</li>
-<li>
-<p>No tienes acceso al sistema operativo</p>
-</li>
-<li>
-<p>Solo subes archivos (HTML, PHP) a través de un panel (cPanel)</p>
-</li>
-<li>
-<p>No puedes instalar nada — usas lo que ya viene instalado</p>
-</li>
-<li>
-<p>Ejemplo: pagas $5/mes en GoDaddy, subes tu web y listo</p>
-</li>
-<li>
-<p>están encendidos 24/7.</p>
-</li>
-<li>
-<p>Sirven para : Webs estáticas (HTML, CSS, JS),  WordPress, Webs con PHP</p>
-</li>
-<li>
-<p><strong>No sirven para: </strong>Apps con <strong>Node.js, </strong>Apps con <strong>Python</strong> (Django, Flask), Apps que necesiten <strong>bases de datos modernas, </strong>Cualquier cosa que requiera instalar algo en el servidor</p>
-</li>
+<li>Compras un <strong>espacio en una carpeta</strong> dentro de un servidor</li>
+<li>No tienes acceso al sistema operativo</li>
+<li>Solo subes archivos (HTML, PHP) a través de un panel (cPanel)</li>
+<li>No puedes instalar nada — usas lo que ya viene instalado</li>
+<li>Ejemplo: pagas $5/mes en GoDaddy, subes tu web y listo</li>
+<li>están encendidos 24/7.</li>
+<li>Sirven para : Webs estáticas (HTML, CSS, JS),  WordPress, Webs con PHP</li>
+<li><strong>No sirven para:</strong>Apps con <strong>Node.js,</strong>Apps con <strong>Python</strong> (Django, Flask), Apps que necesiten <strong>bases de datos modernas,</strong>Cualquier cosa que requiera instalar algo en el servidor
+| Proveedor | Conocido por |
+| --- | --- |
+| <strong>GoDaddy</strong> | El más popular, también vende dominios |
+| <strong>HostGator</strong> | Barato, popular en Latinoamérica |
+| <strong>Bluehost</strong> | Recomendado por WordPress |
+| <strong>Namecheap</strong> | Dominios baratos + hosting |
+| <strong>SiteGround</strong> | Buen soporte técnico |</li>
 </ul>
 <h3>2) Hosting dedicado (<strong>Servidor dedicado)</strong></h3>
 <ul>
-<li>
-<p>Te dan un <strong>servidor físico completo</strong> exclusivamente para ti</p>
-</li>
-<li>
-<p>Tienes acceso total al sistema operativo, igual que un VPS</p>
-</li>
-<li>
-<p>Nadie más comparte tu máquina — todos los recursos (CPU, RAM, disco) son 100% tuyos</p>
-</li>
-<li>
-<p>Rendimiento garantizado, sin sorpresas por vecinos que consuman mucho</p>
-</li>
-<li>
-<p>Lo usan empresas con alto tráfico o regulaciones que exigen hardware exclusivo</p>
-</li>
-<li>
-<p>Ejemplo: pagas $80-200+/mes en OVH, Hetzner o proveedores cloud</p>
-</li>
-<li>
-<p>Están encendidos 24/7</p>
-</li>
+<li>Te dan un <strong>servidor físico completo</strong> exclusivamente para ti</li>
+<li>Tienes acceso total al sistema operativo, igual que un VPS</li>
+<li>Nadie más comparte tu máquina — todos los recursos (CPU, RAM, disco) son 100% tuyos</li>
+<li>Rendimiento garantizado, sin sorpresas por vecinos que consuman mucho</li>
+<li>Lo usan empresas con alto tráfico o regulaciones que exigen hardware exclusivo</li>
+<li>Ejemplo: pagas $80-200+/mes en OVH, Hetzner o proveedores cloud</li>
+<li>Están encendidos 24/7</li>
 </ul>
 <h3>3) VPS (Máquina visual) (vm)</h3>
 <ul>
-<li>
-<p>Te dan una <strong>computadora virtual completa</strong> con su propio sistema operativo (Linux)</p>
-</li>
-<li>
-<p>Tú entras por terminal, instalas programas, configuras todo</p>
-</li>
-<li>
-<p>Es como tener tu propia PC remota</p>
-</li>
-<li>
-<p>Ejemplo: pagas $5/mes en DigitalOcean, te conectas por SSH y haces lo que quieras</p>
-</li>
-<li>
-<p>Un VPS es una computadora tuya en internet, encendida 24/7, donde corres lo que quieras:</p>
-</li>
-<li>
-<p>Un VPS pagas un monto fijo mensual, esté encendido o apagado, lo uses o no. Es como el alquiler de un departamento.</p>
-</li>
+<li>Te dan una <strong>computadora virtual completa</strong> con su propio sistema operativo (Linux)</li>
+<li>Tú entras por terminal, instalas programas, configuras todo</li>
+<li>Es como tener tu propia PC remota</li>
+<li>Ejemplo: pagas $5/mes en DigitalOcean, te conectas por SSH y haces lo que quieras</li>
+<li>Un VPS es una computadora tuya en internet, encendida 24/7, donde corres lo que quieras:</li>
+<li>Un VPS pagas un monto fijo mensual, esté encendido o apagado, lo uses o no. Es como el alquiler de un departamento.</li>
 </ul>
-<pre class="codehilite"><code class="language-bash">Aplicaciones web — dashboards como el tuyo, e-commerce, APIs 
+<pre class="highlight"><code class="language-bash">Aplicaciones web — dashboards como el tuyo, e-commerce, APIs 
 Bots — bots de Discord, Telegram, WhatsApp que necesitan estar siempre activos
 Bases de datos — MongoDB, PostgreSQL, MySQL propio
 Servidores de juegos — Minecraft, Counter-Strike
 VPN propia — para navegación privada
 Automatizaciones — scripts que se ejecutan cada cierto tiempo (scraping, reportes)
-Correo propio — tu propio servidor de email
-</code></pre>
-
+Correo propio — tu propio servidor de email</code></pre>
+<table>
+<thead>
+<tr>
+<th>Proveedor</th>
+<th>Conocido por</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AWS</strong> (Amazon)</td>
+<td>El más grande del mercado</td>
+</tr>
+<tr>
+<td><strong>Google Cloud</strong></td>
+<td>BigQuery, IA — el que usas tú</td>
+</tr>
+<tr>
+<td><strong>Azure</strong> (Microsoft)</td>
+<td>Popular en empresas que usan Microsoft</td>
+</tr>
+</tbody>
+</table>
+<p>*Los proveedores de cloud también ofrecen VPS/VMs, pero van más allá — incluyen bases de datos, IA, contenedores, y cientos de servicios adicionales.</p>
+<table>
+<thead>
+<tr>
+<th>Proveedor</th>
+<th>Conocido por</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DigitalOcean</strong></td>
+<td>El más popular entre desarrolladores</td>
+</tr>
+<tr>
+<td><strong>Hetzner</strong></td>
+<td>El más barato, servidores en Europa</td>
+</tr>
+<tr>
+<td><strong>Vultr</strong></td>
+<td>Muchas ubicaciones, barato</td>
+</tr>
+<tr>
+<td><strong>Linode</strong></td>
+<td>Ahora es de Akamai, buen rendimiento</td>
+</tr>
+<tr>
+<td><strong>OVH</strong></td>
+<td>Europeo, buena relación precio/calidad</td>
+</tr>
+<tr>
+<td><strong>Contabo</strong></td>
+<td>Mucha RAM/disco por poco preci</td>
+</tr>
+</tbody>
+</table>
 <h3>¿VPS  vs Hosting dedicado?</h3>
 <p>La diferencia es <strong>rendimiento garantizado</strong>.</p>
 <p>`VPS:
@@ -201,18 +148,10 @@ Si otro VPS consume mucho, puede afectarte</p>
 └──────────────────────────────────┘</code></p>
 <p><strong>Ventajas de tenerlos separados</strong></p>
 <ul>
-<li>
-<p>Si uno falla, <strong>los demás siguen funcionando</strong></p>
-</li>
-<li>
-<p>Cada uno tiene sus propias dependencias sin conflictos</p>
-</li>
-<li>
-<p>Puedes apagar, reiniciar o actualizar uno sin tocar los demás</p>
-</li>
-<li>
-<p>Para migrar, copias los contenedores que quieras al nuevo VPS</p>
-</li>
+<li>Si uno falla, <strong>los demás siguen funcionando</strong></li>
+<li>Cada uno tiene sus propias dependencias sin conflictos</li>
+<li>Puedes apagar, reiniciar o actualizar uno sin tocar los demás</li>
+<li>Para migrar, copias los contenedores que quieras al nuevo VPS</li>
 </ul>
 <p><strong>Herramienta clave: Docker Compose</strong></p>
 <p>Con un solo archivo defines todos tus contenedores y los levantas con un comando:</p>
@@ -220,10 +159,86 @@ Si otro VPS consume mucho, puede afectarte</p>
 <p>Y todo arranca. Es la forma estándar de manejar varios contenedores en un VPS.</p>
 <h3><strong>4) Contenedores por demanda</strong></h3>
 <p>Subes tu app empaquetada, se enciende/apaga sola. Pagas por uso.</p>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Proveedor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cloud Run</strong></td>
+<td>Google</td>
+</tr>
+<tr>
+<td><strong>Fargate</strong></td>
+<td>Amazon (AWS)</td>
+</tr>
+<tr>
+<td><strong>Container Apps</strong></td>
+<td>Microsoft (Azure)</td>
+</tr>
+<tr>
+<td><strong>Railway</strong></td>
+<td>Independiente</td>
+</tr>
+<tr>
+<td><strong>Render</strong></td>
+<td>Independiente</td>
+</tr>
+<tr>
+<td><strong>Fly.io</strong></td>
+<td>Independiente</td>
+</tr>
+</tbody>
+</table>
 <h3>5) Serverless / Plataformas</h3>
 <p>Solo subes código, ni siquiera piensas en contenedores. Ideal para frontends y funciones simples.</p>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Ideal para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vercel</strong></td>
+<td>Frontends (React, Next.js)</td>
+</tr>
+<tr>
+<td><strong>Netlify</strong></td>
+<td>Frontends + formularios</td>
+</tr>
+<tr>
+<td><strong>Cloudflare Pages</strong></td>
+<td>Frontends con CDN global</td>
+</tr>
+</tbody>
+</table>
 <h3>6) PaaS (Platform as a Service)</h3>
 <p>Subes tu código directo, sin Docker ni contenedores. La plataforma se encarga de todo.</p>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Nota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Heroku</strong></td>
+<td>El pionero, muy fácil</td>
+</tr>
+<tr>
+<td><strong>AWS Elastic Beanstalk</strong></td>
+<td>Lo mismo pero en Amazon</td>
+</tr>
+</tbody>
+</table>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

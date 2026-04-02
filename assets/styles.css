@@ -4,7 +4,7 @@
   --bg-hover:  #1c1c1c;
   --border:    #242424;
   --text:      #c9c9c9;
-  --text-dim:  #555;
+  --text-dim:  #777;
   --text-head: #e8e8e8;
   --accent:    #4a90d9;
   --tag-bg:    #1a1a1a;
@@ -288,13 +288,54 @@ main {
 .empty-state { padding: 40px 0; text-align: center; color: var(--text-dim); font-size: 13px; }
 
 /* ── NOTE VIEWER ── */
-#noteViewer {
+#noteWrapper {
   display: none;
+}
+#noteWrapper.active { display: block; }
+
+#noteViewer {
   padding: 48px 60px;
   max-width: 860px;
   width: 100%;
 }
-#noteViewer.active { display: block; }
+
+/* ── TOC PANEL ── */
+#tocPanel {
+  position: fixed;
+  top: 64px;
+  right: 24px;
+  width: 200px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  padding: 8px 0;
+}
+.toc-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+.toc-item {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  text-decoration: none;
+  line-height: 1.4;
+  padding: 4px 0 4px 10px;
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  cursor: pointer;
+}
+.toc-item:hover { color: var(--text); }
+.toc-item.toc-active { color: var(--accent); border-left-color: var(--accent); }
+.toc-h2 { padding-left: 18px; font-size: 11px; }
+.toc-h3 { padding-left: 26px; font-size: 11px; }
+
+@media (max-width: 1200px) {
+  #tocPanel { display: none !important; }
+}
 
 .note-back {
   display: inline-flex;
@@ -312,21 +353,22 @@ main {
 }
 .note-back:hover { color: var(--text); }
 
-#noteViewer h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-#noteViewer h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-#noteViewer h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-#noteViewer h4 { font-size: 14px; font-weight: 500; color: var(--text-head); margin: 20px 0 8px; }
+#noteViewer h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin: 72px 0 24px; letter-spacing: -0.02em; }
+#noteContent > h1:first-child { margin-top: 0; }
+#noteViewer h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 48px 0 12px; }
+#noteViewer h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 36px 0 8px; }
+#noteViewer h4 { font-size: 14px; font-weight: 500; color: var(--text-head); margin: 28px 0 8px; }
 #noteViewer p { margin-bottom: 16px; line-height: 1.7; }
 #noteViewer a { color: var(--accent); text-decoration: none; }
 #noteViewer a:hover { text-decoration: underline; }
 #noteViewer code {
   font-family: 'Fira Code', monospace;
-  background: #1a1a1a;
+  background: rgba(235,87,87,0.15);
   border: 1px solid var(--border);
   padding: 2px 6px;
   border-radius: 3px;
   font-size: 13px;
-  color: #e2e8f0;
+  color: #f28b82;
 }
 #noteViewer pre {
   background: #1a1a1a;
@@ -336,7 +378,9 @@ main {
   overflow-x: auto;
   margin: 16px 0;
 }
-#noteViewer pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+#noteViewer pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; color: inherit; }
+#noteViewer pre code.language-bash,
+#noteViewer pre code.language-bash * { color: #f28b82; }
 #noteViewer blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); background: var(--bg-side); border-radius: 0 4px 4px 0; }
 #noteViewer ul, #noteViewer ol { padding-left: 20px; margin-bottom: 16px; }
 #noteViewer li { margin-bottom: 6px; line-height: 1.7; }

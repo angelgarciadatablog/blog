@@ -40,7 +40,5 @@ Your client does not have permission to get URL`
 ## ✅ Solo pueden ejecutarla:
 
 1. **Cloud Scheduler** (con cuenta de servicio `youtube-pipeline-sa`)
-
 1. **Tu cuenta** (porque eres owner del proyecto)
-
 1. Cualquier otra cuenta que tenga el rol `Cloud Run Invoker`

@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obtener API de Youtube · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -91,11 +18,13 @@
   <div class="note-content">
     <h1>Obtener API de Youtube</h1>
     <p>Para poder utilizar la API de youtube se tiene que buscar en la biblioteca de API la “YOUTUBE”</p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/20564091-80b5-41c4-923d-5ee90b6d62bc/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667F4GEJBZ%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061120Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJIMEYCIQDY7qmgSJHY%2BuXQpPPUxiQLBfhSyr12qrwzJOghChZyNAIhAJwMk8MCOJNTW1f0kx6rM4Rd0RVYEkpnEbif6gPmqKCxKv8DCAUQABoMNjM3NDIzMTgzODA1IgzFwCmUHKhg28cN2YEq3AP5a2xKyeJDaMft9ckdf6%2B3kn96qtrOIX5ZUER2xDd5smpSIYg8wDTmeeJM6tgdHAxIOHoYc2jIqWgtXQEOi5qHUs1bvfS0q3qmD0SQ0TkhWMERTZbu5Msr0EfO55npTzb5mG6w9tmHb7JOOhkVUUdZ2JM%2BJexF3yoQ5HIR1wGXk25YX2NESqVsQjkiHRXfkCR3cpfczSMC5rRirMIKDNjgzbx0J3dUj08ff9mwo6ODsW1b8KwTYx229K7l6rAQVc1S%2FHe0QnDdBSB7Xyi7WUJxykAmEE4cBMwCd2YQwmMuK2Ysjk7WE2njqA195z9%2Blhfkk8USjJlovoi1KkhvufrpaT%2B%2B8bu06MLNA1HDtYTybg%2F9fzV5czbmYOyqjUsnjgvLX2HiSwO%2B%2Bht4giC9Yk8rGLrSzvSvjTfQdsZQSYfBrgnaebxvATZPI%2F%2FVuDReVBOjZcIWps472vMSHpf2IwRcIGhZAWrb2C5mexJtYFCL6fw5PuWduVLwDf2xK8upYrpWnnDW7rVIMidG%2FwDL%2FbpRYh5pehw6Lvpp1GHpYr%2Fe7JnKHrCLIiOcG%2FGocrxymU8PeGiya7dpj%2B3gDlC8jNSgrX0HoAJ5coqf2jqRta6jiX%2B28QjcQHWQdi1GfTDIxqLOBjqkAZ2anqafIlFCo7Yuu674Y5V4sgLcaG2i6bItokl6rLMi1WC8OaqrhyWHhUPs0eLS32W84q7MrsQ9IH2xYW2vDWu3eWQswAOiIZTYURmvEfb%2Fm9YJgGl8a1VwesZBIkFW9RJdxymZyb%2BHBo0aOFdm3dELO0P0%2F06IMNOunyMT%2BD73JFhryXKnDHvG%2BY0NdEyzHBz7E5gScx9MkSIfpoGTK8bAqdil&amp;X-Amz-Signature=2bcbd6c04d83a5cf171f90607fa3855101ecf6aa355cfb78a123a4d70d9ea650&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p><img alt="" src="img/301477bcd0eb80918995d40fd4e303e2.webp" /></p>
 <p>Luego se debe instalar la opción → Youtube data api v3</p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/aaa5f5b3-2104-48ec-af85-6584e5538e8b/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667F4GEJBZ%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061120Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJIMEYCIQDY7qmgSJHY%2BuXQpPPUxiQLBfhSyr12qrwzJOghChZyNAIhAJwMk8MCOJNTW1f0kx6rM4Rd0RVYEkpnEbif6gPmqKCxKv8DCAUQABoMNjM3NDIzMTgzODA1IgzFwCmUHKhg28cN2YEq3AP5a2xKyeJDaMft9ckdf6%2B3kn96qtrOIX5ZUER2xDd5smpSIYg8wDTmeeJM6tgdHAxIOHoYc2jIqWgtXQEOi5qHUs1bvfS0q3qmD0SQ0TkhWMERTZbu5Msr0EfO55npTzb5mG6w9tmHb7JOOhkVUUdZ2JM%2BJexF3yoQ5HIR1wGXk25YX2NESqVsQjkiHRXfkCR3cpfczSMC5rRirMIKDNjgzbx0J3dUj08ff9mwo6ODsW1b8KwTYx229K7l6rAQVc1S%2FHe0QnDdBSB7Xyi7WUJxykAmEE4cBMwCd2YQwmMuK2Ysjk7WE2njqA195z9%2Blhfkk8USjJlovoi1KkhvufrpaT%2B%2B8bu06MLNA1HDtYTybg%2F9fzV5czbmYOyqjUsnjgvLX2HiSwO%2B%2Bht4giC9Yk8rGLrSzvSvjTfQdsZQSYfBrgnaebxvATZPI%2F%2FVuDReVBOjZcIWps472vMSHpf2IwRcIGhZAWrb2C5mexJtYFCL6fw5PuWduVLwDf2xK8upYrpWnnDW7rVIMidG%2FwDL%2FbpRYh5pehw6Lvpp1GHpYr%2Fe7JnKHrCLIiOcG%2FGocrxymU8PeGiya7dpj%2B3gDlC8jNSgrX0HoAJ5coqf2jqRta6jiX%2B28QjcQHWQdi1GfTDIxqLOBjqkAZ2anqafIlFCo7Yuu674Y5V4sgLcaG2i6bItokl6rLMi1WC8OaqrhyWHhUPs0eLS32W84q7MrsQ9IH2xYW2vDWu3eWQswAOiIZTYURmvEfb%2Fm9YJgGl8a1VwesZBIkFW9RJdxymZyb%2BHBo0aOFdm3dELO0P0%2F06IMNOunyMT%2BD73JFhryXKnDHvG%2BY0NdEyzHBz7E5gScx9MkSIfpoGTK8bAqdil&amp;X-Amz-Signature=e7783a0e4b53867291c6599f1bfa9f905883c6d8d42fd9b54297c8406e1942d7&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p><img alt="" src="img/301477bcd0eb80709902e6b6b1fdc148.webp" /></p>
 <p>Finalmente se deben crear las credenciales para tener acceso a la API</p>
-<p><img alt="" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/6777a3e4-8bfc-492a-8dc5-bb9cc05a541d/6ad062d8-d042-4486-aa33-839e46957d5f/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Credential=ASIAZI2LB4667F4GEJBZ%2F20260329%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20260329T061120Z&amp;X-Amz-Expires=3600&amp;X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDwaCXVzLXdlc3QtMiJIMEYCIQDY7qmgSJHY%2BuXQpPPUxiQLBfhSyr12qrwzJOghChZyNAIhAJwMk8MCOJNTW1f0kx6rM4Rd0RVYEkpnEbif6gPmqKCxKv8DCAUQABoMNjM3NDIzMTgzODA1IgzFwCmUHKhg28cN2YEq3AP5a2xKyeJDaMft9ckdf6%2B3kn96qtrOIX5ZUER2xDd5smpSIYg8wDTmeeJM6tgdHAxIOHoYc2jIqWgtXQEOi5qHUs1bvfS0q3qmD0SQ0TkhWMERTZbu5Msr0EfO55npTzb5mG6w9tmHb7JOOhkVUUdZ2JM%2BJexF3yoQ5HIR1wGXk25YX2NESqVsQjkiHRXfkCR3cpfczSMC5rRirMIKDNjgzbx0J3dUj08ff9mwo6ODsW1b8KwTYx229K7l6rAQVc1S%2FHe0QnDdBSB7Xyi7WUJxykAmEE4cBMwCd2YQwmMuK2Ysjk7WE2njqA195z9%2Blhfkk8USjJlovoi1KkhvufrpaT%2B%2B8bu06MLNA1HDtYTybg%2F9fzV5czbmYOyqjUsnjgvLX2HiSwO%2B%2Bht4giC9Yk8rGLrSzvSvjTfQdsZQSYfBrgnaebxvATZPI%2F%2FVuDReVBOjZcIWps472vMSHpf2IwRcIGhZAWrb2C5mexJtYFCL6fw5PuWduVLwDf2xK8upYrpWnnDW7rVIMidG%2FwDL%2FbpRYh5pehw6Lvpp1GHpYr%2Fe7JnKHrCLIiOcG%2FGocrxymU8PeGiya7dpj%2B3gDlC8jNSgrX0HoAJ5coqf2jqRta6jiX%2B28QjcQHWQdi1GfTDIxqLOBjqkAZ2anqafIlFCo7Yuu674Y5V4sgLcaG2i6bItokl6rLMi1WC8OaqrhyWHhUPs0eLS32W84q7MrsQ9IH2xYW2vDWu3eWQswAOiIZTYURmvEfb%2Fm9YJgGl8a1VwesZBIkFW9RJdxymZyb%2BHBo0aOFdm3dELO0P0%2F06IMNOunyMT%2BD73JFhryXKnDHvG%2BY0NdEyzHBz7E5gScx9MkSIfpoGTK8bAqdil&amp;X-Amz-Signature=5dec3283e84942eb87564b0600237dbdcd735b5022956fcf00de7ea5b5407da3&amp;X-Amz-SignedHeaders=host&amp;x-amz-checksum-mode=ENABLED&amp;x-id=GetObject" /></p>
+<p><img alt="" src="img/301477bcd0eb806294b4df97fae332b7.webp" /></p>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

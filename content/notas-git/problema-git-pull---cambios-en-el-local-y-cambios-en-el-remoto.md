@@ -2,11 +2,15 @@
 
 > 
 
+### Inicio
+
 Situación inicial (ambos, remoto y local empiezan igual):
 
 
 
 > 
+
+### Divergencia (cada uno escribe diferente):
 
 Tú en tu laptop:
 
@@ -67,7 +71,7 @@ git config pull.rebase false
 git pull origin main
 ```
 
-***Detalles importantes: **Sobre `git config pull.rebase false`:
+***Detalles importantes:**Sobre `git config pull.rebase false`:
 
 -Solo necesitas ejecutarlo **UNA VEZ**
 

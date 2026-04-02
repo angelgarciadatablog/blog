@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Revisar versiones · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -90,21 +17,19 @@
   </div>
   <div class="note-content">
     <h1>Revisar versiones</h1>
-    <pre class="codehilite"><code class="language-bash">#Revisar las versiones
-#Presionar &quot;q&quot; para salir de esa vista
+    <pre class="highlight"><code class="language-bash">#Revisar las versiones
+#Presionar "q" para salir de esa vista
 git log --oneline
 
 #Revisar una versión en específica
 git checkout xxxxxxx
 
 #Regresar a la versión que estaba
-git checkout main
-</code></pre>
-
+git checkout main</code></pre>
 <ol>
 <li>Ejemplo:</li>
 </ol>
-<pre class="codehilite"><code class="language-bash">e19e6c8 (HEAD -&gt; main) actualización de carpetas   ← tu máquina
+<pre class="highlight"><code class="language-bash">e19e6c8 (HEAD -&gt; main) actualización de carpetas   ← tu máquina
 3f10683 (origin/main) optimize: compress images    ← GitHub
 8f0a4b4 prueba de imagen 6
 73343a3 add: scripts de git
@@ -113,30 +38,27 @@ git checkout main
 52be078 imagen prueba 6
 4964530 update action: update md links after conversion
 99977e7 optimize: compress images to webp
-eb1c3f1 nuevas imagenes
-</code></pre>
-
+eb1c3f1 nuevas imagenes</code></pre>
 <hr />
 <p><strong><code>main</code></strong> — es tu rama local, la que vive en tu Mac.</p>
 <p><strong><code>origin/main</code></strong> — es la rama que está en GitHub (<code>origin</code> es el apodo que Git le da a tu repositorio remoto).</p>
 <p><strong><code>HEAD</code></strong> — es simplemente un puntero que dice <em>"estás aquí ahora mismo"</em>. Siempre apunta al commit donde te encuentras parado.</p>
 <hr />
-<p><strong>La flecha </strong><strong><code>HEAD -&gt; main</code></strong><strong> significa:</strong></p>
+<p><strong>La flecha</strong><strong><code>HEAD -&gt; main</code></strong><strong>significa:</strong></p>
 <blockquote>
 <p><em>"Estás parado en la rama main, en tu máquina local"</em></p>
 </blockquote>
 <hr />
 <p><strong>La situación que tenías:</strong></p>
-<pre class="codehilite"><code class="language-bash">[GitHub]   3f10683  ← origin/main se quedó aquí
+<pre class="highlight"><code class="language-bash">[GitHub]   3f10683  ← origin/main se quedó aquí
               ↑
-[Tu Mac]   e19e6c8  ← HEAD -&gt; main avanzó un commit más
-</code></pre>
-
+[Tu Mac]   e19e6c8  ← HEAD -&gt; main avanzó un commit más</code></pre>
 <p>Tu máquina fue un commit más adelante que GitHub, porque el push no se completó.</p>
 <hr />
 <p><strong>Cuando todo está sincronizado</strong> se ve así:</p>
-<pre class="codehilite"><code class="language-bash">e19e6c8 (HEAD -&gt; main, origin/main)
-</code></pre>
+<pre class="highlight"><code class="language-bash">e19e6c8 (HEAD -&gt; main, origin/main)</code></pre>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

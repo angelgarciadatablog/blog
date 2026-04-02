@@ -28,9 +28,14 @@ Le dices a Git:
 
 Significa:
 
+| Código | Significado |
+| --- | --- |
+| `%an` | author name |
+| `%ae` | author email |
+
 Ejemplo de salida cruda:
 
-```plain text
+```
 Angel Garcia | angelgarciadatablog@gmail.com
 Angel Garcia | angelgarciadatablog@gmail.com
 Angel García | noreply@github.com
@@ -46,7 +51,6 @@ Esto ya es Linux/macOS, no Git.
 Hace dos cosas:
 
 - ordena
-
 - elimina duplicados (`u` = unique)
 
 Resultado final:
@@ -60,11 +64,8 @@ Resultado final:
 Porque responde rápido preguntas como:
 
 - ¿Quién ha contribuido al repo?
-
 - ¿Hay emails personales filtrados?
-
 - ¿Hay identidades duplicadas?
-
 - ¿Tengo firmas inconsistentes?
 
 Exactamente lo que estás haciendo ahora.
@@ -75,13 +76,13 @@ Exactamente lo que estás haciendo ahora.
 
 ## Ver autores + cantidad de commits
 
-```plain text
+```
 git shortlog-sne
 ```
 
 Ejemplo:
 
-```plain text
+```
 15  Angel Garcia <angelgarciadatablog@gmail.com>
 3   Angel García <noreply@github.com>
 ```
@@ -92,7 +93,7 @@ Ejemplo:
 
 ## Solo nombres únicos
 
-```plain text
+```
 git log--format="%an" |sort-u
 ```
 
@@ -100,6 +101,6 @@ git log--format="%an" |sort-u
 
 ## Solo correos únicos
 
-```plain text
+```
 git log--format="%ae" |sort-u
 ```

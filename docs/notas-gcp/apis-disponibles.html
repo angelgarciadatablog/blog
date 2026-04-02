@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apis disponibles · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -95,24 +22,12 @@
 <p>👉 Es la API “pública” de datos estructurales de YouTube.</p>
 <h3>Sirve para:</h3>
 <ul>
-<li>
-<p>Info de canales</p>
-</li>
-<li>
-<p>Lista de videos</p>
-</li>
-<li>
-<p>Metadata de videos</p>
-</li>
-<li>
-<p>Views, likes, comments (conteos públicos)</p>
-</li>
-<li>
-<p>Playlists</p>
-</li>
-<li>
-<p>Comentarios públicos</p>
-</li>
+<li>Info de canales</li>
+<li>Lista de videos</li>
+<li>Metadata de videos</li>
+<li>Views, likes, comments (conteos públicos)</li>
+<li>Playlists</li>
+<li>Comentarios públicos</li>
 </ul>
 <h3>Autenticación:</h3>
 <p>✔ API Key</p>
@@ -120,38 +35,20 @@
 <p>✔ Perfecta para pipelines automáticos</p>
 <h3>Ejemplo de preguntas que responde:</h3>
 <ul>
-<li>
-<p>¿Cuántos videos tiene el canal?</p>
-</li>
-<li>
-<p>¿Cuántas vistas tiene cada video?</p>
-</li>
-<li>
-<p>¿Qué videos existen?</p>
-</li>
-<li>
-<p>¿Cuándo se publicó cada video?</p>
-</li>
+<li>¿Cuántos videos tiene el canal?</li>
+<li>¿Cuántas vistas tiene cada video?</li>
+<li>¿Qué videos existen?</li>
+<li>¿Cuándo se publicó cada video?</li>
 </ul>
 <hr />
 <h3>🚨 Limitaciones importantes</h3>
 <p>No trae:</p>
 <ul>
-<li>
-<p>Retención de audiencia</p>
-</li>
-<li>
-<p>Watch time real</p>
-</li>
-<li>
-<p>CTR</p>
-</li>
-<li>
-<p>Ingresos</p>
-</li>
-<li>
-<p>Performance interna del canal</p>
-</li>
+<li>Retención de audiencia</li>
+<li>Watch time real</li>
+<li>CTR</li>
+<li>Ingresos</li>
+<li>Performance interna del canal</li>
 </ul>
 <p>👉 Esto es normal. No es un bug.</p>
 <hr />
@@ -159,27 +56,13 @@
 <p>👉 Es la API “interna” del rendimiento real del canal.</p>
 <h3>Sirve para:</h3>
 <ul>
-<li>
-<p>Watch time</p>
-</li>
-<li>
-<p>Retención</p>
-</li>
-<li>
-<p>CTR</p>
-</li>
-<li>
-<p>Fuentes de tráfico</p>
-</li>
-<li>
-<p>Demografía</p>
-</li>
-<li>
-<p>Revenue</p>
-</li>
-<li>
-<p>Engagement profundo</p>
-</li>
+<li>Watch time</li>
+<li>Retención</li>
+<li>CTR</li>
+<li>Fuentes de tráfico</li>
+<li>Demografía</li>
+<li>Revenue</li>
+<li>Engagement profundo</li>
 </ul>
 <h3>Autenticación:</h3>
 <p>❌ No usa API Key</p>
@@ -189,12 +72,8 @@
 <h3>🚨 Limitación clave</h3>
 <p>Solo puedes acceder a:</p>
 <ul>
-<li>
-<p>Tu canal</p>
-</li>
-<li>
-<p>Canales donde tengas permisos</p>
-</li>
+<li>Tu canal</li>
+<li>Canales donde tengas permisos</li>
 </ul>
 <p>👉 No sirve para analizar canales externos.</p>
 <hr />
@@ -203,31 +82,19 @@
 <p>👉 Es para descargar <strong>reportes masivos programados</strong>.</p>
 <h3>Sirve para:</h3>
 <ul>
-<li>
-<p>Reportes históricos grandes</p>
-</li>
-<li>
-<p>Descargas en CSV</p>
-</li>
-<li>
-<p>Jobs programados</p>
-</li>
-<li>
-<p>Data warehouse scenarios</p>
-</li>
+<li>Reportes históricos grandes</li>
+<li>Descargas en CSV</li>
+<li>Jobs programados</li>
+<li>Data warehouse scenarios</li>
 </ul>
 <h3>Ejemplo real:</h3>
 <ul>
-<li>
-<p>Descargar todos los datos históricos del canal</p>
-</li>
-<li>
-<p>Cargar a BigQuery</p>
-</li>
-<li>
-<p>Procesar offline</p>
-</li>
+<li>Descargar todos los datos históricos del canal</li>
+<li>Cargar a BigQuery</li>
+<li>Procesar offline</li>
 </ul>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

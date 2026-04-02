@@ -41,4 +41,17 @@ Arquitectura de microservicios. Para empresas grandes tipo Netflix, Uber, etc.
 
 ### Otras opciones para subir contenedores a la nube
 
+| Servicio | Proveedor | Nota |
+| --- | --- | --- |
+| **AWS Fargate** | Amazon | El equivalente directo en AWS |
+| **Azure Container Apps** | Microsoft | Lo mismo en Azure |
+| **Railway** | Independiente | Más simple, ideal para equipos pequeños |
+| **Render** | Independiente | Similar a Railway, muy fácil de usar |
+| **Fly.io** | Independiente | Bueno para baja latencia global |
+
 ### Y si no quisieras contenedores en absoluto
+
+| Servicio | Qué hace |
+| --- | --- |
+| **Heroku** | Subes tu código directo, sin Docker. Él se encarga de todo |
+| **AWS Elastic Beanstalk** | Lo mismo pero en Amazon |

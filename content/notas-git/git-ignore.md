@@ -44,12 +44,10 @@ git push
 ## ✅ Resultado
 
 - El archivo desapareció del repositorio remoto.
-
 - Se mantuvo en el entorno local.
-
 - No volverá a subirse gracias a la regla agregada en `.gitignore`:
 
-```plain text
+```
 .DS_Store
 ```
 

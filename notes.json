@@ -5,16 +5,16 @@
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
     "grupo": "CLI de google cloud - SDK",
-    "fecha_modificacion": "2026-03-29T21:29:00+00:00",
+    "fecha_modificacion": "2026-04-02T06:53:00+00:00",
     "fecha_creacion": "2026-02-12T04:28:00.000Z"
   },
   {
-    "title": "Configuración del Google Cloud SDK 👌",
-    "slug": "notas-gcp/configuracion-del-google-cloud-sdk-",
+    "title": "Configuración de Google Cloud SDK 👌",
+    "slug": "notas-gcp/configuracion-de-google-cloud-sdk-",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
     "grupo": "CLI de google cloud - SDK",
-    "fecha_modificacion": "2026-03-29T22:44:00+00:00",
+    "fecha_modificacion": "2026-04-02T05:07:00+00:00",
     "fecha_creacion": "2026-03-29T21:42:00.000Z"
   },
   {
@@ -23,7 +23,7 @@
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
     "grupo": "CLI de google cloud - SDK",
-    "fecha_modificacion": "2026-03-29T23:00:00+00:00",
+    "fecha_modificacion": "2026-04-02T05:08:00+00:00",
     "fecha_creacion": "2026-03-29T22:50:00.000Z"
   },
   {
@@ -34,15 +34,6 @@
     "grupo": "CLI de google cloud - SDK",
     "fecha_modificacion": "2026-03-29T07:39:00+00:00",
     "fecha_creacion": "2026-03-29T07:39:00.000Z"
-  },
-  {
-    "title": "Cambiar de proyecto",
-    "slug": "notas-gcp/cambiar-de-proyecto",
-    "category": "notas-gcp",
-    "catLabel": "Google Cloud Platform",
-    "grupo": "CLI de google cloud - SDK",
-    "fecha_modificacion": "2026-03-29T04:22:00+00:00",
-    "fecha_creacion": "2026-02-17T05:59:00.000Z"
   },
   {
     "title": "Crear una service account",
@@ -169,6 +160,15 @@
     "grupo": "Otros",
     "fecha_modificacion": "2026-03-29T04:25:00+00:00",
     "fecha_creacion": "2026-03-03T19:25:00.000Z"
+  },
+  {
+    "title": "Clonar un repositorio privado (windows)",
+    "slug": "notas-git/clonar-un-repositorio-privado-windows",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Clonar un repositorio",
+    "fecha_modificacion": "2026-04-02T07:13:00+00:00",
+    "fecha_creacion": "2026-03-31T11:43:00.000Z"
   },
   {
     "title": "Iniciando en git - iniciar un control de versiones local",
@@ -340,6 +340,15 @@
     "grupo": "Comandos Git",
     "fecha_modificacion": "2026-03-29T07:00:00+00:00",
     "fecha_creacion": "2025-10-31T23:42:00.000Z"
+  },
+  {
+    "title": "Ocultar el correo en commit ",
+    "slug": "notas-git/ocultar-el-correo-en-commit",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-31T12:03:00+00:00",
+    "fecha_creacion": "2026-03-31T12:03:00.000Z"
   },
   {
     "title": "GitHub CLI - SSH",

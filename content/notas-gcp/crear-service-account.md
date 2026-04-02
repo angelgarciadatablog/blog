@@ -4,23 +4,27 @@ Puedes hacerlo desde la interfaz (recomendado para que veas todo visualmente):
 
 ☰ → IAM & Admin → Service Accounts → Create Service Account
 
+![](img/30a477bcd0eb80c79e9fcdf79a751cbf.webp)
+
+![](img/30a477bcd0eb80ed9fa5c884382a64e0.webp)
+
 
 
 Nombre:
 
-```plain text
+```
 youtube-pipeline-sa
 ```
 
 ID sugerido (automático):
 
-```plain text
+```
 youtube-pipeline-sa
 ```
 
 Descripción:
 
-```plain text
+```
 Service accountfor YouTubedata pipeline Cloud Functions
 ```
 
@@ -71,9 +75,7 @@ Arquitectura limpia desde el inicio.
 En producción con Cloud Functions:
 
 - No necesitas descargar claves
-
 - No necesitas service account keys
-
 - No necesitas JSON local
 
 La función se ejecuta con esa Service Account automáticamente.

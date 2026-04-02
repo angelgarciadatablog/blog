@@ -4,81 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Configurar tu identidad en Git · Angel García</title>
-  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --bg-side: #141414;
-    --border: #242424;
-    --text: #c9c9c9;
-    --text-dim: #555;
-    --text-head: #e8e8e8;
-    --accent: #4a90d9;
-    --code-bg: #1a1a1a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.7;
-    padding: 48px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .topbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 48px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    gap: 16px;
-    z-index: 100;
-  }
-  .topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
-  .topbar a:hover { color: var(--text); }
-  .topbar .sep { color: var(--border); }
-  .note-content { margin-top: 72px; }
-  h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin-bottom: 24px; letter-spacing: -0.02em; }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 36px 0 12px; }
-  h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 24px 0 8px; }
-  p { margin-bottom: 16px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  code {
-    font-family: 'Fira Code', monospace;
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #e2e8f0;
-  }
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-    overflow-x: auto;
-    margin: 16px 0;
-  }
-  pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
-  blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); font-style: italic; }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
-  th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  ul, ol { padding-left: 20px; margin-bottom: 16px; }
-  li { margin-bottom: 6px; }
-  img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-</style>
-
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
 </head>
 <body>
   <div class="topbar">
@@ -94,75 +21,71 @@
 <h1>1) Identidad del commit (Git local)</h1>
 <p>Define:</p>
 <ul>
-<li>
-<p>nombre visible</p>
-</li>
-<li>
-<p>correo grabado para siempre</p>
-</li>
+<li>nombre visible</li>
+<li>correo grabado para siempre</li>
 </ul>
 <h1>Nivel global</h1>
 <p>El <code>--global</code> significa "global para todos los repositorios de MI usuario del sistema", no "global para todo el ordenador". Cada usuario del SO tiene su propio archivo <code>.gitconfig</code>.</p>
-<pre class="codehilite"><code class="language-bash"># Configurar nombre (usa tu nombre real o de GitHub)
-git config --global user.name &quot;Angel García&quot;
+<pre class="highlight"><code class="language-bash"># Configurar nombre (usa tu nombre real o de GitHub)
+git config --global user.name "Angel García"
 
 # Configurar email (usa el mismo email de tu cuenta GitHub)
-git config --global user.email &quot;tu-email@gmail.com&quot;
+git config --global user.email "tu-email@gmail.com"
 
 # Verificar que se guardó
 git config --global user.name
 git config --global user.email
 </code></pre>
-
+<table>
+<thead>
+<tr>
+<th>Sistema</th>
+<th>Ubicación del .gitconfig</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows</strong></td>
+<td><code>C:\Users\TuUsuario\.gitconfig</code></td>
+</tr>
+<tr>
+<td><strong>Mac</strong></td>
+<td><code>/Users/tuusuario/.gitconfig</code></td>
+</tr>
+<tr>
+<td><strong>Linux</strong></td>
+<td><code>/home/tuusuario/.gitconfig</code></td>
+</tr>
+</tbody>
+</table>
 <h1>Nivel local</h1>
 <p>Se crea cuando haces algo como:</p>
-<pre class="codehilite"><code class="language-bash">git config user.name &quot;Algo&quot;
-git config user.email &quot;algo@email.com&quot;
-</code></pre>
-
+<pre class="highlight"><code class="language-bash">git config user.name "Algo"
+git config user.email "algo@email.com"</code></pre>
 <p>👉 Solo afecta ese repositorio.</p>
 <h1>Nivel fallback del sistema</h1>
 <p>Si no existe nada:</p>
 <p>👉 usa usuario + hostname del computador.</p>
 <p>(Eso puede exponer nombre de usuario u correo del ordenador)</p>
-<p>```plain text
-git var GIT_AUTHOR_IDENT</p>
-<pre class="codehilite"><code>Eso mostrará exactamente **cómo Git se identifica AHORA MISMO** si hicieras un commit.
-
-
-
----
-
-
-
-# 2) Identidad de subida (GitHub)
-
-Define:
-
-- permisos
-
-- acceso al repo
-
-- quién puede push
-
-Esto usa:
-
-- HTTPS + token
-
-- o SSH key
-
-(NO tiene relación directa con el author del commit).
-
-
-
-# 🔐 Cómo GitHub sabe quién está haciendo `git push`
-
-Cuando haces:
-
-```plain text
-git push
-</code></pre>
-
+<pre class="highlight"><code>git var GIT_AUTHOR_IDENT</code></pre>
+<p>Eso mostrará exactamente <strong>cómo Git se identifica AHORA MISMO</strong> si hicieras un commit.</p>
+<hr />
+<h1>2) Identidad de subida (GitHub)</h1>
+<p>Define:</p>
+<ul>
+<li>permisos</li>
+<li>acceso al repo</li>
+<li>quién puede push</li>
+</ul>
+<p>Esto usa:</p>
+<ul>
+<li>HTTPS + token</li>
+<li>o SSH key</li>
+</ul>
+<p>(NO tiene relación directa con el author del commit).</p>
+<h1>🔐 Cómo GitHub sabe quién está haciendo <code>git push</code></h1>
+<p>Cuando haces:</p>
+<pre class="highlight"><code>git push</code></pre>
 <p>GitHub necesita autenticarte.</p>
 <p>Hoy existen <strong>dos formas principales</strong>:</p>
 <p>1️⃣ HTTPS + Token (la más común al inicio)</p>
@@ -180,21 +103,14 @@ git push
 <hr />
 <h2>Cómo funciona internamente</h2>
 <p>Cuando haces push:</p>
-<p>```plain text
-Tu Mac → GitHub
+<pre class="highlight"><code>Tu Mac → GitHub
 GitHub: ¿quién eres?
 Mac: aquí está mi token guardado
-GitHub: OK, eres esta cuenta</p>
-<pre class="codehilite"><code>---
-
-## Dónde se guarda en Mac
-
-Gracias a esto que vimos antes:
-
-```plain text
-credential.helper=osxkeychain
-</code></pre>
-
+GitHub: OK, eres esta cuenta</code></pre>
+<hr />
+<h2>Dónde se guarda en Mac</h2>
+<p>Gracias a esto que vimos antes:</p>
+<pre class="highlight"><code>credential.helper=osxkeychain</code></pre>
 <p>Tu token queda guardado en:</p>
 <p>👉 <strong>Llavero de macOS (Keychain Access)</strong></p>
 <p>Por eso normalmente solo te pide login una vez.</p>
@@ -204,77 +120,116 @@ credential.helper=osxkeychain
 <ol>
 <li>Clonas un repo usando URL HTTPS:</li>
 </ol>
-<p>```plain text
-https://github.com/usuario/repo.git</p>
-<pre class="codehilite"><code>1. Haces `git push`
-
-1. GitHub abre login en navegador
-
-1. Apruebas acceso
-
-1. macOS guarda el token automáticamente
-
-Y listo.
-
-No vuelves a verlo.
-
----
-
-## Ventajas
-
-- Fácil
-
-- Automático
-
-- Ideal para empezar
-
-## Desventajas
-
-- Depende del llavero
-
-- A veces pide login otra vez
-
-- Menos usado en setups avanzados
-
----
-
-# 2. SSH Key (la forma profesional)
-
-## Idea simple
-
-En vez de contraseña:
-
-👉 tu computadora tiene una **llave privada**.
-
-GitHub tiene la **llave pública**.
-
-Cuando te conectas:
-
-```plain text
-GitHub: demuestra que eres tú
+<pre class="highlight"><code>https://github.com/usuario/repo.git</code></pre>
+<ol>
+<li>Haces <code>git push</code></li>
+<li>GitHub abre login en navegador</li>
+<li>Apruebas acceso</li>
+<li>macOS guarda el token automáticamente</li>
+</ol>
+<p>Y listo.</p>
+<p>No vuelves a verlo.</p>
+<hr />
+<h2>Ventajas</h2>
+<ul>
+<li>Fácil</li>
+<li>Automático</li>
+<li>Ideal para empezar</li>
+</ul>
+<h2>Desventajas</h2>
+<ul>
+<li>Depende del llavero</li>
+<li>A veces pide login otra vez</li>
+<li>Menos usado en setups avanzados</li>
+</ul>
+<hr />
+<h1>2. SSH Key (la forma profesional)</h1>
+<h2>Idea simple</h2>
+<p>En vez de contraseña:</p>
+<p>👉 tu computadora tiene una <strong>llave privada</strong>.</p>
+<p>GitHub tiene la <strong>llave pública</strong>.</p>
+<p>Cuando te conectas:</p>
+<pre class="highlight"><code>GitHub: demuestra que eres tú
 Mac: firma con su llave privada
-GitHub: coincide → acceso permitido
-</code></pre>
-
+GitHub: coincide → acceso permitido</code></pre>
 <p>Nunca envías contraseña.</p>
 <hr />
 <h2>Qué se crea realmente</h2>
 <p>En tu Mac aparecen dos archivos:</p>
-<p>```plain text
-~/.ssh/id_ed25519        ← privada (NUNCA compartir)
-~/.ssh/id_ed25519.pub    ← pública (se sube a GitHub)</p>
-<pre class="codehilite"><code>---
-
-## Cómo se configura (resumen claro)
-
-### 1️⃣ Crear la llave
-
-```plain text
-ssh-keygen-t ed25519-C&quot;angelgarciadatablog@gmail.com&quot;
-</code></pre>
-
+<pre class="highlight"><code>~/.ssh/id_ed25519        ← privada (NUNCA compartir)
+~/.ssh/id_ed25519.pub    ← pública (se sube a GitHub)</code></pre>
+<hr />
+<h2>Cómo se configura (resumen claro)</h2>
+<h3>1️⃣ Crear la llave</h3>
+<pre class="highlight"><code>ssh-keygen-t ed25519-C"angelgarciadatablog@gmail.com"</code></pre>
 <p>(presionas Enter varias veces)</p>
 <hr />
+<h3>2️⃣ Copiar la llave pública</h3>
+<pre class="highlight"><code>cat ~/.ssh/id_ed25519.pub</code></pre>
+<p>Copias todo el texto.</p>
+<hr />
+<h3>3️⃣ Agregarla en GitHub</h3>
+<p>GitHub → Settings → SSH and GPG Keys → New SSH Key</p>
+<p>Pegas el contenido.</p>
+<hr />
+<h3>4️⃣ Usar URL SSH en repos</h3>
+<p>En lugar de:</p>
+<pre class="highlight"><code>https://github.com/usuario/repo.git</code></pre>
+<p>usas:</p>
+<pre class="highlight"><code>git@github.com:usuario/repo.git</code></pre>
+<hr />
+<h2>Ventajas</h2>
+<ul>
+<li>No vuelves a loguearte</li>
+<li>Más seguro</li>
+<li>Ideal para múltiples repos</li>
+<li>Estándar profesional</li>
+</ul>
+<h2>Desventaja</h2>
+<ul>
+<li>Primera configuración confunde un poco.</li>
+</ul>
+<hr />
+<h1>Diferencia CLAVE</h1>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>HTTPS Token</th>
+<th>SSH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Usa contraseña</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Guarda credencial</td>
+<td>Keychain</td>
+<td>archivo local</td>
+</tr>
+<tr>
+<td>Recomendado profesionalmente</td>
+<td>👍</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td>Fácil inicio</td>
+<td>⭐⭐⭐</td>
+<td>👍</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>Algo MUY importante que conecta con todo lo anterior</h1>
+<p>Ni el token ni la SSH key tienen relación con:</p>
+<pre class="highlight"><code>git config user.email</code></pre>
+<p>Eso solo firma commits.</p>
+<p>La autenticación vive aparte.</p>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

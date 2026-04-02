@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg:       #0f0f0f;
+  --bg-side:  #141414;
+  --border:   #242424;
+  --text:     #c9c9c9;
+  --text-dim: #777;
+  --text-head:#e8e8e8;
+  --accent:   #4a90d9;
+  --code-bg:  #1a1a1a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── SCROLLBARS ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  padding: 48px 60px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 48px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  gap: 16px;
+  z-index: 100;
+}
+.topbar a { color: var(--text-dim); text-decoration: none; font-size: 13px; }
+.topbar a:hover { color: var(--text); }
+.topbar .sep { color: var(--border); }
+
+/* ── CONTENIDO ── */
+.note-content { margin-top: 72px; }
+
+h1 { font-size: 26px; font-weight: 600; color: var(--text-head); margin: 72px 0 24px; letter-spacing: -0.02em; }
+h2 { font-size: 18px; font-weight: 600; color: var(--text-head); margin: 48px 0 12px; }
+h3 { font-size: 15px; font-weight: 500; color: var(--text-head); margin: 36px 0 8px; }
+h4 { font-size: 14px; font-weight: 500; color: var(--text-head); margin: 28px 0 8px; }
+
+p { margin-bottom: 16px; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+code {
+  font-family: 'Fira Code', monospace;
+  background: rgba(235,87,87,0.15);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #f28b82;
+}
+
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; color: inherit; }
+pre code.language-bash,
+pre code.language-bash * { color: #f28b82; }
+
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 8px 16px;
+  margin: 16px 0;
+  color: var(--text-dim);
+  background: var(--bg-side);
+  border-radius: 0 4px 4px 0;
+}
+
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+tr:last-child td { border-bottom: none; }
+
+ul, ol { padding-left: 20px; margin-bottom: 16px; }
+li { margin-bottom: 6px; }
+li > ul, li > ol { margin-top: 6px; margin-bottom: 0; }
+
+img { max-width: 100%; border-radius: 6px; margin: 16px 0; }
+
+hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  body { padding: 24px 20px; }
+  .topbar { padding: 0 16px; }
+  .note-content { margin-top: 60px; }
+}
