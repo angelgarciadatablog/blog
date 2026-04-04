@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Cómo se autentica Claude Code? (Mac)👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Inteligencia Artificial</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Claude</span>
+  </div>
+  <div class="note-content">
+    <h1>¿Cómo se autentica Claude Code? (Mac)👌</h1>
+    <h1>1. Iniciar autenticación</h1>
+<p>Claude Code usa tu cuenta de Anthropic. No necesitas configurar nada manualmente — el proceso es automático vía navegador.</p>
+<h1>2. Primera vez que ejecutas <code>claude</code></h1>
+<pre class="highlight"><code class="language-bash"># Navega primero a tu proyecto
+cd ~/proyectos/mi-proyecto
+
+# Ejecuta claude
+claude</code></pre>
+<p>Lo que ocurre en orden:</p>
+<ol>
+<li>Claude Code detecta que no hay sesión activa</li>
+<li>Se abre tu navegador automáticamente</li>
+<li>Inicias sesión con tu cuenta de Anthropic</li>
+<li>Autorizas el acceso</li>
+<li>El navegador te confirma que puedes cerrar la pestaña</li>
+<li>Tu terminal muestra la confirmación de seguridad del workspace:</li>
+</ol>
+<hr />
+<p>Respuesta:</p>
+<pre class="highlight"><code class="language-bash">Accessing workspace:
+/Users/tu_usuario/proyectos/mi-proyecto
+
+Quick safety check: Is this a project you created or one you trust?
+Claude Code'll be able to read, edit, and execute files here.
+
+❯ 1. Yes, I trust this folder
+  2. No, exit</code></pre>
+<p>Confirmas con <code>1</code> y Claude Code queda listo para usar</p>
+<blockquote>
+<p>⚠️ La autenticación con Anthropic solo ocurre <strong>una vez</strong>. Queda guardada en <code>~/.claude</code> y no te la pedirá de nuevo aunque cierres la terminal o reinicies la Mac.</p>
+</blockquote>
+<hr />
+<h1>3. ¿Desde qué directorio ejecutar <code>claude</code> la primera vez?</h1>
+<blockquote>
+<p>⚠️ <strong>Importante:</strong> En Mac, cuando abres la terminal por defecto te posiciona en tu directorio de usuario <code>/Users/tu_usuario</code>. Si ejecutas <code>claude</code> desde ahí, le estás dando acceso a <strong>todo lo que hay en tu usuario</strong> — documentos, descargas, proyectos, configuraciones, todo.</p>
+</blockquote>
+<p><strong>La buena práctica es navegar primero a tu proyecto:</strong></p>
+<pre class="highlight"><code class="language-bash"># ❌ Evitar — le das acceso a todo tu usuario
+cd ~
+claude
+
+# ✅ Correcto — navegas primero a tu proyecto específico
+cd ~/proyectos/mi-proyecto
+claude</code></pre>
+<hr />
+<h1>4. Las siguientes veces que ejecutas <code>claude</code></h1>
+<p>La autenticación ya está guardada. Lo único que ocurre es la confirmación del workspace si es un directorio nuevo:</p>
+<p><strong>En un directorio ya confiado → entra directo:</strong></p>
+<pre class="highlight"><code class="language-bash">cd ~/proyectos/mi-proyecto
+claude
+# Entra directamente sin preguntas</code></pre>
+<p><strong>En un directorio nuevo → te pregunta si confías:</strong></p>
+<pre class="highlight"><code class="language-bash">cd ~/proyectos/nuevo-proyecto
+claude
+# Muestra la confirmación de seguridad del workspace</code></pre>
+<blockquote>
+<p>💡 La confirmación de seguridad aparece <strong>una vez por directorio</strong>. Una vez que confirmas, Claude Code recuerda ese directorio.</p>
+</blockquote>
+<hr />
+<h1>5. La pantalla de inicio de Claude Code</h1>
+<p>Una vez autenticado y dentro de un directorio, verás esta pantalla:</p>
+<pre class="highlight"><code class="language-bash">╭─── Claude Code v2.1.81 ──────────────────────────────────────────╮
+│                                        │ Tips for getting started │
+│         Welcome back Angel!            │ Run /init to create a    │
+│                                        │ CLAUDE.md file           │
+│   Sonnet 4.6 · Claude Pro ·            │                          │
+│   tu@gmail.com's Organization          │ Recent activity          │
+│   /Users/tu_usuario                    │ ...                      │
+╰──────────────────────────────────────────────────────────────────╯
+❯</code></pre>
+<p>Lo que muestra:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Qué significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Welcome back</code></td>
+<td>Ya estás autenticado</td>
+</tr>
+<tr>
+<td><code>Sonnet 4.6 · Claude Pro</code></td>
+<td>Modelo y plan activos</td>
+</tr>
+<tr>
+<td><code>tu@gmail.com's Organization</code></td>
+<td>Cuenta vinculada</td>
+</tr>
+<tr>
+<td><code>/Users/tu_usuario</code></td>
+<td>Directorio donde está operando</td>
+</tr>
+<tr>
+<td><code>Recent activity</code></td>
+<td>Últimas sesiones, puedes retomarlas con <code>/resume</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>⚠️ Advertencia de directorio home</h2>
+<p>Si ejecutaste <code>claude</code> desde tu directorio home verás este aviso:</p>
+<p><code>Note: You have launched claude in your home directory. For the best experience...</code></p>
+<blockquote>
+<p>⚠️ Claude Code mismo te está advirtiendo que no es la mejor práctica. Sal con <code>/exit</code> y vuelve a entrar desde tu proyecto específico.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>⚠️ Para Claude Code, proyecto = ruta exacta. Siempre entra desde la raíz de tu proyecto, no desde un subdirectorio. De lo contrario se crearán sesiones separadas aunque sea el mismo proyecto.</p>
+</blockquote>
+<h2>Salir de Claude Code</h2>
+<pre class="highlight"><code class="language-bash"># Opción 1 — comando
+/exit
+
+# Opción 2 — atajo de teclado
+Ctrl + C</code></pre>
+<h1>6. Conceptos clave antes de continuar</h1>
+<p>Antes de usar Claude Code en el día a día, hay tres conceptos que conviene tener claros:</p>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Qué es</th>
+<th>Dónde vive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sesión</strong></td>
+<td>El historial de una conversación con Claude en un directorio específico (queda en local)</td>
+<td><code>~/.claude/projects/</code> en tu Mac</td>
+</tr>
+<tr>
+<td><strong>CLAUDE.md</strong></td>
+<td>Archivo de instrucciones persistentes para Claude en un proyecto</td>
+<td>En la raíz de tu proyecto, junto a tu código. A diferencia de las sesiones, puedes commitearlo a git y compartirlo con tu equipo.</td>
+</tr>
+<tr>
+<td><strong>Auto memory</strong></td>
+<td>Notas que Claude escribe solo sobre tus preferencias y patrones (queda en local)</td>
+<td><code>~/.claude/projects/&lt;proyecto&gt;/memory/</code></td>
+</tr>
+</tbody>
+</table>
+<p>Los tres son independientes entre sí:</p>
+<ul>
+<li>Puedes tener sesiones sin tener <code>CLAUDE.md</code></li>
+<li>Puedes tener <code>CLAUDE.md</code> sin sesiones previas</li>
+<li>El auto memory se genera solo con el uso</li>
+</ul>
+<p>💡 Cada uno de estos conceptos tiene su propio bloque en esta documentación. Por ahora basta con saber que existen y para qué sirven.</p>
+<p><strong>CLAUDE.md</strong> → SÍ está en tu proyecto:</p>
+<pre class="highlight"><code class="language-bash">~/proyectos/mi-proyecto/
+├── CLAUDE.md        ← aquí, junto a tu código
+├── src/
+└── package.json</code></pre>
+<blockquote>
+<p>💡 <code>/init</code> es un comando que genera automáticamente un archivo <code>CLAUDE.md</code> en tu proyecto — el archivo donde le das instrucciones persistentes a Claude. Lo veremos en detalle en el bloque dedicado a CLAUDE.md.</p>
+</blockquote>
+<p><strong>Sesiones</strong> → NO están en tu proyecto, están en <code>~/.claude</code>:</p>
+<pre class="highlight"><code class="language-bash">~/.claude/projects/
+└── Users-angel-proyectos-mi-proyecto/  ← carpeta que representa tu proyecto
+    └── [historial de conversaciones]</code></pre>
+<hr />
+<p>O sea Claude crea una carpeta en <code>~/.claude/projects/</code> que representa a tu proyecto, pero el historial de conversaciones vive ahí, no dentro de tu proyecto real.</p>
+<blockquote>
+<p>⚠️ <strong>Las sesiones crecen con el tiempo.</strong> Cada conversación que tengas con Claude Code se guarda localmente. En el largo plazo esto puede ocupar espacio considerable en tu Mac. Revisa periódicamente cuánto ocupan:</p>
+</blockquote>
+<h1>7. Verificar que estás autenticado</h1>
+<pre class="highlight"><code class="language-bash">claude doctor</code></pre>
+<p>Busca esta línea en el output:</p>
+<p><code>✓ Logged in as: tu@email.com</code></p>
+<hr />
+<h1>8. Cerrar sesión</h1>
+<pre class="highlight"><code class="language-bash">claude logout</code></pre>
+<blockquote>
+<p>💡 Útil si necesitas cambiar de cuenta o si alguien más va a usar Claude Code en el mismo usuario de Mac.</p>
+</blockquote>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

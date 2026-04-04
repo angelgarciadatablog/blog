@@ -33,6 +33,37 @@ Una **categoría** es un tema principal. Cada categoría corresponde a una pági
 
 Las categorías se gestionan directamente en el script (`RAICES` en `sync/descargar_notas.py`). Agregar una nueva categoría implica crear una página raíz en Notion, obtener su ID y añadirla al diccionario.
 
+### ⚠️ Al agregar una nueva categoría hay que actualizar 3 lugares
+
+`CAT_LABELS` está definido en **dos sitios distintos** — uno para el backend (Python) y otro para el frontend (JavaScript). Olvidar cualquiera de los dos hace que el label no se muestre correctamente:
+
+| Archivo | Qué actualizar |
+|---------|---------------|
+| `sync/descargar_notas.py` | Añadir entrada en `RAICES` y en `CAT_LABELS` |
+| `assets/app.js` | Añadir entrada en `CAT_LABELS` (línea 1) |
+
+Ejemplo para una nueva categoría `notas-ia`:
+
+```python
+# sync/descargar_notas.py
+RAICES = {
+    ...
+    "332477bc-d0eb-8042-be0a-f27c6d6a2013": "notas-ia",
+}
+CAT_LABELS = {
+    ...
+    "notas-ia": "Inteligencia Artificial",
+}
+```
+
+```javascript
+// assets/app.js
+const CAT_LABELS = {
+  ...
+  'notas-ia': 'Inteligencia Artificial',
+};
+```
+
 ### Carpetas (grupos)
 
 Dentro de cada categoría existen **carpetas** (llamadas internamente "grupos"), que representan subtemas. Por ejemplo, dentro de `notas-gcp` existe la carpeta "CLI de google cloud - SDK". Estas carpetas son páginas hijo de la página raíz en Notion y agrupan notas relacionadas.

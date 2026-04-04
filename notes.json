@@ -421,5 +421,86 @@
     "grupo": "Otros",
     "fecha_modificacion": "2026-03-29T06:56:00+00:00",
     "fecha_creacion": "2025-11-21T11:48:00.000Z"
+  },
+  {
+    "title": "Introducción a Claude Code (Mac) 👌",
+    "slug": "notas-ia/introduccion-a-claude-code-mac-",
+    "category": "notas-ia",
+    "catLabel": "Inteligencia Artificial",
+    "grupo": "Claude",
+    "fecha_modificacion": "2026-04-04T02:02:00+00:00",
+    "fecha_creacion": "2026-04-03T03:47:00.000Z"
+  },
+  {
+    "title": "¿Cómo se autentica Claude Code? (Mac)👌",
+    "slug": "notas-ia/como-se-autentica-claude-code-mac",
+    "category": "notas-ia",
+    "catLabel": "Inteligencia Artificial",
+    "grupo": "Claude",
+    "fecha_modificacion": "2026-04-04T01:24:00+00:00",
+    "fecha_creacion": "2026-04-03T23:15:00.000Z"
+  },
+  {
+    "title": "Estructura de archivos de Claude Code (.claude y claude.md) (Mac)👌",
+    "slug": "notas-ia/estructura-de-archivos-de-claude-code-claude-y-claudemd-mac",
+    "category": "notas-ia",
+    "catLabel": "Inteligencia Artificial",
+    "grupo": "Claude",
+    "fecha_modificacion": "2026-04-04T08:17:00+00:00",
+    "fecha_creacion": "2026-04-04T01:56:00.000Z"
+  },
+  {
+    "title": "Configuración de Claude Code (Mac)👌 ",
+    "slug": "notas-ia/configuracion-de-claude-code-mac",
+    "category": "notas-ia",
+    "catLabel": "Inteligencia Artificial",
+    "grupo": "Claude",
+    "fecha_modificacion": "2026-04-04T08:20:00+00:00",
+    "fecha_creacion": "2026-04-04T03:05:00.000Z"
+  },
+  {
+    "title": "Claude Code en la práctica: comandos, atajos y flujo de trabajo (Mac)👌",
+    "slug": "notas-ia/claude-code-en-la-practica-comandos-atajos-y-flujo-de-trabajo-mac",
+    "category": "notas-ia",
+    "catLabel": "Inteligencia Artificial",
+    "grupo": "Claude",
+    "fecha_modificacion": "2026-04-04T08:21:00+00:00",
+    "fecha_creacion": "2026-04-04T06:53:00.000Z"
+  },
+  {
+    "title": "Comando /init y CLAUDE.md",
+    "slug": "notas-ia/comando-init-y-claudemd",
+    "category": "notas-ia",
+    "catLabel": "Inteligencia Artificial",
+    "grupo": "Claude",
+    "fecha_modificacion": "2026-04-02T02:37:00+00:00",
+    "fecha_creacion": "2026-02-28T10:33:00.000Z"
+  },
+  {
+    "title": "Skills",
+    "slug": "notas-ia/skills",
+    "category": "notas-ia",
+    "catLabel": "Inteligencia Artificial",
+    "grupo": "Claude",
+    "fecha_modificacion": "2026-04-02T02:37:00+00:00",
+    "fecha_creacion": "2026-02-28T11:36:00.000Z"
+  },
+  {
+    "title": "Memoria de proyecto",
+    "slug": "notas-ia/memoria-de-proyecto",
+    "category": "notas-ia",
+    "catLabel": "Inteligencia Artificial",
+    "grupo": "Claude",
+    "fecha_modificacion": "2026-04-02T02:37:00+00:00",
+    "fecha_creacion": "2026-03-01T13:56:00.000Z"
+  },
+  {
+    "title": "Links importantes",
+    "slug": "notas-ia/links-importantes",
+    "category": "notas-ia",
+    "catLabel": "Inteligencia Artificial",
+    "grupo": "Claude",
+    "fecha_modificacion": "2026-04-02T02:50:00+00:00",
+    "fecha_creacion": "2026-04-02T02:50:00.000Z"
   }
 ]

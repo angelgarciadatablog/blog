@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comando /init y CLAUDE.md · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Inteligencia Artificial</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Claude</span>
+  </div>
+  <div class="note-content">
+    <h1>Comando /init y CLAUDE.md</h1>
+    <hr />
+<h1><strong>Documentación: Comando /init y CLAUDE.md</strong></h1>
+<h2><strong>¿Qué es CLAUDE.md?</strong></h2>
+<p>CLAUDE.md es un archivo de documentación que Claude lee automáticamente al iniciar una sesión. Le dice a Claude:</p>
+<ul>
+<li>Qué es tu proyecto</li>
+<li>Qué tecnologías usas</li>
+<li>Qué reglas seguir</li>
+<li>Convenciones del equipo</li>
+</ul>
+<p><strong>Analogía:</strong> Es como un manual de instrucciones del proyecto para Claude.</p>
+<h2><strong>Comando /init</strong></h2>
+<h3><strong>¿Qué hace?</strong></h3>
+<p>Crea automáticamente un archivo CLAUDE.md analizando tu proyecto.</p>
+<h3><strong>¿Cuándo usarlo?</strong></h3>
+<ul>
+<li><strong>Primera vez</strong> que usas Claude Code en un proyecto</li>
+<li>Cuando quieres que Claude entienda el contexto del proyecto</li>
+</ul>
+<h3><strong>Cómo usarlo:</strong></h3>
+<pre class="highlight"><code class="language-bash">cd ~/mi-proyecto
+claude
+/init</code></pre>
+<h3><strong>Resultado:</strong></h3>
+<p>Claude genera un archivo <code>CLAUDE.md</code> con:</p>
+<ul>
+<li>Descripción del proyecto</li>
+<li>Stack tecnológico detectado</li>
+<li>Estructura de carpetas</li>
+<li>Comandos útiles</li>
+<li>Convenciones sugeridas</li>
+</ul>
+<h3><strong>✅ Cuándo actualizar CLAUDE.md:</strong></h3>
+<ul>
+<li>Cambias de stack tecnológico</li>
+<li>Agregas/quitas librerías importantes</li>
+<li>Cambias convenciones de código</li>
+<li>Cambias estructura del proyecto</li>
+<li>Nuevos miembros se unen al equipo</li>
+</ul>
+<h2><strong>Cómo actualizar CLAUDE.md</strong></h2>
+<h3><strong>Opción 1: Volver a ejecutar /init (NO recomendado)</strong></h3>
+<pre class="highlight"><code>/init</code></pre>
+<p><strong>Por qué NO usarla:</strong></p>
+<ul>
+<li>❌ Sobrescribe TODO el archivo</li>
+<li>❌ Pierdes personalizaciones manuales</li>
+<li>❌ Pierdes reglas de negocio específicas</li>
+<li>⚠️ Solo útil si quieres empezar desde cero</li>
+</ul>
+<h3><strong>Opción 2: Actualización específica (Para cambios pequeños)</strong></h3>
+<p>Dentro de Claude Code:</p>
+<pre class="highlight"><code>"Actualiza CLAUDE.md: ahora usamos React 18 en lugar de 17"</code></pre>
+<p><strong>Cuándo usarla:</strong></p>
+<ul>
+<li>✅ Cambio muy específico que conoces bien</li>
+<li>✅ Quieres control total sobre qué se actualiza</li>
+</ul>
+<p><strong>Riesgo:</strong></p>
+<ul>
+<li>⚠️ Puedes olvidar mencionar otros cambios relacionados</li>
+</ul>
+<h2><strong>Opción 3: Detección automática (RECOMENDADO)</strong> ⭐</h2>
+<pre class="highlight"><code>"Analiza el proyecto actual, compáralo con CLAUDE.md,
+y actualízalo con todos los cambios que encuentres.
+Mantén las reglas de negocio y convenciones existentes."</code></pre>
+<p><strong>Por qué es la mejor:</strong></p>
+<ul>
+<li>✅ Claude detecta TODOS los cambios automáticamente</li>
+<li>✅ No olvidas nada</li>
+<li>✅ Mantiene contenido personalizado</li>
+<li>✅ No sobrescribe reglas de negocio</li>
+</ul>
+<p><strong>Prompt completo recomendado:</strong></p>
+<pre class="highlight"><code>"Actualiza CLAUDE.md basándote en el estado actual del proyecto:
+
+1. Analiza package.json y detecta cambios en dependencias
+2. Revisa archivos de configuración (vite.config, tsconfig, etc)
+3. Verifica la estructura de carpetas actual
+4. Compara con el CLAUDE.md existente
+5. Actualiza las secciones técnicas (Stack, Configuración)
+6. MANTÉN intactas las secciones de:
+   - Reglas de negocio
+   - Convenciones personalizadas
+   - Notas del equipo
+7. Agrega una sección de changelog al final"</code></pre>
+<h3><strong>Opción 5: Crear un skill personalizado (Automatización completa)</strong> 🎯</h3>
+<p>Puedes crear tu propio comando <code>/actualizar-claude</code> que ejecute el proceso automáticamente.</p>
+<p><strong>Crear el skill:</strong></p>
+<pre class="highlight"><code class="language-bash">mkdir -p ~/.claude/skills/actualizar-claude
+nano ~/.claude/skills/actualizar-claude/SKILL.md</code></pre>
+<p><strong>Contenido del SKILL.md:</strong></p>
+<pre class="highlight"><code class="language-markdown">actualizar-claude
+description: Actualiza CLAUDE.md detectando cambios en el proyecto automáticamente--Actualiza CLAUDE.md basándote en el estado actual del proyecto:
+1. Analiza package.json y detecta cambios en dependencias
+2. Revisa archivos de configuración (vite.config, tsconfig, webpack.config, etc)
+3. Verifica la estructura de carpetas actual
+4. Compara con el CLAUDE.md existente
+5. Actualiza las secciones técnicas:
+  Stack tecnológico
+  Configuración del proyecto
+  Estructura de carpetas
+6. MANTÉN intactas las secciones de:
+  Reglas de negocio
+  Convenciones personalizadas del equipo
+  Notas importantes
+  Decisiones de arquitectura
+7. Agrega una sección "Última actualización" con la fecha de hoy
+8. Lista los cambios detectados en formato de changelog
+Sé exhaustivo en la detección de cambios pero conservador al mantener documentación existente.</code></pre>
+<p><strong>Usar el skill:</strong></p>
+<pre class="highlight"><code class="language-markdown"># Dentro de Claude Code:
+/actualizar-claude</code></pre>
+<p>✅ Claude ejecuta todo el proceso automáticamente
+✅ Detecta cambios
+✅ Actualiza CLAUDE.md
+✅ Mantiene reglas de negocio</p>
+<p><strong>Ventajas:</strong></p>
+<ul>
+<li>✅ Un solo comando ejecuta todo el proceso</li>
+<li>✅ Consistente en todos tus proyectos</li>
+<li>✅ Reutilizable (skill personal global)</li>
+<li>✅ No tienes que recordar el prompt largo</li>
+</ul>
+<p><strong>Ubicación:</strong></p>
+<ul>
+<li>Skill personal: <code>~/.claude/skills/</code> (funciona en TODOS los proyectos)</li>
+<li>Skill de proyecto: <code>.claude/skills/</code> (solo ese proyecto)</li>
+</ul>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

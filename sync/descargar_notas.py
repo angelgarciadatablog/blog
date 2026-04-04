@@ -18,11 +18,13 @@ notion = Client(auth=os.getenv("NOTION_TOKEN"))
 RAICES = {
     "290477bc-d0eb-8013-a785-d8784b2f8210": "notas-gcp",
     "290477bc-d0eb-807e-a377-f5b7cbbf8b9e": "notas-git",
+    "332477bc-d0eb-8042-be0a-f27c6d6a2013": "notas-ia",
 }
 
 CAT_LABELS = {
     "notas-gcp": "Google Cloud Platform",
     "notas-git": "Git & GitHub",
+    "notas-ia": "Inteligencia Artificial",
 }
 
 _DIR          = os.path.dirname(os.path.abspath(__file__))

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Inteligencia Artificial</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Claude</span>
+  </div>
+  <div class="note-content">
+    <h1>Skills</h1>
+    <p>Los skills son archivos <code>.md</code> que pueden guardarse localmente o globalmente, funcionan en <strong>Claude Code, claude.ai y API</strong>, y pueden invocarse explícitamente o activarse automáticamente.</p>
+<h2>Defininición:</h2>
+<ul>
+<li>Son archivos <code>.md</code> (con YAML frontmatter + instrucciones)</li>
+<li>Se pueden guardar en <code>.claude/</code> en tu carpeta de usuario</li>
+</ul>
+<h3><strong>Ubicaciones posibles</strong> (no solo una):</h3>
+<ul>
+<li><code>~/.claude/skills/nombre/</code> → Global (todos los proyectos)</li>
+<li><code>.claude/skills/nombre/</code> → Local del repo (solo ese proyecto)</li>
+<li>Skills empresariales (compartidos en organización)</li>
+</ul>
+<h3><strong>SÍ funcionan en el navegador</strong> (claude.ai):</h3>
+<p>Según la documentación oficial, los skills <strong>sí funcionan en claude.ai</strong> si:</p>
+<ul>
+<li>Tienes plan Pro, Max, Team o Enterprise</li>
+<li>Tienes "code execution" habilitado</li>
+<li>Los subes como archivos ZIP en <strong>Settings → Features → Custom Skills</strong></li>
+</ul>
+<h3><strong>También funcionan en la API</strong>:</h3>
+<p>Los skills funcionan en:</p>
+<ul>
+<li>Claude Code (CLI)</li>
+<li>Claude.ai (navegador) - subiéndolos manualmente</li>
+<li>Claude API - usando el parámetro <code>container</code> con <code>skills</code></li>
+</ul>
+<h2>Importante entender al momento de actualizar un skill:</h2>
+<table>
+<thead>
+<tr>
+<th>Claude Code (local)</th>
+<th>claude.ai (navegador)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lee automáticamente de <code>~/.claude/skills/</code></td>
+<td>Necesitas subir ZIP manualmente</td>
+</tr>
+<tr>
+<td>Se actualiza si editas el archivo</td>
+<td>Es una copia separada, hay que re-subir si cambias</td>
+</tr>
+<tr>
+<td><code>/comando</code> funciona</td>
+<td>No hay comandos <code>/</code>, solo invocación natural</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

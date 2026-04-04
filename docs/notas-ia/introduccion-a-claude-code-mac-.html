@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introducción a Claude Code (Mac) 👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Inteligencia Artificial</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Claude</span>
+  </div>
+  <div class="note-content">
+    <h1>Introducción a Claude Code (Mac) 👌</h1>
+    <h1>1. Formas de utilizar Claude</h1>
+<table>
+<thead>
+<tr>
+<th>Forma</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>claude.ai</strong></td>
+<td>Chat en el navegador, uso diario, exploración</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>Integrar Claude en tus apps y scripts</td>
+</tr>
+<tr>
+<td><strong>Claude Code</strong></td>
+<td>Trabajar con Claude directo en tu terminal y proyectos</td>
+</tr>
+</tbody>
+</table>
+<h1>2. ¿Qué es Claude Code?</h1>
+<p>Claude Code es el CLI oficial de Anthropic. Te permite trabajar con Claude <strong>directamente desde tu terminal</strong>, dentro de tus proyectos reales. No es solo un chat — Claude puede leer tus archivos, escribir código, ejecutar comandos y entender el contexto de tu proyecto completo.</p>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Precio</th>
+<th>Claude Code</th>
+<th>Para quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Free</strong></td>
+<td>Gratis</td>
+<td>❌ No incluido</td>
+<td>Explorar claude.ai</td>
+</tr>
+<tr>
+<td><strong>Pro</strong></td>
+<td>~$20/mes</td>
+<td>✅ Incluido</td>
+<td>Uso intensivo, devs</td>
+</tr>
+<tr>
+<td><strong>Max</strong></td>
+<td>~$100/mes</td>
+<td>✅ Incluido</td>
+<td>Uso muy intensivo</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ <strong>Importante:</strong> El plan gratuito <strong>no incluye acceso a Claude Code</strong>. Necesitas mínimo el plan Pro para usarlo.</p>
+<h1>3. ¿Ya tienes Claude Code?</h1>
+<pre class="highlight"><code class="language-bash">claude --version</code></pre>
+<table>
+<thead>
+<tr>
+<th>Resultado</th>
+<th>Qué significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Muestra una versión (ej: <code>2.1.81</code>)</td>
+<td>✅ Ya lo tienes, continúa al 3.3</td>
+</tr>
+<tr>
+<td><code>command not found</code></td>
+<td>❌ Hay que instalarlo</td>
+</tr>
+</tbody>
+</table>
+<h1>4. Instalar Claude Code</h1>
+<pre class="highlight"><code class="language-bash">curl -fsSL https://claude.ai/install.sh | bash</code></pre>
+<p>Este comando siempre instala la versión más reciente. No hay versión hardcodeada.</p>
+<p>Respuesta:</p>
+<pre class="highlight"><code class="language-bash">Setting up Claude Code...
+
+✔ Claude Code successfully installed!        
+
+  Version: 2.1.91
+
+  Location: ~/.local/bin/claude
+
+
+  Next: Run claude --help to get started
+
+⚠ Setup notes:
+  • Native installation exists but ~/.local/bin is not in your PATH. Run:
+
+  echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc
+
+
+✅ Installation complete!</code></pre>
+<p>Una vez instalado, Claude Code se guarda en:</p>
+<pre class="highlight"><code class="language-bash">~/.local/bin/claude</code></pre>
+<blockquote>
+<p>💡 A diferencia de n8n u otras herramientas de Node.js, Claude Code es <strong>autónomo</strong> — no comparte ni depende de la versión de Node.js que tengas en nvm.</p>
+</blockquote>
+<h3>⚠️ Advertencia post-instalación: PATH no configurado</h3>
+<p>Es posible que al terminar la instalación veas este mensaje:</p>
+<pre class="highlight"><code class="language-bash">~/.local/bin is not in your PATH</code></pre>
+<p>Esto significa que aunque Claude Code está instalado, tu terminal aún no sabe dónde encontrarlo. Para resolverlo ejecuta:</p>
+<pre class="highlight"><code class="language-bash">echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</code></pre>
+<blockquote>
+<p>💡 Este comando hace dos cosas: agrega <code>~/.local/bin</code> a tu PATH de forma permanente en <code>~/.zshrc</code>, y recarga la configuración para que tome efecto inmediatamente sin tener que cerrar la terminal.</p>
+</blockquote>
+<p>Luego verifica que quedó bien:</p>
+<pre class="highlight"><code class="language-bash">claude --version</code></pre>
+<hr />
+<h2>4.1 ¿Claude Code instala Node.js en mi sistema?</h2>
+<p>No. Claude Code es un ejecutable autónomo con su propio runtime interno. Ese runtime <strong>no queda disponible</strong> para el sistema ni para otras herramientas.</p>
+<pre class="highlight"><code class="language-bash">Claude Code → runtime interno propio → solo lo usa él
+n8n         → necesita Node.js de nvm → son completamente independientes</code></pre>
+<blockquote>
+<p>⚠️ Si necesitas Node.js para otras herramientas como n8n, debes instalarlo por separado con nvm. La instalación de Claude Code no te lo proporciona.</p>
+</blockquote>
+<hr />
+<h2>4.2 ¿Qué pasa si hay varios usuarios en la misma Mac?</h2>
+<p>Claude Code se instala en el directorio home de cada usuario. Cada usuario debe instalarlo de forma independiente:</p>
+<pre class="highlight"><code class="language-bash">Tu Mac
+├── Usuario 1 (angel)
+│   └── ~/.local/bin/claude  ✅ tiene Claude Code
+│
+└── Usuario 2
+    └── ~/.local/bin/        ❌ no existe, debe instalarlo por su cuenta</code></pre>
+<blockquote>
+<p>💡 Misma lógica que nvm — cada usuario tiene su propio entorno aislado.</p>
+</blockquote>
+<h2>4.3 Si en algún momento necesitas desinstalarlo:</h2>
+<pre class="highlight"><code class="language-bash"># Eliminar el binario de claude
+rm -f ~/.local/bin/claude
+
+# Eliminar claude (archivos de versión)
+rm -rf ~/.local/share/claude
+
+# Eliminar configuración y historial (opcional) de claude
+rm -rf ~/.claude
+rm ~/.claude.json</code></pre>
+<blockquote>
+<p>⚠️ El último bloque elimina toda tu configuración, herramientas permitidas, servidores MCP y historial de sesiones. Omítelo si solo quieres reinstalar.</p>
+</blockquote>
+<h2>4.4 ¿Cuánto espacio ocupa Claude Code?</h2>
+<pre class="highlight"><code class="language-bash"># Ver cuánto pesa el binario
+du -sh ~/.local/bin/claude
+
+# Ver cuánto pesa el runtime
+du -sh ~/.local/share/claude
+
+# Ver cuánto pesa la configuración
+du -sh ~/.claude</code></pre>
+<table>
+<thead>
+<tr>
+<th>Ruta</th>
+<th>Peso aprox.</th>
+<th>Qué contiene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.local/bin/claude</code></td>
+<td>0B</td>
+<td>Symlink (acceso directo al binario real)</td>
+</tr>
+<tr>
+<td><code>~/.local/share/claude</code></td>
+<td>~544MB</td>
+<td>Binario real + runtime interno</td>
+</tr>
+<tr>
+<td><code>~/.claude</code></td>
+<td>~68MB inicial</td>
+<td>Configuración, historial, caché</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <code>~/.local/bin/claude</code> pesa 0B porque no es el archivo real sino un <strong>symlink</strong> que apunta a <code>~/.local/share/claude</code>. El peso real está en los 544MB.</p>
+</blockquote>
+<h3>¿Crece con el uso?</h3>
+<p>Sí, principalmente <code>~/.claude</code> aumenta a medida que usas Claude Code:</p>
+<table>
+<thead>
+<tr>
+<th>Qué agregas</th>
+<th>Dónde crece</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Skills</td>
+<td><code>~/.claude</code></td>
+</tr>
+<tr>
+<td>Configuración de agentes</td>
+<td><code>~/.claude</code></td>
+</tr>
+<tr>
+<td>Servidores MCP</td>
+<td><code>~/.claude</code></td>
+</tr>
+<tr>
+<td>Historial de sesiones</td>
+<td><code>~/.claude</code></td>
+</tr>
+<tr>
+<td>Actualizaciones de Claude Code</td>
+<td><code>~/.local/share/claude</code></td>
+</tr>
+</tbody>
+</table>
+<h3>En una Mac con varios usuarios:</h3>
+<pre class="highlight"><code class="language-bash">Usuario 1 → ~/.local/share/claude ≈ 544MB
+           → ~/.claude            ≈ crece según uso
+
+Usuario 2 → ~/.local/share/claude ≈ 544MB
+           → ~/.claude            ≈ crece según uso
+
+Total base ≈ ~1GB solo en binarios</code></pre>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

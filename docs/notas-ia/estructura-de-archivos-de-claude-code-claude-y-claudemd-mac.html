@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estructura de archivos de Claude Code (.claude y claude.md) (Mac)👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Inteligencia Artificial</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Claude</span>
+  </div>
+  <div class="note-content">
+    <h1>Estructura de archivos de Claude Code (.claude y claude.md) (Mac)👌</h1>
+    <h1><strong>1. ¿Por qué entender esto?</strong></h1>
+<p>Cuando trabajas con Claude Code, los archivos y carpetas que se generan no son aleatorios. Cada uno tiene un propósito específico y vive en un lugar determinado. Entender esta estructura te evita confusiones, te ayuda a depurar problemas y te permite sacarle el máximo provecho.</p>
+<h1>2. usuario/.claude/ (en la carpeta global)</h1>
+<p>Es un directorio oculto que guarda <strong>configuraciones, credenciales y datos persistentes</strong> que usa Claude en tu sistema, para que funcione correctamente.</p>
+<h2><strong>2.1 ¿Cuándo se crea?</strong></h2>
+<p>Se crea en <strong>dos momentos distintos</strong>, no de golpe:</p>
+<pre class="highlight"><code class="language-bash">Durante la instalación de Claude Code:
+usuario/.claude/
+├── backups/
+├── cache/
+└── downloads/</code></pre>
+<pre class="highlight"><code class="language-bash">Al ejecutar claude por primera vez (desde cualquier directorio):
+usuario/.claude/ agrega:
+├── history.jsonl
+├── mcp-needs-auth-cache.json
+├── plugins/
+├── projects/
+├── sessions/
+└── settings.json</code></pre>
+<blockquote>
+<p>💡 Claude Code nunca toca tu proyecto sin que se lo pidas. Todo lo que genera automáticamente vive en <code>usuario/.claude/</code>, nunca en tu proyecto.</p>
+</blockquote>
+<h2>2.2 Estructura completa con el uso</h2>
+<p>Con el tiempo, a medida que usas más funcionalidades, aparecen carpetas adicionales:</p>
+<pre class="highlight"><code class="language-bash">~/.claude/
+├── backups/              ← instalación
+├── cache/                ← instalación
+├── downloads/            ← instalación
+├── history.jsonl         ← primer uso
+├── mcp-needs-auth-cache.json ← primer uso
+├── plugins/              ← primer uso
+├── projects/             ← primer uso
+├── sessions/             ← primer uso
+├── settings.json         ← primer uso
+├── debug/                ← cuando hay errores o modo debug
+├── file-history/         ← historial de archivos editados
+├── ide/                  ← cuando conectas un IDE
+├── plans/                ← cuando usas modo plan
+├── session-env/          ← snapshots del entorno por sesión
+├── shell-snapshots/      ← estado del shell en cada interacción
+├── skills/               ← cuando creas o usas skills
+├── statsig/              ← métricas de uso
+├── telemetry/            ← datos de telemetría
+└── todos/                ← cuando usas tareas</code></pre>
+<blockquote>
+<p>💡 Las carpetas que aparecen con el uso no se crean vacías — se crean cuando hay algo que guardar en ellas. Cada una se explica en detalle en su bloque correspondiente.</p>
+</blockquote>
+<h2>2.3 ¿Qué contiene cada carpeta base?</h2>
+<table>
+<thead>
+<tr>
+<th>Carpeta/Archivo</th>
+<th>Qué contiene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>backups/</code></td>
+<td>Respaldos automáticos de archivos antes de editarlos</td>
+</tr>
+<tr>
+<td><code>cache/</code></td>
+<td>Caché general de Claude Code</td>
+</tr>
+<tr>
+<td><code>downloads/</code></td>
+<td>Archivos descargados durante sesiones</td>
+</tr>
+<tr>
+<td><code>history.jsonl</code></td>
+<td>Historial de todos los comandos ejecutados</td>
+</tr>
+<tr>
+<td><code>mcp-needs-auth-cache.json</code></td>
+<td>Caché de servidores MCP que necesitan autenticación</td>
+</tr>
+<tr>
+<td><code>plugins/</code></td>
+<td>Plugins instalados globalmente</td>
+</tr>
+<tr>
+<td><code>projects/</code></td>
+<td>Sesiones e historial de conversaciones por proyecto</td>
+</tr>
+<tr>
+<td><code>sessions/</code></td>
+<td>Datos de sesiones activas</td>
+</tr>
+<tr>
+<td><code>settings.json</code></td>
+<td>Configuración global de Claude Code</td>
+</tr>
+</tbody>
+</table>
+<h3>Una por usuario</h3>
+<p><code>~/.claude/</code> es personal — cada usuario de Mac tiene la suya:</p>
+<pre class="highlight"><code class="language-bash">Tu Mac
+├── Usuario angel
+│   └── ~/.claude/    ✅ su propia carpeta global
+│
+└── Usuario datablog
+    └── ~/.claude/    ✅ su propia carpeta global, independiente</code></pre>
+<h1>3. proyecto/.claude/ (dentro del proyecto)</h1>
+<p>A diferencia de <code>usuario/.claude/</code> que se crea durante la instalación, la carpeta <code>.claude/</code> dentro de un proyecto <strong>se crea bajo demanda</strong> — solo cuando hay algo que persistir.</p>
+<h2>3.1 ¿Cómo se genera?</h2>
+<p>No existe un comando que la cree explícitamente. Se genera de forma implícita:</p>
+<table>
+<thead>
+<tr>
+<th>Acción</th>
+<th>Qué crea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cambiar una preferencia personal en <code>/config</code></td>
+<td><code>.claude/settings.local.json</code></td>
+</tr>
+<tr>
+<td>Cambiar una configuración del equipo en <code>/config</code></td>
+<td><code>.claude/settings.json</code></td>
+</tr>
+<tr>
+<td>Agregar reglas</td>
+<td><code>.claude/rules/</code></td>
+</tr>
+<tr>
+<td>Agregar skills del proyecto</td>
+<td><code>.claude/skills/</code></td>
+</tr>
+<tr>
+<td>Agregar agentes</td>
+<td><code>.claude/agents/</code></td>
+</tr>
+</tbody>
+</table>
+<h2>3.2 settings.json vs settings.local.json</h2>
+<p>Al cambiar configuraciones en <code>/config</code>, Claude Code decide inteligentemente dónde guardar cada cambio:</p>
+<table>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Para qué</th>
+<th>¿Se commitea a git?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>settings.json</code></td>
+<td>Configuración compartida con el equipo</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>settings.local.json</code></td>
+<td>Preferencias personales del proyecto</td>
+<td>❌ No, es personal</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo real:</strong> al cambiar <code>Show tips</code> a <code>false</code> en <code>/config</code>, Claude lo guardó en <code>settings.local.json</code> porque es una preferencia personal:</p>
+<pre class="highlight"><code class="language-bash">{
+  "spinnerTipsEnabled": false
+}</code></pre>
+<p><code>settings.local.json</code>Es el archivo para tus preferencias personales dentro de un proyecto específico. Lo que lo hace especial:</p>
+<ul>
+<li><strong>No se comparte</strong> con el equipo</li>
+<li><strong>Debe agregarse al</strong><strong><code>.gitignore</code></strong> para evitar subirlo accidentalmente</li>
+<li>Claude Code lo crea automáticamente cuando cambias preferencias personales en <code>/config</code></li>
+</ul>
+<h2>3.3 No genera toda la estructura de golpe dentro de .claude (con varias carpetas)</h2>
+<pre class="highlight"><code class="language-bash">~/test-claude/
+├── CLAUDE.md
+├── README.md
+├── script.sh
+└── .claude/
+    └── settings.local.json    ← solo lo que se necesitó</code></pre>
+<p>💡 <code>.claude/</code> dentro del proyecto es bajo demanda. <code>usuario/.claude/</code> en cambio se crea durante la instalación con una estructura base.</p>
+<h1>4. CLAUDE.md</h1>
+<h2>4.1 ¿Qué es?</h2>
+<p>Es un archivo markdown que le da a Claude <strong>instrucciones persistentes</strong> sobre tu proyecto. A diferencia de una conversación que Claude olvida al cerrar la sesión, el <code>CLAUDE.md</code> se lee automáticamente cada vez que inicias <code>claude</code> en ese directorio.</p>
+<h2>4.2 ¿Es lo mismo que <code>README.md</code>?</h2>
+<p>No, tienen propósitos distintos:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>README.md</code></th>
+<th><code>CLAUDE.md</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Para quién</strong></td>
+<td>Humanos / equipo</td>
+<td>Claude</td>
+</tr>
+<tr>
+<td><strong>Qué contiene</strong></td>
+<td>Descripción del proyecto, instalación, uso</td>
+<td>Instrucciones y contexto para Claude</td>
+</tr>
+<tr>
+<td><strong>Se actualiza</strong></td>
+<td>Manualmente</td>
+<td>Manualmente o con <code>/init</code></td>
+</tr>
+<tr>
+<td><strong>¿Se commitea?</strong></td>
+<td>✅ Sí</td>
+<td>✅ Sí</td>
+</tr>
+</tbody>
+</table>
+<h2>4.3 ¿Cómo se genera?</h2>
+<p>Con el comando <code>/init</code> dentro de Claude Code:</p>
+<pre class="highlight"><code class="language-bash">cd ~/mi-proyecto
+claude
+/init</code></pre>
+<p>💡 <code>/init</code> no genera contenido genérico — analiza tu código real. En un proyecto vacío no puede generar nada útil.</p>
+<h3>Los 4 escenarios de <code>/init</code></h3>
+<table>
+<thead>
+<tr>
+<th>Escenario</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proyecto vacío</td>
+<td>No genera nada, necesita código para analizar</td>
+</tr>
+<tr>
+<td>Primera vez con código</td>
+<td>Genera <code>CLAUDE.md</code> desde cero</td>
+</tr>
+<tr>
+<td><code>CLAUDE.md</code> existe y está actualizado</td>
+<td>Confirma que está bien, no propone cambios</td>
+</tr>
+<tr>
+<td><code>CLAUDE.md</code> existe pero el código cambió</td>
+<td>Muestra diff y propone solo los cambios necesarios</td>
+</tr>
+</tbody>
+</table>
+<h3>Flujo recomendado</h3>
+<pre class="highlight"><code class="language-bash">1. Haces cambios en tu código
+2. /init → Claude detecta cambios y propone actualizar CLAUDE.md
+3. Confirmas los cambios
+4. Le pides a Claude: "actualiza el README basándote en el CLAUDE.md"
+5. Revisas el README antes de commitear</code></pre>
+<p>⚠️ Siempre revisa el README antes de commitear — está dirigido a humanos y Claude puede no saber qué tan técnica es tu audiencia.</p>
+<h1>5. Sesiones</h1>
+<h2>5.1 ¿Qué es una sesión?</h2>
+<p>Es el historial de una conversación con Claude Code vinculada a un directorio específico. Se guarda automáticamente en <code>~/.claude/projects/</code> — nunca dentro de tu proyecto.</p>
+<pre class="highlight"><code class="language-bash">usuario/mi-proyecto/                          ← tu código vive aquí
+
+usuario/.claude/projects/
+└── Users-angel-mi-proyecto/            ← la sesión vive aquí
+    └── [historial de conversaciones]</code></pre>
+<p>💡 Las sesiones de Claude Code son completamente independientes de las conversaciones de claude.ai — esas viven en los servidores de Anthropic, no en tu Mac.</p>
+<h2>5.2 Proyecto = ruta exacta</h2>
+<p>Para Claude Code, <strong>proyecto es igual a ruta exacta</strong>:</p>
+<pre class="highlight"><code class="language-bash">cd ~/proyecto-A        → sesión en projects/Users-angel-proyecto-A/
+cd ~/proyecto-A/src    → sesión en projects/Users-angel-proyecto-A-src/</code></pre>
+<p>⚠️ Siempre entra desde la raíz de tu proyecto. Si entras desde un subdirectorio tendrás sesiones fragmentadas que no comparten historial. Esto lo desarrollamos en detalle en el próximo bloque.</p>
+<h2>5.3 Cómo retomar sesiones</h2>
+<pre class="highlight"><code class="language-bash"># Continuar la sesión más reciente del directorio actual
+claude -c
+
+# Ver todas las sesiones y elegir cuál retomar
+claude -r</code></pre>
+<p>Al ejecutar <code>claude -r</code> verás:</p>
+<pre class="highlight"><code class="language-bash">Resume Session
+┌─────────────────────────────────────┐
+│ ⌕ Search…                           │
+└─────────────────────────────────────┘
+
+❯ exits
+  18 seconds ago · HEAD · 6.6KB
+
+  Hola, quiero saber cómo...
+  2 weeks ago · HEAD · 1.8MB</code></pre>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Qué significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primera línea</td>
+<td>Primer mensaje de esa conversación</td>
+</tr>
+<tr>
+<td>Tiempo</td>
+<td>Hace cuánto fue la última actividad</td>
+</tr>
+<tr>
+<td><code>HEAD</code></td>
+<td>Branch de git en ese momento</td>
+</tr>
+<tr>
+<td>Tamaño</td>
+<td>Peso del historial de esa sesión</td>
+</tr>
+</tbody>
+</table>
+<h3>Atajos en la pantalla de sesiones</h3>
+<table>
+<thead>
+<tr>
+<th>Atajo</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl+A</code></td>
+<td>Ver sesiones de todos los proyectos</td>
+</tr>
+<tr>
+<td><code>Ctrl+B</code></td>
+<td>Filtrar por branch de git</td>
+</tr>
+<tr>
+<td><code>Ctrl+V</code></td>
+<td>Vista previa de la sesión</td>
+</tr>
+<tr>
+<td><code>Ctrl+R</code></td>
+<td>Renombrar la sesión</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Cancelar</td>
+</tr>
+</tbody>
+</table>
+<h2>5.4 Las sesiones crecen con el tiempo</h2>
+<pre class="highlight"><code class="language-bash"># Ver cuánto ocupan tus sesiones
+du -sh ~/.claude/projects/</code></pre>
+<p>⚠️ Cada conversación se guarda completa. En el largo plazo esto puede ocupar espacio considerable en tu Mac.</p>
+<h3>Limpiar sesiones</h3>
+<pre class="highlight"><code class="language-bash"># Eliminar sesiones de un proyecto específico
+rm -rf ~/.claude/projects/nombre-del-proyecto/
+
+# Eliminar TODAS las sesiones (no recuperable)
+rm -rf ~/.claude/projects/</code></pre>
+<p>⚠️ No hay forma de recuperar sesiones eliminadas.</p>
+<h1>6. Resumen: Dos niveles de configuración</h1>
+<p>Todo en Claude Code funciona en dos niveles que se aplican en cascada:</p>
+<pre class="highlight"><code class="language-bash">~/.claude/                    ← nivel global (todos tus proyectos)
+    +
+~/mi-proyecto/.claude/        ← nivel proyecto (solo este proyecto)
+    =
+Configuración final aplicada</code></pre>
+<p>Si hay conflicto, el nivel proyecto tiene prioridad sobre el global.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Global (<code>~/.claude/</code>)</th>
+<th>Proyecto (<code>.claude/</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CLAUDE.md</strong></td>
+<td><code>~/.claude/CLAUDE.md</code> instrucciones para todos tus proyectos</td>
+<td><code>./CLAUDE.md</code> instrucciones solo para este proyecto</td>
+</tr>
+<tr>
+<td><strong>settings.json</strong></td>
+<td>Configuración global</td>
+<td>Configuración del equipo</td>
+</tr>
+<tr>
+<td><strong>settings.local.json</strong></td>
+<td>—</td>
+<td>Preferencias personales del proyecto</td>
+</tr>
+<tr>
+<td><strong>Skills</strong></td>
+<td>Disponibles en todos los proyectos</td>
+<td>Solo disponibles en este proyecto</td>
+</tr>
+<tr>
+<td><strong>MCP servers</strong></td>
+<td>Conectados en todos los proyectos</td>
+<td>Solo conectados en este proyecto</td>
+</tr>
+<tr>
+<td><strong>Reglas</strong></td>
+<td>Aplican en todos los proyectos</td>
+<td>Solo aplican en este proyecto</td>
+</tr>
+<tr>
+<td><strong>Agentes</strong></td>
+<td>Disponibles en todos los proyectos</td>
+<td>Solo disponibles en este proyecto</td>
+</tr>
+</tbody>
+</table>
+<p>💡 Esto es muy poderoso — puedes tener tus preferencias personales globales y por encima de eso cada proyecto tiene sus propias reglas específicas.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>
