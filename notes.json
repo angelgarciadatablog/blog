@@ -446,61 +446,52 @@
     "category": "notas-ia",
     "catLabel": "Inteligencia Artificial",
     "grupo": "Claude",
-    "fecha_modificacion": "2026-04-04T08:17:00+00:00",
+    "fecha_modificacion": "2026-04-04T17:14:00+00:00",
     "fecha_creacion": "2026-04-04T01:56:00.000Z"
   },
   {
-    "title": "Configuración de Claude Code (Mac)👌 ",
-    "slug": "notas-ia/configuracion-de-claude-code-mac",
+    "title": "Configuración de Claude Code (/config) (Mac)👌 ",
+    "slug": "notas-ia/configuracion-de-claude-code-config-mac",
     "category": "notas-ia",
     "catLabel": "Inteligencia Artificial",
     "grupo": "Claude",
-    "fecha_modificacion": "2026-04-04T08:20:00+00:00",
+    "fecha_modificacion": "2026-04-05T21:10:00+00:00",
     "fecha_creacion": "2026-04-04T03:05:00.000Z"
   },
   {
-    "title": "Claude Code en la práctica: comandos, atajos y flujo de trabajo (Mac)👌",
-    "slug": "notas-ia/claude-code-en-la-practica-comandos-atajos-y-flujo-de-trabajo-mac",
+    "title": "Simbolos especiales (Mac) 👌",
+    "slug": "notas-ia/simbolos-especiales-mac-",
     "category": "notas-ia",
     "catLabel": "Inteligencia Artificial",
     "grupo": "Claude",
-    "fecha_modificacion": "2026-04-04T08:21:00+00:00",
+    "fecha_modificacion": "2026-04-05T22:26:00+00:00",
     "fecha_creacion": "2026-04-04T06:53:00.000Z"
   },
   {
-    "title": "Comando /init y CLAUDE.md",
-    "slug": "notas-ia/comando-init-y-claudemd",
+    "title": "Comandos de sesión (Mac)👌",
+    "slug": "notas-ia/comandos-de-sesion-mac",
     "category": "notas-ia",
     "catLabel": "Inteligencia Artificial",
     "grupo": "Claude",
-    "fecha_modificacion": "2026-04-02T02:37:00+00:00",
-    "fecha_creacion": "2026-02-28T10:33:00.000Z"
+    "fecha_modificacion": "2026-04-05T20:42:00+00:00",
+    "fecha_creacion": "2026-04-05T20:38:00.000Z"
   },
   {
-    "title": "Skills",
-    "slug": "notas-ia/skills",
+    "title": "Comandos de contexto y memoria (Mac) 👌",
+    "slug": "notas-ia/comandos-de-contexto-y-memoria-mac-",
     "category": "notas-ia",
     "catLabel": "Inteligencia Artificial",
     "grupo": "Claude",
-    "fecha_modificacion": "2026-04-02T02:37:00+00:00",
-    "fecha_creacion": "2026-02-28T11:36:00.000Z"
+    "fecha_modificacion": "2026-04-05T22:50:00+00:00",
+    "fecha_creacion": "2026-04-04T15:04:00.000Z"
   },
   {
-    "title": "Memoria de proyecto",
-    "slug": "notas-ia/memoria-de-proyecto",
+    "title": " Comandos de configuración (Mac) 👌",
+    "slug": "notas-ia/comandos-de-configuracion-mac-",
     "category": "notas-ia",
     "catLabel": "Inteligencia Artificial",
     "grupo": "Claude",
-    "fecha_modificacion": "2026-04-02T02:37:00+00:00",
-    "fecha_creacion": "2026-03-01T13:56:00.000Z"
-  },
-  {
-    "title": "Links importantes",
-    "slug": "notas-ia/links-importantes",
-    "category": "notas-ia",
-    "catLabel": "Inteligencia Artificial",
-    "grupo": "Claude",
-    "fecha_modificacion": "2026-04-02T02:50:00+00:00",
-    "fecha_creacion": "2026-04-02T02:50:00.000Z"
+    "fecha_modificacion": "2026-04-05T22:35:00+00:00",
+    "fecha_creacion": "2026-04-05T21:04:00.000Z"
   }
 ]

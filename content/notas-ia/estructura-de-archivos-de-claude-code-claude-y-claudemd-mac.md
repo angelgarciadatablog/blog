@@ -213,17 +213,22 @@ claude
 
 ## 5.1 ¿Qué es una sesión?
 
-Es el historial de una conversación con Claude Code vinculada a un directorio específico. Se guarda automáticamente en `~/.claude/projects/` — nunca dentro de tu proyecto.
+Es el historial de una conversación con Claude Code vinculada a un directorio específico. Se guarda automáticamente en `~/.claude/projects/mi-proyecto` — nunca dentro de tu proyecto.
 
 ```bash
 usuario/mi-proyecto/                          ← tu código vive aquí
 
-usuario/.claude/projects/
-└── Users-angel-mi-proyecto/            ← la sesión vive aquí
-    └── [historial de conversaciones]
+/Users/tu_usuario/.claude/projects/
+└── -Users-tu_usuario-mi-proyecto/     ← carpeta del proyecto
+    ├── UUID-1.jsonl                    ← sesión 1
+    ├── UUID-2.jsonl                    ← sesión 2
+    ├── UUID-3.jsonl                    ← sesión 3
+    └── UUID-3/                         ← carpeta con archivos adicionales de esa sesión
 ```
 
 💡 Las sesiones de Claude Code son completamente independientes de las conversaciones de claude.ai — esas viven en los servidores de Anthropic, no en tu Mac.
+
+💡 Cada sesión es un archivo `.jsonl` — un formato donde cada línea es un mensaje de la conversación. Por eso ocupan más espacio cuanto más larga es la sesión.
 
 
 
@@ -296,11 +301,15 @@ du -sh ~/.claude/projects/
 ### Limpiar sesiones
 
 ```bash
-# Eliminar sesiones de un proyecto específico
-rm -rf ~/.claude/projects/nombre-del-proyecto/
+# Ver las sesiones de un proyecto
+ls ~/.claude/projects/-Users-tu_usuario-mi-proyecto/
 
-# Eliminar TODAS las sesiones (no recuperable)
-rm -rf ~/.claude/projects/
+# Eliminar una sesión específica por UUID
+rm ~/.claude/projects/-Users-tu_usuario-mi-proyecto/UUID.jsonl
+rm -rf ~/.claude/projects/-Users-tu_usuario-mi-proyecto/UUID/
+
+# Eliminar todas las sesiones de un proyecto
+rm -rf ~/.claude/projects/-Users-tu_usuario-mi-proyecto/
 ```
 
 ⚠️ No hay forma de recuperar sesiones eliminadas.

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Comandos de configuración (Mac) 👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Inteligencia Artificial</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Claude</span>
+  </div>
+  <div class="note-content">
+    <h1> Comandos de configuración (Mac) 👌</h1>
+    <table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/config</code></td>
+<td>Abre el panel de configuración visual → ver Bloque 4</td>
+</tr>
+<tr>
+<td><code>/permissions</code></td>
+<td>Gestiona reglas de permisos allow, ask y deny</td>
+</tr>
+<tr>
+<td><code>/theme</code></td>
+<td>Cambia el tema visual</td>
+</tr>
+<tr>
+<td><code>/keybindings</code></td>
+<td>Abre o crea tu archivo de atajos de teclado personalizados</td>
+</tr>
+<tr>
+<td><code>/terminal-setup</code></td>
+<td>Activa Option+Enter para saltos de línea y visual bell</td>
+</tr>
+<tr>
+<td><code>/sandbox</code></td>
+<td>Configura el modo sandbox</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>1. /config — Panel de configuración</h1>
+<p>Abre la interfaz visual para cambiar configuraciones de Claude Code. Ya lo explicamos en detalle en el <strong>Bloque “</strong>Configuración de Claude Code (/config) (Mac)”</p>
+<pre class="highlight"><code class="language-bash">/config</code></pre>
+<h1>2. /permissions — Gestiona reglas de permisos</h1>
+<p>Permite ver y gestionar las reglas de permisos de Claude Code para la sesión actual.</p>
+<pre class="highlight"><code class="language-bash">/permissions</code></pre>
+<p>Tiene 5 pestañas navegables con <code>←</code> <code>→</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Pestaña</th>
+<th>Qué muestra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Recently denied</code></td>
+<td>Acciones que Claude intentó ejecutar pero fueron bloqueadas</td>
+</tr>
+<tr>
+<td><code>Allow</code></td>
+<td>Herramientas y acciones que Claude puede usar sin pedir confirmación</td>
+</tr>
+<tr>
+<td><code>Ask</code></td>
+<td>Herramientas que siempre piden confirmación antes de ejecutarse</td>
+</tr>
+<tr>
+<td><code>Deny</code></td>
+<td>Herramientas y archivos bloqueados técnicamente</td>
+</tr>
+<tr>
+<td><code>Workspace</code></td>
+<td>Directorios a los que Claude tiene acceso</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2.1 Pestaña Recently denied</h2>
+<p>Muestra acciones que Claude intentó ejecutar pero el sistema bloqueó. Útil para detectar si alguna regla está siendo demasiado restrictiva o si hay intentos de acceso inesperados.</p>
+<pre class="highlight"><code class="language-bash">No recent denials. Commands denied by the auto mode classifier will appear here.</code></pre>
+<h2>2.2 Pestaña Allow</h2>
+<p>Muestra las herramientas pre-aprobadas. Aquí aparecen las reglas de <code>permissions.allow</code> del <code>settings.json</code> y también herramientas de MCP conectados:</p>
+<pre class="highlight"><code class="language-bash">mcp__computer-use__left_click
+mcp__computer-use__key
+...</code></pre>
+<h2>2.3 Pestaña Ask</h2>
+<p>Herramientas que siempre pedirán confirmación antes de ejecutarse, independientemente del modo de permiso activo.</p>
+<pre class="highlight"><code class="language-bash">Claude Code will always ask for confirmation before using these tools.</code></pre>
+<h2>2.4 Pestaña Deny</h2>
+<p>Muestra los archivos y herramientas bloqueados técnicamente. Aquí se ven las reglas del <code>settings.json</code> del proyecto:</p>
+<pre class="highlight"><code class="language-bash">Read(./.env)
+Read(./secretos.txt)</code></pre>
+<h2>2.5 Pestaña Workspace</h2>
+<p>Muestra los directorios a los que Claude tiene acceso:</p>
+<pre class="highlight"><code class="language-bash">/Users/tu_usuario/mi_proyecto  (Original working directory)</code></pre>
+<blockquote>
+<p>💡 Puedes agregar nuevas reglas directamente desde <code>/permissions</code> sin editar manualmente el <code>settings.json</code> — selecciona <code>Add a new rule…</code> en cualquier pestaña.</p>
+</blockquote>
+<h2>→Agregar una nueva regla desde /permissions</h2>
+<p>En lugar de editar manualmente el <code>settings.json</code>, puedes agregar reglas directamente desde la interfaz. Selecciona <code>Add a new rule…</code> en cualquier pestaña y verás:</p>
+<pre class="highlight"><code class="language-bash">Add deny permission rule
+
+Permission rules are a tool name, optionally followed by a specifier in parentheses.
+e.g., WebFetch or Bash(ls:*)
+
+╭──────────────────────────────────────╮
+│ Enter permission rule…               │
+╰──────────────────────────────────────╯
+
+Enter to submit · Esc to cancel</code></pre>
+<p>El formato de las reglas es:</p>
+<table>
+<thead>
+<tr>
+<th>Formato</th>
+<th>Ejemplo</th>
+<th>Qué bloquea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Solo herramienta</td>
+<td><code>WebFetch</code></td>
+<td>Todas las llamadas web</td>
+</tr>
+<tr>
+<td>Con especificador</td>
+<td><code>Bash(rm *)</code></td>
+<td>Solo el comando <code>rm</code></td>
+</tr>
+<tr>
+<td>Archivo específico</td>
+<td><code>Read(./.env)</code></td>
+<td>Solo ese archivo</td>
+</tr>
+<tr>
+<td>Patrón con wildcard</td>
+<td><code>Read(./secrets/*)</code></td>
+<td>Toda la carpeta secrets</td>
+</tr>
+<tr>
+<td>Dominio específico</td>
+<td><code>WebFetch(domain:ejemplo.com)</code></td>
+<td>Fetch a ese dominio</td>
+</tr>
+<tr>
+<td>Comando npm</td>
+<td><code>Bash(npm run *)</code></td>
+<td>Todos los scripts npm</td>
+</tr>
+<tr>
+<td>Git específico</td>
+<td><code>Bash(git push *)</code></td>
+<td>Solo git push</td>
+</tr>
+<tr>
+<td>Todas las ediciones</td>
+<td><code>Edit</code></td>
+<td>Cualquier edición de archivo</td>
+</tr>
+<tr>
+<td>Edición específica</td>
+<td><code>Edit(./src/*)</code></td>
+<td>Solo ediciones en src/</td>
+</tr>
+<tr>
+<td>Agentes</td>
+<td><code>Agent</code></td>
+<td>Todos los subagentes</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 El formato general es <code>Herramienta(especificador)</code>. El <code>*</code> es un wildcard que coincide con cualquier valor. La lista completa de herramientas disponibles está en code.claude.com/docs/en/tools-reference.</p>
+</blockquote>
+<h1>3. /theme — Cambiar tema visual</h1>
+<pre class="highlight"><code class="language-bash">/theme</code></pre>
+<p>Abre un selector con 6 opciones y una vista previa de código en tiempo real:</p>
+<pre class="highlight"><code class="language-bash">Theme
+
+Choose the text style that looks best with your terminal
+
+❯ 1. Dark mode ✔
+  2. Light mode
+  3. Dark mode (colorblind-friendly)
+  4. Light mode (colorblind-friendly)
+  5. Dark mode (ANSI colors only)
+  6. Light mode (ANSI colors only)
+
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+ 1  function greet() {
+ 2 -  console.log("Hello, World!");
+ 2 +  console.log("Hello, Claude!");
+ 3  }
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+Syntax theme: Monokai Extended (ctrl+t to disable)</code></pre>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Para quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Dark mode</code></td>
+<td>La mayoría de usuarios — fondo oscuro</td>
+</tr>
+<tr>
+<td><code>Light mode</code></td>
+<td>Si prefieres fondo claro</td>
+</tr>
+<tr>
+<td><code>Dark/Light mode (colorblind-friendly)</code></td>
+<td>Paleta de colores adaptada para daltonismo</td>
+</tr>
+<tr>
+<td><code>Dark/Light mode (ANSI colors only)</code></td>
+<td>Terminales con soporte limitado de colores</td>
+</tr>
+</tbody>
+</table>
+<p>💡 El tema se guarda en <code>~/.claude.json</code> — aplica en todos tus proyectos. También se puede cambiar desde <code>/config</code> → <code>Theme</code>.</p>
+<h1>4. /keybindings — Atajos de teclado personalizados</h1>
+<pre class="highlight"><code class="language-bash">/keybindings</code></pre>
+<p>Si no existe el archivo, lo crea automáticamente con una plantilla completa y lo abre en tu editor:</p>
+<pre class="highlight"><code class="language-bash">Created /Users/tu_usuario/.claude/keybindings.json with template. Opened in your editor.</code></pre>
+<h2>4.1 ¿Para qué sirve?</h2>
+<p>El archivo <code>keybindings.json</code> te permite <strong>cambiar o crear atajos de teclado</strong> para Claude Code. Por ejemplo, si quieres que <code>Ctrl+K</code> limpie la conversación en lugar de <code>Ctrl+L</code>, lo defines aquí.</p>
+<p>El archivo usa JSON con esta estructura:</p>
+<pre class="highlight"><code class="language-bash">{
+  "$schema": "https://www.schemastore.org/claude-code-keybindings.json",
+  "$docs": "https://code.claude.com/docs/en/keybindings",
+  "bindings": [
+    {
+      "context": "Chat",
+      "bindings": {
+        "ctrl+s": "chat:stash",
+        "enter": "chat:submit"
+      }
+    }
+  ]
+}</code></pre>
+<h2>4.2 ¿Qué es un contexto?</h2>
+<p>Un contexto es <strong>la pantalla o modo en que estás</strong> dentro de Claude Code en ese momento. El mismo atajo puede hacer cosas distintas dependiendo de dónde estés:</p>
+<pre class="highlight"><code class="language-bash">Estás escribiendo en el chat    → contexto: Chat
+Estás en el selector de tema    → contexto: ThemePicker
+Estás viendo un diff            → contexto: DiffDialog
+Estás en cualquier lugar        → contexto: Global</code></pre>
+<p>Por ejemplo <code>Escape</code> hace cosas distintas según el contexto:</p>
+<ul>
+<li>En <code>Chat</code> → cancela lo que Claude está haciendo</li>
+<li>En <code>Autocomplete</code> → descarta las sugerencias</li>
+<li>En <code>Settings</code> → cierra la configuración</li>
+</ul>
+<hr />
+<h2><strong>4.3 ¿Cómo crear un atajo personalizado?</strong></h2>
+<pre class="highlight"><code class="language-bash">{
+  "context": "Chat",
+  "bindings": {
+    "ctrl+k": "chat:cancel"   ← presionar Ctrl+K cancela el chat
+  }
+}</code></pre>
+<p>El formato es siempre:</p>
+<pre class="highlight"><code class="language-bash">"atajo": "contexto:acción"</code></pre>
+<hr />
+<p>Los atajos están organizados por <strong>contexto</strong> — cada contexto es una pantalla o modo diferente de Claude Code:</p>
+<table>
+<thead>
+<tr>
+<th>Contexto</th>
+<th>Cuándo aplica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Global</code></td>
+<td>En cualquier parte de Claude Code</td>
+</tr>
+<tr>
+<td><code>Chat</code></td>
+<td>Dentro del chat principal</td>
+</tr>
+<tr>
+<td><code>Autocomplete</code></td>
+<td>Cuando aparecen sugerencias</td>
+</tr>
+<tr>
+<td><code>Settings</code></td>
+<td>Dentro de <code>/config</code></td>
+</tr>
+<tr>
+<td><code>Confirmation</code></td>
+<td>Cuando Claude pide confirmación</td>
+</tr>
+<tr>
+<td><code>Tabs</code></td>
+<td>Navegando entre pestañas</td>
+</tr>
+<tr>
+<td><code>Transcript</code></td>
+<td>Viendo el historial</td>
+</tr>
+<tr>
+<td><code>ThemePicker</code></td>
+<td>Dentro de <code>/theme</code></td>
+</tr>
+<tr>
+<td><code>Scroll</code></td>
+<td>Navegando el contenido</td>
+</tr>
+<tr>
+<td><code>ModelPicker</code></td>
+<td>Seleccionando modelo</td>
+</tr>
+<tr>
+<td><code>DiffDialog</code></td>
+<td>Viendo diffs de archivos</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ El archivo vive en <code>/Users/tu_usuario/.claude/keybindings.json</code> — aplica globalmente a todos tus proyectos.</p>
+<h1>5. /terminal-setup — Configuración del terminal</h1>
+<pre class="highlight"><code class="language-bash">/terminal-setup</code></pre>
+<p>⚠️Configura automáticamente <strong>Terminal.app</strong> de Mac para una mejor experiencia con Claude Code. No muestra opciones ni pide confirmación — ejecuta los cambios <strong>inmediatamente</strong> al invocarlo.</p>
+<h2>5.1 ¿Qué cambia exactamente?</h2>
+<p>Verificamos en la práctica que modifica dos configuraciones en Terminal.app:</p>
+<table>
+<thead>
+<tr>
+<th>Cambio</th>
+<th>Dónde en Terminal.app</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Usar Opción como tecla modificadora</code></td>
+<td>Preferencias → Perfiles → Teclado</td>
+<td>Habilita <code>Option+Enter</code> para saltos de línea sin enviar el mensaje</td>
+</tr>
+<tr>
+<td><code>Aviso visual</code></td>
+<td>Preferencias → Perfiles → Avanzado → Aviso</td>
+<td>Reemplaza el beep sonoro por un parpadeo visual</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>5.2 ¿Qué significa cada cambio?</h2>
+<p><strong><code>Usar Opción como tecla modificadora</code></strong></p>
+<p>Por defecto en Mac, la tecla <code>Option</code> escribe caracteres especiales (<code>∑</code>, <code>®</code>, <code>†</code>). Al activar esta opción, <code>Option</code> funciona como tecla <code>Meta</code> — lo que habilita atajos como:</p>
+<pre class="highlight"><code class="language-bash">Option + Enter  → salto de línea sin enviar el mensaje
+Meta + P        → cambiar modelo en Claude Code
+Meta + T        → activar/desactivar thinking mode</code></pre>
+<p>Sin esta configuración estos atajos no funcionarían.</p>
+<pre class="highlight"><code class="language-bash">Aviso visual</code></pre>
+<p>Normalmente cuando la terminal quiere alertarte emite un sonido (<code>beep</code>). Con aviso visual, en lugar del sonido la pantalla parpadea brevemente. Es más discreto especialmente en espacios compartidos.</p>
+<h3>⚠️ Advertencias importantes</h3>
+<blockquote>
+<p>Debes <strong>reiniciar Terminal.app</strong> para que los cambios tomen efecto — abre una nueva ventana con <code>Cmd + N</code>.</p>
+<p>Si no quieres estos cambios, puedes revertirlos manualmente en <code>Terminal → Configuración → Perfiles</code> desactivando las opciones correspondientes.</p>
+<p>💡 Solo funciona con <strong>Terminal.app</strong> nativa de Mac. Si usas iTerm2, Ghostty, Warp u otro terminal, debes configurar estas opciones manualmente en sus preferencias.</p>
+</blockquote>
+<h1>6. /sandbox — Modo sandbox</h1>
+<pre class="highlight"><code class="language-bash">/sandbox</code></pre>
+<p>El sandbox aísla los comandos bash de Claude del resto de tu sistema — Claude puede ejecutar comandos pero con acceso limitado al filesystem y red.</p>
+<p>📌 <strong>Pendiente:</strong> El sandbox tiene sentido en contextos más avanzados como automatizaciones, agentes autónomos y CI/CD. Lo documentamos en detalle cuando lleguemos a esos bloques donde su uso será más claro y relevante.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simbolos especiales (Mac) 👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Inteligencia Artificial</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Claude</span>
+  </div>
+  <div class="note-content">
+    <h1>Simbolos especiales (Mac) 👌</h1>
+    <p>Dentro de Claude Code hay 4 símbolos que activan comportamientos especiales:</p>
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Cómo se usa</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!</code></td>
+<td><code>! ls -la</code></td>
+<td>Ejecuta un comando bash directamente desde Claude Code sin pedirle a Claude que lo haga</td>
+</tr>
+<tr>
+<td><code>@</code></td>
+<td><code>@src/index.js</code></td>
+<td>Referencia un archivo del proyecto para que Claude lo lea y use como contexto</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td><code>&amp; claude "tarea"</code></td>
+<td>Ejecuta una tarea en segundo plano mientras sigues trabajando</td>
+</tr>
+<tr>
+<td><code>/btw</code></td>
+<td><code>/btw ¿qué es un hook?</code></td>
+<td>Hace una pregunta rápida sin interrumpir la conversación principal</td>
+</tr>
+</tbody>
+</table>
+<h1>1. Modo bash (!)</h1>
+<pre class="highlight"><code class="language-bash"># En lugar de pedirle a Claude que liste los archivos
+# puedes ejecutarlo tú directamente
+! ls -la
+! git status</code></pre>
+<p>💡 Útil cuando quieres ejecutar algo rápido sin que Claude intervenga. Recuerda que <code>permissions.deny</code> bloquea a Claude, no a ti — con <code>!</code> puedes leer cualquier archivo aunque Claude no pueda.</p>
+<h1>2. Referenciar archivos (@)</h1>
+<pre class="highlight"><code class="language-bash"># Pedirle a Claude que revise un archivo específico
+revisa @src/index.js y dime si hay mejoras
+
+# Referenciar varios archivos
+compara @src/v1.js con @src/v2.js</code></pre>
+<p>💡 Claude lee el archivo completo y lo agrega al contexto de la conversación. Respeta el <code>.gitignore</code> si tienes activado <code>Respect .gitignore in file picker</code> en <code>/config</code>.</p>
+<h1>3. Background (&amp;)</h1>
+<pre class="highlight"><code class="language-bash"># Enviar una tarea para que se ejecute en segundo plano
+&amp; revisa todos los archivos del proyecto y genera un reporte</code></pre>
+<blockquote>
+<p>📌 <strong>Pendiente de verificar:</strong> En pruebas básicas <code>&amp;</code> se comportó igual que una pregunta normal. Su comportamiento real en segundo plano se verá con más claridad en el <strong>Bloque Agentes</strong>, donde tiene más contexto de uso.</p>
+</blockquote>
+<h1>4. Pregunta lateral (/btw)</h1>
+<pre class="highlight"><code class="language-bash"># Pregunta rápida sin perder el hilo principal
+/btw ¿qué diferencia hay entre == y === en JavaScript?</code></pre>
+<p>💡 Claude responde la pregunta y luego vuelve al contexto de la conversación principal como si no hubiera pasado nada.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

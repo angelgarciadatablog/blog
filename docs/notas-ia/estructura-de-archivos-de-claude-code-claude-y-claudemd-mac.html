@@ -272,13 +272,17 @@ claude
 <p>⚠️ Siempre revisa el README antes de commitear — está dirigido a humanos y Claude puede no saber qué tan técnica es tu audiencia.</p>
 <h1>5. Sesiones</h1>
 <h2>5.1 ¿Qué es una sesión?</h2>
-<p>Es el historial de una conversación con Claude Code vinculada a un directorio específico. Se guarda automáticamente en <code>~/.claude/projects/</code> — nunca dentro de tu proyecto.</p>
+<p>Es el historial de una conversación con Claude Code vinculada a un directorio específico. Se guarda automáticamente en <code>~/.claude/projects/mi-proyecto</code> — nunca dentro de tu proyecto.</p>
 <pre class="highlight"><code class="language-bash">usuario/mi-proyecto/                          ← tu código vive aquí
 
-usuario/.claude/projects/
-└── Users-angel-mi-proyecto/            ← la sesión vive aquí
-    └── [historial de conversaciones]</code></pre>
+/Users/tu_usuario/.claude/projects/
+└── -Users-tu_usuario-mi-proyecto/     ← carpeta del proyecto
+    ├── UUID-1.jsonl                    ← sesión 1
+    ├── UUID-2.jsonl                    ← sesión 2
+    ├── UUID-3.jsonl                    ← sesión 3
+    └── UUID-3/                         ← carpeta con archivos adicionales de esa sesión</code></pre>
 <p>💡 Las sesiones de Claude Code son completamente independientes de las conversaciones de claude.ai — esas viven en los servidores de Anthropic, no en tu Mac.</p>
+<p>💡 Cada sesión es un archivo <code>.jsonl</code> — un formato donde cada línea es un mensaje de la conversación. Por eso ocupan más espacio cuanto más larga es la sesión.</p>
 <h2>5.2 Proyecto = ruta exacta</h2>
 <p>Para Claude Code, <strong>proyecto es igual a ruta exacta</strong>:</p>
 <pre class="highlight"><code class="language-bash">cd ~/proyecto-A        → sesión en projects/Users-angel-proyecto-A/
@@ -363,11 +367,15 @@ claude -r</code></pre>
 du -sh ~/.claude/projects/</code></pre>
 <p>⚠️ Cada conversación se guarda completa. En el largo plazo esto puede ocupar espacio considerable en tu Mac.</p>
 <h3>Limpiar sesiones</h3>
-<pre class="highlight"><code class="language-bash"># Eliminar sesiones de un proyecto específico
-rm -rf ~/.claude/projects/nombre-del-proyecto/
+<pre class="highlight"><code class="language-bash"># Ver las sesiones de un proyecto
+ls ~/.claude/projects/-Users-tu_usuario-mi-proyecto/
 
-# Eliminar TODAS las sesiones (no recuperable)
-rm -rf ~/.claude/projects/</code></pre>
+# Eliminar una sesión específica por UUID
+rm ~/.claude/projects/-Users-tu_usuario-mi-proyecto/UUID.jsonl
+rm -rf ~/.claude/projects/-Users-tu_usuario-mi-proyecto/UUID/
+
+# Eliminar todas las sesiones de un proyecto
+rm -rf ~/.claude/projects/-Users-tu_usuario-mi-proyecto/</code></pre>
 <p>⚠️ No hay forma de recuperar sesiones eliminadas.</p>
 <h1>6. Resumen: Dos niveles de configuración</h1>
 <p>Todo en Claude Code funciona en dos niveles que se aplican en cascada:</p>
