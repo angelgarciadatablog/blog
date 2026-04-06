@@ -8,6 +8,8 @@ let notes = [];
 let currentFilter = 'all';
 let tocObserver = null;
 
+window.addEventListener('popstate', () => showIndex());
+
 // ── Cargar notas desde notes.json ──
 async function cargarNotas() {
   try {
@@ -199,6 +201,7 @@ async function abrirNota(slug, titulo, grupo, catLabel, el) {
   const content = document.getElementById('noteContent');
   const indexView = document.getElementById('indexView');
 
+  history.pushState({ nota: slug }, '', '');
   indexView.style.display = 'none';
   document.getElementById('noteWrapper').classList.add('active');
   content.innerHTML = '<div class="note-loading">Cargando...</div>';
