@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La carpeta .claude/ del proyecto 👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Claude</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">claude.md y .claude</span>
+  </div>
+  <div class="note-content">
+    <h1>La carpeta .claude/ del proyecto 👌</h1>
+    <h1>¿Qué es y cuándo se crea?</h1>
+<p>La carpeta <code>.claude/</code> dentro de tu proyecto es el <strong>centro de configuración local</strong> de Claude Code para ese proyecto específico. A diferencia de <code>/Users/tu_usuario/.claude/</code> que es global para tu usuario, esta carpeta solo aplica cuando ejecutas <code>claude</code> en ese directorio.</p>
+<p>⚠️ No se crea automáticamente al ejecutar <code>claude</code> — se genera bajo demanda cuando la necesitas o cuando cambias alguna configuración desde <code>/config</code>.</p>
+<h2>Estructura completa</h2>
+<table>
+<thead>
+<tr>
+<th>Archivo/Carpeta</th>
+<th>Qué es</th>
+<th>¿Se commitea?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CLAUDE.md</code></td>
+<td>Instrucciones para Claude (alternativa al de la raíz)</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>settings.json</code></td>
+<td>Configuración compartida del equipo</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>settings.local.json</code></td>
+<td>Preferencias personales del proyecto</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td><code>commands/</code></td>
+<td>Comandos personalizados invocables con <code>/nombre</code></td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>skills/</code></td>
+<td>Comandos personalizados avanzados (recomendado)</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>agents/</code></td>
+<td>Subagentes del proyecto</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>rules/</code></td>
+<td>Reglas por tipo de archivo o directorio</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>.mcp.json</code></td>
+<td>Servidores MCP del proyecto</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>agent-memory/</code></td>
+<td>Memoria persistente de subagentes</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>output-styles/</code></td>
+<td>Estilos de respuesta personalizados</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td><code>worktrees/</code></td>
+<td>Worktrees de git aislados</td>
+<td>❌ No</td>
+</tr>
+</tbody>
+</table>
+<p>💡 Esta es la estructura base. Dependiendo de configuraciones más avanzadas como hooks, plugins y automatizaciones, pueden aparecer archivos y carpetas adicionales.</p>
+<pre class="highlight"><code class="language-bash">/Users/tu_usuario/mi_proyecto/.claude/
+├── settings.json          ← configuración del equipo (se commitea)
+├── settings.local.json    ← preferencias personales (NO se commitea)
+├── CLAUDE.md              ← alternativa al CLAUDE.md de la raíz
+├── commands/              ← comandos personalizados simples (legacy)
+│   └── mi-comando.md
+├── skills/                ← comandos personalizados avanzados (recomendado)
+│   └── mi-skill/
+│       └── SKILL.md
+├── agents/                ← subagentes del proyecto
+│   └── mi-agente.md
+├── rules/                 ← reglas por tipo de archivo
+│   └── frontend.md
+├── .mcp.json              ← servidores MCP del proyecto
+├── worktrees/             ← worktrees de git aislados
+├── agent-memory/          ← memoria persistente de subagentes
+└── output-styles/         ← estilos de respuesta personalizados</code></pre>
+<p>Según la documentación oficial hay dos ubicaciones válidas para el <code>CLAUDE.md</code> del proyecto:</p>
+<pre class="highlight"><code class="language-bash">/Users/tu_usuario/mi_proyecto/CLAUDE.md        ← opción 1 (más común)
+/Users/tu_usuario/mi_proyecto/.claude/CLAUDE.md ← opción 2 (alternativa)</code></pre>
+<p>Ambas funcionan igual — Claude las reconoce y carga. La diferencia es solo organizacional:</p>
+<ul>
+<li>En la raíz → más visible, más fácil de encontrar</li>
+<li>Dentro de <code>.claude/</code> → más ordenado si prefieres tener todo lo de Claude en un solo luga</li>
+</ul>
+<p>💡 Si existen ambas, Claude las carga y concatena igual que con los otros niveles.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

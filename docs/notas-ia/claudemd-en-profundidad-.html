@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLAUDE.md en profundidad 👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Claude</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">claude.md y .claude</span>
+  </div>
+  <div class="note-content">
+    <h1>CLAUDE.md en profundidad 👌</h1>
+    <h1><strong>1. ¿Qué es y para qué sirve?</strong></h1>
+<p><code>CLAUDE.md</code> es un archivo markdown que le da a Claude <strong>instrucciones persistentes</strong> sobre tu proyecto. Una vez que existe, se carga automáticamente al inicio de cada sesión — Claude lo lee antes de que escribas tu primer mensaje.</p>
+<p>⚠️ <code>CLAUDE.md</code> <strong>no se crea automáticamente</strong> al ejecutar <code>claude</code>. Tienes que crearlo tú — manualmente o con <code>/init</code>. Una vez que existe, Claude lo carga en cada sesión sin que tengas que hacer nada.</p>
+<p>Es la diferencia entre tener que explicarle a Claude el contexto de tu proyecto en cada sesión, o que ya lo sepa desde el inicio.</p>
+<h1>2. Dónde puede vivir</h1>
+<p>El <code>CLAUDE.md</code> más común es el que vive en la raíz de tu proyecto:</p>
+<pre class="highlight"><code class="language-bash">/Users/tu_usuario/mi_proyecto/CLAUDE.md  ← el principal</code></pre>
+<p>Este es el que usarás en el día a día. Se commitea a git y aplica a todos los que trabajen en el proyecto.</p>
+<h2>2.1 Los otros niveles — opcionales</h2>
+<p>Existen otros niveles para casos más específicos:</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Ubicación</th>
+<th>Cuándo usarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Personal del proyecto</strong></td>
+<td><code>/Users/tu_usuario/mi_proyecto/CLAUDE.local.md</code></td>
+<td>Preferencias tuyas que no quieres commitear</td>
+</tr>
+<tr>
+<td><strong>Global personal</strong></td>
+<td><code>/Users/tu_usuario/.claude/CLAUDE.md</code></td>
+<td>Preferencias que aplican en todos tus proyectos</td>
+</tr>
+<tr>
+<td><strong>Organización</strong></td>
+<td><code>/Library/Application Support/ClaudeCode/CLAUDE.md</code></td>
+<td>Solo empresas con IT centralizado</td>
+</tr>
+</tbody>
+</table>
+<pre class="highlight"><code class="language-bash">#Personal del proyecto
+/Users/tu_usuario/mi_proyecto/
+├── CLAUDE.md              ← instrucciones del proyecto (se commitea)
+├── CLAUDE.local.md        ← instrucciones personales (NO se commitea)
+└── .claude/               ← configuración del proyecto
+    ├── settings.json
+    ├── settings.local.json
+    ├── skills/
+    ├── agents/
+    └── commands/</code></pre>
+<pre class="highlight"><code class="language-bash">#Global personal
+/Users/tu_usuario/
+└── .claude/
+    ├── CLAUDE.md              ← instrucciones globales (aplica a todos tus proyectos)
+    ├── settings.json          ← configuración global
+    ├── skills/                ← skills globales
+    ├── agents/                ← agentes globales
+    ├── plans/                 ← planes guardados
+    ├── projects/              ← sesiones por proyecto
+    └── keybindings.json       ← atajos de teclado</code></pre>
+<h2>2.2 Cómo los carga Claude</h2>
+<p>Claude recorre el árbol de directorios hacia arriba desde donde ejecutas <code>claude</code> y carga todos los <code>CLAUDE.md</code> que encuentra. No se sobreescriben — <strong>se concatenan</strong>:</p>
+<pre class="highlight"><code class="language-bash">cd /Users/tu_usuario/proyecto-A
+claude</code></pre>
+<pre class="highlight"><code class="language-bash">Claude carga en orden:
+1. ~/.claude/CLAUDE.md          ← global personal
+2. ~/proyecto-A/CLAUDE.md       ← del proyecto
+3. ~/proyecto-A/CLAUDE.local.md ← personal del proyecto (si existe)</code></pre>
+<p>💡 Los archivos de subdirectorios no se cargan al inicio — solo cuando Claude lee archivos en esos subdirectorios.</p>
+<h1>3. Cómo escribirlo bien</h1>
+<p>Estructura recomendada:</p>
+<pre class="highlight"><code class="language-bash"># CLAUDE.md
+
+## Overview
+Breve descripción del proyecto y su propósito.
+
+## Stack
+- Node.js + Express
+- PostgreSQL con Prisma ORM
+- Jest para tests
+
+## Comandos importantes
+- `npm run dev` → inicia el servidor
+- `npm test` → corre los tests
+- `npm run migrate` → corre las migraciones
+
+## Convenciones de código
+- Usa async/await, nunca callbacks
+- Nombres de variables en inglés
+- Comentarios en español
+
+## Lo que NO debes tocar
+- El archivo `.env`
+- La carpeta `/legacy`</code></pre>
+<h2>3.1 Buenas prácticas</h2>
+<p><strong>Sé específico, no vago:</strong></p>
+<pre class="highlight"><code class="language-bash">❌ "Formatea el código correctamente"
+✅ "Usa 2 espacios de indentación"
+
+❌ "Testea tus cambios"
+✅ "Ejecuta `npm test` antes de commitear"</code></pre>
+<p><strong>Usa headers y bullets:</strong>
+Claude escanea la estructura igual que un humano — las secciones organizadas son más fáciles de seguir que párrafos densos.</p>
+<p><strong>Sin contradicciones:</strong>
+Si dos reglas se contradicen, Claude puede elegir una arbitrariamente. Revisa periódicamente que no haya instrucciones conflictivas.</p>
+<h1>4. Límites y tokens</h1>
+<p>El <code>CLAUDE.md</code> se carga en el contexto al inicio de cada sesión y consume tokens:</p>
+<table>
+<thead>
+<tr>
+<th>Recomendación</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Máximo 200 líneas por archivo</td>
+<td>Archivos más largos consumen más contexto y reducen la adherencia</td>
+</tr>
+<tr>
+<td>Si crece mucho, divide en archivos con <code>@</code></td>
+<td>Mantén el principal enfocado</td>
+</tr>
+<tr>
+<td>Solo lo esencial que Claude no puede inferir</td>
+<td>No documentes lo obvio</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ El <code>CLAUDE.md</code> global (<code>/Users/tu_usuario/.claude/CLAUDE.md</code>) es el más costoso porque se carga en <strong>todos tus proyectos</strong>. Mantenlo especialmente conciso.</p>
+<hr />
+<h1>5. Generarlo y actualizarlo con <code>/init</code></h1>
+<pre class="highlight"><code class="language-bash"># Dentro de Claude Code
+/init</code></pre>
+<table>
+<thead>
+<tr>
+<th>Escenario</th>
+<th>Qué hace <code>/init</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proyecto vacío</td>
+<td>No genera nada — necesita código para analizar</td>
+</tr>
+<tr>
+<td>Primera vez con código</td>
+<td>Genera <code>CLAUDE.md</code> desde cero analizando el proyecto</td>
+</tr>
+<tr>
+<td><code>CLAUDE.md</code> existe y está actualizado</td>
+<td>Confirma que está bien</td>
+</tr>
+<tr>
+<td><code>CLAUDE.md</code> existe pero el código cambió</td>
+<td>Muestra diff y propone solo los cambios necesarios</td>
+</tr>
+</tbody>
+</table>
+<h2>5.1 Flujo recomendado</h2>
+<pre class="highlight"><code class="language-bash">1. Haces cambios en tu código
+2. /init → Claude detecta cambios y propone actualizar CLAUDE.md
+3. Confirmas los cambios
+4. Opcionalmente: "actualiza el README basándote en el CLAUDE.md"</code></pre>
+<hr />
+<h1>6. Importar otros archivos con <code>@</code></h1>
+<p>Cuando tu <code>CLAUDE.md</code> crece demasiado, puedes dividirlo en archivos y referenciarlos:</p>
+<pre class="highlight"><code class="language-bash"># CLAUDE.md
+
+Ver @README para el overview del proyecto.
+Ver @package.json para los comandos disponibles.
+
+## Instrucciones adicionales
+- Flujo de git: @docs/git-instructions.md
+- Convenciones de API: @docs/api-conventions.md</code></pre>
+<p>Los archivos importados se cargan en el contexto al inicio de la sesión junto con el <code>CLAUDE.md</code> que los referencia.</p>
+<p>💡 Las rutas relativas se resuelven desde el archivo que contiene el <code>@</code>, no desde el directorio de trabajo.</p>
+<hr />
+<h1>7.  CLAUDE.local.md — versión personal no commitable</h1>
+<p>Es el equivalente personal del <code>CLAUDE.md</code> del proyecto. Se carga junto al <code>CLAUDE.md</code> pero <strong>no se commitea a git</strong>.</p>
+<pre class="highlight"><code class="language-bash"># Crear en la raíz del proyecto
+touch CLAUDE.local.md
+
+# Agregar al .gitignore
+echo "CLAUDE.local.md" &gt;&gt; .gitignore</code></pre>
+<p>Úsalo para:</p>
+<ul>
+<li>URLs locales de desarrollo (<code>http://localhost:3000</code>)</li>
+<li>Credenciales de sandbox personales</li>
+<li>Preferencias que no aplican a todo el equipo</li>
+<li>Notas de debugging que solo te sirven a ti</li>
+</ul>
+<pre class="highlight"><code class="language-bash"># CLAUDE.local.md
+
+## Mi entorno local
+- API local: http://localhost:8080
+- Usuario de prueba: test@example.com
+- DB local: postgresql://localhost/mi_proyecto_dev</code></pre>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>skills/ — Comandos personalizados avanzados 👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Claude</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">claude.md y .claude</span>
+  </div>
+  <div class="note-content">
+    <h1>skills/ — Comandos personalizados avanzados 👌</h1>
+    <h1>1. ¿Qué es una skill?</h1>
+<p>Una skill es la evolución de un <code>command/</code>. Se define con un archivo <code>SKILL.md</code> y puede hacer todo lo que hace un command, más capacidades avanzadas como correr en subagentes aislados, activarse automáticamente y controlar qué herramientas usa Claude.</p>
+<hr />
+<h1>2. commands/ vs skills/</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>commands/</code></th>
+<th><code>skills/</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Formato</td>
+<td>Archivo <code>.md</code> simple</td>
+<td>Carpeta con <code>SKILL.md</code> y archivos de soporte</td>
+</tr>
+<tr>
+<td>Frontmatter YAML</td>
+<td>❌ No</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td>Subagentes</td>
+<td>❌ No</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td>Activación automática</td>
+<td>❌ No</td>
+<td>✅ Sí — Claude la usa cuando detecta que aplica</td>
+</tr>
+<tr>
+<td>Control de herramientas</td>
+<td>❌ No</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td>Archivos de soporte</td>
+<td>❌ No</td>
+<td>✅ Scripts, referencias, assets</td>
+</tr>
+<tr>
+<td>Estado</td>
+<td>Legacy</td>
+<td>✅ Recomendado</td>
+</tr>
+</tbody>
+</table>
+<p>💡 Si tu comando es simple y no necesita estas capacidades, <code>commands/</code> es perfectamente válido. Usa <code>skills/</code> cuando necesitas más potencia.</p>
+<hr />
+<h1>3. Dónde pueden vivir</h1>
+<table>
+<thead>
+<tr>
+<th>Ubicación</th>
+<th>Alcance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/Users/tu_usuario/.claude/skills/</code></td>
+<td>Todos tus proyectos</td>
+</tr>
+<tr>
+<td><code>/Users/tu_usuario/mi_proyecto/.claude/skills/</code></td>
+<td>Solo este proyecto</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>4. Estructura de una skill</h1>
+<p>La estructura mínima es una carpeta con un <code>SKILL.md</code>:</p>
+<p><strong>Un skill = una carpeta</strong>, no un archivo. Aunque solo tenga un <code>SKILL.md</code> dentro:</p>
+<pre class="highlight"><code class="language-markdown">.claude/skills/
+└── documentar/          ← esto es la skill (la carpeta)
+    └── SKILL.md         ← el archivo principal dentro</code></pre>
+<p>Esto es diferente a <code>commands/</code> donde el archivo ES el comando:</p>
+<pre class="highlight"><code class="language-markdown">.claude/commands/
+└── revisar.md           ← esto es el command (el archivo directamente)</code></pre>
+<p>Una skill más compleja puede incluir archivos de soporte:</p>
+<pre class="highlight"><code class="language-bash">.claude/skills/
+└── documentar/
+    ├── SKILL.md           ← instrucciones principales (obligatorio)
+    ├── agents/            ← subagentes especializados
+    ├── scripts/           ← scripts que Claude puede ejecutar
+    ├── references/        ← documentación de referencia
+    └── assets/            ← archivos de soporte</code></pre>
+<p>💡 No necesitas todas las carpetas — empieza solo con <code>SKILL.md</code> y agrega lo que necesites.</p>
+<hr />
+<h1>5. Anatomía del <code>SKILL.md</code></h1>
+<p>Tiene dos partes: <strong>frontmatter YAML</strong> y <strong>las instrucciones</strong>:</p>
+<pre class="highlight"><code class="language-markdown">---
+name: documentar
+description: Genera un README.md detallado y profesional para el proyecto actual,
+leyendo el código fuente real. Úsalo siempre que el usuario pida documentar el
+proyecto, generar un README, o describir cómo funciona el proyecto.
+---
+
+# Skill: documentar
+
+Tu tarea es generar un `README.md` detallado y preciso para el proyecto actual,
+basándote en el código real que encuentres.
+
+## Proceso
+
+### 1. Explorar el proyecto
+Antes de escribir nada, explora el repositorio...
+
+### 2. Escribir el README
+- Usa Markdown bien formateado
+- Los ejemplos deben ser reales y funcionales</code></pre>
+<hr />
+<h1>6. El frontmatter YAML</h1>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Obligatorio</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>No</td>
+<td>Nombre del comando. Si se omite usa el nombre de la carpeta</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>✅ Recomendado</td>
+<td>Cuándo y cómo usar la skill. Claude lo usa para activarla automáticamente</td>
+</tr>
+<tr>
+<td><code>disable-model-invocation</code></td>
+<td>No</td>
+<td><code>true</code> → solo tú puedes invocarla, Claude no la activa sola</td>
+</tr>
+<tr>
+<td><code>user-invocable</code></td>
+<td>No</td>
+<td><code>false</code> → solo Claude puede invocarla, no aparece en el menú <code>/</code></td>
+</tr>
+<tr>
+<td><code>allowed-tools</code></td>
+<td>No</td>
+<td>Herramientas que Claude puede usar sin pedir permiso cuando la skill está activa</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td>No</td>
+<td><code>fork</code> → corre en un subagente aislado</td>
+</tr>
+<tr>
+<td><code>agent</code></td>
+<td>No</td>
+<td>Qué subagente usar cuando <code>context: fork</code></td>
+</tr>
+<tr>
+<td><code>effort</code></td>
+<td>No</td>
+<td>Nivel de esfuerzo: <code>low</code>, <code>medium</code>, <code>high</code>, <code>max</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>7. Activación automática vs manual</h1>
+<p>A diferencia de <code>commands/</code>, las skills pueden activarse solas basándose en su <code>description</code>:</p>
+<pre class="highlight"><code class="language-markdown">Tú escribes:   "necesito un README para este proyecto"
+Claude detecta: la skill "documentar" aplica aquí
+Claude la carga y la ejecuta automáticamente</code></pre>
+<p>Para controlar esto:</p>
+<pre class="highlight"><code class="language-markdown"># Solo tú la invocas — Claude no la activa sola
+disable-model-invocation: true
+
+# Solo Claude la activa — no aparece en el menú /
+user-invocable: false</code></pre>
+<hr />
+<h1>8. Cómo crear una skill manualmente</h1>
+<pre class="highlight"><code class="language-markdown"># 1. Crear la carpeta en el proyecto
+mkdir -p /Users/tu_usuario/mi_proyecto/.claude/skills/mi-skill
+
+# 2. Crear el SKILL.md
+cat &gt; /Users/tu_usuario/mi_proyecto/.claude/skills/mi-skill/SKILL.md &lt;&lt; 'EOF'
+---
+name: mi-skill
+description: Descripción de cuándo y cómo usar esta skill
+---
+
+Instrucciones para Claude aquí...
+EOF</code></pre>
+<p>⚠️ Después de crear una skill nueva necesitas <strong>reiniciar Claude Code</strong> para que la detecte. Sal con <code>/exit</code> y vuelve a entrar.</p>
+<hr />
+<h1>9. Cómo crear una skill con <code>skill-creator</code></h1>
+<p>La forma más fácil es usar la skill oficial de Anthropic que guía el proceso:</p>
+<pre class="highlight"><code class="language-markdown">/skill-creator</code></pre>
+<p>Claude te hace preguntas sobre qué quieres que haga la skill, genera el <code>SKILL.md</code> y lo guarda en el directorio correcto.</p>
+<p><strong>Ejemplo real</strong> — creamos la skill <code>documentar</code> en <code>test-claude</code>:</p>
+<pre class="highlight"><code class="language-markdown">/skill-creator
+
+→ "quiero crear una skill llamada documentar que genere 
+   documentación del código del proyecto"
+
+→ Claude pregunta: ¿qué tipo de documentación? ¿formato? ¿dónde guardar?
+
+→ Genera automáticamente el SKILL.md con instrucciones detalladas
+
+→ /documentar  ← ya disponible para usar</code></pre>
+<p>💡 La forma más recomendada de crear una skill es con <code>/skill-creator</code> — Claude te guía con preguntas, genera el <code>SKILL.md</code> bien estructurado y lo guarda en el directorio correcto automáticamente.</p>
+<hr />
+<h1>10. Pasar argumentos</h1>
+<p>Igual que en <code>commands/</code>, puedes usar <code>$ARGUMENTS</code>, <code>$0</code>, <code>$1</code>:</p>
+<pre class="highlight"><code class="language-markdown">---
+name: explicar-funcion
+description: Explica en detalle una función del proyecto
+---</code></pre>
+<pre class="highlight"><code class="language-markdown">/explicar-funcion saludar script.sh</code></pre>
+<hr />
+<h1>11. Ver skills disponibles</h1>
+<pre class="highlight"><code class="language-markdown">/skills</code></pre>
+<p>Muestra las skills separadas por nivel:</p>
+<pre class="highlight"><code class="language-markdown">Skills
+4 skills
+
+Project skills (/Users/tu_usuario/test-claude/.claude/skills, .claude/commands)
+documentar · ~89 description tokens
+dato-curioso · ~15 description tokens
+revisar · ~12 description tokens
+
+User skills (/Users/tu_usuario/.claude/skills)
+datablog-design-v1 · ~69 description tokens
+skill-creator · ~83 description tokens</code></pre>
+<h1>12. Cómo consume tokens una skill</h1>
+<p>Cuando inicias una sesión, Claude no carga el contenido completo de cada skill — solo carga su <strong>description</strong> del frontmatter. El contenido completo del <code>SKILL.md</code> se carga solo cuando la skill se invoca.</p>
+<p>Puedes verlo con <code>/context</code>:</p>
+<pre class="highlight"><code class="language-markdown">Skills · /skills
+
+Project
+└ documentar: 110 tokens    ← solo la description
+└ dato-curioso: 15 tokens   ← description muy corta
+└ revisar: 12 tokens        ← description muy corta
+
+User
+└ skill-creator: 83 tokens
+└ datablog-design-v1: 69 tokens</code></pre>
+<p>Esto tiene dos implicaciones importantes:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Description (siempre en contexto)</th>
+<th>SKILL.md completo (bajo demanda)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cuándo se carga</strong></td>
+<td>Al inicio de cada sesión</td>
+<td>Solo cuando se invoca la skill</td>
+</tr>
+<tr>
+<td><strong>Para qué sirve</strong></td>
+<td>Claude decide si la skill aplica</td>
+<td>Claude ejecuta las instrucciones</td>
+</tr>
+<tr>
+<td><strong>Costo en tokens</strong></td>
+<td>Fijo — pocos tokens</td>
+<td>Variable — puede ser grande</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ Por eso la <code>description</code> es crítica — es lo único que Claude lee para decidir si usar la skill automáticamente. Una description vaga hace que Claude no la active cuando debería.</p>
+<p>💡 Mantén las descriptions concisas pero específicas. La documentación oficial recomienda máximo 250 caracteres — descriptions más largas se truncan en el listado de skills.</p>
+<h1>13.  Archivos de soporte de una skill</h1>
+<p>Una skill puede tener más que solo el <code>SKILL.md</code>. Las siguientes carpetas las documentaremos cuando tengamos más contexto de agentes:</p>
+<table>
+<thead>
+<tr>
+<th>Carpeta</th>
+<th>Para qué sirve</th>
+<th>Dónde se documenta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>agents/</code></td>
+<td>Subagentes especializados que la skill puede invocar</td>
+<td>Bloque — Agentes</td>
+</tr>
+<tr>
+<td><code>scripts/</code></td>
+<td>Scripts que Claude ejecuta antes de procesar</td>
+<td>Bloque — Agentes</td>
+</tr>
+<tr>
+<td><code>references/</code></td>
+<td>Documentación de referencia que Claude carga cuando necesita</td>
+<td>Bloque — Agentes</td>
+</tr>
+<tr>
+<td><code>assets/</code></td>
+<td>Archivos de soporte como templates, HTML, imágenes</td>
+<td>Bloque — Agentes</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

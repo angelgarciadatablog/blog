@@ -385,7 +385,7 @@ main {
 #noteViewer blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; color: var(--text-dim); background: var(--bg-side); border-radius: 0 4px 4px 0; }
 #noteViewer ul, #noteViewer ol { padding-left: 20px; margin-bottom: 16px; }
 #noteViewer li { margin-bottom: 6px; line-height: 1.7; }
-#noteViewer table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+#noteViewer table { display: block; overflow-x: auto; width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
 #noteViewer th { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; }
 #noteViewer td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
 #noteViewer tr:last-child td { border-bottom: none; }

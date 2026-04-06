@@ -116,9 +116,9 @@ Con 50 skills globales (~500 tokens c/u = 25k) + CLAUDE.md extenso (2k):
 → Disponible para mensajes: ~137k tokens
 ```
 
-> ⚠️ Las **skills globales** (~/.claude/skills/) se cargan en **todos tus proyectos** sin excepción. Las **skills del proyecto** (.claude/skills/) solo en ese proyecto. Por eso es importante no acumular skills globales que no usas.
+⚠️ Las skills globales (`/Users/tu_usuario/.claude/skills/`) cargan su **description** en el contexto de **todos tus proyectos** al inicio de cada sesión. Las skills del proyecto (`/Users/tu_usuario/mi_proyecto/.claude/skills/`) solo en ese proyecto. Por eso es importante no acumular skills globales que no usas — cada una suma tokens aunque sea pocos.
 
-> 💡 El `CLAUDE.md` solo afecta al proyecto actual — no es global a menos que crees uno en `~/.claude/CLAUDE.md`.
+> 💡 El `CLAUDE.md` solo afecta al proyecto actual — no es global a menos que crees uno en `users/usuario/.claude/CLAUDE.md`.
 
 ---
 

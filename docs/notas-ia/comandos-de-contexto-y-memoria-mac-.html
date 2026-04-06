@@ -11,9 +11,9 @@
   <div class="topbar">
     <a href="../../index.html">← Inicio</a>
     <span class="sep">|</span>
-    <a href="../../index.html">Inteligencia Artificial</a>
+    <a href="../../index.html">Claude</a>
     <span class="sep">|</span>
-    <span style="color: var(--text-dim); font-size: 13px;">Claude</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Claude Comandos</span>
   </div>
   <div class="note-content">
     <h1>Comandos de contexto y memoria (Mac) 👌</h1>
@@ -195,9 +195,9 @@ Segunda vez:  29.4k tokens → Messages: 15.8k</code></pre>
 Con 50 skills globales (~500 tokens c/u = 25k) + CLAUDE.md extenso (2k):
 → Sistema ocupa ~42k tokens
 → Disponible para mensajes: ~137k tokens</code></pre>
+<p>⚠️ Las skills globales (<code>/Users/tu_usuario/.claude/skills/</code>) cargan su <strong>description</strong> en el contexto de <strong>todos tus proyectos</strong> al inicio de cada sesión. Las skills del proyecto (<code>/Users/tu_usuario/mi_proyecto/.claude/skills/</code>) solo en ese proyecto. Por eso es importante no acumular skills globales que no usas — cada una suma tokens aunque sea pocos.</p>
 <blockquote>
-<p>⚠️ Las <strong>skills globales</strong> (~/.claude/skills/) se cargan en <strong>todos tus proyectos</strong> sin excepción. Las <strong>skills del proyecto</strong> (.claude/skills/) solo en ese proyecto. Por eso es importante no acumular skills globales que no usas.</p>
-<p>💡 El <code>CLAUDE.md</code> solo afecta al proyecto actual — no es global a menos que crees uno en <code>~/.claude/CLAUDE.md</code>.</p>
+<p>💡 El <code>CLAUDE.md</code> solo afecta al proyecto actual — no es global a menos que crees uno en <code>users/usuario/.claude/CLAUDE.md</code>.</p>
 </blockquote>
 <hr />
 <h1>2. /clear — Limpiar la conversación actual</h1>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>commands/ — Comandos personalizados 👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Claude</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">claude.md y .claude</span>
+  </div>
+  <div class="note-content">
+    <h1>commands/ — Comandos personalizados 👌</h1>
+    <p>La carpeta <code>commands/</code> te permite crear comandos personalizados invocables con <code>/nombre</code> dentro de Claude Code. Cada archivo <code>.md</code> se convierte en un comando.</p>
+<pre class="highlight"><code class="language-bash">.claude/commands/
+├── revisar.md       → se invoca con /revisar
+└── dato-curioso.md  → se invoca con /dato-curioso</code></pre>
+<hr />
+<h1>1. Cómo crear un comando</h1>
+<pre class="highlight"><code class="language-bash"># Crear la carpeta
+mkdir -p /Users/tu_usuario/mi_proyecto/.claude/commands
+
+# Crear el comando - archivo revisar.md
+cat &gt; .claude/commands/revisar.md &lt;&lt; 'EOF'
+Revisa el código de este proyecto y dime:
+1. Qué hace cada archivo
+2. Si hay algo que mejorar
+3. Si hay bugs evidentes
+EOF</code></pre>
+<p>Luego dentro de Claude Code:</p>
+<pre class="highlight"><code class="language-bash">/revisar</code></pre>
+<p>Claude ejecuta exactamente lo que dice el archivo <code>.md</code>.</p>
+<hr />
+<h1>2. Pasar argumentos</h1>
+<p><strong><code>$ARGUMENTS</code></strong><strong>— recibe todo como un bloque de texto:</strong></p>
+<pre class="highlight"><code class="language-bash">Explica detalladamente este concepto en español, con un ejemplo práctico: $ARGUMENTS</code></pre>
+<pre class="highlight"><code class="language-bash">/explicar recursividad y sus casos de uso</code></pre>
+<p>Claude recibe todo el texto después del comando como un solo string.</p>
+<hr />
+<h1><strong>3. $0, $1, $2 — argumentos por posición:</strong></h1>
+<pre class="highlight"><code class="language-bash">Di hola a $0 y cuéntale un dato curioso sobre $1</code></pre>
+<pre class="highlight"><code class="language-bash">/dato-curioso Angel programación</code></pre>
+<p>Claude recibe:</p>
+<ul>
+<li><code>$0</code> → <code>Angel</code></li>
+<li><code>$1</code> → <code>programación</code></li>
+</ul>
+<p><strong>Resultado real probado:</strong></p>
+<pre class="highlight"><code class="language-bash">Hola Angel! 👋
+
+Aquí va tu dato curioso sobre programación:
+
+El primer "bug" de computadora real fue un insecto de verdad. En 1947,
+la ingeniera Grace Hopper encontró una polilla atrapada en los relés de
+la computadora Harvard Mark II...</code></pre>
+<hr />
+<h1>4. ¿Qué es <code>$ARGUMENTS</code> vs <code>$0</code>, <code>$1</code>?</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>$ARGUMENTS</code></th>
+<th><code>$0</code>, <code>$1</code>, <code>$2</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qué recibe</td>
+<td>Todo el texto después del comando</td>
+<td>Cada palabra por separado</td>
+</tr>
+<tr>
+<td>Cuándo usarlo</td>
+<td>Cuando el input es una frase o texto libre</td>
+<td>Cuando necesitas parámetros específicos y ordenados</td>
+</tr>
+<tr>
+<td>Ejemplo</td>
+<td><code>/explicar qué es la recursividad</code></td>
+<td><code>/dato-curioso Angel programación</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>5. Eliminar un comando</h1>
+<pre class="highlight"><code class="language-bash">rm /Users/tu_usuario/mi_proyecto/.claude/commands/nombre-del-comando.md</code></pre>
+<hr />
+<p>💡 El nombre del archivo define el comando. Usa nombres descriptivos de la acción: <code>revisar</code>, <code>dato-curioso</code>, <code>generar-tests</code> — no nombres de los parámetros.</p>
+<p>⚠️ <code>commands/</code> es la forma <strong>legacy</strong> — sigue funcionando y no va a desaparecer, pero <code>skills/</code> es la versión más avanzada y recomendada para casos complejos. Si tu comando es simple, <code>commands/</code> es perfectamente válido.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>
