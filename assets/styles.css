@@ -297,6 +297,12 @@ main {
   padding: 48px 60px;
   max-width: 860px;
   width: 100%;
+  margin: 0 auto;
+  margin-right: 280px;
+}
+
+@media (max-width: 1200px) {
+  #noteViewer { margin-right: auto; }
 }
 
 /* ── TOC PANEL ── */
