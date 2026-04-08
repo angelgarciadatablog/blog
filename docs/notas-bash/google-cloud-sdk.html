@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Cloud (SDK) · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">CLI con login Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>Google Cloud (SDK)</h1>
+    <p><strong>¿Qué es Google Cloud SDK?</strong></p>
+<p>Es un conjunto de herramientas CLI para interactuar con los servicios de Google Cloud desde la terminal. El comando principal es <code>gcloud</code>.</p>
+<p><strong>¿Por qué necesita login?</strong></p>
+<p>Porque Google Cloud es un servicio de pago — cada acción (crear servidores, subir archivos, consultar bases de datos) está asociada a una cuenta y a un proyecto de facturación.</p>
+<p><strong>Los comandos principales:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gcloud</code></td>
+<td>Gestionar infraestructura (VMs, redes, etc.)</td>
+</tr>
+<tr>
+<td><code>gsutil</code></td>
+<td>Gestionar almacenamiento (buckets)</td>
+</tr>
+<tr>
+<td><code>bq</code></td>
+<td>Gestionar BigQuery</td>
+</tr>
+</tbody>
+</table>
+<h2><strong>Primera revisión:</strong></h2>
+<p><strong>¿Qué vamos a revisar?</strong></p>
+<ol>
+<li>Qué cuenta está activa</li>
+<li>A qué proyecto está conectado</li>
+<li>Si corresponde a tu cuenta de trabajo</li>
+</ol>
+<hr />
+<p>Ejecuta esto:</p>
+<pre class="highlight"><code class="language-bash">gcloud auth list</code></pre>
+<p><strong>Ahora verifiquemos a qué proyecto está apuntando:</strong></p>
+<pre class="highlight"><code class="language-bash">gcloud config list</code></pre>
+<h2><strong>Una cosa importante sobre gcloud:</strong></h2>
+<p>A diferencia de gh, gcloud maneja el concepto de <strong>configuraciones</strong> — puedes tener múltiples configuraciones con diferentes cuentas y proyectos, y cambiar entre ellas:</p>
+<pre class="highlight"><code class="language-bash"># Ver todas las configuraciones
+gcloud config configurations list
+
+# Cambiar de configuración
+gcloud config configurations activate nombre-configuracion</code></pre>
+<p>Útil cuando trabajas con múltiples proyectos o cuentas de Google Cloud.</p>
+<h2><strong>¿Cómo funciona gcloud con múltiples cuentas?</strong></h2>
+<p>gcloud usa el concepto de <strong>configuraciones</strong> — cada una guarda:</p>
+<ul>
+<li>Una cuenta de Google</li>
+<li>Un proyecto activo</li>
+<li>Región y zona por defecto (opcional)</li>
+</ul>
+<p><strong>La relación cuenta → proyecto:</strong></p>
+<p>`Cuenta 1: angelg@reechai.com
+    └── Proyecto: proyecto-datos1</p>
+<p>Cuenta 2: angel@otraempresa.com
+    └── Proyecto: proyecto-empresa-2</p>
+<p>Cuenta 3: angel@tercera.com
+    └── Proyecto: proyecto-3`</p>
+<p>Cada configuración apunta a una cuenta + proyecto específico.</p>
+<p><strong>Lo que esto significa:</strong></p>
+<ul>
+<li>Si tienes <strong>3 cuentas diferentes</strong> → necesitas 3 configuraciones</li>
+<li>Si tienes <strong>1 cuenta con 3 proyectos</strong> → necesitas 3 configuraciones</li>
+<li>Si tienes <strong>1 cuenta, 1 proyecto, 3 datasets</strong> → necesitas solo 1 configuración, los datasets se acceden directamente con <code>bq</code></li>
+</ul>
+<p><strong>El concepto clave:</strong></p>
+<blockquote>
+<p>La configuración de gcloud solo define <strong>desde dónde trabajas</strong> (proyecto activo). Los permisos de acceso a otros proyectos los gestiona <strong>IAM de Google Cloud</strong> a nivel de cuenta.</p>
+</blockquote>
+<h2>Agregar una nueva cuenta</h2>
+<h2>Paso 1. Revisar configuración actual</h2>
+<p><pre class="highlight"><code class="language-bash"># Ver configuraciones existentes
+gcloud config configurations list
+
+# Ver configuración activa
+gcloud config list
+
+# Ver cuentas autenticadas
+gcloud auth list</code></pre>
+<pre class="highlight"><code>
+
+
+## Paso 2. Agregar una nueva configuración cuenta-proyecto
+
+```bash
+gcloud config configurations create angel-angelgarciadatablog</code></pre></p>
+<p>*Aquí angel-angelgarciadatablog es el nombre de la configuración, en donde sería bueno tener de manera descriptiva el usuario de google y el proyecto</p>
+<p>Ahora autenticamos la cuenta:</p>
+<pre class="highlight"><code class="language-bash">gcloud auth login</code></pre>
+<p><img alt="" src="img/32c477bcd0eb8084a65add3797e4b8e3.webp" /></p>
+<p>*tiene que ser la cuenta de google de la cuenta de google cloud</p>
+<h2>Paso 3. Ahora establece el proyecto:</h2>
+<pre class="highlight"><code class="language-bash">gcloud config set project angelgarciadatablog</code></pre>
+<p>*en este caso estamos estableciendo como configuración el proyecto ya creado en google cloud llamado angelgarciadatablog</p>
+<p>Verifiquemos que quedó bien:</p>
+<pre class="highlight"><code class="language-bash"># Ver configuración activa
+gcloud config list
+
+# Ver configuraciones existentes
+gcloud config configurations list</code></pre>
+<p>Para agregar nuevos proyectos que están en la misma cuenta de google: Repite desde el paso 2</p>
+<pre class="highlight"><code class="language-bash">gcloud config configurations create angel-angelgarciadatablog</code></pre>
+<pre class="highlight"><code class="language-bash">gcloud config set account cuenta-google@gmail.com
+gcloud config set project nombre-proyecto</code></pre>
+<h2>Eliminar una configuración cuenta-proyecto</h2>
+<pre class="highlight"><code class="language-bash"># Ver configuraciones existentes
+gcloud config configurations list
+
+# Primero activamos otra configuración para que no haya conflicto
+gcloud config configurations activate nombre-otra-configuracion
+
+# La eliminamos
+gcloud config configurations delete nombre-configuracion</code></pre>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

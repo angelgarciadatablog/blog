@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub CLI (gh) · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">CLI con login Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>GitHub CLI (gh)</h1>
+    <p><strong>Git</strong> → es la herramienta base de control de versiones. Solo necesita tu nombre y email para firmar commits. No sabe nada de GitHub específicamente.</p>
+<p><strong>GitHub CLI (gh)</strong> → es una herramienta para interactuar con <strong>GitHub como plataforma</strong> desde la terminal. Necesita login real con tu cuenta de GitHub.</p>
+<table>
+<thead>
+<tr>
+<th>Acción</th>
+<th>Git</th>
+<th>GitHub CLI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hacer commits</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Push/pull a repos</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Crear un repo en GitHub</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Abrir un Pull Request</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Ver issues</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Hacer fork</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2><strong>¿Cómo autentica Git en Mac?</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Mac</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>¿Profesional?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSH</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅ Estándar</td>
+</tr>
+<tr>
+<td><strong>Keychain (OAuth)</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>⚠️ Personal</td>
+</tr>
+<tr>
+<td><strong>PAT (token manual)</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>⚠️ Puntual</td>
+</tr>
+</tbody>
+</table>
+<p>Git usa el <strong>macOS Keychain</strong> para guardar credenciales de forma independiente a <code>gh</code>. Puedes verificarlo con:</p>
+<pre class="highlight"><code class="language-bash">git credential-osxkeychain get</code></pre>
+<p>Esto devuelve tu ID de usuario de GitHub y un <strong>Personal Access Token (PAT)</strong> guardado. Por eso puedes hacer push sin tener sesión activa en <code>gh</code> — son dos sistemas separados.</p>
+<h2><strong>¿Cómo logearte con gh?</strong></h2>
+<pre class="highlight"><code class="language-bash">gh auth login</code></pre>
+<p>Es el comando central de autenticación de gh. Sirve para:</p>
+<ul>
+<li><strong>Agregar cuentas de GitHub</strong> — cada vez que lo ejecutas puedes autenticar una cuenta nueva, gh las guarda todas en (<code>~/.config/gh/hosts.yml</code> )</li>
+<li><strong>Cambiar el protocolo</strong> — durante el proceso te pregunta si quieres usar HTTPS o SSH, actualizando la sesión existente</li>
+<li><strong>Reconectar o renovar</strong> — si un token expiró o quieres actualizar la configuración de una cuenta ya guardada</li>
+</ul>
+<h2><strong>¿Cómo está configurado tu gh ahora mismo?</strong></h2>
+<pre class="highlight"><code class="language-bash">gh auth status</code></pre>
+<p>Muestra todas las cuentas guardadas en gh, tanto la activa como las inactivas, con su protocolo y estado.</p>
+<p>Tu resultado mostró:</p>
+<ul>
+<li>Protocolo: <code>https</code></li>
+<li>Token guardado en: <code>keyring</code> (el almacén de credenciales de Windows)</li>
+</ul>
+<h2><strong>HTTPS vs SSH:</strong></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>HTTPS</th>
+<th>SSH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cómo funciona</strong></td>
+<td>Token de acceso</td>
+<td>Par de llaves (pública/privada)</td>
+</tr>
+<tr>
+<td><strong>Autenticación</strong></td>
+<td>Token guardado en keyring</td>
+<td>Llave privada en tu equipo</td>
+</tr>
+<tr>
+<td><strong>Seguridad</strong></td>
+<td>Buena</td>
+<td>Mejor</td>
+</tr>
+<tr>
+<td><strong>Uso profesional</strong></td>
+<td>Común</td>
+<td>Más estándar en entornos pro</td>
+</tr>
+<tr>
+<td><strong>Múltiples cuentas</strong></td>
+<td>Complicado</td>
+<td>Más manejable</td>
+</tr>
+</tbody>
+</table>
+<h2><strong>Los problemas reales con una sola cuenta en gh:</strong></h2>
+<p><strong>Escenario 1 — Clonar un repo de otra cuenta:</strong></p>
+<pre class="highlight"><code class="language-bash">gh repo clone otra-cuenta/su-repo</code></pre>
+<p>✅ Funciona si el repo es público
+❌ Falla si el repo es privado — gh usará <code>angel-reechai</code> y no tendrá acceso</p>
+<p><strong>Escenario 2 — Push a un repo de otra cuenta:</strong></p>
+<pre class="highlight"><code class="language-bash">git push</code></pre>
+<p>⚠️ Git intentará autenticarse con las credenciales guardadas — si no coinciden con el dueño del repo, te dará error de permisos</p>
+<h1><strong>Otras formas de manejar múltiples cuentas en gh:</strong></h1>
+<p>gh desde la versión 2.x soporta múltiples cuentas. Puedes agregar una segunda cuenta así:</p>
+<pre class="highlight"><code class="language-bash">gh auth login --hostname github.com</code></pre>
+<p>Y cambiar entre ellas con:</p>
+<pre class="highlight"><code class="language-bash">gh auth switch</code></pre>
+<p><strong>El flujo real con 2 cuentas:</strong></p>
+<pre class="highlight"><code class="language-bash"># Primera vez (solo una vez por cuenta)
+gh auth login  # logueas cuenta trabajo → se guarda
+gh auth login  # logueas cuenta personal → se guarda
+
+# Del día a día (instantáneo, sin login)
+gh auth switch  # alterna entre las dos cuentas guardadas</code></pre>
+<hr />
+<p><strong>Pero hay una forma aún más cómoda:</strong></p>
+<p>Con SSH configurado correctamente, <strong>ni siquiera necesitas hacer</strong><strong><code>gh auth switch</code></strong><strong>manualmente</strong> — cada repo usa la cuenta correcta automáticamente según la llave SSH configurada.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

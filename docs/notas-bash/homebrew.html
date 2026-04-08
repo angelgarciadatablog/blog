@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Homebrew · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Programas Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>Homebrew</h1>
+    <h3><strong>🛠️ ¿Qué vamos a hacer?</strong></h3>
+<ol>
+<li><strong>Instalar Homebrew</strong> → un gestor de paquetes que facilita instalar herramientas técnicas desde la terminal.</li>
+<li><strong>Usar Homebrew para instalar ngrok</strong> → una herramienta que crea una <strong>URL pública temporal</strong> (HTTPS) que apunta a tu localhost.</li>
+</ol>
+<p>Así podremos probar webhooks <strong>como si estuviéramos en producción</strong>, pero sin subir nada a la nube.</p>
+<h3><strong>⚙️ ¿Qué implica hacer esto?</strong></h3>
+<ul>
+<li>Instalar <strong>Homebrew</strong> ocupa ~300 MB, pero <strong>te servirá a futuro</strong> para instalar herramientas como:<ul>
+<li>jq, git, httpie, mysql, ffmpeg, python, etc.</li>
+</ul>
+</li>
+<li>Instalar <strong>ngrok</strong> ocupa ~25 MB y te servirá para:<ul>
+<li>Exponer webhooks de n8n</li>
+<li>Probar APIs locales desde móviles, Zapier, Airtable, Shopify, etc.</li>
+</ul>
+</li>
+</ul>
+<h3><strong>🔒 ¿Es seguro?</strong></h3>
+<p>Sí. ngrok crea una conexión segura <strong>solo durante el tiempo que está activo</strong>.</p>
+<p>No es recomendable para producción, pero <strong>sí es seguro para pruebas y desarrollo</strong>.</p>
+<p><strong>comando actualizado para instalar Homebrew</strong></p>
+<p>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</p>
+<p><strong>comando para instalar ngrok</strong></p>
+<p>brew install ngrok</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

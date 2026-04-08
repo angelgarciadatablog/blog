@@ -221,7 +221,7 @@ Si en el futuro se quisieran combinar estas notas con Markdown de otras fuentes 
 
 ### Flujo
 
-1. Durante el sync, al encontrar un bloque `image`, el script llama a `sync/imagenes.py`
+1. Durante el sync, al encontrar un bloque `image`, el script llama al módulo `sync/_imagenes.py`
 2. La imagen se descarga desde la URL de Notion (firmada por AWS S3, expira en ~1 hora)
 3. Se convierte a formato WebP con calidad 85 usando Pillow
 4. Se guarda en `img/{block_id_sin_guiones}.webp`
@@ -312,7 +312,7 @@ El flujo completo al ejecutar `python sync/descargar_notas.py`:
 5. Si cambió: exporta bloques → Markdown → HTML → guarda ambos
 6. Al finalizar: elimina HTML huérfanos, descarga imágenes huérfanas, regenera `notes.json`
 
-**Módulo de imágenes:** `sync/imagenes.py` — completamente aislado. Si falla la importación (Pillow no instalado), el script principal continúa sin descargar imágenes.
+**Módulo de imágenes:** `sync/_imagenes.py` — completamente aislado. Si falla la importación (Pillow no instalado), el script principal continúa sin descargar imágenes.
 
 ### Automatización pendiente
 
@@ -322,6 +322,64 @@ Actualmente el sync se ejecuta manualmente. Está pendiente integrarlo en uno de
 - **Cloud Function**: función en GCP que ejecute el script periódicamente via Cloud Scheduler
 
 Por ahora se mantiene manual para validar que el pipeline sea estable y no rompa nada antes de automatizarlo.
+
+---
+
+## Scripts y módulos disponibles
+
+### 📜 Scripts ejecutables (en `sync/`)
+
+#### `descargar_notas.py` — Script principal
+Sincroniza todas las notas desde Notion a archivos locales (Markdown + HTML). 
+
+**Qué hace:**
+1. Lee las categorías desde `RAICES`
+2. Recorre cada categoría, grupo y nota en Notion
+3. Compara fechas (última modificación local vs Notion)
+4. Exporta notas modificadas a Markdown y HTML
+5. Descarga y convierte imágenes (via módulo `_imagenes.py`)
+6. Genera `notes.json` con índice de todas las notas
+7. Elimina archivos huérfanos y referencias de imágenes no usadas
+
+**Cómo ejecutar:**
+```bash
+# Sync completo
+python sync/descargar_notas.py
+
+# Sync de prueba (solo 3 notas, sin limpiar huérfanos)
+python sync/descargar_notas.py --test
+```
+
+#### `descubrir_paginas_raiz.py` — Descubridor de categorías
+Busca nuevas páginas raíz en Notion que coincidan con el patrón `notas-*` y verifica que tengan la estructura correcta (carpetas con notas dentro).
+
+**Qué hace:**
+1. Busca en Notion páginas cuyo nombre empiece con `notas-`
+2. Verifica que no estén ya en `RAICES` de `descargar_notas.py`
+3. Valida que tengan la estructura correcta (carpetas → notas)
+4. Lista las candidatas encontradas con sus IDs
+
+**Cuándo usarlo:**
+Cuando liberes una nueva categoría en Notion y quieras agregarla al blog.
+
+**Cómo ejecutar:**
+```bash
+python sync/descubrir_paginas_raiz.py
+```
+
+### 📦 Módulos (en `sync/`)
+
+#### `_imagenes.py` — Gestor de imágenes
+Módulo interno que descarga y convierte imágenes de Notion. **No se ejecuta directamente**, se importa automáticamente dentro de `descargar_notas.py`.
+
+**Qué hace:**
+- Descarga imágenes desde URLs de Notion (almacenadas en AWS S3)
+- Las convierte a formato WebP con calidad 85
+- Las guarda en `img/` con nombre basado en block ID
+- Limpia imágenes huérfanas (que ya no están referenciadas en ningún markdown)
+
+**Dependencia:**
+Requiere `Pillow` instalado. Si falta, `descargar_notas.py` usa las URLs directas de Notion (que expiran en ~1 hora).
 
 ---
 

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App electron · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Conceptos importantes</span>
+  </div>
+  <div class="note-content">
+    <h1>App electron</h1>
+    <h2>🧠 ¿Qué es una app Electron?</h2>
+<p>Electron es una tecnología que permite crear apps de escritorio usando:</p>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>Chromium (el motor de Chrome)</li>
+<li>Node.js</li>
+</ul>
+<p>En simple:</p>
+<blockquote>
+<p>una app Electron es básicamente <strong>un navegador Chrome disfrazado de aplicación</strong>.</p>
+</blockquote>
+<p>Por eso se ven iguales en Mac y Windows.</p>
+<h2>⚠️ Por qué consumen más recursos</h2>
+<p>Cada app Electron incluye:</p>
+<ul>
+<li>su propio mini-Chrome</li>
+<li>su propio motor JS</li>
+<li>su propio renderizador</li>
+</ul>
+<p>Entonces pasa algo así:</p>
+<pre class="highlight"><code>Chrome abierto        → 1 Chromium
+VS Code abierto       → otro Chromium
+Postman abierto       → otro Chromium
+TikTok Studio         → otro Chromium</code></pre>
+<p>👉 No comparten motor.</p>
+<p>Tu computadora siente como si hubiera varios navegadores abiertos.</p>
+<h2>🗺️ Mapeemos TU Mac (según lo que vimos)</h2>
+<p>Estas son <strong>muy probablemente Electron</strong> en tu lista:</p>
+<h3>🔴 Electron (consumo medio–alto)</h3>
+<ul>
+<li>Visual Studio Code</li>
+<li>TikTok LIVE Studio</li>
+<li>Notion</li>
+<li>Zoom</li>
+<li>Spotify</li>
+<li>Cursor</li>
+<li>ChatGPT app (com.openai.atlas)</li>
+<li>Postman (si lo instalas)</li>
+</ul>
+<h3>🟡 Parcialmente pesadas (no Electron pero exigentes)</h3>
+<ul>
+<li>OBS (usa GPU/video)</li>
+<li>CapCut</li>
+<li>Filmora</li>
+<li>Chrome (obviamente Chromium base)</li>
+</ul>
+<h3>🟢 Nativas de macOS (muy eficientes)</h3>
+<ul>
+<li>Word / Excel / PowerPoint (versión Mac moderna)</li>
+<li>Keynote</li>
+<li>Pages</li>
+<li>Numbers</li>
+<li>The Unarchiver</li>
+<li>Horo</li>
+</ul>
+<p>Estas usan frameworks nativos → mejor rendimiento.</p>
+<h2>⚠️🌐 Aplicaciones web complejas (NO Electron)</h2>
+<p>Son páginas abiertas en Chrome, pero<strong>funcionan como software completo.</strong></p>
+<p>Ejemplos:</p>
+<ul>
+<li>BigQuery (usa mucha ram)</li>
+<li>GA4</li>
+<li>Looker Studio</li>
+<li>Notion web</li>
+<li>Figma</li>
+<li>Canva</li>
+<li>dashboards cloud</li>
+</ul>
+<p>Aquí ocurre:</p>
+<pre class="highlight"><code>Chrome (1 motor)
+ └─ app web pesada ejecutándose dentro</code></pre>
+<p>No hay motores duplicados.</p>
+<h2>🧠 Las webs que realmente consumen recursos tienen 3 cosas</h2>
+<p>Una web empieza a comportarse como “software pesado” cuando cumple varias de estas:</p>
+<p>✅ editor interactivo en tiempo real</p>
+<p>✅ tablas grandes o virtualizadas</p>
+<p>✅ dashboards dinámicos</p>
+<p>✅ muchos scripts JS ejecutándose constantemente</p>
+<p>✅ conexión persistente al servidor (streaming / live updates)</p>
+<p>Eso convierte al navegador en una mini-app.</p>
+<h2>🔴 Categoría 1 — Data &amp; Cloud Consoles (las más pesadas)</h2>
+<p>Aquí vive BigQuery y sus primos.</p>
+<p>Debes vigilar:</p>
+<ul>
+<li>Google Cloud Console (en general)</li>
+<li>Looker Studio cuando el dashboard es grande</li>
+<li>Snowflake Web UI</li>
+<li>Databricks</li>
+<li>Azure Data Explorer</li>
+<li>AWS Athena / Redshift Query Editor</li>
+<li>GitHub Codespaces / editor web</li>
+</ul>
+<p>👉 Todas cargan grids de datos enormes y editores SQL complejos.</p>
+<h2>🟠 Categoría 2 — Herramientas tipo “workspace”</h2>
+<p>No parecen pesadas, pero acumulan memoria con el tiempo.</p>
+<p>Ejemplos:</p>
+<ul>
+<li>Notion (especialmente páginas largas)</li>
+<li>Figma</li>
+<li>Canva con diseños grandes</li>
+<li>Miro</li>
+<li>Airtable</li>
+<li>Monday / ClickUp dashboards</li>
+<li>GitHub</li>
+</ul>
+<p>Porque renderizan muchos elementos dinámicos.</p>
+<h2>🟡 Categoría 3 — Dashboards marketing / analytics</h2>
+<p>Muy relevante para tu trabajo.</p>
+<ul>
+<li>GA4 (propiedad grande)</li>
+<li>Meta Ads Manager</li>
+<li>Google Ads dashboards</li>
+<li>herramientas BI embebidas</li>
+</ul>
+<p>Los gráficos interactivos usan bastante GPU.</p>
+<h2>🟢 Categoría 4 — Las que NO preocupan mucho</h2>
+<p>Estas casi nunca son problema:</p>
+<ul>
+<li>ChatGPT</li>
+<li>Claude</li>
+<li>documentación técnica</li>
+<li>blogs</li>
+<li>StackOverflow</li>
+<li>Gmail normal</li>
+</ul>
+<p>Son principalmente texto.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

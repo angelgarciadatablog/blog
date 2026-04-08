@@ -31,5 +31,3 @@ gcloud iam service-accounts create sa-nombre-service-account --display-name="Ang
 
 
 
-Mac
-

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revisión de Login en CLI · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">CLI con login Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>Revisión de Login en CLI</h1>
+    <p><strong>¿Qué es un CLI?</strong>
+CLI = <em>Command Line Interface</em>. Es un programa que se usa desde la terminal escribiendo comandos, en lugar de hacer clic en botones. Por ejemplo, en vez de abrir GitHub en el navegador, escribes    <code>gh repo clone</code> y listo.</p>
+<p><strong>Comando para revisar aplicaciones instaladas:</strong></p>
+<pre class="highlight"><code class="language-bash">ls /Applications</code></pre>
+<p>*En Mac todas las aplicaciones se guardan en la carpeta Applications</p>
+<p><strong>Comando para revisar las CLIs instaladas con Homebrew</strong></p>
+<pre class="highlight"><code class="language-bash">brew list</code></pre>
+<p><strong>estores de paquetes en Mac:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Gestor</th>
+<th>Para qué sirve</th>
+<th>Cómo listar lo instalado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Homebrew</strong></td>
+<td>CLIs y apps generales del sistema</td>
+<td><code>brew list</code></td>
+</tr>
+<tr>
+<td><strong>npm</strong></td>
+<td>Paquetes de JavaScript/Node.js</td>
+<td><code>npm list -g --depth=0</code></td>
+</tr>
+<tr>
+<td><strong>nvm</strong></td>
+<td>Versiones de Node.js</td>
+<td><code>nvm list</code></td>
+</tr>
+<tr>
+<td><strong>pyenv</strong></td>
+<td>Versiones de Python</td>
+<td><code>pyenv versions</code></td>
+</tr>
+<tr>
+<td><strong>App Store</strong></td>
+<td>Apps oficiales de Apple</td>
+<td>Desde la UI</td>
+</tr>
+</tbody>
+</table>
+<p>💡 <code>brew list</code> solo muestra lo instalado con Homebrew. nvm, npm, pyenv se instalan por separado y gestionan sus propias versiones.</p>
+<hr />
+<p><strong>Setup actual:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Gestor</th>
+<th>Paquetes instalados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Homebrew</strong></td>
+<td><code>gh</code>, <code>pyenv</code>, <code>gcloud-cli</code>, <code>ngrok</code>, <code>obsidian</code>, <code>postman</code></td>
+</tr>
+<tr>
+<td><strong>npm (via nvm)</strong></td>
+<td><code>n8n</code></td>
+</tr>
+<tr>
+<td><strong>Instalación nativa (web)</strong></td>
+<td><code>claude</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>¿Cuáles requieren login?</strong>
+No todos los CLIs necesitan login — solo los que se conectan a un servicio externo con tu cuenta:</p>
+<table>
+<thead>
+<tr>
+<th>CLI</th>
+<th>Servicio</th>
+<th>¿Requiere login?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Git</td>
+<td>GitHub / GitLab / cualquier repo</td>
+<td>⚠️ Parcialmente (nombre y email)</td>
+</tr>
+<tr>
+<td>GitHub CLI (<code>gh</code>)</td>
+<td>GitHub</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td>Google Cloud SDK (<code>gcloud</code>)</td>
+<td>Google Cloud</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td>npm</td>
+<td>npmjs.com</td>
+<td>✅ Solo si publicas paquetes</td>
+</tr>
+<tr>
+<td>Claude CLI</td>
+<td>Anthropic</td>
+<td>✅ Sí</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Los que NO necesitan login:</strong></p>
+<ul>
+<li>Python, Node.js, WinRAR, VLC, etc. — son herramientas locales que no se conectan a ningún servicio con tu cuenta.</li>
+</ul>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

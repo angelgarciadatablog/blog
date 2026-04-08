@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>n8n · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Programas Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>n8n</h1>
+    <h1><strong>Cómo abrir n8n en el terminal (con Node.js instalado mediante nvm)</strong></h1>
+<h1><strong>¿Por qué abrimos n8n de esta forma?</strong></h1>
+<p>Se decidió instalar y abrir n8n a través de la terminal utilizando Node.js instalado mediante nvm (Node Version Manager) porque es la opción más flexible, profesional y recomendada para desarrolladores.</p>
+<p>Esta elección me permite:</p>
+<ul>
+<li>Trabajar con múltiples versiones de Node.js sin conflictos.</li>
+<li>Evitar tocar archivos del sistema de macOS.</li>
+<li>Tener un entorno limpio y controlado para mis proyectos.</li>
+<li>Cambiar fácilmente de versión si un proyecto lo requiere (por ejemplo, usar Node v20 para n8n y Node v18 para otro proyecto).</li>
+</ul>
+<p>Si bien existe la opción de instalar Node.js mediante un archivo .pkg, esa instalación es más rígida, queda a nivel de sistema, y puede traer conflictos si en el futuro necesito trabajar con versiones diferentes.</p>
+<p>Por eso, para fines de desarrollo local serio y escalable, elegí usar nvm.</p>
+<h2><strong>¿Qué pasa al reiniciar o cerrar la terminal?</strong></h2>
+<p>Cuando uso nvm, la configuración no se activa automáticamente cada vez que abro una nueva terminal o reinicio mi Mac. Por eso, si intento ejecutar n8n directamente después de reiniciar, es probable que reciba un error como “command not found” o “node no está instalado”.</p>
+<h2><strong>¿Qué pasa al reiniciar o cerrar la terminal?</strong></h2>
+<p>Al ejecutar en la terminal:</p>
+<pre class="highlight"><code class="language-bash">node -v</code></pre>
+<p>pueden ocurrir dos escenarios:</p>
+<h3>✅ Caso 1: Node.js está activo</h3>
+<p>Si la respuesta es algo como:</p>
+<pre class="highlight"><code class="language-bash">v20.19.4</code></pre>
+<p>significa que <strong>Node.js está correctamente instalado, activo y listo para usarse</strong> en esa terminal.</p>
+<hr />
+<h3>❌ Caso 2: Node.js no está disponible</h3>
+<p>Si en cambio aparece un mensaje como:</p>
+<pre class="highlight"><code class="language-bash">zsh:command not found: node</code></pre>
+<p>esto indica que <strong>Node.js no está activo en esa sesión de la terminal</strong>.</p>
+<p>Lo más común es que <code>nvm</code> no se haya cargado automáticamente, por lo que es necesario activarlo manualmente o automatizar su carga.</p>
+<h2>Pasos para abrir n8n nuevamente desde la terminal</h2>
+<ol>
+<li><strong>Abrir una nueva terminal</strong>.</li>
+<li><strong>Cargar</strong><strong><code>nvm</code></strong><strong>y activar la versión correcta de Node.js</strong>:</li>
+</ol>
+<pre class="highlight"><code class="language-bash">export NVM_DIR="$HOME/.nvm"
+."$NVM_DIR/nvm.sh"
+nvm use 20</code></pre>
+<ol>
+<li><strong>Iniciar n8n</strong> con el comando:</li>
+</ol>
+<pre class="highlight"><code class="language-bash">n8n</code></pre>
+<p>Esto levantará el servidor local y podrás acceder desde tu navegador en:</p>
+<p>👉 <strong>http://localhost:5678</strong></p>
+<h2>⚙️ ¿Cómo automatizar este proceso?</h2>
+<p>Para no tener que ejecutar estos comandos cada vez que abras la terminal, puedes agregarlos al final de tu archivo <strong><code>.zshrc</code></strong> o <strong><code>.zprofile</code></strong>:</p>
+<pre class="highlight"><code class="language-bash">export NVM_DIR="$HOME/.nvm"
+[ -s"$NVM_DIR/nvm.sh" ] &amp;&amp; ."$NVM_DIR/nvm.sh"
+nvm use 20 &gt; /dev/null</code></pre>
+<p>Con esta configuración, <strong>cada vez que abras la terminal se activará automáticamente la versión correcta de Node.js</strong>, y solo tendrás que ejecutar:</p>
+<pre class="highlight"><code class="language-bash">n8n</code></pre>
+<hr />
+<h2>🔍 Diferencias entre instalar Node.js con <code>.pkg</code> y usar <code>nvm</code></h2>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Instalación con <code>.pkg</code></th>
+<th>Instalación con <code>nvm</code> (recomendada)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Activación automática</td>
+<td>✅ Sí</td>
+<td>❌ No (requiere automatización)</td>
+</tr>
+<tr>
+<td>Múltiples versiones de Node.js</td>
+<td>❌ No</td>
+<td>✅ Sí</td>
+</tr>
+<tr>
+<td>Cambiar de versión</td>
+<td>❌ Requiere desinstalar</td>
+<td>✅ No</td>
+</tr>
+<tr>
+<td>Modifica archivos del sistema</td>
+<td>✅ Sí</td>
+<td>❌ No</td>
+</tr>
+<tr>
+<td>Uso profesional en desarrollo</td>
+<td>⚠️ Limitado</td>
+<td>✅ Recomendado</td>
+</tr>
+<tr>
+<td>Ícono de aplicación</td>
+<td>❌ No</td>
+<td>❌ No</td>
+</tr>
+</tbody>
+</table>
+<h3>📌 Nota</h3>
+<p>Ni la instalación mediante <strong><code>.pkg</code></strong> ni usando <strong><code>nvm</code></strong> crea un ícono de aplicación.</p>
+<p><strong>n8n no es una app de escritorio</strong>, sino un <strong>servidor web</strong> que se ejecuta desde la terminal y se utiliza a través del navegador.</p>
+<h3><strong>Conclusión</strong></h3>
+<p>La instalación de Node.js mediante nvm, combinada con la ejecución de n8n desde la terminal,  permite trabajar en un entorno técnico moderno, escalable y adaptable a diferentes proyectos. Si bien implica uno o dos pasos extra para activarlo (o automatizarlo),  da control total y prepara para escenarios reales en desarrollo profesional.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

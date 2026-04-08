@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLI - (Command Line Interface) - (Mac) · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Conceptos importantes</span>
+  </div>
+  <div class="note-content">
+    <h1>CLI - (Command Line Interface) - (Mac)</h1>
+    <p>CLI viene de —Command Line Interface— o sea, una herramienta que</p>
+<p>usas desde la terminal escribiendo comandos. (No tiene pantallas ni botones, solo texto.)</p>
+<p>Un <strong>CLI</strong> es un archivo binario que puedes ejecutar desde la Terminal.</p>
+<p><img alt="" src="img/2e3477bcd0eb8034bce2dc3e1c25cad0.webp" /></p>
+<blockquote>
+<p>Las 5 formas más comunes de instalar CLIs (o apps) en macOS</p>
+</blockquote>
+<p>Tu Mac, por sí misma, <strong>no sabe instalar cosas nuevas</strong>.</p>
+<p>Necesita “métodos de instalación”: herramientas o formatos que le digan <em>cómo descargar, descomprimir y colocar los archivos en su sitio correcto</em>.</p>
+<p>Existen varios <strong>tipos de instaladores</strong>, cada uno pensado para cierto tipo de programas.</p>
+<p><img alt="" src="img/2e3477bcd0eb8060b3c0f4d66e48599b.webp" /></p>
+<p>Instalar un CLI <strong>no basta</strong> para poder usarlo.</p>
+<p>Después de instalarlo, el sistema necesita <strong>saber dónde quedó guardado</strong> para poder ejecutarlo desde cualquier parte.</p>
+<p>Ahí entra en juego el <strong><code>$PATH</code></strong>.</p>
+<p><img alt="" src="img/2e3477bcd0eb80e79c62f8794affc2e7.webp" /></p>
+<p><img alt="" src="img/2e3477bcd0eb80c28b96c3cb90900cc7.webp" /></p>
+<p>Ejemplo:</p>
+<p><img alt="" src="img/2e3477bcd0eb80bca27cdf322233f5d0.webp" /></p>
+<p><img alt="" src="img/2e3477bcd0eb800caaffc950913e0dd9.webp" /></p>
+<p><img alt="" src="img/2e3477bcd0eb8080bf1afdb65693089f.webp" /></p>
+<p>ejemplo:</p>
+<pre class="highlight"><code class="language-bash">nombre_usuario@MacBook-Air-de-Angel ~ % echo $PATH | tr ':' '\n'
+/Users/nombre_usuario/.nvm/versions/node/v20.19.4/bin:
+/Users/nombre_usuario/.pyenv/shims:
+/Users/nombre_usuario/.pyenv/bin:
+/opt/homebrew/bin:
+/opt/homebrew/sbin:
+/usr/local/bin:
+/System/Cryptexes/App/usr/bin:
+/usr/bin:
+/bin:
+/usr/sbin:
+/sbin:
+/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:
+/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:
+/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin</code></pre>
+<p>*Rojo → Rutas creadas al instalar algo </p>
+<ul>
+<li>homebrew es como una tienda de aplicaciones para Mac con chip M</li>
+<li>.nvm para instalar diferentes de versiones node.js </li>
+<li>.pyenv para instalar diferentes versiones de pytho</li>
+</ul>
+<p>*Verde → Rutas estándar de Unix/macOS</p>
+<h3>En palabras simples:</h3>
+<blockquote>
+<p>Tu $PATH es como una lista de “lugares VIP”.</p>
+</blockquote>
+<p>Cada vez que escribes un comando, tu Mac recorre la lista de arriba hacia abajo hasta encontrarlo.</p>
+<p>Si lo encuentra, lo ejecuta.</p>
+<p>Si no lo encuentra en ninguno... te dice: command not found</p>
+<h3>Nota importante:</h3>
+<p>Si instalas <strong>dos versiones de un mismo CLI</strong>, <strong>el que esté primero en tu</strong><strong><code>$PATH</code></strong><strong>gana</strong>.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li>Si <code>python</code> existe en Pyenv y también en <code>/usr/bin</code>, se usará el de Pyenv (porque aparece antes).</li>
+<li>Lo mismo pasa con <code>node</code> o <code>npm</code> si usas NVM.</li>
+</ul>
+<blockquote>
+<p>¿qué pasa si se borra algún path?</p>
+</blockquote>
+<p><img alt="" src="img/2e3477bcd0eb807e88f4cadb8af9c246.webp" /></p>
+<blockquote>
+<p>¿Qué pasa si creo otro usuario en mi mac? </p>
+</blockquote>
+<p>Si creas un usuario nuevo y revisas el PATH dentro de la consola, solo aparecerán las rutas estándares en Mac (VERDE), sin embargo hay que tener en cuenta algunas consideraciones:</p>
+<ul>
+<li>Los path que dicen nombre_de_usuario solo están disponibles para el usuario que lo instaló</li>
+<li>Los path como homebrew y /Library/Frameworks/Python. si están instalados a nivel de sistema, pero el nuevo usuario no tendrá acceso a esos programas desde la consola, al menos que los agregue al path.</li>
+</ul>
+<pre class="highlight"><code class="language-bash">usuario_nuevo@MacBook-Air-de-Angel ~ % echo $PATH | tr ':' '\n'
+/Users/nombre_usuario/.nvm/versions/node/v20.19.4/bin:
+/Users/nombre_usuario/.pyenv/shims:
+/Users/nombre_usuario/.pyenv/bin:
+/opt/homebrew/bin:
+/opt/homebrew/sbin:
+/usr/local/bin:
+/System/Cryptexes/App/usr/bin:
+/usr/bin:
+/bin:
+/usr/sbin:
+/sbin:
+/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:
+/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:
+/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin</code></pre>
+<blockquote>
+<p>Agregar al path rutas que solo están en un solo usuario</p>
+</blockquote>
+<p>Aquí vamos a agregar homebrew al nuevo usuario del sistema, puesto que solo se instaló en el usuario principal</p>
+<pre class="highlight"><code class="language-bash">echo 'export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"' &gt;&gt; ~/.zshrc</code></pre>
+<p>*Puedes ejecutar <code>echo</code> desde cualquier carpeta en la consola Porque <code>~/.zshrc</code> es una ruta absoluta</p>
+<h1>Resumen</h1>
+<h3>🧩 1. <strong>Programas con interfaz gráfica (GUI)</strong></h3>
+<ul>
+<li>Son los que <strong>ves y usas con el mouse</strong>.</li>
+<li>Se instalan usualmente con un archivo <code>.pkg</code> o <code>.dmg</code>.</li>
+<li>Quedan visibles en el <strong>Finder → Aplicaciones</strong>.</li>
+<li>Ejemplos:<ul>
+<li>Visual Studio Code</li>
+<li>Google Chrome</li>
+<li>Slack</li>
+<li>Node.pkg</li>
+</ul>
+</li>
+</ul>
+<p>📍<strong>Se ejecutan con doble clic</strong>, no desde la terminal.</p>
+<hr />
+<h3>⚙️ 2. <strong>Programas sin interfaz gráfica (CLI o “de línea de comandos”)</strong></h3>
+<ul>
+<li>No tienen ventanas ni íconos: funcionan <strong>solo en la terminal</strong>.</li>
+<li>Se instalan con gestores de paquetes (como <strong>Homebrew</strong> o <strong>npm</strong>) o mediante scripts.</li>
+<li>Suelen ubicarse en <code>/usr/local/bin</code> o <code>/opt/homebrew/bin</code>.</li>
+<li>Ejemplos:<ul>
+<li><code>git</code> → control de versiones</li>
+<li><code>ffmpeg</code> → conversión de video/audio</li>
+<li><code>python3</code> → intérprete de Python</li>
+<li><code>brew</code> → el propio gestor de paquetes</li>
+<li><code>claude</code> → cliente CLI de IA</li>
+</ul>
+</li>
+</ul>
+<p>📍<strong>Se ejecutan escribiendo un comando</strong>, no haciendo clic.</p>
+<hr />
+<h3>🧠 En resumen</h3>
+<p>En macOS conviven <strong>dos mundos</strong>:</p>
+<ul>
+<li>El <strong>mundo visual (GUI)</strong> → apps con ventanas.</li>
+<li>El <strong>mundo invisible (CLI)</strong> → herramientas que trabajan en segundo plano o desde la terminal.</li>
+</ul>
+<p>Ambos se instalan desde Internet, pero el <strong>tipo de instalador</strong> define <strong>cómo accedes al programa</strong> (por Finder o por Terminal).v</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

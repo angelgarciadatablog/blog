@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revisión de apps · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Gestión de aplicaciones Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>Revisión de apps</h1>
+    <h2>✅ 1️⃣ Ver cuánto pesa cada app instalada</h2>
+<p>Abre <strong>Terminal</strong> y ejecuta:</p>
+<pre class="highlight"><code>du-sh /Applications/*</code></pre>
+<p>Esto calculará el tamaño real de cada aplicación.</p>
+<h2>🔎 Ahora hagamos la parte que revela la verdad</h2>
+<p>Quiero ver quién está usando más espacio REAL (cache y datos).</p>
+<p>Ejecuta en Terminal:</p>
+<pre class="highlight"><code>du-sh ~/Library/Application\ Support/* |sort-hr | head-15</code></pre>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

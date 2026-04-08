@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>npm (Node Package Manager) · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">CLI con login Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>npm (Node Package Manager)</h1>
+    <p><strong>¿Qué es npm?</strong></p>
+<p>npm (Node Package Manager) es el gestor de paquetes de Node.js. Se usa para instalar librerías y herramientas de JavaScript/TypeScript.</p>
+<p><strong>¿Por qué puede necesitar login?</strong></p>
+<p>Solo necesitas login en npm si <strong>publicas paquetes</strong> en npmjs.com. Si solo instalas paquetes (que es el uso más común), no necesitas estar autenticado.</p>
+<p><strong>Verifiquemos tu situación:</strong></p>
+<pre class="highlight"><code class="language-bash">npm whoami</code></pre>
+<p>PS C:\Users\Lenovo&gt; npm whoami
+npm error code ENEEDAUTH
+npm error need auth This command requires you to be logged in.
+npm error need auth You need to authorize this machine using <code>npm adduser</code>
+npm error A complete log of this run can be found in: C:\Users\Lenovo\AppData\Local\npm-cache_logs\2026-03-22T03_43_18_890Z-debug-0.log
+PS C:\Users\Lenovo&gt;</p>
+<p><strong>Resumen de npm:</strong></p>
+<blockquote>
+<p>Solo necesita autenticación si publicas paquetes. Como solo lo usas para instalar dependencias, no es necesario estar logueado.</p>
+</blockquote>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

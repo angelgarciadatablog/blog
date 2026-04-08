@@ -2,6 +2,7 @@ const CAT_LABELS = {
   'notas-gcp': 'Google Cloud Platform',
   'notas-git': 'Git & GitHub',
   'notas-ia': 'Claude',
+  'notas-bash': 'Bash & Shell',
 };
 
 let notes = [];

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Git Local · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">CLI con login Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>Git Local</h1>
+    <p>Git no tiene un "login" como tal, pero guarda tu identidad para firmar los commits. Ejecuta:</p>
+<pre class="highlight"><code class="language-bash">git config --global user.name
+git config --global user.email</code></pre>
+<p>Esto nos dice con qué nombre y correo están firmados tus commits en este usuario. Pega el resultado y vemos si corresponde a tu cuenta de trabajo.</p>
+<h3><strong>Una cosa importante sobre Git:</strong></h3>
+<p>Esta configuración es <code>--global</code>, lo que significa que aplica a todos los repositorios en este usuario. Si en algún proyecto específico necesitas usar otra cuenta (por ejemplo tu cuenta personal), se puede sobrescribir a nivel de repositorio con:</p>
+<pre class="highlight"><code class="language-bash">git config --local user.email "tu@otroemail.com"</code></pre>
+<p><em>Se hace </em><em>una sola vez</em>* dentro de la carpeta del repositorio, y a partir de ese momento todos los commits de ese repo usarán esa identidad.</p>
+<p><pre class="highlight"><code class="language-bash"># 1. Entras a la carpeta del repo
+cd C:\Users\Lenovo\proyectos\mi-repo-personal
+
+# 2. Configuras la identidad local (solo una vez)
+git config --local user.email "tu@personal.com"
+git config --local user.name "Tu Nombre"
+
+# 3. A partir de aquí todos tus commits usan esa cuenta
+git commit -m "mi commit"</code></pre>
+```</p>
+<p>El <code>--local</code> <strong>no afecta commits pasados</strong> — solo aplica a los commits futuros.
+<strong>Los commits pasados no se tocan</strong> — quedan firmados con la identidad que tenían cuando se hicieron. Es simplemente la forma en que funciona Git, los commits son inmutables.</p>
+<p><strong>¿Se puede cambiar la identidad de commits pasados?</strong></p>
+<p>Técnicamente sí, con <code>git rebase</code> o <code>git filter-branch</code>, pero es una operación avanzada y riesgosa — especialmente si ya subiste esos commits a GitHub. No se recomienda salvo que sea realmente necesario.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

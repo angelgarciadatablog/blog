@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apps de Automator en macOS · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Automator Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>Apps de Automator en macOS</h1>
+    <h1>Qué es realmente una app de Automator</h1>
+<p>Cuando exportas una automatización como <strong>“Aplicación” en Automator</strong>, macOS genera un archivo con extensión:</p>
+<pre class="highlight"><code>nombre.app</code></pre>
+<p>Aunque parece un archivo normal, en realidad es un <strong>bundle de aplicación</strong>.</p>
+<p>Un bundle es <strong>una carpeta especial que macOS trata como si fuera una aplicación</strong>.</p>
+<p>Por ejemplo:</p>
+<pre class="highlight"><code>mi-script.app</code></pre>
+<p>En realidad contiene una estructura interna similar a esta:</p>
+<pre class="highlight"><code>mi-script.app
+└── Contents
+    ├── Info.plist
+    ├── MacOS
+    ├── Resources
+    └── document.wflow</code></pre>
+<p>Componentes principales:</p>
+<ul>
+<li><strong>Info.plist</strong> → metadatos de la aplicación.</li>
+<li><strong>MacOS/</strong> → ejecutable que lanza la app.</li>
+<li><strong>Resources/</strong> → recursos como iconos u otros archivos.</li>
+<li><strong>document.wflow</strong> → workflow de Automator que contiene la lógica de la automatización.</li>
+</ul>
+<p>En las apps creadas con Automator, <strong>la lógica del flujo se encuentra dentro del archivo</strong>:</p>
+<pre class="highlight"><code>Contents/document.wflow</code></pre>
+<hr />
+<h1>Cómo identificar apps creadas con Automator</h1>
+<p>Una forma fiable de identificar si una aplicación fue creada con Automator es comprobar si contiene el archivo:</p>
+<pre class="highlight"><code>document.wflow</code></pre>
+<p>Puedes buscarlo dentro de la carpeta <code>/Applications</code> usando el comando:</p>
+<pre class="highlight"><code>find /Applications-name"document.wflow"</code></pre>
+<p>Si una app contiene ese archivo, significa que fue generada por Automator.</p>
+<p>Ejemplo de resultado:</p>
+<pre class="highlight"><code>/Applications/notas-automator.app/Contents/document.wflow</code></pre>
+<hr />
+<h1>Consideración sobre la ubicación de las apps</h1>
+<p>El comando anterior solo busca dentro de:</p>
+<pre class="highlight"><code>/Applications</code></pre>
+<p>Si la aplicación fue guardada en otra carpeta (por ejemplo <code>Desktop</code> o <code>Documents</code>), no será encontrada.</p>
+<p>Para evitar esto, suele ser buena práctica <strong>guardar las apps de Automator en</strong><strong><code>/Applications</code></strong>, porque:</p>
+<ul>
+<li>aparecen en <strong>Launchpad</strong></li>
+<li>pueden abrirse fácilmente con <strong>Spotlight</strong></li>
+<li>se comportan como cualquier otra aplicación del sistema</li>
+</ul>
+<hr />
+<h1>Flujo de trabajo recomendado para proyectos de Automator</h1>
+<p>Para mantener las automatizaciones organizadas, es útil separar los distintos componentes del proyecto.</p>
+<p>Ejemplo de estructura:</p>
+<pre class="highlight"><code>automator-apps
+└── pendientes
+    ├── workflow
+    │   └── notas-automator.workflow
+    │
+    ├── resources
+    │   └── pendientes.html
+    │
+    └── build
+        └── notas-automator.app</code></pre>
+<p>Descripción de cada carpeta:</p>
+<h3>workflow</h3>
+<p>Contiene el <strong>workflow editable de Automator</strong>.</p>
+<p>Es el equivalente al <strong>código fuente del proyecto</strong>.</p>
+<h3>resources</h3>
+<p>Archivos externos utilizados por la automatización:</p>
+<ul>
+<li>HTML</li>
+<li>scripts</li>
+<li>iconos</li>
+<li>archivos auxiliares</li>
+</ul>
+<h3>build</h3>
+<p>Contiene la <strong>app final generada por Automator</strong>.</p>
+<p>Esta separación permite:</p>
+<ul>
+<li>modificar el workflow sin perder la app</li>
+<li>regenerar la aplicación si se elimina</li>
+<li>mantener los recursos organizados</li>
+<li>versionar el proyecto fácilmente</li>
+</ul>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

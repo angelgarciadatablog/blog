@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Node.js, npm y nvm 👌 · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Programas Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>Node.js, npm y nvm 👌</h1>
+    <h2>1.1 ¿Qué es Node.js?</h2>
+<pre class="highlight"><code class="language-bash"># ¿Tienes Node.js?
+node --version</code></pre>
+<p>Node.js es un <strong>entorno de ejecución</strong> para JavaScript. Normalmente JavaScript solo corre en el navegador, Node.js te permite correrlo también en tu computadora o servidor.</p>
+<p>💡 Piénsalo así: así como Python tiene su intérprete para correr archivos <code>.py</code>, Node.js es el intérprete para correr archivos <code>.js</code> fuera del navegador.</p>
+<p>Muchas herramientas modernas están construidas sobre Node.js. Por eso cuando instalas Claude Code, n8n, o docenas de otras herramientas, Node.js es un requisito. Sin embargo, ya no es necesario tener instalado Node.js para instalar claude code.</p>
+<blockquote>
+<p>⚠️ <strong>Claude Code no necesita Node.js.</strong> Tiene su propio instalador nativo y autónomo. Node.js lo instalamos para herramientas como n8n.</p>
+</blockquote>
+<h2>1.2 ¿Qué es npm?</h2>
+<p>Antes de entender qué es npm, hay que entender qué es un <strong>gestor de paquetes</strong>: una herramienta que te permite instalar programas y librerías desde la terminal, sin tener que descargarlos manualmente desde páginas web.</p>
+<p>En macOS (y linux) es muy común escuchar de <strong>Homebrew</strong>. npm funciona igual pero es exclusivo del ecosistema JavaScript.</p>
+<table>
+<thead>
+<tr>
+<th>Gestor</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Homebrew</td>
+<td>Instala herramientas del sistema (Git, wget, ffmpeg, imagemagick)</td>
+</tr>
+<tr>
+<td>npm</td>
+<td>Instala paquetes dentro del ecosistema JavaScript</td>
+</tr>
+</tbody>
+</table>
+<p>npm significa <strong>Node Package Manager</strong> y viene incluido automáticamente cuando instalas Node.js. No necesitas instalarlo por separado.</p>
+<p>Cada lenguaje tiene su propio gestor de paquetes:</p>
+<table>
+<thead>
+<tr>
+<th>Lenguaje</th>
+<th>Gestor de paquetes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JavaScript</td>
+<td><code>npm</code></td>
+</tr>
+<tr>
+<td>Python</td>
+<td><code>pip</code></td>
+</tr>
+<tr>
+<td>Rust</td>
+<td><code>cargo</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 Para lenguajes como Node.js o Python <strong>no se recomienda instalarlos con Homebrew</strong>, sino con un gestor de versiones. Homebrew puede hacerlo y funciona, pero no te da control sobre versiones.</p>
+</blockquote>
+<h3>npm te permite:</h3>
+<pre class="highlight"><code class="language-bash">npm install nombre-paquete    # Instalar en tu proyecto
+npm install -g nombre-paquete # Instalar de forma global en tu Mac
+npm uninstall nombre-paquete  # Desinstalar
+npm list                      # Ver paquetes instalados</code></pre>
+<hr />
+<h2>¿Por qué no usar Homebrew para instalar Node.js o Python?</h2>
+<p>Homebrew instala una sola versión y punto. En proyectos reales, tarde o temprano necesitas tener varias versiones conviviendo. Por eso profesionalmente se usan <strong>gestores de versiones</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Lenguaje</th>
+<th>Gestor de versiones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node.js</td>
+<td><code>nvm</code></td>
+</tr>
+<tr>
+<td>Python</td>
+<td><code>pyenv</code></td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td><code>rbenv</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ Homebrew <strong>puede</strong> instalar Node.js o Python y funciona, pero en proyectos reales se queda corto.</p>
+</blockquote>
+<hr />
+<h2>1.3 ¿Qué es nvm?</h2>
+<pre class="highlight"><code class="language-bash"># ¿Tienes nvm?
+nvm --version</code></pre>
+<p>El problema concreto: distintas herramientas requieren distintas versiones de Node.js:</p>
+<ul>
+<li>Una app legacy puede requerir Node.js <strong>v14</strong></li>
+<li>n8n puede requerir Node.js <strong>v20</strong></li>
+</ul>
+<p><strong>nvm (Node Version Manager)</strong> resuelve esto. Te permite:</p>
+<ul>
+<li>Tener <strong>múltiples versiones</strong> de Node.js instaladas</li>
+<li><strong>Cambiar</strong> entre versiones con un comando</li>
+<li>Definir <strong>qué versión usa cada proyecto</strong></li>
+</ul>
+<hr />
+<h2>Instalación de nvm en Mac</h2>
+<pre class="highlight"><code class="language-bash"># Instalar nvm
+# En este caso (año 2026) utilizamos la versión 39 de nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Cerrar y reabrir la terminal, luego verificar
+nvm --version</code></pre>
+<hr />
+<h2>Comandos esenciales de nvm</h2>
+<pre class="highlight"><code class="language-bash"># Ver todas las versiones disponibles de node.js para instalar
+nvm list-remote
+
+# Instalar una versión específica
+nvm install 20
+
+# Instalar la versión más reciente estable (LTS)
+nvm install --lts
+
+# Ver qué versiones tienes instaladas
+nvm list
+
+# Cambiar a una versión específica
+nvm use 20
+
+# Ver qué versión estás usando ahora
+node --version
+
+# Definir una versión por defecto
+nvm alias default 20</code></pre>
+<h1>5. Múltiples usuarios en la misma Mac</h1>
+<p>nvm se instala <strong>por usuario</strong>, no de forma global en la Mac:</p>
+<table>
+<thead>
+<tr>
+<th>Situación</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Usuario A instala nvm</td>
+<td>Solo Usuario A lo tiene</td>
+</tr>
+<tr>
+<td>Usuario B abre su terminal</td>
+<td>No tiene nvm ni Node.js</td>
+</tr>
+<tr>
+<td>Usuario B necesita Node.js</td>
+<td>Debe instalarlo por su cuenta</td>
+</tr>
+</tbody>
+</table>
+<p>Esto en realidad es una <strong>ventaja</strong>:</p>
+<ul>
+<li>Cada usuario tiene su propio entorno aislado</li>
+<li>Un usuario no puede romper el entorno de otro</li>
+<li>Cada quien puede tener versiones distintas según sus necesidades</li>
+</ul>
+<blockquote>
+<p>⚠️ Si en tu Mac hay varios usuarios que necesitan Node.js, cada uno debe seguir el mismo proceso de instalación de nvm de forma independiente.</p>
+</blockquote>
+<h2>Versiones por proyecto con <code>.nvmrc</code></h2>
+<pre class="highlight"><code class="language-bash"># Dentro de tu proyecto, crear el archivo
+echo "20" &gt; .nvmrc
+
+# La próxima vez que entres al proyecto
+cd mi-proyecto
+nvm use  # Lee el .nvmrc automáticamente y cambia a v20</code></pre>
+<blockquote>
+<p>💡 Esto es importante para n8n, Claude Code y cualquier herramienta que venga después — cada una puede tener su versión de Node recomendada.</p>
+</blockquote>
+<h2>Resumen visual</h2>
+<pre class="highlight"><code class="language-bash">Tu Mac
+├── Usuario Angel
+│   └── nvm
+│       ├── Node v18  ← Claude Code lo usa
+│       ├── Node v20  ← n8n lo usa
+│       └── Node v14  ← proyecto legacy
+│
+└── Usuario Otro
+    └── (sin nvm, debe instalarlo por su cuenta)</code></pre>
+<h1>6. El problema de mezclar métodos</h1>
+<p>nvm <strong>solo controla lo que él mismo instaló</strong>. Si instalaste Node.js de otra forma, nvm no lo toca ni lo gestiona.</p>
+<table>
+<thead>
+<tr>
+<th>Cómo instalaste Node</th>
+<th>¿nvm lo controla?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nvm install 20</code></td>
+<td>✅ Sí, <code>nvm uninstall 20</code> lo elimina completo</td>
+</tr>
+<tr>
+<td><code>brew install node</code></td>
+<td>❌ No, nvm no sabe que existe</td>
+</tr>
+<tr>
+<td>Instalador <code>.pkg</code> desde nodejs.org</td>
+<td>❌ No, son instalaciones independientes</td>
+</tr>
+</tbody>
+</table>
+<p>Si en algún momento instalaste Node.js con Homebrew <strong>y</strong> con nvm, puedes tener dos instalaciones conviviendo. Para saber cuál estás usando realmente:</p>
+<pre class="highlight"><code class="language-bash">which node</code></pre>
+<table>
+<thead>
+<tr>
+<th>Resultado</th>
+<th>Qué significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/.nvm/versions/node/...</code></td>
+<td>✅ Estás usando el de nvm</td>
+</tr>
+<tr>
+<td><code>/usr/local/bin/node</code></td>
+<td>⚠️ Estás usando el de Homebrew</td>
+</tr>
+<tr>
+<td><code>/usr/bin/node</code></td>
+<td>⚠️ Estás usando el del instalador .pkg</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ Por eso es importante elegir <strong>un solo método</strong> desde el principio. Si ya tienes Node.js instalado por Homebrew o por el instalador <code>.pkg</code>, lo ideal es desinstalarlo primero antes de instalar nvm.</p>
+</blockquote>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Limpieza de mac · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Gestión de aplicaciones Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>Limpieza de mac</h1>
+    <pre class="highlight"><code class="language-bash"># Ver TODO el espacio usado en tu carpeta de usuario
+du -sh ~</code></pre>
+<p>81G /Users/angelgarciachanga</p>
+<pre class="highlight"><code class="language-bash">#No suelen haber muchos archivos pesados
+du -sh ~/Documents
+du -sh ~/Downloads
+du -sh ~/Desktop</code></pre>
+<h1>1) Lybrary</h1>
+<pre class="highlight"><code class="language-bash">#Archivos pesados
+du -sh ~/Library</code></pre>
+<p>Esta carpeta es el <strong>corazón de macOS</strong> donde las apps guardan:</p>
+<ul>
+<li>✅ Cachés (seguros de borrar)</li>
+<li>✅ Logs (seguros de borrar)</li>
+<li>⚠️ Datos de apps (algunos seguros, otros NO)</li>
+<li>⚠️ Archivos de Xcode/Developer (pueden ser enormes)</li>
+</ul>
+<h2>Los 3 Grandes Culpables en ~/Library:</h2>
+<table>
+<thead>
+<tr>
+<th>Carpeta</th>
+<th>Tamaño</th>
+<th>¿Qué es?</th>
+<th>¿Se puede limpiar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Application Support</strong></td>
+<td><strong>21 GB</strong></td>
+<td>Datos de apps</td>
+<td>⚠️ Depende (revisar)</td>
+</tr>
+<tr>
+<td><strong>Caches</strong></td>
+<td><strong>9.4 GB</strong></td>
+<td>Cachés temporales</td>
+<td>✅ <strong>SÍ (muy seguro)</strong></td>
+</tr>
+<tr>
+<td><strong>Containers</strong></td>
+<td><strong>3 GB</strong></td>
+<td>Apps sandboxed</td>
+<td>⚠️ Depende</td>
+</tr>
+<tr>
+<td><strong>Group Containers</strong></td>
+<td><strong>2.7 GB</strong></td>
+<td>Datos compartidos</td>
+<td>⚠️ Depende</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total: ~36 GB</strong> de los 38 GB ✓</p>
+<h2>🔴Application Support</h2>
+<h2>¿Qué apps ocupan en Application Support?</h2>
+<pre class="highlight"><code class="language-bash">du -sh ~/Library/Application\ Support/* 2&gt;/dev/null | sort -hr | head -15</code></pre>
+<hr />
+<h2>¿Qué apps tienen cachés enormes?</h2>
+<pre class="highlight"><code class="language-bash">du -sh ~/Library/Caches/* 2&gt;/dev/null | sort -hr | head -15</code></pre>
+<h4>Application Support (21 GB):</h4>
+<table>
+<thead>
+<tr>
+<th>App</th>
+<th>Tamaño</th>
+<th>¿Qué hacer?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Google</strong></td>
+<td><strong>11 GB</strong></td>
+<td>🔴 Chrome (perfiles, extensiones, caché)</td>
+</tr>
+<tr>
+<td><strong>MobileSync</strong></td>
+<td><strong>4.8 GB</strong></td>
+<td>🟡 Backups de iPhone/iPad</td>
+</tr>
+<tr>
+<td><strong>Notion</strong></td>
+<td>1 GB</td>
+<td>🟡 Caché de Notion</td>
+</tr>
+<tr>
+<td><strong>Code</strong></td>
+<td>695 MB</td>
+<td>🟢 VS Code (normal)</td>
+</tr>
+<tr>
+<td><strong>Filmora</strong></td>
+<td>560 MB</td>
+<td>🟡 Editor de video</td>
+</tr>
+<tr>
+<td><strong>TikTok LIVE</strong></td>
+<td>474 MB</td>
+<td>⚠️ ¿Usas esto?</td>
+</tr>
+</tbody>
+</table>
+<h2>🔴 Cachés (9 GB):</h2>
+<p>5.4G    /Users/angelgarciachanga/Library/Caches/Google
+2.1G    /Users/angelgarciachanga/Library/Caches/com.spotify.client</p>
+<p>otros..</p>
+<h2>ACCIÓN → Borra cachés que se regeneran automáticamente:</h2>
+<pre class="highlight"><code class="language-bash">rm -rf ~/Library/Caches/Google/*
+rm -rf ~/Library/Caches/com.spotify.client/*</code></pre>
+<h2>ACCIÓN → Borra copia de seguridad de iphone (solo si lo tienes activo en icloud)</h2>
+<pre class="highlight"><code class="language-bash">rm -rf ~/Library/Application\ Support/MobileSync/Backup/*</code></pre>
+<h2>Revisar Application suport</h2>
+<pre class="highlight"><code class="language-bash">du -sh ~/Library/Application\ Support/Google/Chrome/* 2&gt;/dev/null | sort -hr | head -10</code></pre>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Tamaño</th>
+<th>¿Qué es?</th>
+<th>¿Se puede borrar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OptGuideOnDeviceModel</strong></td>
+<td><strong>4 GB</strong></td>
+<td>Modelo IA de Chrome</td>
+<td>✅ <strong>SÍ (seguro)</strong></td>
+</tr>
+<tr>
+<td><strong>Profile 1</strong></td>
+<td>4 GB</td>
+<td>Tu perfil 1 de Chrome</td>
+<td>⚠️ Solo si no lo usas</td>
+</tr>
+<tr>
+<td><strong>Profile 6</strong></td>
+<td>1.4 GB</td>
+<td>Tu perfil 6 de Chrome</td>
+<td>⚠️ Solo si no lo usas</td>
+</tr>
+<tr>
+<td><strong>Profile 2</strong></td>
+<td>916 MB</td>
+<td>Tu perfil 2 de Chrome</td>
+<td>⚠️ Solo si no lo usa</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3><strong>ACCIÓN → Borrar modelo de IA (4 GB libres):</strong></h3>
+<p>Este archivo es para sugerencias de Chrome y se regenera automáticamente:</p>
+<pre class="highlight"><code class="language-bash">rm -rf ~/Library/Application\ Support/Google/Chrome/OptGuideOnDeviceModel</code></pre>
+<p>✅ <strong>Totalmente seguro, libera 4 GB al instante</strong></p>
+<hr />
+<h1>2) Pictures</h1>
+<pre class="highlight"><code class="language-bash">#Archivos pesados
+du -sh ~/Pictures</code></pre>
+<pre class="highlight"><code class="language-bash">du -sh ~/Pictures/* 2&gt;/dev/null | sort -hr | head -10</code></pre>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

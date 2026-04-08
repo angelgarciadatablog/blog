@@ -19,12 +19,14 @@ RAICES = {
     "290477bc-d0eb-8013-a785-d8784b2f8210": "notas-gcp",
     "290477bc-d0eb-807e-a377-f5b7cbbf8b9e": "notas-git",
     "332477bc-d0eb-8042-be0a-f27c6d6a2013": "notas-ia",
+    "290477bc-d0eb-80c5-9a9a-f3e74d79a73f": "notas-bash",
 }
 
 CAT_LABELS = {
     "notas-gcp": "Google Cloud Platform",
     "notas-git": "Git & GitHub",
     "notas-ia": "Claude",
+    "notas-bash": "Bash & Shell",
 }
 
 _DIR          = os.path.dirname(os.path.abspath(__file__))
@@ -42,7 +44,7 @@ LANGUAGE_MAP = {
 }
 
 try:
-    import imagenes as _img
+    import _imagenes as _img
     _IMG_ENABLED = True
 except ImportError:
     _IMG_ENABLED = False

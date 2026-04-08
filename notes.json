@@ -27,21 +27,12 @@
     "fecha_creacion": "2026-03-29T22:50:00.000Z"
   },
   {
-    "title": "Instalación de Google Cloud SDK en ordenador Windows",
-    "slug": "notas-gcp/instalacion-de-google-cloud-sdk-en-ordenador-windows",
-    "category": "notas-gcp",
-    "catLabel": "Google Cloud Platform",
-    "grupo": "CLI de google cloud - SDK",
-    "fecha_modificacion": "2026-03-29T07:39:00+00:00",
-    "fecha_creacion": "2026-03-29T07:39:00.000Z"
-  },
-  {
     "title": "Crear una service account",
     "slug": "notas-gcp/crear-una-service-account",
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
     "grupo": "CLI de google cloud - SDK",
-    "fecha_modificacion": "2026-03-29T04:22:00+00:00",
+    "fecha_modificacion": "2026-04-07T20:54:00+00:00",
     "fecha_creacion": "2026-03-26T05:09:00.000Z"
   },
   {
@@ -232,6 +223,15 @@
     "grupo": "Comandos Git",
     "fecha_modificacion": "2026-03-29T06:56:00+00:00",
     "fecha_creacion": "2025-11-09T00:24:00.000Z"
+  },
+  {
+    "title": "git diff - verificar cambios locales",
+    "slug": "notas-git/git-diff---verificar-cambios-locales",
+    "category": "notas-git",
+    "catLabel": "Git & GitHub",
+    "grupo": "Comandos Git",
+    "fecha_modificacion": "2026-03-29T06:56:00+00:00",
+    "fecha_creacion": "2026-03-08T14:52:00.000Z"
   },
   {
     "title": "Hacer un push ",
@@ -520,5 +520,167 @@
     "grupo": "claude.md y .claude",
     "fecha_modificacion": "2026-04-06T06:56:00+00:00",
     "fecha_creacion": "2026-04-06T06:32:00.000Z"
+  },
+  {
+    "title": "Comandos principales",
+    "slug": "notas-bash/comandos-principales",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Terminal Mac",
+    "fecha_modificacion": "2026-04-08T06:51:00+00:00",
+    "fecha_creacion": "2026-04-08T06:51:00.000Z"
+  },
+  {
+    "title": "Estructura general del sistema UNIX (Mac)",
+    "slug": "notas-bash/estructura-general-del-sistema-unix-mac",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Conceptos importantes",
+    "fecha_modificacion": "2026-04-08T06:54:00+00:00",
+    "fecha_creacion": "2026-01-09T04:46:00.000Z"
+  },
+  {
+    "title": "CLI - (Command Line Interface) - (Mac)",
+    "slug": "notas-bash/cli---command-line-interface---mac",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Conceptos importantes",
+    "fecha_modificacion": "2026-04-08T06:54:00+00:00",
+    "fecha_creacion": "2026-01-09T04:31:00.000Z"
+  },
+  {
+    "title": "App electron",
+    "slug": "notas-bash/app-electron",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Conceptos importantes",
+    "fecha_modificacion": "2026-04-08T06:55:00+00:00",
+    "fecha_creacion": "2026-02-28T12:27:00.000Z"
+  },
+  {
+    "title": "Homebrew",
+    "slug": "notas-bash/homebrew",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Programas Mac",
+    "fecha_modificacion": "2026-04-08T06:55:00+00:00",
+    "fecha_creacion": "2026-01-15T03:52:00.000Z"
+  },
+  {
+    "title": "n8n",
+    "slug": "notas-bash/n8n",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Programas Mac",
+    "fecha_modificacion": "2026-04-08T06:55:00+00:00",
+    "fecha_creacion": "2026-01-15T04:19:00.000Z"
+  },
+  {
+    "title": "Node.js, npm y nvm 👌",
+    "slug": "notas-bash/nodejs-npm-y-nvm-",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Programas Mac",
+    "fecha_modificacion": "2026-04-08T06:55:00+00:00",
+    "fecha_creacion": "2026-04-03T22:33:00.000Z"
+  },
+  {
+    "title": "Node.js con NVM para n8n",
+    "slug": "notas-bash/nodejs-con-nvm-para-n8n",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Programas Mac",
+    "fecha_modificacion": "2026-04-08T06:55:00+00:00",
+    "fecha_creacion": "2026-01-15T03:54:00.000Z"
+  },
+  {
+    "title": "Revisión de apps",
+    "slug": "notas-bash/revision-de-apps",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Gestión de aplicaciones Mac",
+    "fecha_modificacion": "2026-04-08T06:56:00+00:00",
+    "fecha_creacion": "2026-02-28T12:18:00.000Z"
+  },
+  {
+    "title": "Limpieza de mac",
+    "slug": "notas-bash/limpieza-de-mac",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Gestión de aplicaciones Mac",
+    "fecha_modificacion": "2026-04-08T06:56:00+00:00",
+    "fecha_creacion": "2026-02-26T10:31:00.000Z"
+  },
+  {
+    "title": "Revisión de Login en CLI",
+    "slug": "notas-bash/revision-de-login-en-cli",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "CLI con login Mac",
+    "fecha_modificacion": "2026-04-08T06:57:00+00:00",
+    "fecha_creacion": "2026-03-23T04:50:00.000Z"
+  },
+  {
+    "title": "Git Local",
+    "slug": "notas-bash/git-local",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "CLI con login Mac",
+    "fecha_modificacion": "2026-04-08T06:57:00+00:00",
+    "fecha_creacion": "2026-03-23T04:52:00.000Z"
+  },
+  {
+    "title": "GitHub CLI (gh)",
+    "slug": "notas-bash/github-cli-gh",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "CLI con login Mac",
+    "fecha_modificacion": "2026-04-08T06:57:00+00:00",
+    "fecha_creacion": "2026-03-23T04:54:00.000Z"
+  },
+  {
+    "title": "Google Cloud (SDK)",
+    "slug": "notas-bash/google-cloud-sdk",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "CLI con login Mac",
+    "fecha_modificacion": "2026-04-08T06:57:00+00:00",
+    "fecha_creacion": "2026-03-23T04:55:00.000Z"
+  },
+  {
+    "title": "npm (Node Package Manager)",
+    "slug": "notas-bash/npm-node-package-manager",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "CLI con login Mac",
+    "fecha_modificacion": "2026-04-08T06:57:00+00:00",
+    "fecha_creacion": "2026-03-23T04:57:00.000Z"
+  },
+  {
+    "title": "Claude CLI",
+    "slug": "notas-bash/claude-cli",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "CLI con login Mac",
+    "fecha_modificacion": "2026-04-08T06:57:00+00:00",
+    "fecha_creacion": "2026-03-23T04:57:00.000Z"
+  },
+  {
+    "title": "Apps de Automator en macOS",
+    "slug": "notas-bash/apps-de-automator-en-macos",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Automator Mac",
+    "fecha_modificacion": "2026-04-08T06:59:00+00:00",
+    "fecha_creacion": "2026-03-04T10:56:00.000Z"
+  },
+  {
+    "title": "code .",
+    "slug": "notas-bash/code-",
+    "category": "notas-bash",
+    "catLabel": "Bash & Shell",
+    "grupo": "Otros",
+    "fecha_modificacion": "2026-04-08T06:59:00+00:00",
+    "fecha_creacion": "2026-02-08T19:29:00.000Z"
   }
 ]

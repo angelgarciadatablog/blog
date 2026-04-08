@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>code . · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">Otros</span>
+  </div>
+  <div class="note-content">
+    <h1>code .</h1>
+    <h2>1️⃣ Activa el entorno virtual (desde la raíz del proyecto)</h2>
+<p>Asegúrate de estar en:</p>
+<pre class="highlight"><code class="language-bash">youtube-data-pipeline</code></pre>
+<p>Luego ejecuta:</p>
+<pre class="highlight"><code class="language-bash">source venv/bin/activate</code></pre>
+<hr />
+<h2>2️⃣ Verifica que quedó activo (esto es clave)</h2>
+<p>Deberías ver <strong>dos señales</strong>:</p>
+<h3>a) El prompt</h3>
+<pre class="highlight"><code>(venv)angelgarciachanga@MacBook-Air-de-Angel youtube-data-pipeline %</code></pre>
+<h3>b) El Python correcto</h3>
+<p>Ejecuta:</p>
+<pre class="highlight"><code class="language-bash">which python</code></pre>
+<p>Resultado esperado:</p>
+<pre class="highlight"><code>.../youtube-data-pipeline/venv/bin/python</code></pre>
+<hr />
+<h2>3️⃣ NO abras VS Code todavía</h2>
+<p>Primero quiero que:</p>
+<ul>
+<li>el venv esté activo</li>
+<li>la shell esté “limpia”</li>
+<li>VS Code herede ese contexto</li>
+</ul>
+<hr />
+<h2>4️⃣ Cuando confirmes esto…</h2>
+<p>Con eso, <strong>recién ahí</strong> abrimos VS Code con:</p>
+<pre class="highlight"><code class="language-bash">code .</code></pre>
+<h3>🔴 — NO está en el PATH (tu caso actual)</h3>
+<p>No devuelve nada o muestra:</p>
+<pre class="highlight"><code>code not found</code></pre>
+<p>👉 Esto confirma que <strong>no está registrado en el PATH</strong>.</p>
+<hr />
+<h2>🔎 Forma 2 (comprobación adicional)</h2>
+<p>También puedes probar:</p>
+<pre class="highlight"><code class="language-bash">code --version</code></pre>
+<p>Si dice:</p>
+<pre class="highlight"><code>zsh:command not found: code</code></pre>
+<p>👉 Confirmado al 100%.</p>
+<hr />
+<h2>🧠 Qué significa “no estar en el PATH”</h2>
+<ul>
+<li>VS Code <strong>sí está instalado</strong></li>
+<li>macOS <strong>no sabe</strong> que <code>code</code> es un comando</li>
+<li>la terminal no lo puede ejecutar</li>
+</ul>
+<p>Esto es totalmente normal en macOS.</p>
+<hr />
+<h2>✅ Forma correcta de solucionarlo (recomendada)</h2>
+<p>La opción <strong>más segura y estándar</strong> es esta (desde VS Code):</p>
+<ol>
+<li>Abre <strong>Visual Studio Code</strong></li>
+<li><code>Cmd + Shift + P</code></li>
+<li>Escribe:
+   <pre class="highlight"><code>Shell Command: Install'code'commandin PATH</code></pre></li>
+<li>Enter</li>
+<li>Cierra VS Code</li>
+<li>Cierra la terminal</li>
+<li>Abre una terminal nueva</li>
+</ol>
+<p>Luego prueba:</p>
+<pre class="highlight"><code class="language-bash">which code</code></pre>
+<p>Ahora <strong>sí debería devolver una ruta</strong>.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>

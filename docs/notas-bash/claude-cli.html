@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude CLI · Angel García</title>
+  <link rel="stylesheet" href="../../assets/note.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+</head>
+<body>
+  <div class="topbar">
+    <a href="../../index.html">← Inicio</a>
+    <span class="sep">|</span>
+    <a href="../../index.html">Bash & Shell</a>
+    <span class="sep">|</span>
+    <span style="color: var(--text-dim); font-size: 13px;">CLI con login Mac</span>
+  </div>
+  <div class="note-content">
+    <h1>Claude CLI</h1>
+    <p><strong>¿Qué es Claude CLI?</strong></p>
+<p>Es la interfaz de línea de comandos de Anthropic que permite interactuar con Claude directamente desde la terminal. Vimos que tienes la carpeta <code>.claude</code> en tu usuario, lo que indica que está instalado y configurado.</p>
+<p><strong>Verifiquemos el estado:</strong></p>
+<pre class="highlight"><code class="language-bash">claude auth status</code></pre>
+<p>Respuesta</p>
+<p>{
+"loggedIn": true,
+"authMethod": "claude.ai",
+"apiProvider": "firstParty",
+"email": "correo-de-cuenta-claude@gmail.com",
+"orgId": "90cb726d-7665-4813-b442-44e598666694",
+"orgName": null,
+"subscriptionType": "max"
+}</p>
+<p>Con Claude CLI puedes cambiar de cuenta con:</p>
+<pre class="highlight"><code class="language-bash">claude auth logout
+claude auth login</code></pre>
+<p>No soporta múltiples cuentas simultáneas como gh — es una sola sesión activa a la vez. Si quieres cambiar, haces logout y login con la otra cuenta.</p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</body>
+</html>
