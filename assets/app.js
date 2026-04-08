@@ -231,12 +231,34 @@ async function abrirNota(slug, titulo, grupo, catLabel, el) {
     const noteContent = doc.querySelector('.note-content');
     content.innerHTML = noteContent ? noteContent.innerHTML : doc.body.innerHTML;
     if (typeof hljs !== 'undefined') hljs.highlightAll();
+    addCopyButtons();
     buildTOC();
   } catch (e) {
     content.innerHTML = `<div class="empty-state">Error cargando la nota: ${e.message}</div>`;
   }
 
   window.scrollTo(0, 0);
+}
+
+// ── Copy buttons ──
+function addCopyButtons() {
+  const iconCopy = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+  const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+  document.querySelectorAll('#noteContent pre').forEach(pre => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.innerHTML = iconCopy;
+    btn.addEventListener('click', () => {
+      const code = pre.querySelector('code');
+      navigator.clipboard.writeText(code ? code.innerText : pre.innerText).then(() => {
+        btn.innerHTML = iconCheck;
+        btn.classList.add('copied');
+        setTimeout(() => { btn.innerHTML = iconCopy; btn.classList.remove('copied'); }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
 }
 
 // ── TOC ──

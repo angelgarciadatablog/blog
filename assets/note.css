@@ -77,7 +77,27 @@ pre {
   padding: 16px 20px;
   overflow-x: auto;
   margin: 16px 0;
+  position: relative;
 }
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #2a2a2a;
+  color: #666;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+}
+pre:hover .copy-btn { opacity: 1; }
+.copy-btn:hover { color: #aaa; border-color: #555; }
+.copy-btn.copied { color: #4caf7d; border-color: #4caf7d; opacity: 1; }
 pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; color: inherit; }
 pre code.language-bash,
 pre code.language-bash * { color: #f28b82; }

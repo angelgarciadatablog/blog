@@ -383,7 +383,24 @@ main {
   padding: 16px 20px;
   overflow-x: auto;
   margin: 16px 0;
+  position: relative;
 }
+
+#noteViewer .copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #2a2a2a;
+  color: #666;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 5px 7px;
+  line-height: 0;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+#noteViewer .copy-btn:hover { color: #aaa; border-color: #555; }
+#noteViewer .copy-btn.copied { color: var(--accent); border-color: var(--accent); }
 #noteViewer pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; color: inherit; }
 #noteViewer pre code.language-bash,
 #noteViewer pre code.language-bash * { color: #f28b82; }
