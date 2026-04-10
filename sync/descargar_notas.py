@@ -52,6 +52,7 @@ except ImportError:
 stats = {"actualizadas": 0, "saltadas": 0, "fallidas": 0, "huerfanas": 0}
 notas_procesadas = []
 archivos_generados = set()
+archivos_md_generados = set()
 
 # ────────────────────────────────────────────
 # Utilidades
@@ -99,6 +100,14 @@ def recolectar_html_existentes(base):
     for raiz, _, archivos in os.walk(base):
         for archivo in archivos:
             if archivo.endswith(".html"):
+                existentes.add(os.path.abspath(os.path.join(raiz, archivo)))
+    return existentes
+
+def recolectar_md_existentes(base):
+    existentes = set()
+    for raiz, _, archivos in os.walk(base):
+        for archivo in archivos:
+            if archivo.endswith(".md"):
                 existentes.add(os.path.abspath(os.path.join(raiz, archivo)))
     return existentes
 
@@ -296,6 +305,7 @@ def guardar_nota(page_id, titulo, grupo, categoria):
     ruta_html = os.path.join(carpeta_html, slug + ".html")
 
     archivos_generados.add(os.path.abspath(ruta_html))
+    archivos_md_generados.add(os.path.abspath(ruta_md))
 
     try:
         fecha_notion, fecha_creacion = notion_fechas(page_id)
@@ -380,13 +390,18 @@ def generar_notes_json():
 # ────────────────────────────────────────────
 
 html_existentes = recolectar_html_existentes(BASE_HTML)
+md_existentes   = recolectar_md_existentes(BASE_MD)
 
-for page_id, categoria in RAICES.items():
-    print(f"\n📁 Procesando {categoria}...")
-    procesar_categoria(page_id, categoria)
+try:
+    for page_id, categoria in RAICES.items():
+        print(f"\n📁 Procesando {categoria}...")
+        procesar_categoria(page_id, categoria)
+except KeyboardInterrupt:
+    print("\n\n⚠️  Proceso interrumpido (SIGINT recibido). Guardando lo que se procesó hasta ahora...")
 
 if not TEST_MODE:
     limpiar_huerfanos(html_existentes, archivos_generados)
+    limpiar_huerfanos(md_existentes, archivos_md_generados)
     if _IMG_ENABLED:
         _img.limpiar_imagenes_huerfanas(BASE_MD)
 generar_notes_json()
