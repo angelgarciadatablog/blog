@@ -290,6 +290,8 @@ main {
 /* ── NOTE VIEWER ── */
 #noteWrapper {
   display: none;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 #noteWrapper.active { display: block; }
 
