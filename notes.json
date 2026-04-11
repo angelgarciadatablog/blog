@@ -23,17 +23,8 @@
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
     "grupo": "CLI de google cloud - SDK",
-    "fecha_modificacion": "2026-04-02T05:08:00+00:00",
+    "fecha_modificacion": "2026-04-10T06:54:00+00:00",
     "fecha_creacion": "2026-03-29T22:50:00.000Z"
-  },
-  {
-    "title": "Crear una service account",
-    "slug": "notas-gcp/crear-una-service-account",
-    "category": "notas-gcp",
-    "catLabel": "Google Cloud Platform",
-    "grupo": "CLI de google cloud - SDK",
-    "fecha_modificacion": "2026-04-07T20:54:00+00:00",
-    "fecha_creacion": "2026-03-26T05:09:00.000Z"
   },
   {
     "title": "Instalar libreria Google cloud",
@@ -41,7 +32,7 @@
     "category": "notas-gcp",
     "catLabel": "Google Cloud Platform",
     "grupo": "Libreria de google cloud",
-    "fecha_modificacion": "2026-03-29T04:22:00+00:00",
+    "fecha_modificacion": "2026-04-10T06:49:00+00:00",
     "fecha_creacion": "2026-02-13T04:07:00.000Z"
   },
   {
