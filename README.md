@@ -385,9 +385,66 @@ Requiere `Pillow` instalado. Si falta, `descargar_notas.py` usa las URLs directa
 
 ## Pendientes
 
-### Redirecciones entre notas
+### Links entre notas
 
-En Notion es posible mencionar otras páginas con `@NombreDePágina`. La API devuelve estas menciones en el `rich_text` como tipo `mention` con el `page_id` de la página referenciada. Está pendiente implementar la conversión de estas menciones a links internos del blog que apunten al slug correspondiente.
+Permite referenciar una nota desde otra dentro del blog, navegando sin salir del SPA.
+
+#### Convención en Notion
+
+Escribir el título de la nota destino entre corchetes simples en cualquier parte del texto:
+
+```
+[Instalar librería Google Cloud]
+```
+
+Notion no interpreta este patrón como ningún elemento especial, así que se exporta como texto plano y el script puede detectarlo.
+
+**Riesgo conocido**: si se renombra la nota destino, el link se rompe porque el slug cambia. El script avisará con una advertencia en consola (`⚠️ Link roto: [título]`) para que puedas corregirlo en Notion.
+
+#### Cambios necesarios
+
+**1. `sync/descargar_notas.py`**
+
+Agregar una función `resolver_links(contenido_md, notas_index)` que, antes de llamar a `md_to_html()`, busque el patrón `\[([^\]]+)\]` en el markdown y lo reemplace por un link markdown:
+
+```python
+def resolver_links(contenido_md, notas_index):
+    def reemplazar(match):
+        titulo = match.group(1)
+        slug_buscado = slugify(titulo)
+        nota = next((n for n in notas_index if slugify(n["title"]) == slug_buscado), None)
+        if nota:
+            return f"[{titulo}](docs/{nota['slug']}.html)"
+        else:
+            print(f"  ⚠️  Link roto: [{titulo}]")
+            return match.group(0)  # deja el texto sin cambios
+    return re.sub(r'\[([^\]]+)\]', reemplazar, contenido_md)
+```
+
+Para que `resolver_links` tenga acceso al índice de notas, hay que construir `notas_index` en un **primer paso** (recorrer todas las notas y recolectar títulos + slugs) antes del segundo paso de exportación de contenido. Actualmente el script hace ambas cosas en un solo paso dentro de `guardar_nota()`.
+
+**2. `assets/app.js`**
+
+Agregar dentro de `abrirNota()`, después de inyectar el contenido, un interceptor de clicks para links internos:
+
+```javascript
+content.querySelectorAll('a[href^="docs/"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const slug = a.getAttribute('href').replace('docs/', '').replace('.html', '');
+    const nota = notes.find(n => n.slug === slug);
+    if (nota) abrirNota(nota.slug, nota.title, nota.grupo, CAT_LABELS[nota.category] || nota.category);
+  });
+});
+```
+
+#### Qué notas hay que regenerar
+
+Solo las notas que tengan `[título]` en su contenido en Notion. El script detecta automáticamente cuáles cambiaron por fecha de modificación. No es necesario borrar y regenerar todo.
+
+#### Compatibilidad con Obsidian
+
+La convención `[[título]]` es nativa de Obsidian (wikilinks). Se eligió `[título]` (corchete simple) en su lugar porque Notion interpreta `[[` como comando para crear o referenciar una página. Si en el futuro se migra a Obsidian, habría que cambiar la convención a `[[título]]` y actualizar el patrón regex en el script.
 
 ### Botón atrás en móvil
 
