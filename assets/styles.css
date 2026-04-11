@@ -209,7 +209,7 @@ main {
 }
 
 /* ── CONTENT ── */
-.content { padding: 48px 60px; max-width: 1100px; width: 100%; }
+.content { padding: 48px 60px; max-width: 1100px; width: 100%; margin: 0 auto; }
 
 .hero-row {
   display: flex;
